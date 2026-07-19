@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oklo (OKLO) 深度分析 - Research Constitution V-2.2</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0d1117;--surface:#161b22;--surface2:#21262d;--text:#c9d1d9;--text2:#8b949e;--accent:#f78166;--green:#3fb950;--yellow:#d2991d;--red:#f85149;--blue:#58a6ff;--purple:#bc8cff;--border:#30363d;--orange:#f0883e}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1a2332,#161b22);border-radius:12px;padding:40px;margin-bottom:30px;border:1px solid var(--border)}
+.header h1{font-size:1.8rem;margin-bottom:8px}
+.header .sub{font-size:1.1rem;color:var(--text2)}
+.meta{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:600}
+.badge-yellow{background:rgba(210,153,29,0.15);color:var(--yellow);border:1px solid var(--yellow)}
+.badge-blue{background:rgba(88,166,255,0.15);color:var(--blue);border:1px solid var(--blue)}
+.badge-red{background:rgba(248,81,73,0.15);color:var(--red);border:1px solid var(--red)}
+.badge-green{background:rgba(63,185,80,0.15);color:var(--green);border:1px solid var(--green)}
+
+.toc{background:var(--surface);border-radius:12px;padding:25px 30px;margin-bottom:30px;border:1px solid var(--border)}
+.toc h3{color:var(--accent);margin-bottom:12px}
+.toc ol{padding-left:20px;columns:2}
+.toc li{margin:4px 0;font-size:0.9rem}
+.toc a{color:var(--blue);text-decoration:none}
+.toc a:hover{text-decoration:underline}
+
+.chapter{background:var(--surface);border-radius:12px;padding:30px;margin-bottom:20px;border:1px solid var(--border)}
+.chapter h2{font-size:1.4rem;border-bottom:2px solid var(--border);padding-bottom:10px;margin-bottom:20px}
+.chapter h3{font-size:1.15rem;color:var(--accent);margin:20px 0 10px}
+.chapter h4{color:var(--blue);margin:15px 0 8px}
+.chapter p{margin-bottom:10px}
+.chapter ul,.chapter ol{padding-left:20px;margin-bottom:10px}
+.chapter li{margin:3px 0}
+
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.88rem}
+th{background:var(--surface2);padding:8px 12px;text-align:left;font-weight:600;border-bottom:2px solid var(--border)}
+td{padding:8px 12px;border-bottom:1px solid rgba(48,54,61,0.5)}
+tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+
+.rating{display:inline-block;padding:2px 8px;border-radius:4px;font-weight:700;font-size:0.8rem}
+.rg{background:rgba(63,185,80,0.15);color:var(--green)}
+.ry{background:rgba(210,153,29,0.15);color:var(--yellow)}
+.rr{background:rgba(248,81,73,0.15);color:var(--red)}
+
+.score-circle{width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:800;margin:15px auto;border:4px solid var(--yellow);color:var(--yellow)}
+
+.chart-box{background:var(--surface2);border-radius:8px;padding:20px;margin:15px 0}
+.chart-box canvas{max-height:380px}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:768px){.grid2{grid-template-columns:1fr}.toc ol{columns:1}}
+
+blockquote{border-left:3px solid var(--accent);padding:8px 16px;margin:12px 0;background:rgba(247,129,102,0.05);border-radius:0 6px 6px 0}
+
+.callout{padding:14px 18px;border-radius:8px;margin:12px 0;font-size:0.9rem}
+.caution{background:rgba(210,153,29,0.08);border-left:4px solid var(--yellow)}
+.danger{background:rgba(248,81,73,0.08);border-left:4px solid var(--red)}
+.info{background:rgba(88,166,255,0.08);border-left:4px solid var(--blue)}
+.success{background:rgba(63,185,80,0.08);border-left:4px solid var(--green)}
+
+.conclusion{background:linear-gradient(135deg,rgba(210,153,29,0.08),rgba(248,81,73,0.04));border:2px solid var(--yellow);border-radius:12px;padding:30px;margin-top:25px}
+
+.decision-table{font-size:1rem}
+.decision-table td:first-child{font-weight:700;width:180px}
+.decision-table .big{font-size:1.3rem;font-weight:800}
+
+.evidence-bar{display:flex;height:24px;border-radius:12px;overflow:hidden;margin:10px 0}
+.evidence-bar div{display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:600}
+.ev-l1{background:var(--green);color:#000}
+.ev-l2{background:var(--blue);color:#000}
+.ev-l3{background:var(--yellow);color:#000}
+.ev-ai{background:var(--red);color:#fff}
+
+.footer{text-align:center;padding:30px;color:var(--text2);font-size:0.8rem}
+.warn-box{background:rgba(248,81,73,0.12);border:1px solid var(--red);border-radius:8px;padding:16px;margin:15px 0}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<h1>Oklo Inc. (NYSE: OKLO) 深度证券分析报告</h1>
+<div class="sub">Research Constitution V-2.2 | 分析日期: 2026-07-19</div>
+<div class="meta">
+<span class="badge badge-yellow">评级: 观察 61/100</span>
+<span class="badge badge-blue">Pre-Revenue 超级成长股</span>
+<span class="badge badge-red">$41.11 | 市值 $71.5亿</span>
+<span class="badge badge-green">框架: Research Constitution V-2.2</span>
+</div>
+</div>
+
+<div class="toc">
+<h3>目录</h3>
+<ol>
+<li><a href="#c0">第0章 公司分类</a></li>
+<li><a href="#c1">第1章 公司基本面分析</a></li>
+<li><a href="#c2">第2章 行业研究(TAM)</a></li>
+<li><a href="#c3">第3章 Fisher成长股评价</a></li>
+<li><a href="#c4">第4章 财务审计(Bear Audit)</a></li>
+<li><a href="#c5">第5章 Bear Case</a></li>
+<li><a href="#c6">第6章 估值分析(6.1-6.15)</a></li>
+<li><a href="#c7">第7章 风险分析</a></li>
+<li><a href="#c8">第8章 投资逻辑</a></li>
+<li><a href="#c9">第9章 Value Drivers</a></li>
+<li><a href="#c10">第10章 最终结论</a></li>
+<li><a href="#evidence">Evidence Coverage</a></li>
+</ol>
+</div>
+
+<!-- ==================== CH 0 ==================== -->
+<div class="chapter" id="c0">
+<h2>第0章 | 公司分类（Valuation Classification）</h2>
+<table>
+<tr><th style="width:200px">项目</th><th>判断</th></tr>
+<tr><td><strong>公司类型</strong></td><td><span class="badge badge-blue">超级成长股（Pre-Revenue 阶段）</span></td></tr>
+<tr><td><strong>首选估值方法</strong></td><td>情景分析 + 远期DCF（极高不确定性）</td></tr>
+<tr><td><strong>辅助方法</strong></td><td>EV/远期建成装机容量、现金底部估值</td></tr>
+</table>
+
+<div class="callout caution">
+<strong>为什么传统估值指标不适用:</strong><br>
+PE/Forward PE/PEG: 无盈利 ❌ | PS/EV/Sales: 零营收 ❌ | EV/EBITDA: 负EBITDA ❌ | FCF Yield: 负现金流 ❌<br>
+<strong>唯一可行:</strong> 基于未来建成产能的远期三情景分析。但首堆尚未建成，所有假设均为推断。
+</div>
+</div>
+
+<!-- ==================== CH 1 ==================== -->
+<div class="chapter" id="c1">
+<h2>第1章 | 公司基本面分析</h2>
+<h3>商业模式: Build-Own-Operate (BOO)</h3>
+<table>
+<tr><th>业务单元</th><th>收入模式</th><th>当前状态</th></tr>
+<tr><td><strong>Power (电力)</strong></td><td>自建自营Aurora发电站，PPA售电</td><td>Aurora-INL在建，目标2027-2028商运</td></tr>
+<tr><td><strong>Fuel (燃料)</strong></td><td>燃料制造、乏燃料回收</td><td>A3F在建，Oak Ridge规划中</td></tr>
+<tr><td><strong>Isotopes (同位素)</strong></td><td>医用/工业/国防同位素</td><td>Groves临界目标2026.7.4</td></tr>
+</table>
+
+<div class="chart-box"><canvas id="bizModel"></canvas></div>
+
+<h3>核心产品: Aurora发电站</h3>
+<table>
+<tr><td>技术路线</td><td>液态钠冷却快中子反应堆（第四代）</td><td>功率</td><td>15-75 MWe</td></tr>
+<tr><td>运行压力</td><td>常压（无高压容器）</td><td>燃料</td><td>HALEU/乏燃料/军用钚</td></tr>
+<tr><td>供应链</td><td>~70%非核工业</td><td>总承包商</td><td>Kiewit + 西门子SST-600</td></tr>
+</table>
+
+<div class="callout info">
+<strong>核心判断 ★★★★☆:</strong> 快堆+燃料回收+同位素的垂直整合模式独特，但零营收=所有判断为前瞻性假设。2022年NRC曾拒绝其联合许可申请。
+</div>
+</div>
+
+<!-- ==================== CH 2 ==================== -->
+<div class="chapter" id="c2">
+<h2>第2章 | 行业研究（TAM）</h2>
+<table>
+<tr><th>指标</th><th>数据</th><th>来源</th></tr>
+<tr><td>全球核电远期TAM</td><td>~$10万亿</td><td>美国银行 2025</td></tr>
+<tr><td>AI数据中心新增电力需求</td><td>~80 GW/年 (2025-2045)</td><td>ICF</td></tr>
+<tr><td>SMR市场爆发拐点</td><td>2030-2035</td><td>美国银行</td></tr>
+<tr><td>美国核电容量目标</td><td>2050年翻四倍</td><td>白宫行政令</td></tr>
+</table>
+<div class="chart-box"><canvas id="scenarioChart"></canvas></div>
+<p><strong>结论 ★★★☆☆:</strong> 行业空间巨大，但首堆未建成之前，一切取决于执行。</p>
+</div>
+
+<!-- ==================== CH 3 ==================== -->
+<div class="chapter" id="c3">
+<h2>第3章 | Fisher成长股评价</h2>
+<div class="grid2">
+<div class="chart-box"><canvas id="fisherRadar"></canvas></div>
+<div class="chart-box"><canvas id="fisherBar"></canvas></div>
+</div>
+<div class="score-circle">68</div>
+<p style="text-align:center;color:var(--yellow);font-weight:700">Fisher综合评分: 68/100</p>
+<p><strong>最符合Fisher:</strong> 在巨大市场中打造有独特技术壁垒的产品。<br>
+<strong>最不符合Fisher:</strong> 管理层尚未在商业运营中证明自己。这是一个"故事"驱动的股票。</p>
+</div>
+
+<!-- ==================== CH 4 ==================== -->
+<div class="chapter" id="c4">
+<h2>第4章 | 财务审计（Bear Audit）</h2>
+<table>
+<tr><th>项目</th><th>发现</th><th>评级</th></tr>
+<tr><td>营收</td><td>$0 (FY2025 + Q1 2026)</td><td><span class="rating ry">⚠️</span></td></tr>
+<tr><td>经营现金流</td><td>-$8220万 (FY2025)</td><td><span class="rating ry">⚠️</span></td></tr>
+<tr><td>股权激励</td><td>$4180万，占经营亏损30%</td><td><span class="rating rr">🔴</span></td></tr>
+<tr><td>股本稀释</td><td>+25% (FY2025); +10% (ATM)</td><td><span class="rating rr">🔴🔴</span></td></tr>
+<tr><td>现金储备</td><td>~$25亿</td><td><span class="rating rg">✅</span></td></tr>
+<tr><td>债务</td><td>$0</td><td><span class="rating rg">✅</span></td></tr>
+</table>
+<div class="callout caution"><strong>最终评级: 🟡 黄色（警惕）</strong><br>🔴 最大红旗: 股本稀释（年内25%+）| 🟡 股权激励30% | ✅ $25亿现金+零债务 | ⚠️ 2026年进入"建设烧钱"</div>
+</div>
+
+<!-- ==================== CH 5 ==================== -->
+<div class="chapter" id="c5">
+<h2>第5章 | Bear Case</h2>
+<table>
+<tr><th>情景</th><th>触发条件</th><th>概率</th></tr>
+<tr><td><strong>A. 首堆大幅延迟</strong></td><td>Aurora-INL从2028推迟到2030+</td><td><span class="rating rr">~40%</span></td></tr>
+<tr><td><strong>B. 监管瓶颈</strong></td><td>NRC商业许可障碍(2022年曾被拒)</td><td><span class="rating ry">~20%</span></td></tr>
+<tr><td><strong>C. AI叙事破灭</strong></td><td>能效突破/AI泡沫 → 电力需求下修</td><td><span class="rating ry">~15%</span></td></tr>
+<tr><td><strong>D. 融资螺旋</strong></td><td>$25亿5年内耗尽 → 被迫低价融资</td><td><span class="rating ry">~25%</span></td></tr>
+</table>
+<p><strong>做空成功概率: 35%</strong> — 政策顺风极强，$25亿现金=短期不破产。</p>
+
+<div class="callout danger">
+<strong>市场忽略的问题:</strong> 14GW管线多是非约束LOI | HALEU商业供应为零 | 快堆运营经验断层(EBR-II 1994关闭) | 70%非核供应链从未验证 | Sam Altman品牌溢价 | $46亿EV溢价给零营收公司
+</div>
+</div>
+
+<!-- ==================== CH 6 ==================== -->
+<div class="chapter" id="c6">
+<h2>第6章 | 估值分析</h2>
+
+<h3>6.1-6.3 估值方法选择 & Growth Reality Check</h3>
+<table>
+<tr><th>检验项</th><th>状态</th><th>说明</th></tr>
+<tr><td>TAM支持</td><td><span class="rating rg">✅</span></td><td>$10万亿远期</td></tr>
+<tr><td>行业增速支持</td><td><span class="rating rg">✅</span></td><td>数据中心电力需求爆发</td></tr>
+<tr><td>市场份额提升</td><td><span class="rating ry">❓</span></td><td>尚未获取任何实际份额（零营收）</td></tr>
+<tr><td>历史执行能力</td><td><span class="rating rr">❌</span></td><td>零商运记录，2022年NRC被拒</td></tr>
+</table>
+
+<h3>6.4 DCF</h3>
+<div class="callout caution"><strong>本次不进行DCF估值。</strong>依据框架7.4条: 缺乏可靠参数（无营收历史、无管理层财务指引、无行业可比项目）。</div>
+
+<h3>6.5 三情景远期分析</h3>
+<div class="chart-box"><canvas id="scenarioValue"></canvas></div>
+<table>
+<tr><th>情景</th><th>2035装机</th><th>年收入</th><th>EV估值</th><th>概率</th></tr>
+<tr><td>🐂 Bull</td><td>5GW (100座)</td><td>$34亿</td><td>$396亿</td><td>15%</td></tr>
+<tr><td>📊 Base</td><td>2.5GW (50座)</td><td>$17亿</td><td>$150亿</td><td>40%</td></tr>
+<tr><td>🐻 Bear</td><td>0.5GW (10座)</td><td>$3.4亿</td><td>$20亿</td><td>30%</td></tr>
+<tr><td>💀 Failure</td><td>0</td><td>$0</td><td>$0-25亿(现金)</td><td>15%</td></tr>
+</table>
+<p><strong>情景加权EV: $126亿 | 隐含每股: ~$72</strong> (可信度 ★★☆☆☆)</p>
+
+<div class="warn-box"><strong>⚠️ 所有数据均为【推断】。</strong>收入假设基于行业平均PPA价格，CapEx假设无可靠来源。首堆从未建成，所有电力生产成本均为理论值。</div>
+
+<h3>6.7 同行估值对比</h3>
+<div class="chart-box"><canvas id="peerChart"></canvas></div>
+
+<h3>6.8 安全边际</h3>
+<div class="callout caution"><strong>无法计算有意义的安全边际。</strong>原因: 无盈利、无营收、无稳态现金流。公允价值范围($0-$396亿)说明无法建立可靠的安全边际。</div>
+
+<h3>6.11 投资决策价格框架</h3>
+<table>
+<tr><th>价格位置</th><th>价格</th><th>安全边际</th><th>建议</th></tr>
+<tr><td><span class="rating rg">极度低估</span></td><td>&lt;$25</td><td>&gt;65%</td><td>可重仓（若相信叙事）</td></tr>
+<tr><td><span class="badge badge-blue">安全买入价</span></td><td>$25-40</td><td>44-65%</td><td>积极建仓</td></tr>
+<tr><td><span class="badge badge-yellow">合理价值</span></td><td>$40-70</td><td>0-44%</td><td>正常持有</td></tr>
+<tr><td><span class="badge badge-red">谨慎区</span></td><td>$70-100</td><td>-39~0%</td><td>不追高</td></tr>
+<tr><td><span class="rating rr">高估区</span></td><td>&gt;$100</td><td>&lt;-39%</td><td>不建议新增</td></tr>
+</table>
+<p><strong>综合公允价值: ~$72/股</strong>（可信度★★☆☆☆）</p>
+
+<h3>6.15 最终投资决策</h3>
+<table class="decision-table">
+<tr><td>当前价格</td><td>$41.11</td></tr>
+<tr><td>综合公允价值</td><td>~$72（可信度★★☆☆☆）</td></tr>
+<tr><td>安全买入价格</td><td>$25-40</td></tr>
+<tr><td>当前安全边际</td><td>~43%（可信度极低）</td></tr>
+<tr><td>价格位置</td><td><span class="badge badge-yellow">合理区下沿</span></td></tr>
+<tr><td>投资建议</td><td><span class="badge badge-yellow big">观察</span></td></tr>
+<tr><td>企业质量</td><td>★★★☆☆</td></tr>
+<tr><td>投资价值</td><td>★★☆☆☆</td></tr>
+</table>
+
+<div class="conclusion">
+<strong>核心回答: "现在是否值得投入新的资金？"</strong><br><br>
+<strong>不建议。</strong>$71.5亿市值对应零营收。这是一个高风险期权，不是价值投资。如果已持仓且对核能叙事有坚定信念，可在$25-40区间分批建仓。关键观察窗口: Groves临界(2026.7.4) → Aurora-INL建设里程碑 → 首堆商运(2027-2028)。
+</div>
+</div>
+
+<!-- ==================== CH 7 ==================== -->
+<div class="chapter" id="c7">
+<h2>第7章 | 风险分析</h2>
+<div class="chart-box"><canvas id="riskChart"></canvas></div>
+<table>
+<tr><th>风险</th><th>严重度</th><th>定价状态</th></tr>
+<tr><td>技术(首堆FOAK)</td><td><span class="rating rr">🔴 极高</span></td><td>部分定价(从高点跌78%)</td></tr>
+<tr><td>稀释</td><td><span class="rating rr">🔴 极高</span></td><td>被严重低估</td></tr>
+<tr><td>黑天鹅(核安全)</td><td><span class="rating rr">🔴 极高</span></td><td>完全被忽视</td></tr>
+<tr><td>叙事(AI泡沫)</td><td><span class="rating ry">🟡 中高</span></td><td>被低估</td></tr>
+<tr><td>监管</td><td><span class="rating ry">🟡 中高</span></td><td>市场高估政策确定性</td></tr>
+<tr><td>政策(2028大选)</td><td><span class="rating ry">🟡 中</span></td><td>完全被忽视</td></tr>
+</table>
+</div>
+
+<!-- ==================== CH 8 ==================== -->
+<div class="chapter" id="c8">
+<h2>第8章 | 投资逻辑</h2>
+<p><strong>核心逻辑:</strong> Oklo是押注"AI时代的电力刚需 + 先进核能商业化"的最纯粹上市公司标的。</p>
+<p><strong>为什么可能持续十年以上:</strong> 如果Aurora首堆成功，Oklo将拥有独一无二的平台——BOO模式下的快堆+燃料回收+同位素生产——面对万亿级TAM。</p>
+<p><strong>失效条件:</strong> 首堆商运延迟>2年 | 成本超支>50% | 核安全事故 | AI叙事逆转 | NRC再被拒</p>
+</div>
+
+<!-- ==================== CH 9 ==================== -->
+<div class="chapter" id="c9">
+<h2>第9章 | Value Drivers（价值驱动因素）</h2>
+
+<h3>9.1-9.2 Driver识别及权重</h3>
+<table>
+<tr><th>#</th><th>Driver</th><th>重要程度</th><th>为什么决定企业价值</th></tr>
+<tr><td>1</td><td><strong>Aurora-INL首堆商运时间</strong></td><td><span class="rating rr">★★★★★</span></td><td>首堆成功=一切前提。延迟=烧钱+稀释+信用崩塌</td></tr>
+<tr><td>2</td><td><strong>NRC/DOE监管审批</strong></td><td><span class="rating rr">★★★★★</span></td><td>决定能否从"试点"进入"商业"</td></tr>
+<tr><td>3</td><td><strong>绑定PPA签约量(GW)</strong></td><td><span class="rating ry">★★★★☆</span></td><td>收入可见度和项目融资能力</td></tr>
+<tr><td>4</td><td><strong>单堆建造成本</strong></td><td><span class="rating ry">★★★★☆</span></td><td>BOO模式经济性的核心</td></tr>
+<tr><td>5</td><td><strong>AI/数据中心CapEx趋势</strong></td><td><span class="rating ry">★★★★☆</span></td><td>目标市场规模</td></tr>
+<tr><td>6</td><td><strong>燃料供应链自主度</strong></td><td><span class="rating ry">★★★☆☆</span></td><td>中期风险，短期DOE可兜底</td></tr>
+<tr><td>7</td><td><strong>同位素业务营收</strong></td><td><span class="rating ry">★★★☆☆</span></td><td>短期唯一现金流，证明能力</td></tr>
+</table>
+
+<h3>9.5 投资决策影响（当前状态 2026.7）</h3>
+<table>
+<tr><th>Driver</th><th>当前状态</th><th>影响逻辑?</th><th>需重估值?</th></tr>
+<tr><td>首堆商运时间</td><td>→ 建设中，目标2027-2028</td><td>—</td><td>—</td></tr>
+<tr><td>NRC监管</td><td>↑ PDC获批，DOE PDSA获批</td><td>否</td><td>否</td></tr>
+<tr><td>PPA签约</td><td>→ Meta绑定，其余LOI</td><td>否</td><td>否</td></tr>
+<tr><td>建造成本</td><td>❓ 未披露</td><td>待观察</td><td>待数据</td></tr>
+<tr><td>AI CapEx</td><td>↑ Hyperscaler 2026 CapEx增长</td><td>否</td><td>否</td></tr>
+<tr><td>燃料自主</td><td>↑ DOE钚计划获选，A3F在建</td><td>否</td><td>否</td></tr>
+<tr><td>同位素营收</td><td>→ Groves临界在即</td><td>否</td><td>否</td></tr>
+</table>
+<p><strong>当前判断:</strong> 无Driver触发重构。继续监测，等待Groves临界结果+后续财报。</p>
+
+<div class="chart-box"><canvas id="driverWeight"></canvas></div>
+</div>
+
+<!-- ==================== CH 10 ==================== -->
+<div class="chapter" id="c10">
+<h2>第10章 | 最终结论</h2>
+
+<div class="grid2">
+<div class="chart-box"><canvas id="finalDonut"></canvas></div>
+<div>
+<h3>综合评分: 61/100</h3>
+<table>
+<tr><th>维度</th><th>权重</th><th>评分</th></tr>
+<tr><td>商业模式</td><td>15%</td><td>7/10</td></tr>
+<tr><td>行业空间</td><td>15%</td><td>9/10</td></tr>
+<tr><td>管理层</td><td>10%</td><td>6/10</td></tr>
+<tr><td>财务健康</td><td>10%</td><td>6/10</td></tr>
+<tr><td>护城河</td><td>10%</td><td>4/10</td></tr>
+<tr><td>成长性</td><td>15%</td><td>8/10</td></tr>
+<tr><td>估值合理性</td><td>10%</td><td>3/10</td></tr>
+<tr><td>风险水平</td><td>10%</td><td>2/10</td></tr>
+<tr><td>Fisher评分</td><td>5%</td><td>7/10</td></tr>
+</table>
+</div>
+</div>
+
+<div class="conclusion">
+<h3 style="color:var(--yellow);margin-bottom:12px">🟡 评级: 观察 (61/100) | 估值: 严重高估 | 安全边际: 无法可靠计算</h3>
+<p><strong>一句话总结:</strong> Oklo拥有AI时代核能复兴中最精彩的故事和最强的政策顺风，但这是<span style="color:var(--red)">下注</span>，不是投资。首堆成功之前，所有估值都是科幻小说。</p>
+<p style="margin-top:12px"><strong>更安全的核能敞口替代:</strong> Cameco(CCJ) — 盈利+股息+西屋49% | BWXT(BWXT) — 核能供应链垄断</p>
+</div>
+</div>
+
+<!-- ==================== EVIDENCE ==================== -->
+<div class="chapter" id="evidence">
+<h2>Evidence Coverage（证据覆盖率）</h2>
+
+<div class="evidence-bar">
+<div class="ev-l1" style="width:40%">一级 40%</div>
+<div class="ev-l2" style="width:25%">二级 25%</div>
+<div class="ev-l3" style="width:20%">三级 20%</div>
+<div class="ev-ai" style="width:15%">推断 15%</div>
+</div>
+
+<table>
+<tr><th>项目</th><th>占比</th></tr>
+<tr><td>一级证据（SEC文件、公司IR）</td><td>40%</td></tr>
+<tr><td>二级证据（DOE公告、西门子公告、行业报告）</td><td>25%</td></tr>
+<tr><td>三级证据（分析师共识、财经媒体）</td><td>20%</td></tr>
+<tr><td>AI推断</td><td>15%</td></tr>
+</table>
+
+<h3>未验证数据</h3>
+<ul>
+<li>三情景远期分析中的所有收入和装机假设</li>
+<li>单座Aurora建造成本假设 | PPA电价假设($90/MWh)</li>
+<li>综合公允价值$72/股 | 2035年装机规模预测</li>
+</ul>
+
+<h3>无法获取的数据</h3>
+<ul>
+<li>首堆建造成本预算（管理层未披露）</li>
+<li>绑定PPA具体电价条款</li>
+<li>Aurora具体建造进度里程碑</li>
+<li>管理层内部财务预测</li>
+</ul>
+
+<div class="warn-box">
+<strong>⚠️ 本报告存在较高推断比例(15% > 10%)，建议补充官方资料后重新生成。</strong><br>
+特别是在首堆建造成本指引和绑定PPA条款公开后，应重新进行完整的估值分析。
+</div>
+</div>
+
+<div class="footer">
+<p>报告生成时间: 2026-07-19 15:15 CST | 框架: Research Constitution V-2.2</p>
+<p style="color:var(--red);margin-top:4px">免责声明: 本报告仅用于研究参考，不构成任何投资建议。投资有风险，入市需谨慎。</p>
+<p style="margin-top:4px">下次更新触发: Q2 2026财报(预计2026-08-10) → 优先更新第9章Value Drivers</p>
+</div>
+
+</div>
+
+<script>
+// Business Model Chart
+new Chart(document.getElementById('bizModel'),{type:'bar',data:{labels:['技术壁垒','燃料灵活性','供应链创新','政策顺风','客户管线','资金储备','监管先行者','护城河'],datasets:[{label:'竞争优劣势评估(1-10)',data:[8,10,8,9,7,9,6,4],backgroundColor:['#3fb950','#3fb950','#58a6ff','#3fb950','#d2991d','#3fb950','#d2991d','#f85149'],borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},title:{display:true,text:'Oklo竞争优势评估',color:'#c9d1d9',font:{size:14}}},scales:{y:{max:10,grid:{color:'#30363d'},ticks:{color:'#8b949e'}},x:{ticks:{color:'#8b949e'}}}}});
+
+// Scenario Value
+new Chart(document.getElementById('scenarioValue'),{type:'bar',data:{labels:['Bull(15%)','Base(40%)','Bear(30%)','Failure(15%)'],datasets:[{label:'EV估值(亿$)',data:[396,150,20,12.5],backgroundColor:['#3fb950','#58a6ff','#d2991d','#f85149'],borderRadius:6}]},options:{responsive:true,plugins:{legend:{display:false},title:{display:true,text:'三情景EV估值(2035年)',color:'#c9d1d9'}},scales:{y:{grid:{color:'#30363d'},ticks:{color:'#8b949e'}},x:{ticks:{color:'#8b949e'}}}}});
+
+// Fisher Radar
+new Chart(document.getElementById('fisherRadar'),{type:'radar',data:{labels:['市场潜力','管理层','研发','销售','利润率空间','护城河','长期成长','企业文化','资本配置','竞争优势'],datasets:[{label:'Oklo',data:[9,7,8,6,8,5,8,7,4,6],backgroundColor:'rgba(247,129,102,0.15)',borderColor:'#f78166',borderWidth:2,pointBackgroundColor:'#f78166'}]},options:{responsive:true,plugins:{legend:{labels:{color:'#c9d1d9'}}},scales:{r:{beginAtZero:true,max:10,grid:{color:'#30363d'},pointLabels:{color:'#8b949e',font:{size:10}},ticks:{backdropColor:'transparent',color:'#8b949e'}}}}});
+
+// Fisher Bar
+new Chart(document.getElementById('fisherBar'),{type:'bar',data:{labels:['市场潜力','研发','利润率','长期成长','管理层','企业文化','销售','竞争优势','护城河','资本配置'],datasets:[{label:'评分',data:[9,8,8,8,7,7,6,6,5,4],backgroundColor:['#3fb950','#3fb950','#3fb950','#3fb950','#d2991d','#d2991d','#d2991d','#d2991d','#f85149','#f85149'],borderRadius:3}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{max:10,grid:{color:'#30363d'},ticks:{color:'#8b949e'}},y:{ticks:{color:'#8b949e'}}}}});
+
+// Scenario probabilities
+new Chart(document.getElementById('scenarioChart'),{type:'doughnut',data:{labels:['乐观(20%)','基准(50%)','悲观(30%)'],datasets:[{data:[20,50,30],backgroundColor:['#3fb950','#58a6ff','#f85149'],borderColor:'#0d1117',borderWidth:2}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:'#c9d1d9'}},title:{display:true,text:'行业三情景概率分布',color:'#c9d1d9'}}}});
+
+// Peer chart
+new Chart(document.getElementById('peerChart'),{type:'bar',data:{labels:['Oklo','NuScale','Centrus','BWXT','Cameco'],datasets:[{label:'市值(亿$)',data:[71.5,30,40,120,280],backgroundColor:['#f78166','#d2991d','#58a6ff','#3fb950','#bc8cff'],borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},subtitle:{display:true,text:'Oklo市值是NuScale(唯一NRC认证SMR)的2.4倍',color:'#8b949e',font:{size:11}}},scales:{y:{grid:{color:'#30363d'},ticks:{color:'#8b949e'}},x:{ticks:{color:'#8b949e'}}}}});
+
+// Risk chart
+new Chart(document.getElementById('riskChart'),{type:'bar',data:{labels:['技术','稀释','黑天鹅','叙事','监管','政策','管理层','燃料','竞争','宏观'],datasets:[{label:'严重程度',data:[10,9,9,7,7,6,6,5,5,4],backgroundColor:['#f85149','#f85149','#f85149','#d2991d','#d2991d','#d2991d','#d2991d','#d2991d','#d2991d','#3fb950'],borderRadius:3}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false},title:{display:true,text:'风险热力图',color:'#c9d1d9'}},scales:{x:{max:10,grid:{color:'#30363d'},ticks:{color:'#8b949e'}},y:{ticks:{color:'#8b949e'}}}}});
+
+// Driver weights
+new Chart(document.getElementById('driverWeight'),{type:'bar',data:{labels:['首堆商运','NRC/DOE审批','PPA签约','建造成本','AI CapEx','燃料自主','同位素营收'],datasets:[{label:'重要程度',data:[5,5,4,4,4,3,3],backgroundColor:['#f85149','#f85149','#d2991d','#d2991d','#d2991d','#58a6ff','#58a6ff'],borderRadius:3}]},options:{responsive:true,plugins:{legend:{display:false},title:{display:true,text:'Value Drivers重要程度(1-5★)',color:'#c9d1d9'}},scales:{y:{max:5,grid:{color:'#30363d'},ticks:{color:'#8b949e',stepSize:1}},x:{ticks:{color:'#8b949e',font:{size:9}}}}});
+
+// Final score donut
+new Chart(document.getElementById('finalDonut'),{type:'doughnut',data:{labels:['商业模式(1.05)','行业(1.35)','管理层(0.60)','财务(0.60)','护城河(0.40)','成长性(1.20)','估值(0.30)','风险(0.20)','Fisher(0.35)'],datasets:[{data:[1.05,1.35,0.60,0.60,0.40,1.20,0.30,0.20,0.35],backgroundColor:['#3fb950','#58a6ff','#d2991d','#d2991d','#f85149','#3fb950','#f85149','#f85149','#d2991d'],borderColor:'#0d1117',borderWidth:2}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:'#c9d1d9',font:{size:9},padding:8}},title:{display:true,text:'综合评分构成 6.05/10→61/100',color:'#c9d1d9',font:{size:13}}}}});
+</script>
+</body>
+</html>
