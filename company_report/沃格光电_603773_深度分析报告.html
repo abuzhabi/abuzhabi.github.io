@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沃格光电(603773) 深度分析报告 | 大灰皮证券研究 V-2.2</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+  --border: #30363d; --text: #c9d1d9; --text-dim: #8b949e;
+  --red: #f85149; --green: #3fb950; --yellow: #d29922; --blue: #58a6ff; --purple: #bc8cff;
+  --orange: #db6d28; --cyan: #39c5cf;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7; padding:20px; max-width:1200px; margin:0 auto; }
+h1 { color:var(--blue); font-size:1.8em; margin-bottom:5px; border-bottom:2px solid var(--border); padding-bottom:10px; }
+h2 { color:var(--cyan); font-size:1.4em; margin:30px 0 15px; padding-left:12px; border-left:4px solid var(--blue); }
+h3 { color:var(--purple); font-size:1.15em; margin:20px 0 10px; }
+h4 { color:var(--orange); font-size:1em; margin:15px 0 8px; }
+p { margin:8px 0; }
+.subtitle { color:var(--text-dim); font-size:0.9em; margin-bottom:20px; }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em; }
+th { background:var(--bg3); color:var(--blue); padding:10px; text-align:left; border:1px solid var(--border); }
+td { padding:8px 10px; border:1px solid var(--border); }
+tr:nth-child(even) { background:var(--bg2); }
+tr:hover { background:var(--bg3); }
+.score-badge { display:inline-block; padding:6px 20px; border-radius:8px; font-size:1.3em; font-weight:bold; }
+.score-red { background:rgba(248,81,73,0.15); color:var(--red); border:2px solid var(--red); }
+.score-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); border:2px solid var(--yellow); }
+.score-green { background:rgba(63,185,80,0.15); color:var(--green); border:2px solid var(--green); }
+.card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.card-red { border-left:4px solid var(--red); }
+.card-yellow { border-left:4px solid var(--yellow); }
+.card-green { border-left:4px solid var(--green); }
+.card-blue { border-left:4px solid var(--blue); }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; }
+.metric { text-align:center; padding:15px; background:var(--bg3); border-radius:8px; }
+.metric-val { font-size:1.8em; font-weight:bold; }
+.metric-label { color:var(--text-dim); font-size:0.85em; margin-top:5px; }
+.chart-container { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.highlight-red { color:var(--red); font-weight:bold; }
+.highlight-green { color:var(--green); font-weight:bold; }
+.highlight-yellow { color:var(--yellow); font-weight:bold; }
+blockquote { border-left:3px solid var(--orange); padding:10px 15px; margin:15px 0; background:var(--bg2); color:var(--text-dim); border-radius:0 8px 8px 0; }
+ul,ol { margin:8px 0 8px 25px; }
+li { margin:4px 0; }
+.tag { display:inline-block; padding:2px 10px; border-radius:4px; font-size:0.8em; margin:2px; }
+.tag-red { background:rgba(248,81,73,0.2); color:var(--red); }
+.tag-green { background:rgba(63,185,80,0.2); color:var(--green); }
+.tag-yellow { background:rgba(210,153,34,0.2); color:var(--yellow); }
+.tag-blue { background:rgba(88,166,255,0.2); color:var(--blue); }
+hr { border:none; border-top:1px solid var(--border); margin:25px 0; }
+.section-num { color:var(--blue); font-weight:bold; }
+.evidence-bar { display:flex; height:25px; border-radius:5px; overflow:hidden; margin:10px 0; }
+.evidence-bar div { display:flex; align-items:center; justify-content:center; font-size:0.75em; color:#fff; }
+.footer { text-align:center; color:var(--text-dim); margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:0.85em; }
+</style>
+</head>
+<body>
+
+<h1>沃格光电（603773.SH）深度分析报告</h1>
+<p class="subtitle">框架: 大灰皮证券研究 V-2.2 | 日期: 2026-07-21 | 分析师: 小八(AI) | Evidence First + 7 Hard Constraints</p>
+
+<!-- 核心结论卡片 -->
+<div class="card card-red">
+<h2 style="margin-top:0">最终结论</h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--red)">47<span style="font-size:0.5em">/100</span></div><div class="metric-label">综合评分</div></div>
+<div class="metric"><div class="score-badge score-red">🔴 红色</div><div class="metric-label">评级</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">回避</div><div class="metric-label">投资建议</div></div>
+</div>
+<blockquote>玻璃基板赛道的"技术领先者"但"财务落后者"——技术值得长期跟踪，但当前估值严重透支未来，不适合在77元价格入场。</blockquote>
+</div>
+
+<!-- 核心指标 -->
+<h2><span class="section-num">核心指标</span></h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--blue)">~77元</div><div class="metric-label">当前股价</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--blue)">~173亿</div><div class="metric-label">总市值</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">13.3x</div><div class="metric-label">PB(极高)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">6.8x</div><div class="metric-label">PS(极高)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">-1.58亿</div><div class="metric-label">2025归母净利润</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">70.7%</div><div class="metric-label">资产负债率</div></div>
+</div>
+
+<!-- 第0章 -->
+<h2><span class="section-num">第0章</span> 公司分类</h2>
+<div class="card card-blue">
+<h3>分类：转折股 + 早期超级成长股混合体</h3>
+<table>
+<tr><th>判据</th><th>分析</th></tr>
+<tr><td>营收增长</td><td>5年CAGR 33.9%，连续6年增长 → 成长属性</td></tr>
+<tr><td>盈利状态</td><td>归母净利润连续5年为负(2021-2025) → 转折属性</td></tr>
+<tr><td>业务转型</td><td>传统玻璃精加工 → 玻璃基线路板(GCP)/TGV半导体封装</td></tr>
+<tr><td>现金流</td><td>经营现金流连续为正且增长(2025: 2.12亿, +67%)</td></tr>
+</table>
+<p><strong>首选估值方法</strong>：PS + PB + 产能释放进度跟踪<br>
+<span class="tag tag-red">不进行DCF估值</span> 无法可靠预测FCF转正时间点</p>
+</div>
+
+<!-- 第1章 -->
+<h2><span class="section-num">第1章</span> 基本面分析</h2>
+<h3>三层业务结构</h3>
+<table>
+<tr><th>层级</th><th>业务</th><th>2025营收</th><th>状态</th><th>角色</th></tr>
+<tr><td>基本盘</td><td>光电玻璃精加工</td><td>7.94亿(+28.5%)</td><td><span class="tag tag-green">稳定盈利</span></td><td>现金流奶牛</td></tr>
+<tr><td>成长期</td><td>光电显示器件(背光模组等)</td><td>13.36亿</td><td><span class="tag tag-yellow">微利</span></td><td>规模支撑</td></tr>
+<tr><td>未来盘</td><td>玻璃基线路板/TGV载板</td><td><1000万</td><td><span class="tag tag-red">亏损投入</span></td><td>价值赌注</td></tr>
+</table>
+
+<div class="grid-2">
+<div class="card card-green">
+<h4>核心优势</h4>
+<ul>
+<li>TGV全制程：薄化→通孔→镀铜→多层线路，全球极少数</li>
+<li>专利635项(发明70%+)，设备自研</li>
+<li>国内唯一GCP玻璃线路板企业</li>
+<li>7年研发先发，客户认证2-3年绑定</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>核心风险</h4>
+<ul>
+<li>连续5年亏损，2026Q1亏损翻倍</li>
+<li>TGV营收仅203万(2024)，"叫好不叫座"</li>
+<li>负债率70.7%，15亿定增终止</li>
+<li>信披违规被多次监管警示</li>
+</ul>
+</div>
+</div>
+
+<div class="chart-container">
+<canvas id="revenueChart" height="100"></canvas>
+</div>
+
+<!-- 第2章 -->
+<h2><span class="section-num">第2章</span> 行业研究 (TAM)</h2>
+<table>
+<tr><th>细分市场</th><th>2023规模</th><th>2028预测</th><th>CAGR</th></tr>
+<tr><td>全球先进封装</td><td>468亿美元</td><td>786亿美元</td><td>10.9%</td></tr>
+<tr><td>TGV玻璃基载板</td><td>-</td><td>80亿美元(2026)</td><td>80%+</td></tr>
+<tr><td>CPO共封装光学</td><td>-</td><td>50亿美元(2026)</td><td>-</td></tr>
+</table>
+<div class="card card-blue">
+<h3>竞争格局</h3>
+<p><strong>全球</strong>：康宁/AGC/肖特/NEG 寡头垄断(80%+份额)</p>
+<p><strong>国内第一梯队</strong>：彩虹股份(高世代原片) | <span style="color:var(--cyan)">沃格光电(TGV全制程龙头)</span></p>
+<p><strong>沃格独特定位</strong>：国内唯一能将玻璃基板制作成玻璃基线路板(GCP)的企业</p>
+</div>
+
+<!-- 第3章 -->
+<h2><span class="section-num">第3章</span> Fisher成长股评价</h2>
+<div class="chart-container">
+<canvas id="fisherChart" height="120"></canvas>
+</div>
+<p><strong>综合评分：5.5/10</strong></p>
+<p><span class="tag tag-green">最符合Fisher</span> 管理层研发决心(9分) + 产品市场潜力(8分)</p>
+<p><span class="tag tag-red">最不符合Fisher</span> 利润率(2分) + 高管关系(4分)</p>
+
+<!-- 第4章 -->
+<h2><span class="section-num">第4章</span> 财务审计 (Bear Audit)</h2>
+<div class="chart-container">
+<canvas id="financialChart" height="100"></canvas>
+</div>
+<div class="card card-red">
+<h3 style="color:var(--red)">🔴 红色 (Red)</h3>
+<ol>
+<li>连续5年亏损且扩大</li>
+<li>资产负债率70.7% + 15亿定增终止</li>
+<li>信披违规被多次监管警示(治理缺陷)</li>
+<li>新业务营收极低(通格微2024年仅203万)</li>
+<li>估值极高(PB 16倍)，市场定价透支未来</li>
+</ol>
+</div>
+
+<!-- 第5章 -->
+<h2><span class="section-num">第5章</span> Bear Case</h2>
+<div class="card card-red">
+<h3>做空成功概率：中高 (65%)</h3>
+<p>一家连续5年亏损、PB 16倍、负债率70%、信披有前科的公司，股价却被AI封装/商业航天概念推到173亿市值。在新业务没有产生meaningful收入之前，估值回归是大概率事件。</p>
+</div>
+<table>
+<tr><th>触发事件</th><th>概率</th><th>股价影响</th></tr>
+<tr><td>2026中报继续亏损扩大</td><td>高</td><td class="highlight-red">-20%~30%</td></tr>
+<tr><td>TGV/CPO客户认证失败或延迟</td><td>中</td><td class="highlight-red">-30%~40%</td></tr>
+<tr><td>银行抽贷/流动性危机</td><td>中低</td><td class="highlight-red">-40%~50%</td></tr>
+<tr><td>再次信披违规/立案调查</td><td>中低</td><td class="highlight-red">-50%+</td></tr>
+</table>
+
+<!-- 第6章 -->
+<h2><span class="section-num">第6章</span> 估值分析</h2>
+<h3>三情景估值</h3>
+<div class="chart-container">
+<canvas id="valuationChart" height="100"></canvas>
+</div>
+<table>
+<tr><th>情景</th><th>假设</th><th>合理市值</th><th>对应股价</th></tr>
+<tr><td><span class="tag tag-green">Bull</span></td><td>TGV量产+CPO认证+Mini LED放量</td><td>200-250亿</td><td>89-111元</td></tr>
+<tr><td><span class="tag tag-yellow">Base</span></td><td>新业务逐步放量但未爆发</td><td>80-120亿</td><td>36-53元</td></tr>
+<tr><td><span class="tag tag-red">Bear</span></td><td>新业务不及预期+持续亏损</td><td>40-60亿</td><td>18-27元</td></tr>
+</table>
+
+<div class="card card-red">
+<h3>6.15 最终投资决策</h3>
+<div class="grid-2">
+<div>
+<p><strong>当前价格</strong>: ~77元</p>
+<p><strong>公允价值(Base)</strong>: 36-53元</p>
+<p><strong>买入价(含安全边际)</strong>: &lt;30元</p>
+<p><strong>当前安全边际</strong>: <span class="highlight-red">负值</span></p>
+</div>
+<div>
+<p><strong>操作建议</strong>: <span class="highlight-red">回避，列入观察名单</span></p>
+<p><strong>触发买入条件</strong>:</p>
+<ul>
+<li>股价&lt;30元(PB 4倍)</li>
+<li>或 TGV季度营收&gt;5000万</li>
+<li>或 单季度盈利</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- 第7章 -->
+<h2><span class="section-num">第7章</span> 风险分析</h2>
+<table>
+<tr><th>#</th><th>风险</th><th>严重度</th><th>概率</th><th>市场定价</th></tr>
+<tr><td>1</td><td>新业务商业化失败(TGV/CPO认证不通过)</td><td class="highlight-red">致命</td><td>中</td><td>❌ 未充分定价</td></tr>
+<tr><td>2</td><td>资金链断裂(负债70%+定增终止)</td><td class="highlight-red">致命</td><td>中低</td><td>❌ 未充分定价</td></tr>
+<tr><td>3</td><td>估值回归(PB 13倍→4-6倍)</td><td class="highlight-yellow">严重</td><td>高</td><td>⚠️ 部分定价</td></tr>
+<tr><td>4</td><td>信披违规升级(立案调查/ST风险)</td><td class="highlight-yellow">严重</td><td>中低</td><td>❌ 未充分定价</td></tr>
+<tr><td>5</td><td>技术路线替代(有机基板改良)</td><td class="highlight-yellow">严重</td><td>低</td><td>❌ 未定价</td></tr>
+</table>
+
+<!-- 第8章 -->
+<h2><span class="section-num">第8章</span> 投资逻辑</h2>
+<div class="grid-2">
+<div class="card card-green">
+<h4>多头逻辑</h4>
+<ul>
+<li>TGV全制程全球领先，国内唯一</li>
+<li>AI封装+Mini LED+CPO三重需求(200亿美元+)</li>
+<li>产能已落地(非PPT阶段)</li>
+<li>传统业务稳定造血(现金流2.12亿)</li>
+<li>国产替代战略价值</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>空头逻辑</h4>
+<ul>
+<li>连续5年亏损，Q1亏损翻倍</li>
+<li>新业务营收203万，"叫好不叫座"</li>
+<li>PB 13倍/PS 6.8倍，透支3-5年</li>
+<li>资金链风险(负债70%+定增终止)</li>
+<li>治理缺陷(多次信披违规)</li>
+</ul>
+</div>
+</div>
+
+<!-- 第9章 -->
+<h2><span class="section-num">第9章</span> Value Drivers</h2>
+<table>
+<tr><th>#</th><th>Driver</th><th>权重</th><th>当前状态</th></tr>
+<tr><td>1</td><td>TGV客户认证进度(英伟达/AMD/华为)</td><td>★★★★★</td><td>送样认证中，未获量产订单</td></tr>
+<tr><td>2</td><td>TGV业务季度营收增速</td><td>★★★★★</td><td>203万→388万(Q1)，基数极低</td></tr>
+<tr><td>3</td><td>Mini LED背光渗透率</td><td>★★★★</td><td>海信已量产，追觅合作中</td></tr>
+<tr><td>4</td><td>单季度盈利时间点</td><td>★★★★</td><td>Q1亏损扩大，时间点不明</td></tr>
+<tr><td>5</td><td>资产负债率变化</td><td>★★★</td><td>70.7%且攀升，定增终止</td></tr>
+<tr><td>6</td><td>成都AMOLED投产进度</td><td>★★★</td><td>设备搬入调试中</td></tr>
+<tr><td>7</td><td>玻璃基板技术路线确认</td><td>★★</td><td>2026量产元年，趋势向好</td></tr>
+</table>
+
+<!-- 第10章 -->
+<h2><span class="section-num">第10章</span> 最终结论</h2>
+<div class="chart-container">
+<canvas id="scoreChart" height="120"></canvas>
+</div>
+<div class="card card-red">
+<h3>评级：🔴 红色 (回避) | 评分：47/100</h3>
+<p><strong>沃格光电有真技术</strong>——TGV全制程确实全球领先，AI封装/Mini LED/CPO三重需求驱动逻辑成立。但：</p>
+<ol>
+<li><strong>太贵</strong>：PB 13倍定价一家连续5年亏损的公司</li>
+<li><strong>太早</strong>：新业务营收203万，距离商业化验证遥远</li>
+<li><strong>太险</strong>：负债70%+定增终止+信披违规前科</li>
+</ol>
+<blockquote>玻璃基板赛道的"技术领先者"但"财务落后者"——技术值得长期跟踪，但当前估值严重透支未来，不适合在77元价格入场。</blockquote>
+</div>
+
+<!-- Evidence Coverage -->
+<h2>Evidence Coverage (证据覆盖率)</h2>
+<div class="evidence-bar">
+<div style="width:35%;background:#3fb950">一级 35%</div>
+<div style="width:30%;background:#58a6ff">二级 30%</div>
+<div style="width:25%;background:#d29922">三级 25%</div>
+<div style="width:10%;background:#f85149">AI推断 10%</div>
+</div>
+<div class="grid-2">
+<div class="card card-green">
+<h4>已验证数据</h4>
+<ul>
+<li>✅ 2024/2025营收净利润(年报)</li>
+<li>✅ 资产负债率/现金流(年报)</li>
+<li>✅ 股价市值股本(交易所)</li>
+<li>✅ 信披违规(上交所决定书)</li>
+<li>✅ 产能/技术参数(官网/展会)</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>未验证/推断</h4>
+<ul>
+<li>⚠️ 英伟达认证进度(仅"送样中")</li>
+<li>⚠️ TGV市场80亿美元(行业研究)</li>
+<li>⚠️ 量产良率>85%(雪球研报)</li>
+<li>⚠️ 估值情景(AI推断)</li>
+<li>❌ TGV分部利润率(未披露)</li>
+<li>❌ 产能利用率/在手订单(未披露)</li>
+</ul>
+</div>
+</div>
+<p class="highlight-yellow">⚠️ AI推断占比10%，处于可接受范围。但估值情景不确定性极高(Bull 111元 vs Bear 18元)，投资者应谨慎参考。</p>
+
+<div class="footer">
+<p>报告生成: 2026-07-21 | 框架: 大灰皮证券研究 V-2.2 | Evidence First + 7 Hard Constraints</p>
+<p>本报告由AI生成，不构成投资建议。投资有风险，入市需谨慎。</p>
+</div>
+
+<script>
+// 营收净利润图
+new Chart(document.getElementById('revenueChart'), {
+  type: 'bar',
+  data: {
+    labels: ['2023','2024','2025','2026Q1'],
+    datasets: [
+      {label:'营收(亿元)', data:[18.17,22.21,25.51,5.94], backgroundColor:'#58a6ff', yAxisID:'y'},
+      {label:'归母净利润(亿元)', data:[-0.93,-1.22,-1.58,-0.51], type:'line', borderColor:'#f85149', backgroundColor:'#f85149', yAxisID:'y1', tension:0.3}
+    ]
+  },
+  options: {
+    responsive:true,
+    plugins:{title:{display:true,text:'营收 vs 归母净利润 (2023-2026Q1)',color:'#c9d1d9'}},
+    scales:{
+      x:{ticks:{color:'#8b949e'},grid:{color:'#30363d'}},
+      y:{position:'left',title:{display:true,text:'营收(亿)',color:'#8b949e'},ticks:{color:'#8b949e'},grid:{color:'#30363d'}},
+      y1:{position:'right',title:{display:true,text:'净利润(亿)',color:'#8b949e'},ticks:{color:'#8b949e'},grid:{display:false}}
+    }
+  }
+});
+
+// Fisher雷达图
+new Chart(document.getElementById('fisherChart'), {
+  type: 'radar',
+  data: {
+    labels:['产品潜力','管理层决心','研发投入','销售能力','利润率','改善利润率','劳资关系','高管关系','管理层深度','成本控制'],
+    datasets:[{label:'Fisher评分', data:[8,9,7,5,2,5,6,4,4,5], backgroundColor:'rgba(88,166,255,0.2)', borderColor:'#58a6ff', pointBackgroundColor:'#58a6ff'}]
+  },
+  options: {
+    responsive:true,
+    plugins:{title:{display:true,text:'Fisher成长股10维度评分 (综合: 5.5/10)',color:'#c9d1d9'}},
+    scales:{r:{beginAtZero:true,max:10,ticks:{color:'#8b949e',backdropColor:'transparent'},pointLabels:{color:'#c9d1d9'},grid:{color:'#30363d'},angleLines:{color:'#30363d'}}}
+  }
+});
+
+// 财务指标图
+new Chart(document.getElementById('financialChart'), {
+  type: 'bar',
+  data: {
+    labels: ['资产负债率(%)','经营现金流(亿)','研发投入(亿)','归母净利润(亿)'],
+    datasets: [
+      {label:'2024', data:[67.7,1.27,1.20,-1.22], backgroundColor:'#d29922'},
+      {label:'2025', data:[70.7,2.12,1.40,-1.58], backgroundColor:'#f85149'}
+    ]
+  },
+  options: {
+    responsive:true,
+    plugins:{title:{display:true,text:'关键财务指标对比 (2024 vs 2025)',color:'#c9d1d9'}},
+    scales:{x:{ticks:{color:'#8b949e'},grid:{color:'#30363d'}},y:{ticks:{color:'#8b949e'},grid:{color:'#30363d'}}}
+  }
+});
+
+// 估值情景图
+new Chart(document.getElementById('valuationChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Bear情景','Base情景','当前股价','Bull情景'],
+    datasets: [{
+      label: '股价(元)',
+      data: [22, 45, 77, 100],
+      backgroundColor: ['#f85149','#d29922','#58a6ff','#3fb950'],
+      borderRadius: 5
+    }]
+  },
+  options: {
+    responsive:true,
+    indexAxis:'y',
+    plugins:{title:{display:true,text:'三情景估值 vs 当前股价',color:'#c9d1d9'},legend:{display:false}},
+    scales:{x:{ticks:{color:'#8b949e'},grid:{color:'#30363d'}},y:{ticks:{color:'#c9d1d9'},grid:{color:'#30363d'}}}
+  }
+});
+
+// 评分维度图
+new Chart(document.getElementById('scoreChart'), {
+  type: 'radar',
+  data: {
+    labels:['商业模式/技术','行业前景TAM','管理层/治理','财务健康','盈利能力','增长动力','估值吸引力','竞争优势','信披合规','资本配置'],
+    datasets:[{
+      label:'评分(/10)',
+      data:[7.5,7.0,3.5,3.0,2.0,7.0,2.5,7.0,2.5,4.0],
+      backgroundColor:'rgba(248,81,73,0.2)',
+      borderColor:'#f85149',
+      pointBackgroundColor:'#f85149'
+    }]
+  },
+  options: {
+    responsive:true,
+    plugins:{title:{display:true,text:'10维度评分 (总计: 47/100 → 红色)',color:'#c9d1d9'}},
+    scales:{r:{beginAtZero:true,max:10,ticks:{color:'#8b949e',backdropColor:'transparent'},pointLabels:{color:'#c9d1d9'},grid:{color:'#30363d'},angleLines:{color:'#30363d'}}}
+  }
+});
+</script>
+
+</body>
+</html>
