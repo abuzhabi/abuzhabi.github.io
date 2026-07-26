@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ST信源(300352) 深度分析报告 | 大灰皮证券研究 V-2.3</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+  --border: #30363d; --text: #c9d1d9; --text-dim: #8b949e;
+  --red: #f85149; --green: #3fb950; --yellow: #d29922; --blue: #58a6ff; --purple: #bc8cff;
+  --orange: #db6d28; --cyan: #39c5cf;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7; padding:20px; max-width:1200px; margin:0 auto; }
+h1 { color:var(--blue); font-size:1.8em; margin-bottom:5px; border-bottom:2px solid var(--border); padding-bottom:10px; }
+h2 { color:var(--cyan); font-size:1.4em; margin:30px 0 15px; padding-left:12px; border-left:4px solid var(--blue); }
+h3 { color:var(--purple); font-size:1.15em; margin:20px 0 10px; }
+h4 { color:var(--orange); font-size:1em; margin:15px 0 8px; }
+p { margin:8px 0; }
+.subtitle { color:var(--text-dim); font-size:0.9em; margin-bottom:20px; }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em; }
+th { background:var(--bg3); color:var(--blue); padding:10px; text-align:left; border:1px solid var(--border); }
+td { padding:8px 10px; border:1px solid var(--border); }
+tr:nth-child(even) { background:var(--bg2); }
+tr:hover { background:var(--bg3); }
+.score-badge { display:inline-block; padding:6px 20px; border-radius:8px; font-size:1.3em; font-weight:bold; }
+.score-red { background:rgba(248,81,73,0.15); color:var(--red); border:2px solid var(--red); }
+.score-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); border:2px solid var(--yellow); }
+.score-green { background:rgba(63,185,80,0.15); color:var(--green); border:2px solid var(--green); }
+.card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.card-red { border-left:4px solid var(--red); }
+.card-yellow { border-left:4px solid var(--yellow); }
+.card-green { border-left:4px solid var(--green); }
+.card-blue { border-left:4px solid var(--blue); }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; }
+@media(max-width:600px){ .grid-2,.grid-3{ grid-template-columns:1fr; } }
+.metric { text-align:center; padding:15px; background:var(--bg3); border-radius:8px; }
+.metric-val { font-size:1.8em; font-weight:bold; }
+.metric-label { color:var(--text-dim); font-size:0.85em; margin-top:5px; }
+.chart-container { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.highlight-red { color:var(--red); font-weight:bold; }
+.highlight-green { color:var(--green); font-weight:bold; }
+.highlight-yellow { color:var(--yellow); font-weight:bold; }
+blockquote { border-left:3px solid var(--orange); padding:10px 15px; margin:15px 0; background:var(--bg2); color:var(--text-dim); border-radius:0 8px 8px 0; }
+ul,ol { margin:8px 0 8px 25px; }
+li { margin:4px 0; }
+.tag { display:inline-block; padding:2px 10px; border-radius:4px; font-size:0.8em; margin:2px; }
+.tag-red { background:rgba(248,81,73,0.2); color:var(--red); }
+.tag-green { background:rgba(63,185,80,0.2); color:var(--green); }
+.tag-yellow { background:rgba(210,153,34,0.2); color:var(--yellow); }
+.tag-blue { background:rgba(88,166,255,0.2); color:var(--blue); }
+hr { border:none; border-top:1px solid var(--border); margin:25px 0; }
+.section-num { color:var(--blue); font-weight:bold; }
+.evidence-bar { display:flex; height:25px; border-radius:5px; overflow:hidden; margin:10px 0; }
+.evidence-bar div { display:flex; align-items:center; justify-content:center; font-size:0.75em; color:#fff; }
+.footer { text-align:center; color:var(--text-dim); margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:0.85em; }
+.warning-box { background:rgba(248,81,73,0.1); border:1px solid var(--red); border-radius:10px; padding:15px; margin:15px 0; }
+.warning-box h3 { color:var(--red); margin-top:0; }
+</style>
+</head>
+<body>
+
+<h1>ST信源（300352.SZ）深度分析报告</h1>
+<p class="subtitle">框架: 大灰皮证券研究 V-V-2.3 | 日期: 2026-07-26 | 分析师: 小八(AI) | Evidence First + 7 Hard Constraints</p>
+
+<!-- 核心结论卡片 -->
+<div class="card card-red">
+<h2 style="margin-top:0">最终结论</h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--red)">22<span style="font-size:0.5em">/100</span></div><div class="metric-label">综合评分</div></div>
+<div class="metric"><div class="score-badge score-red">🔴 红色</div><div class="metric-label">评级</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">回避</div><div class="metric-label">投资建议</div></div>
+</div>
+<blockquote>中国信息安全领域的"老炮"在治理崩塌中急速坠落——营收腰斩、连续亏损、内控否定意见被ST、实控人质押爆仓、定增终止。信源密信的军工技术护城河是唯一亮点，但治理信任已经归零。不值得在2元价位接飞刀。</blockquote>
+</div>
+
+<!-- 核心指标 -->
+<h2><span class="section-num">核心指标</span></h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--blue)">2.13元</div><div class="metric-label">当前股价</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--blue)">~30.88亿</div><div class="metric-label">总市值</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">3.06x</div><div class="metric-label">PB（净资产x3）</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">-3.38亿</div><div class="metric-label">2025归母净利润</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">-40.81%</div><div class="metric-label">营收同比</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">10.63x</div><div class="metric-label">PS（亏损无意义）</div></div>
+</div>
+
+<!-- 报告导读 -->
+<h2><span class="section-num">报告导读</span>  V-2.3</h2>
+<div class="card card-blue">
+<p><strong>三句话说明公司：</strong></p>
+<p>北信源(300352)是中国最早一批信息安全企业，创立于1996年、2012年上市，主营终端安全管理软件和"信源密信"高安全通信平台，客户覆盖政府、军队、军工等国家要害部门。但2025年内控被出具否定意见，2026年5月正式戴帽"ST信源"，股价从年初6.13元暴跌至2.13元，市值蒸发超60%。</p>
+<p><strong>商业模式简图：</strong> 软件产品(53%)+技术服务(21%)+系统集成(13%)——下游覆盖政府(33%)/军工(19%)/企业(28%)。核心产品信源密信已服务全军百万用户，具备极高军工准入壁垒；AI平台适配DeepSeek等主流大模型。但政企客户预算收缩导致营收持续萎缩。</p>
+<p><strong>投资者当前最需要理解的问题：</strong></p>
+<p>1. 内控否定意见能否在2026年年报前实质性修复？2027年是否面临退市风险警示？</p>
+<p>2. 实控人林皓54.73%质押已多数跌穿平仓线，控股稳定性是否会崩塌？</p>
+<p>3. 信源密信的技术护城河是否足以支撑公司在治理危机中生存下来？</p>
+</div>
+
+<!-- 第0章 -->
+<h2><span class="section-num">第0章</span> 公司分类</h2>
+<div class="card card-blue">
+<h3>分类：困境转折股（Distressed Turnaround）</h3>
+<table>
+<tr><th>判据</th><th>分析</th></tr>
+<tr><td>营收趋势</td><td>3年CAGR -23.4%，2025年加速下滑-40.81% → <span class="tag tag-red">衰退</span></td></tr>
+<tr><td>盈利状态</td><td>连续3年亏损（2023微利），亏损持续扩大 → <span class="tag tag-red">恶化</span></td></tr>
+<tr><td>治理状态</td><td>内控否定意见，ST戴帽，实控人质押爆仓 → <span class="tag tag-red">危机</span></td></tr>
+<tr><td>技术资产</td><td>信源密信服务全军百万用户，军工准入壁垒极高 → <span class="tag tag-green">护城河</span></td></tr>
+<tr><td>现金流</td><td>2025年经营现金流2822万为正，2026Q1达4233万 → <span class="tag tag-yellow">尚可</span></td></tr>
+</table>
+<p><strong>分类理由</strong>：这不是成长股、不是周期股、不是价值股——这是一家正在经历治理崩塌的老牌安全企业，核心问题是生存而非增长。按困境转折股(困境反转/清算价值)进行估值，优先看PB和清算价值。</p>
+<p><strong>首选估值方法</strong>：PB（市净率）+ 清算价值估算<br>
+<span class="tag tag-red">不进行DCF估值</span> <span class="tag tag-red">不进行PE估值（亏损）</span></p>
+</div>
+
+<!-- 第1章 -->
+<h2><span class="section-num">第1章</span> 基本面分析</h2>
+<h3>业务结构（2025年）</h3>
+<table>
+<tr><th>业务板块</th><th>营收</th><th>占比</th><th>同比</th><th>状态</th></tr>
+<tr><td>软件产品</td><td>1.63亿</td><td>53.2%</td><td class="highlight-red">-24.7%</td><td><span class="tag tag-yellow">承压</span></td></tr>
+<tr><td>技术服务</td><td>0.65亿</td><td>21.1%</td><td class="highlight-red">-27.5%</td><td><span class="tag tag-yellow">承压</span></td></tr>
+<tr><td>系统集成</td><td>0.39亿</td><td>12.7%</td><td class="highlight-red">-74.5%</td><td><span class="tag tag-red">崩塌</span></td></tr>
+<tr><td>其他</td><td>0.40亿</td><td>13.0%</td><td>—</td><td><span class="tag tag-yellow">低基数</span></td></tr>
+<tr><td><strong>合计</strong></td><td><strong>3.06亿</strong></td><td><strong>100%</strong></td><td class="highlight-red"><strong>-40.8%</strong></td><td></td></tr>
+</table>
+
+<h3>客户结构（2025年）</h3>
+<table>
+<tr><th>终端客户</th><th>营收</th><th>占比</th><th>趋势</th></tr>
+<tr><td>政府</td><td>1.01亿</td><td>32.9%</td><td class="highlight-red">下降（预算收缩）</td></tr>
+<tr><td>军工</td><td>0.57亿</td><td>18.6%</td><td class="highlight-yellow">稳定</td></tr>
+<tr><td>其他/企业</td><td>1.48亿</td><td>48.5%</td><td class="highlight-red">下降</td></tr>
+</table>
+
+<div class="grid-2">
+<div class="card card-green">
+<h4>核心资产（护城河）</h4>
+<ul>
+<li><strong>信源密信</strong>：100%国产化，服务全军百万用户，军工准入壁垒极高</li>
+<li><strong>AI平台</strong>：适配DeepSeek/千问/Kimi等主流大模型，支持私有化部署</li>
+<li><strong>终端安全</strong>：中国终端安全管理市场领导者，三十年品牌积淀</li>
+<li><strong>悍能芯</strong>：参股20%，芯片级物理安全（自毁芯片），尚在早期</li>
+<li><strong>专利514项+著作权284项</strong>，承接过重大国事活动信息安全保障</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>核心风险</h4>
+<ul>
+<li><strong>内控否定意见被ST</strong>：发出商品1.13亿无法审计+增值税核算混乱</li>
+<li><strong>营收连续2年加速下滑</strong>：2024 -24.3% → 2025 -40.8%</li>
+<li><strong>亏损扩大</strong>：2024亏1.45亿 → 2025亏3.38亿（扩大133%）</li>
+<li><strong>实控人质押爆仓</strong>：林皓54.73%质押，多笔已跌穿平仓线</li>
+<li><strong>定增终止</strong>：4.77亿募资计划流产，外部融资渠道关闭</li>
+<li><strong>银行存款被冻结</strong>：招行380万因纠纷被保全</li>
+</ul>
+</div>
+</div>
+
+<div class="chart-container">
+<canvas id="revenueChart" height="80"></canvas>
+</div>
+
+<!-- 第2章 -->
+<h2><span class="section-num">第2章</span> 行业研究 (TAM)</h2>
+<h3>信息安全行业</h3>
+<table>
+<tr><th>细分市场</th><th>2025规模(中国)</th><th>2028预测</th><th>CAGR</th></tr>
+<tr><td>终端安全管理</td><td>~80亿</td><td>~120亿</td><td>~14%</td></tr>
+<tr><td>高安全通信</td><td>~50亿</td><td>~100亿</td><td>~26%</td></tr>
+<tr><td>信创安全</td><td>~200亿</td><td>~350亿</td><td>~20%</td></tr>
+</table>
+<p><strong>竞争格局</strong>：深信服、奇安信、启明星辰、360为第一梯队(营收50亿+)；北信源属第二梯队但营收仅3亿，市场份额被持续蚕食。</p>
+<p><strong>行业趋势</strong>：信创+AI安全+军工信息化是结构性增量。但政企预算收紧、竞争加剧，行业整体增速放缓。</p>
+
+<!-- 第3章 -->
+<h2><span class="section-num">第3章</span> Fisher成长股评价</h2>
+<div class="chart-container">
+<canvas id="fisherChart" height="120"></canvas>
+</div>
+<table>
+<tr><th>维度</th><th>评分(/10)</th><th>说明</th></tr>
+<tr><td>1. 产品/服务潜力</td><td>6</td><td>信源密信+军工准入壁垒有结构性价值，但商业化乏力</td></tr>
+<tr><td>2. 成本/效率优势</td><td>3</td><td>毛利率69%尚可，但费用率极高(销售+管理+研发>100%营收)</td></tr>
+<tr><td>3. 管理层能力</td><td>2</td><td>内控否定+质押爆仓+ST，治理能力严重不足</td></tr>
+<tr><td>4. 研发能力</td><td>6</td><td>30年技术积淀+AI平台+信源密信，但研发转化为收入效率低</td></tr>
+<tr><td>5. 销售组织</td><td>3</td><td>客户拓展停滞，营收持续萎缩，销售效率堪忧</td></tr>
+<tr><td>6. 利润率水平</td><td>1</td><td>净利率-111%，每一块钱收入亏一块一</td></tr>
+<tr><td>7. 利润/成本关系</td><td>1</td><td>费用失控，研发+管理+销售费用合计超营收100%</td></tr>
+<tr><td>8. 股东关系</td><td>1</td><td>质押爆仓+戴帽+定增终止=信任崩塌</td></tr>
+<tr><td>9. 管理层深度</td><td>3</td><td>林皓集董事长总经理于一身，治理结构缺陷</td></tr>
+<tr><td>10. 业务独特性</td><td>7</td><td>信源密信在军工通信领域不可替代</td></tr>
+<tr><td><strong>Fisher综合评分</strong></td><td><strong>3.3/10</strong></td><td>技术资产有亮点但治理和盈利能力全面崩塌</td></tr>
+</table>
+<p><span class="tag tag-green">最符合Fisher</span> 业务独特性（军工通信准入壁垒）</p>
+<p><span class="tag tag-red">最不符合Fisher</span> 利润率(1分) + 股东关系(1分) + 管理层能力(2分)</p>
+
+<!-- 第4章 -->
+<h2><span class="section-num">第4章</span> 财务审计 (Bear Audit)</h2>
+<div class="chart-container">
+<canvas id="financialChart" height="100"></canvas>
+</div>
+<h3>审计报告的问题（一级证据）</h3>
+<div class="card card-red">
+<ol>
+<li><strong>发出商品1.13亿无法审计</strong>：占年营收37% — 审计机构未能执行监盘、函证，账实是否相符存疑</li>
+<li><strong>增值税核算混乱</strong>：进项税662万、销项税1.04亿均无法审计验证</li>
+<li><strong>内控否定意见</strong>：直接触发的ST，管理基础存在系统性缺陷</li>
+<li><strong>未弥补亏损-7.45亿</strong>：超总股本三分之一，触发信息披露加强要求</li>
+<li><strong>营收持续萎缩</strong>：2025年3.06亿，2024年5.17亿，2023年6.83亿 → 逐年递减</li>
+<li><strong>亏损持续扩大</strong>：2022亏1.87亿→2023微利0.07亿→2024亏1.45亿→2025亏3.38亿</li>
+</ol>
+</div>
+
+<div class="card card-yellow">
+<h4>资产负债表</h4>
+<table>
+<tr><th>指标</th><th>2025年末</th><th>2026Q1</th><th>信号</th></tr>
+<tr><td>总资产</td><td>18.03亿</td><td>17.47亿</td><td class="highlight-red">持续缩水</td></tr>
+<tr><td>净资产</td><td>10.49亿</td><td>9.98亿</td><td class="highlight-red">持续缩水</td></tr>
+<tr><td>负债率</td><td>41.83%</td><td>42.89%</td><td class="highlight-yellow">可控但上升</td></tr>
+<tr><td>流动比率</td><td>0.91</td><td>—</td><td class="highlight-red">低于1（流动性风险）</td></tr>
+<tr><td>每股净资产</td><td>0.73元</td><td>0.70元</td><td class="highlight-yellow">高于股价3倍</td></tr>
+</table>
+</div>
+
+<h3>Bear Audit 最终评级：<span style="color:var(--red);font-weight:bold">🔴 红色 (Red)</span></h3>
+<p>三重审计警报+营收萎缩+质押危机+ST戴帽。这不是"坏公司"，这是"公司的生存已经出现问题"。</p>
+
+<!-- 第5章 -->
+<h2><span class="section-num">第5章</span> Bear Case（完整做空逻辑）</h2>
+<div class="card card-red">
+<h3>做空成功概率：高 (75%)</h3>
+<p>一家年营收3亿、亏损3.38亿、内控否定被ST、实控人质押爆仓、银行账户被冻结的公司——做空它不是押注悲观，是承认现实。</p>
+</div>
+<table>
+<tr><th>触发事件</th><th>概率</th><th>股价影响</th></tr>
+<tr><td>2026年报内控继续否定→退市风险警示(*ST)</td><td>中高</td><td class="highlight-red">-30%~50%</td></tr>
+<tr><td>实控人质押强制平仓（批量减持或被动减持）</td><td>中</td><td class="highlight-red">-20%~30%</td></tr>
+<tr><td>营收继续萎缩至2亿以下</td><td>中</td><td class="highlight-red">-30%~40%</td></tr>
+<tr><td>主要银行账户被冻结（已出现苗头）</td><td>中低</td><td class="highlight-red">-40%~60%</td></tr>
+<tr><td>退市（若连续2年内控否定）</td><td>低中</td><td class="highlight-red">-80%~90%</td></tr>
+</table>
+
+<h3>腰斩之后还能再腰斩的逻辑</h3>
+<p>当前股价2.13元较年初6.13元已跌66%。但跌得多≠便宜。看清算：</p>
+<ul>
+<li>净资产10亿 → 扣除商誉、应收账款等虚资产 → 真实清算价值可能仅5-7亿</li>
+<li>按7亿清算价值÷14.5亿股=0.48元/股 → 当前2.13元溢价344%</li>
+<li>若按年营收3亿、PS给2-3倍=6-9亿市值 → 0.41-0.62元/股</li>
+<li><strong>继续跌至0.5-0.8元并非不可想象</strong></li>
+</ul>
+
+<!-- 第6章 -->
+<h2><span class="section-num">第6章</span> 估值分析</h2>
+<h3>6.1 估值模型</h3>
+<p>困境转折股，持续亏损，PE/PS/DCF均不适用。以PB和清算价值为核心。</p>
+
+<h3>6.2 核心估值指标</h3>
+<table>
+<tr><th>指标</th><th>数值</th><th>信号</th></tr>
+<tr><td>PE(TTM)</td><td>负值（亏损）</td><td>无意义</td></tr>
+<tr><td>PB</td><td>3.06x</td><td class="highlight-yellow">5年最低位（0.08%分位），但对亏损公司不便宜</td></tr>
+<tr><td>PS(TTM)</td><td>10.63x</td><td class="highlight-red">对于营收萎缩的ST公司极贵</td></tr>
+<tr><td>EV/EBITDA</td><td>负值</td><td>无意义</td></tr>
+<tr><td>ROE(TTM)</td><td>-33.18%</td><td class="highlight-red">毁灭价值</td></tr>
+<tr><td>毛利率(2025)</td><td>59.66%</td><td class="highlight-yellow">尚可但被费用吞噬</td></tr>
+</table>
+
+<h3>6.5 三情景估值</h3>
+<table>
+<tr><th>情景</th><th>假设</th><th>合理市值</th><th>对应股价</th></tr>
+<tr><td><span class="tag tag-green">Bull</span></td><td>内控修复+摘帽+军工业绩反转（小概率）</td><td>30-40亿</td><td>2.07-2.76元</td></tr>
+<tr><td><span class="tag tag-yellow">Base</span></td><td>内控维持否定+退市风险警示+营收继续下滑</td><td>6-10亿</td><td>0.41-0.69元</td></tr>
+<tr><td><span class="tag tag-red">Bear</span></td><td>退市+质押爆仓+账户冻结全面爆发</td><td>3-5亿</td><td>0.21-0.34元</td></tr>
+</table>
+
+<h3>6.8 安全边际</h3>
+<p><strong>当前安全边际：无</strong></p>
+<ul>
+<li>Base情景0.41-0.69元 vs 当前2.13元 → 溢价208%-419%</li>
+<li>Bear情景0.21-0.34元 vs 当前2.13元 → 溢价526%-914%</li>
+<li>即使Bull情景2.07-2.76元，当前也处于上限</li>
+</ul>
+
+<h3>6.11 投资决策价格框架</h3>
+<table>
+<tr><th>价格区间</th><th>对应市值</th><th>PB</th><th>判断</th><th>操作</th></tr>
+<tr><td>1.5-2.5元</td><td>22-36亿</td><td>2.2-3.6x</td><td class="highlight-yellow">偏高</td><td>回避</td></tr>
+<tr><td>0.8-1.5元</td><td>12-22亿</td><td>1.2-2.2x</td><td class="highlight-yellow">偏贵</td><td>观望</td></tr>
+<tr><td>0.5-0.8元</td><td>7-12亿</td><td>0.7-1.2x</td><td>合理</td><td>考虑（需确认内控修复）</td></tr>
+<tr><td><0.5元</td><td><7亿</td><td><0.7x</td><td class="highlight-green">低估</td><td>关注</td></tr>
+</table>
+
+<h3>6.15 最终投资决策</h3>
+<table>
+<tr><th>项目</th><th>数值</th></tr>
+<tr><td>当前股价</td><td>2.13元</td></tr>
+<tr><td>公允价值（Base清算）</td><td>0.41-0.69元</td></tr>
+<tr><td>买入价（含安全边际+摘帽信号确认）</td><td><0.5元（且内控修复信号明确）</td></tr>
+<tr><td>当前安全边际</td><td class="highlight-red">-208%~-419%（负值）</td></tr>
+<tr><td>操作建议</td><td><strong>回避</strong></td></tr>
+</table>
+
+<!-- 第7章 -->
+<h2><span class="section-num">第7章</span> 风险分析</h2>
+<table>
+<tr><th>#</th><th>风险</th><th>严重度</th><th>概率</th><th>市场定价</th></tr>
+<tr><td>1</td><td>2026年报内控继续否定→退市</td><td>致命</td><td>中高</td><td class="highlight-yellow">部分定价</td></tr>
+<tr><td>2</td><td>实控人质押爆仓→控制权危机</td><td>致命</td><td>中</td><td class="highlight-yellow">部分定价</td></tr>
+<tr><td>3</td><td>营收持续萎缩→业务空心化</td><td>严重</td><td>高</td><td class="highlight-yellow">部分定价</td></tr>
+<tr><td>4</td><td>银行账户被全面冻结</td><td>严重</td><td>中低</td><td>未定价</td></tr>
+<tr><td>5</td><td>信源密信军工订单流失/替代</td><td>严重</td><td>低</td><td>未定价</td></tr>
+</table>
+
+<!-- 第8章 -->
+<h2><span class="section-num">第8章</span> 投资逻辑</h2>
+<div class="card card-red">
+<h3>核心结论：不要接飞刀</h3>
+<p>一家营收从7亿萎缩至3亿、亏损3.38亿、内控否定、实控人质押爆仓的ST公司，即使有信源密信这样的技术资产，3倍的PB仍然太贵。理由是：技术资产的价值在治理崩塌时会被大幅折价。</p>
+<p><strong>唯一可能的反转剧本</strong>：2026年内控修复+摘帽+信源密信军工订单放量+悍能芯产品落地。但这四个条件同时发生的概率极低。</p>
+</div>
+
+<!-- 第9章 -->
+<h2><span class="section-num">第9章</span> Value Drivers（价值驱动因素）</h2>
+<table>
+<tr><th>#</th><th>Driver</th><th>权重</th><th>当前状态</th></tr>
+<tr><td>1</td><td>2026年内控审计意见</td><td>★★★★★</td><td class="highlight-red">最核心变量→是摘帽还是退市?</td></tr>
+<tr><td>2</td><td>实控人质押暴雷风险</td><td>★★★★★</td><td class="highlight-red">多笔已跌穿平仓线，持续补仓中</td></tr>
+<tr><td>3</td><td>信源密信军工营收增速</td><td>★★★★</td><td class="highlight-yellow">稳定但未放量</td></tr>
+<tr><td>4</td><td>营收下滑是否触底</td><td>★★★★</td><td class="highlight-red">2026Q1继续-24.87%</td></tr>
+<tr><td>5</td><td>悍能芯产品化进展</td><td>★★★</td><td>极小概率，可忽略</td></tr>
+<tr><td>6</td><td>法院诉讼/账户冻结蔓延</td><td>★★★</td><td>已有苗头</td></tr>
+</table>
+<p><strong>唯一值得长期监控的Driver</strong>：2026年内控审计报告的方向——这是生与死的分界线。</p>
+
+<!-- 第10章 -->
+<h2><span class="section-num">第10章</span> 最终结论</h2>
+
+<h3>综合评分</h3>
+<table>
+<tr><th>维度</th><th>评分(/10)</th><th>权重</th><th>加权分</th></tr>
+<tr><td>商业模式/技术壁垒</td><td>5.0</td><td>10%</td><td>0.50</td></tr>
+<tr><td>行业前景/TAM</td><td>4.0</td><td>10%</td><td>0.40</td></tr>
+<tr><td>管理层/治理</td><td>1.5</td><td>15%</td><td>0.23</td></tr>
+<tr><td>财务健康</td><td>1.5</td><td>15%</td><td>0.23</td></tr>
+<tr><td>盈利能力</td><td>0.5</td><td>10%</td><td>0.05</td></tr>
+<tr><td>增长动力</td><td>1.0</td><td>10%</td><td>0.10</td></tr>
+<tr><td>估值吸引力</td><td>2.0</td><td>15%</td><td>0.30</td></tr>
+<tr><td>竞争优势可持续性</td><td>4.0</td><td>8%</td><td>0.32</td></tr>
+<tr><td>信披/合规质量</td><td>1.0</td><td>3%</td><td>0.03</td></tr>
+<tr><td>资本配置能力</td><td>1.0</td><td>4%</td><td>0.04</td></tr>
+<tr><td><strong>总计</strong></td><td></td><td><strong>100%</strong></td><td><strong>2.20/10 → 22/100</strong></td></tr>
+</table>
+
+<h3>评级：<span style="color:var(--red);font-weight:bold">🔴 红色（回避）</span></h3>
+
+<div class="card card-red">
+<h3>一句话总结</h3>
+<p>中国信息安全行业的"活化石"正在治理崩塌中走向十字路口——技术底蕴犹在但信任已经归零，2.13元买入的不是"便宜的军工安全股"，是价值0.5元的风险彩票。</p>
+</div>
+
+<!-- Evidence Coverage -->
+<h2><span class="section-num">Evidence Coverage</span>（证据覆盖率）</h2>
+<div class="evidence-bar">
+<div style="width:55%;background:var(--green)">一级55%</div>
+<div style="width:20%;background:var(--yellow)">二级20%</div>
+<div style="width:15%;background:var(--blue)">三级15%</div>
+<div style="width:10%;background:var(--red)">AI推断10%</div>
+</div>
+<table>
+<tr><th>等级</th><th>占比</th><th>说明</th></tr>
+<tr><td>一级（年报/审计报告）</td><td>55%</td><td>营收/利润/审计意见/内控报告/质押公告</td></tr>
+<tr><td>二级（公司公告）</td><td>20%</td><td>ST公告/定增终止/账户冻结/质押公告</td></tr>
+<tr><td>三级（财经媒体）</td><td>15%</td><td>行业分析/竞品数据/股价历史</td></tr>
+<tr><td>四级（AI推断）</td><td>10%</td><td>清算价值估算/三情景假设/竞争格局判断</td></tr>
+</table>
+<p><strong>未验证数据</strong>：发出商品1.13亿的真实性（审计受限），信源密信的具体军工营收占比。</p>
+<p><strong>AI推断>10%：⚠️ 已警告</strong> — 清算价值估算、三情景价格区间为AI推断，非公司直接披露。</p>
+
+<hr>
+<div class="footer">
+<p>框架版本：V-2.3 | Research Constitution V-2.3</p>
+<p>生成日期：2026-07-26 | 分析师：小八 (WorkBuddy AI)</p>
+<p style="margin-top:8px;color:var(--red);font-size:0.75rem">⚠️ 本报告仅为独立研究参考，不构成投资建议。投资有风险，入市需谨慎。</p>
+</div>
+
+<script>
+// 营收趋势图
+new Chart(document.getElementById('revenueChart'), {
+  type: 'bar',
+  data: {
+    labels: ['2021','2022','2023','2024','2025'],
+    datasets: [{
+      label: '营收(亿)',
+      data: [7.22, 5.43, 6.83, 5.17, 3.06],
+      backgroundColor: ['#58a6ff','#58a6ff','#3fb950','#d29922','#f85149'],
+      borderRadius: 4
+    },{
+      label: '净利润(亿)',
+      data: [0.90, -1.87, 0.07, -1.45, -3.38],
+      type: 'line',
+      borderColor: '#bc8cff',
+      backgroundColor: 'transparent',
+      borderWidth: 2,
+      pointBackgroundColor: '#bc8cff',
+      tension: 0.3
+    }]
+  },
+  options: {
+    plugins: { legend: { labels: { color:'#8b949e' } } },
+    scales: { x: { ticks: { color:'#8b949e' } }, y: { ticks: { color:'#8b949e' } } }
+  }
+});
+
+// Fisher雷达图
+new Chart(document.getElementById('fisherChart'), {
+  type: 'radar',
+  data: {
+    labels: ['产品潜力','成本效率','管理层','研发','销售','利润率','费用控制','股东关系','管理层深度','业务独特性'],
+    datasets: [{
+      label: 'ST信源',
+      data: [6,3,2,6,3,1,1,1,3,7],
+      borderColor: '#f85149',
+      backgroundColor: 'rgba(248,81,73,0.1)',
+      pointBackgroundColor: '#f85149'
+    }]
+  },
+  options: {
+    scales: { r: { min:0, max:10, ticks: { color:'#8b949e', stepSize:2 }, grid: { color:'#30363d' } } },
+    plugins: { legend: { labels: { color:'#8b949e' } } }
+  }
+});
+
+// 财务趋势
+new Chart(document.getElementById('financialChart'), {
+  type: 'line',
+  data: {
+    labels: ['2021','2022','2023','2024','2025'],
+    datasets: [{
+      label: '营收(亿)',
+      data: [7.22, 5.43, 6.83, 5.17, 3.06],
+      borderColor: '#58a6ff',
+      backgroundColor: 'rgba(88,166,255,0.1)',
+      fill: true,
+      tension: 0.3
+    },{
+      label: '毛利率(%)',
+      data: [72.5, 68.3, 70.1, 55.6, 59.7],
+      borderColor: '#d29922',
+      backgroundColor: 'rgba(210,153,34,0.1)',
+      fill: true,
+      tension: 0.3,
+      yAxisID: 'y1'
+    },{
+      label: '净利率(%)',
+      data: [12.5, -34.4, 1.0, -28.0, -110.5],
+      borderColor: '#f85149',
+      borderDash: [5,5],
+      tension: 0.3,
+      yAxisID: 'y1'
+    }]
+  },
+  options: {
+    plugins: { legend: { labels: { color:'#8b949e' } } },
+    scales: {
+      x: { ticks: { color:'#8b949e' } },
+      y: { ticks: { color:'#8b949e' }, title: { display:true, text:'营收(亿)', color:'#8b949e' } },
+      y1: { position:'right', ticks: { color:'#8b949e' }, title: { display:true, text:'%', color:'#8b949e' }, grid: { display:false } }
+    }
+  }
+});
+</script>
+</body></html>
