@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nebius Group(NBIS) 深度分析报告 | 大灰皮证券研究 V-2.4</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+  --border: #30363d; --text: #c9d1d9; --text-dim: #8b949e;
+  --red: #f85149; --green: #3fb950; --yellow: #d29922; --blue: #58a6ff; --purple: #bc8cff;
+  --orange: #db6d28; --cyan: #39c5cf;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7; padding:20px; max-width:1200px; margin:0 auto; }
+h1 { color:var(--blue); font-size:1.8em; margin-bottom:5px; border-bottom:2px solid var(--border); padding-bottom:10px; }
+h2 { color:var(--cyan); font-size:1.4em; margin:30px 0 15px; padding-left:12px; border-left:4px solid var(--blue); }
+h3 { color:var(--purple); font-size:1.15em; margin:20px 0 10px; }
+h4 { color:var(--orange); font-size:1em; margin:15px 0 8px; }
+p { margin:8px 0; }
+.subtitle { color:var(--text-dim); font-size:0.9em; margin-bottom:20px; }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em; }
+th { background:var(--bg3); color:var(--blue); padding:10px; text-align:left; border:1px solid var(--border); }
+td { padding:8px 10px; border:1px solid var(--border); }
+tr:nth-child(even) { background:var(--bg2); }
+tr:hover { background:var(--bg3); }
+.score-badge { display:inline-block; padding:6px 20px; border-radius:8px; font-size:1.3em; font-weight:bold; }
+.score-red { background:rgba(248,81,73,0.15); color:var(--red); border:2px solid var(--red); }
+.score-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); border:2px solid var(--yellow); }
+.score-green { background:rgba(63,185,80,0.15); color:var(--green); border:2px solid var(--green); }
+.card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.card-red { border-left:4px solid var(--red); }
+.card-yellow { border-left:4px solid var(--yellow); }
+.card-green { border-left:4px solid var(--green); }
+.card-blue { border-left:4px solid var(--blue); }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; }
+@media(max-width:600px){ .grid-2,.grid-3{ grid-template-columns:1fr; } }
+.metric { text-align:center; padding:15px; background:var(--bg3); border-radius:8px; }
+.metric-val { font-size:1.8em; font-weight:bold; }
+.metric-label { color:var(--text-dim); font-size:0.85em; margin-top:5px; }
+.chart-container { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.highlight-red { color:var(--red); font-weight:bold; }
+.highlight-green { color:var(--green); font-weight:bold; }
+.highlight-yellow { color:var(--yellow); font-weight:bold; }
+blockquote { border-left:3px solid var(--orange); padding:10px 15px; margin:15px 0; background:var(--bg2); color:var(--text-dim); border-radius:0 8px 8px 0; }
+ul,ol { margin:8px 0 8px 25px; }
+li { margin:4px 0; }
+.tag { display:inline-block; padding:2px 10px; border-radius:4px; font-size:0.8em; margin:2px; }
+.tag-red { background:rgba(248,81,73,0.2); color:var(--red); }
+.tag-green { background:rgba(63,185,80,0.2); color:var(--green); }
+.tag-yellow { background:rgba(210,153,34,0.2); color:var(--yellow); }
+.tag-blue { background:rgba(88,166,255,0.2); color:var(--blue); }
+hr { border:none; border-top:1px solid var(--border); margin:25px 0; }
+.section-num { color:var(--blue); font-weight:bold; }
+.evidence-bar { display:flex; height:25px; border-radius:5px; overflow:hidden; margin:10px 0; }
+.evidence-bar div { display:flex; align-items:center; justify-content:center; font-size:0.75em; color:#fff; }
+.footer { text-align:center; color:var(--text-dim); margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:0.85em; }
+.warning-box { background:rgba(248,81,73,0.1); border:1px solid var(--red); border-radius:10px; padding:15px; margin:15px 0; }
+.warning-box h3 { color:var(--red); margin-top:0; }
+</style>
+</head>
+<body>
+
+<h1>Nebius Group（NBIS.US）深度分析报告</h1>
+<p class="subtitle">框架: 大灰皮证券研究 V-V-2.4 | 日期: 2026-08-02 | 分析师: 小八(AI) | Evidence First + Market Data Integrity</p>
+
+<div class="warning-box">
+<h3>⚠️ 数据口径声明（Market Data Integrity Gate）</h3>
+<p>本报告核心财务数据来自 SEC 6-K 文件（一级证据，Q1 2026财报）。股价为 2026-07-31 收盘 190.41 美元，52周区间 43.89~287.69 美元；不同数据源（Yahoo 盘中 283.90 / 行情系统 190.41）存在偏差，本报告以 7/31 收盘价为准，市值约 483 亿美元。Q1 财报时点（2026-03-31）股价为 103.76 美元，市值 263 亿。机构目标价中位 260 美元，区间 120~410。</p>
+</div>
+
+<!-- 核心结论 -->
+<div class="card card-yellow">
+<h2 style="margin-top:0">最终结论</h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">63<span style="font-size:0.5em">/100</span></div><div class="metric-label">综合评分</div></div>
+<div class="metric"><div class="score-badge score-yellow">? 黄色</div><div class="metric-label">评级</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">观察</div><div class="metric-label">投资建议</div></div>
+</div>
+<blockquote>英伟达投资的"AI云新贵"：Meta 270亿+微软174亿在手合同、ARR 19亿、调整后EBITDA转正——基本面在AI云赛道属于第一梯队。但 PS 34x 的估值、Q1单季 24.7亿资本开支、GAAP利润靠一次性收益撑起、客户高度集中，使得好公司与好价格之间存在巨大鸿沟。</blockquote>
+</div>
+
+<!-- 核心指标 -->
+<h2><span class="section-num">核心指标</span></h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--blue)">190.41$</div><div class="metric-label">7/31收盘价</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--blue)">~483亿$</div><div class="metric-label">总市值</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">3.99亿$</div><div class="metric-label">Q1营收(+684%)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">+1.30亿$</div><div class="metric-label">Q1调整EBITDA</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--blue)">19亿$</div><div class="metric-label">ARR(+50% QoQ)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">-24.7亿$</div><div class="metric-label">Q1资本开支</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">~34x</div><div class="metric-label">PS(TTM)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">93亿$</div><div class="metric-label">在手现金</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">67.5%</div><div class="metric-label">资产负债率</div></div>
+</div>
+
+<!-- 报告导读 -->
+<h2><span class="section-num">报告导读</span> V-2.3/V-2.4</h2>
+<div class="card card-blue">
+<p><strong>三句话说明公司：</strong></p>
+<p>Nebius Group 是原 Yandex 分拆出的国际 AI 云公司，2024年8月更名上市（NASDAQ: NBIS），主营 GPU 算力即服务（Nebius AI 云），另有教育科技 TripleTen 与自动驾驶 Avride 业务。公司处于 AI 算力超级周期的最前线：Q1营收同比增长684%，ARR达19亿美元，英伟达战略投资20亿美元持股8.3%，并手握 Meta（270亿）+微软（174亿）合计超440亿美元长期算力合同。</p>
+<p><strong>商业模式简图：</strong> 英伟达提供最新GPU+投资背书 → Nebius 自建/租赁数据中心（含宾州1.2GW自有工厂）→ 将算力以长协形式卖给 Meta/微软等大客户 → 客户预付款支撑巨额资本开支（Q1经营现金流+22.6亿，几乎全部来自预收）。核心壁垒：英伟达优先供应权 + 大客户锁定 + 规模化交付能力。</p>
+<p><strong>投资者当前最需要理解的问题：</strong></p>
+<p>1. 484亿市值对应 PS 34x——这是"AI泡沫定价"还是"稀缺性溢价"？</p>
+<p>2. Q1单季资本开支24.7亿 vs 营收3.99亿——这套烧钱模式何时实现自由现金流为正？</p>
+<p>3. Meta/微软两大客户占在手合同绝大部分——客户集中风险有多大？</p>
+</div>
+
+<!-- 第0章 -->
+<h2><span class="section-num">第0章</span> 公司分类</h2>
+<div class="card card-blue">
+<h3>分类：超级成长股（AI基础设施/GPU云）— 类似CoreWeave</h3>
+<table>
+<tr><th>判据</th><th>分析</th></tr>
+<tr><td>营收增速</td><td>Q1 2026 +684%，Nebius核心业务+841% → <span class="tag tag-green">极速成长</span></td></tr>
+<tr><td>盈利状态</td><td>调整后EBITDA扭亏(+1.3亿)，但GAAP净利靠一次性收益(6.2亿含公允价值变动) → <span class="tag tag-yellow">混合</span></td></tr>
+<tr><td>商业模式</td><td>重资产GPU云，资本开支/Q1 = 6.2x营收 → <span class="tag tag-red">烧钱型</span></td></tr>
+<tr><td>客户结构</td><td>Meta+微软合计440亿+美元长协 → <span class="tag tag-green">顶级客户</span> 但 <span class="tag tag-red">集中</span></td></tr>
+<tr><td>供应链</td><td>英伟达8.3%股东+优先供应权 → <span class="tag tag-green">战略绑定</span></td></tr>
+</table>
+<p><strong>首选估值方法</strong>：PS（主）+ EV/Adjusted EBITDA（辅）。GAAP利润含一次性收益，PE/PEG不适用。</p>
+<p><span class="tag tag-yellow">⚠️ 周期属性提示：GPU云资本开支有行业周期，2023-2024年曾因算力过剩调整</span></p>
+</div>
+
+<!-- 第1章 -->
+<h2><span class="section-num">第1章</span> 基本面分析</h2>
+<h3>业务结构（2025年报）</h3>
+<table>
+<tr><th>业务</th><th>营收</th><th>占比</th><th>说明</th></tr>
+<tr><td>Nebius AI云</td><td>4.80亿$</td><td>90.7%</td><td>GPU即服务/训练推理/Token Factory</td></tr>
+<tr><td>TripleTen</td><td>0.54亿$</td><td>10.2%</td><td>科技教育（转码训练营）</td></tr>
+<tr><td>Avride</td><td>0.01亿$</td><td>0.3%</td><td>自动驾驶+配送机器人</td></tr>
+<tr><td>抵消项</td><td>-0.06亿$</td><td>-1.1%</td><td>—</td></tr>
+</table>
+<p>另持有 ClickHouse（数据库）与 Toloka（数据标注）股权（权益法）。</p>
+
+<h3>Q1 2026 核心数据（一级证据）</h3>
+<table>
+<tr><th>指标</th><th>Q1 2025</th><th>Q1 2026</th><th>变化</th></tr>
+<tr><td>营收</td><td>5090万$</td><td>3.99亿$</td><td class="highlight-green">+684%</td></tr>
+<tr><td>调整后EBITDA</td><td>-5370万$</td><td>+1.30亿$</td><td class="highlight-green">扭亏</td></tr>
+<tr><td>GAAP净利</td><td>-1.04亿$</td><td>+6.21亿$</td><td>含一次性公允价值收益</td></tr>
+<tr><td>调整后净亏损</td><td>-8360万$</td><td>-1.00亿$</td><td class="highlight-red">仍亏损</td></tr>
+<tr><td>经营现金流</td><td>-1.84亿$</td><td>+22.6亿$</td><td>预付款驱动</td></tr>
+<tr><td>资本开支</td><td>-5.44亿$</td><td>-24.7亿$</td><td class="highlight-red">+355%</td></tr>
+<tr><td>毛利率(GAAP)</td><td>—</td><td>20.85%</td><td class="highlight-yellow">偏低（重资产折旧）</td></tr>
+</table>
+
+<div class="grid-2">
+<div class="card card-green">
+<h4>核心优势</h4>
+<ul>
+<li>英伟达20亿美元投资+8.3%股权+优先算力供应权（技术端顶层支持）</li>
+<li>Meta 270亿$（120亿专用+150亿扩容）+ 微软174亿$ 长协</li>
+<li>ARR 19亿$，环比+50%，Q1算力全部售罄</li>
+<li>在手现金93亿$，资本充足（含IPO/英伟达注资）</li>
+<li>调整后EBITDA利润率32%，随规模效应快速改善</li>
+<li>宾州1.2GW自有AI工厂 + 英国17亿英镑扩张</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>核心风险</h4>
+<ul>
+<li>PS ~34x，估值极度依赖高增长兑现</li>
+<li>Q1资本开支24.7亿 > 全年营收预期31亿——烧钱强度惊人</li>
+<li>GAAP利润靠公允价值收益，调整后仍亏损1亿/季</li>
+<li>客户集中：Meta+微软占在手合同绝大部分</li>
+<li>俄裔背景（Yandex拆分）地缘政治敏感性</li>
+<li>英伟达既是最大供应商又是股东——关联交易质疑</li>
+<li>资产负债率67.5%，负债150亿$（含算力租赁债务）</li>
+</ul>
+</div>
+</div>
+
+<div class="chart-container">
+<canvas id="revenueChart" height="80"></canvas>
+</div>
+
+<!-- 第2章 -->
+<h2><span class="section-num">第2章</span> 行业研究 (TAM)</h2>
+<h3>AI云/GPU基础设施市场</h3>
+<table>
+<tr><th>项目</th><th>数值</th></tr>
+<tr><td>全球AI云市场规模(2026E)</td><td>~1500-2000亿美元</td></tr>
+<tr><td>增速</td><td>50-80% CAGR（AI算力需求驱动）</td></tr>
+<tr><td>算力供需</td><td>严重供不应求（Q1 NBIS算力售罄）</td></tr>
+<tr><td>竞争格局</td><td>CoreWeave / Nebius / Lambda / Crusoe 为新势力第一梯队（SemiAnalysis）</td></tr>
+<tr><td>传统云厂商</td><td>AWS/Azure/GCP 也加大AI算力投入，竞争加剧</td></tr>
+</table>
+
+<h3>竞争对比</h3>
+<table>
+<tr><th>公司</th><th>市值</th><th>PS(TTM)</th><th>营收增速</th><th>在手合同</th></tr>
+<tr><td><strong>Nebius</strong></td><td>~483亿$</td><td>~34x</td><td>+684%</td><td>Meta+微软440亿$+</td></tr>
+<tr><td>CoreWeave</td><td>~71.77$/股</td><td>~20x</td><td>+200%+</td><td>微软/OpenAI等</td></tr>
+<tr><td>微软Azure(AI)</td><td>~4万亿$</td><td>~12x</td><td>~15%</td><td>—</td></tr>
+<tr><td>AWS</td><td>（亚马逊内）</td><td>~3x</td><td>~20%</td><td>—</td></tr>
+</table>
+<p><span class="highlight-yellow">NBIS 相对 CoreWeave 估值更贵，但增速更高、且有多元化资产（Avride/TripleTen/ClickHouse股权）。</span></p>
+
+<!-- 第3章 -->
+<h2><span class="section-num">第3章</span> Fisher成长股评价</h2>
+<div class="chart-container">
+<canvas id="fisherChart" height="120"></canvas>
+</div>
+<table>
+<tr><th>维度</th><th>评分</th><th>说明</th></tr>
+<tr><td>1. 产品/服务潜力</td><td>9</td><td>AI算力需求结构性增长，GPU云是AI时代"卖铲人"</td></tr>
+<tr><td>2. 成本/效率优势</td><td>6</td><td>规模效应显现（EBITDA利润率32%），但GAAP毛利率仅21%</td></tr>
+<tr><td>3. 管理层能力</td><td>7</td><td>Volozh（Yandex联合创始人）技术出身，执行力强</td></tr>
+<tr><td>4. 研发能力</td><td>8</td><td>自研云平台+Token Factory+AI推理优化</td></tr>
+<tr><td>5. 销售组织</td><td>7</td><td>拿下Meta/微软超级合同，Revolut等客户案例</td></tr>
+<tr><td>6. 利润率水平</td><td>4</td><td>调整后仍亏损，依赖EBITDA口径转正</td></tr>
+<tr><td>7. 费用控制</td><td>5</td><td>SG&A费用1.44亿(占营收36%)，扩张期偏高</td></tr>
+<tr><td>8. 股东关系</td><td>5</td><td>英伟达入股+老股东（俄罗斯资产相关）结构复杂</td></tr>
+<tr><td>9. 管理层深度</td><td>6</td><td>团队国际化，但核心依赖Volozh个人</td></tr>
+<tr><td>10. 业务独特性</td><td>8</td><td>英伟达优先供应权+欧亚中立定位（vs CoreWeave美国本土）</td></tr>
+<tr><td><strong>Fisher综合</strong></td><td><strong>6.5/10</strong></td><td>赛道顶级、执行力强，但盈利与股东结构待验证</td></tr>
+</table>
+
+<!-- 第4章 -->
+<h2><span class="section-num">第4章</span> 财务审计 (Bear Audit)</h2>
+<div class="card card-yellow">
+<ol>
+<li><strong>盈利质量</strong>：GAAP净利+6.21亿中，绝大部分为债务/投资公允价值变动等一次性收益；调整后净亏损-1.00亿。投资者需以调整后口径看待。</li>
+<li><strong>现金流结构</strong>：经营现金流+22.6亿主要来自客户预付款（Meta/微软合同），扣除预付款后的真实现金创造能力待验证；资本开支-24.7亿，自由现金流-21.5亿。</li>
+<li><strong>折旧压力</strong>：Q1折旧2.12亿（占营收53%），GPU资产快速减值风险。</li>
+<li><strong>债务杠杆</strong>：总负债150.6亿$（含算力设备租赁融资），资产负债率67.5%，但速动比率8.33（现金充裕）。</li>
+<li><strong>关联交易</strong>：英伟达为最大供应商+8.3%股东；客户Meta/微软同时是英伟达大客户——多方利益交叉。</li>
+</ol>
+</div>
+<h3>Bear Audit 最终评级：<span style="color:var(--yellow);font-weight:bold">? 黄色（需关注）</span></h3>
+<p>不是财务造假风险，而是"重资产烧钱+一次性收益美化报表+高杠杆扩张"的模式风险。</p>
+
+<!-- 第5章 -->
+<h2><span class="section-num">第5章</span> Bear Case（完整做空逻辑）</h2>
+<div class="card card-red">
+<h3>做空成功概率：40%（中等）</h3>
+<p>NBIS有真实业务与顶级客户，不是骗局。做空的核心赌注是：AI算力资本开支周期的拐点 + 34x PS 的估值回归。</p>
+</div>
+<table>
+<tr><th>逻辑</th><th>概率</th><th>股价影响</th></tr>
+<tr><td>AI CAPEX周期见顶 → GPU云需求萎缩</td><td>中</td><td class="highlight-red">-50%~-70%</td></tr>
+<tr><td>客户集中（Meta/微软）订单违约/削减</td><td>低</td><td class="highlight-red">-30%~-50%</td></tr>
+<tr><td>英伟达自有云竞争（NVIDIA DGX Cloud）</td><td>中</td><td class="highlight-red">-30%~-40%</td></tr>
+<tr><td>融资扩张引发债务/稀释压力</td><td>中</td><td class="highlight-yellow">-20%~-30%</td></tr>
+<tr><td>地缘政治（俄裔背景）制裁风险</td><td>低</td><td class="highlight-red">-40%~-60%</td></tr>
+</table>
+
+<!-- 第6章 -->
+<h2><span class="section-num">第6章</span> 估值分析</h2>
+<h3>6.2 核心估值指标</h3>
+<table>
+<tr><th>指标</th><th>NBIS</th><th>CoreWeave</th><th>说明</th></tr>
+<tr><td>PS(TTM)</td><td>~34x</td><td>~20x</td><td class="highlight-red">显著更贵</td></tr>
+<tr><td>PS(2026E)</td><td>~16x</td><td>~8x</td><td>基于2026E营收31亿$（中金）</td></tr>
+<tr><td>PS(2027E)</td><td>~7x</td><td>~4x</td><td>基于2027E营收70亿$（中金）</td></tr>
+<tr><td>EV/EBITDA</td><td>~44x</td><td>—</td><td>调整后EBITDA年化5.2亿$</td></tr>
+</table>
+
+<h3>6.5 三情景估值</h3>
+<table>
+<tr><th>情景</th><th>假设</th><th>2027E营收</th><th>PS倍数</th><th>合理股价</th></tr>
+<tr><td><span class="tag tag-green">Bull</span></td><td>AI CAPEX持续+Meta/微软合同全兑现+英伟达持续加持</td><td>100亿$</td><td>8x</td><td>~315$</td></tr>
+<tr><td><span class="tag tag-yellow">Base</span></td><td>增长兑现但估值消化（中金2027E 70亿$）</td><td>70亿$</td><td>5x</td><td>~138$</td></tr>
+<tr><td><span class="tag tag-red">Bear</span></td><td>AI CAPEX见顶+合同缩水</td><td>30亿$</td><td>3x</td><td>~35$</td></tr>
+</table>
+
+<h3>6.8 安全边际</h3>
+<p><strong>当前190.41$：</strong></p>
+<ul>
+<li>vs Base 138$ → <span class="highlight-red">溢价38%（无安全边际）</span></li>
+<li>vs Bull 315$ → 仍有65%空间（需2027年100亿营收兑现）</li>
+<li>机构目标价中位260$（隐含+37%）</li>
+</ul>
+
+<h3>6.11 投资决策价格框架</h3>
+<table>
+<tr><th>价格区间</th><th>对应市值</th><th>PS(2026E)</th><th>判断</th><th>操作</th></tr>
+<tr><td>>260$</td><td>>660亿$</td><td>>21x</td><td class="highlight-yellow">高估</td><td>卖出/回避</td></tr>
+<tr><td>190-260$</td><td>480-660亿$</td><td>16-21x</td><td class="highlight-yellow">偏贵</td><td>观察</td></tr>
+<tr><td>130-190$</td><td>330-480亿$</td><td>11-16x</td><td>合理</td><td>关注</td></tr>
+<tr><td>80-130$</td><td>200-330亿$</td><td>7-11x</td><td class="highlight-green">低估</td><td>建仓</td></tr>
+<tr><td><80$</td><td><200亿$</td><td><7x</td><td class="highlight-green">深度低估</td><td>重仓</td></tr>
+</table>
+
+<h3>6.15 最终投资决策</h3>
+<table>
+<tr><th>项目</th><th>数值</th></tr>
+<tr><td>当前股价(7/31)</td><td>190.41$</td></tr>
+<tr><td>公允价值（Base）</td><td>~138$</td></tr>
+<tr><td>买入价</td><td><130$（PS 2026E 11x以下）</td></tr>
+<tr><td>当前安全边际</td><td class="highlight-red">-38%（负值）</td></tr>
+<tr><td>操作建议</td><td><strong>观察，等待估值消化</strong></td></tr>
+</table>
+
+<!-- 第7章 -->
+<h2><span class="section-num">第7章</span> 风险分析</h2>
+<table>
+<tr><th>#</th><th>风险</th><th>严重度</th><th>概率</th></tr>
+<tr><td>1</td><td>AI CAPEX周期见顶 → GPU云需求骤降</td><td>致命</td><td>中</td></tr>
+<tr><td>2</td><td>估值回归（PS 34x→15x）</td><td>严重</td><td>高</td></tr>
+<tr><td>3</td><td>客户集中（Meta/微软）合同风险</td><td>严重</td><td>中低</td></tr>
+<tr><td>4</td><td>英伟达自营云竞争（DGX Cloud）</td><td>中等</td><td>中</td></tr>
+<tr><td>5</td><td>地缘政治（俄裔背景）</td><td>严重</td><td>低</td></tr>
+<tr><td>6</td><td>持续烧钱 → 融资稀释</td><td>中等</td><td>中高</td></tr>
+</table>
+
+<!-- 第8章 -->
+<h2><span class="section-num">第8章</span> 投资逻辑</h2>
+<div class="grid-2">
+<div class="card card-green">
+<h4>? 做多逻辑</h4>
+<ul>
+<li>AI算力结构性短缺，Meta/微软长协锁定需求</li>
+<li>英伟达背书+优先供应权，技术不掉队</li>
+<li>ARR 19亿+环比50%，增长引擎强劲</li>
+<li>欧洲/英国扩张+客户多元化（Revolut等）</li>
+<li>调整后EBITDA转正，规模效应开始显现</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>? 做空逻辑</h4>
+<ul>
+<li>PS 34x vs CoreWeave 20x——估值无安全边际</li>
+<li>单季capex 24.7亿>全年营收——烧钱无底洞</li>
+<li>GAAP利润靠一次性收益，调整后仍亏损</li>
+<li>客户集中+英伟达关联交易双重风险</li>
+<li>AI CAPEX周期终有尽时（2027?）</li>
+</ul>
+</div>
+</div>
+
+<!-- 第9章 -->
+<h2><span class="section-num">第9章</span> Value Drivers</h2>
+<table>
+<tr><th>#</th><th>Driver</th><th>权重</th><th>当前状态</th></tr>
+<tr><td>1</td><td>Meta/微软合同交付与收入确认进度</td><td>★★★★★</td><td class="highlight-green">Meta首批已确认收入</td></tr>
+<tr><td>2</td><td>AI CAPEX行业景气度</td><td>★★★★★</td><td class="highlight-yellow">高景气但临近拐点观察期</td></tr>
+<tr><td>3</td><td>算力售罄与合同续签价格</td><td>★★★★</td><td class="highlight-green">Q1售罄，价格+50%</td></tr>
+<tr><td>4</td><td>英伟达供应与DGX Cloud竞争</td><td>★★★★</td><td class="highlight-yellow">既依赖又潜在竞争</td></tr>
+<tr><td>5</td><td>资本开支效率（收入/capex）</td><td>★★★</td><td class="highlight-red">capex远超营收</td></tr>
+<tr><td>6</td><td>客户多元化进展</td><td>★★★</td><td>Revolut等新客户拓展中</td></tr>
+</table>
+
+<!-- 第10章 -->
+<h2><span class="section-num">第10章</span> 最终结论</h2>
+<h3>综合评分</h3>
+<table>
+<tr><th>维度</th><th>评分(/10)</th><th>权重</th><th>加权分</th></tr>
+<tr><td>商业模式/技术壁垒</td><td>8.0</td><td>10%</td><td>0.80</td></tr>
+<tr><td>行业前景/TAM</td><td>8.5</td><td>10%</td><td>0.85</td></tr>
+<tr><td>管理层/治理</td><td>6.5</td><td>10%</td><td>0.65</td></tr>
+<tr><td>财务健康</td><td>5.0</td><td>15%</td><td>0.75</td></tr>
+<tr><td>盈利能力</td><td>5.0</td><td>10%</td><td>0.50</td></tr>
+<tr><td>增长动力</td><td>8.5</td><td>15%</td><td>1.28</td></tr>
+<tr><td>估值吸引力</td><td>3.0</td><td>15%</td><td>0.45</td></tr>
+<tr><td>竞争优势可持续性</td><td>7.0</td><td>8%</td><td>0.56</td></tr>
+<tr><td>信披/合规质量</td><td>6.0</td><td>3%</td><td>0.18</td></tr>
+<tr><td>资本配置能力</td><td>4.0</td><td>4%</td><td>0.16</td></tr>
+<tr><td><strong>总计</strong></td><td></td><td><strong>100%</strong></td><td><strong>6.18/10 → 62/100</strong></td></tr>
+</table>
+
+<h3>评级：<span style="color:var(--yellow);font-weight:bold">? 黄色（观察）</span></h3>
+
+<div class="card card-yellow">
+<h3>一句话总结</h3>
+<p>英伟达亲自站台的AI云第一梯队玩家，Meta/微软440亿在手合同+ARR翻倍式增长是硬实力；但34倍PS的估值已经把未来两年的增长全部定价，重资产烧钱模式+客户集中+俄裔背景三重隐忧下，当前价位买入赚的是"接盘"而不是"价值"。好公司，等好价格。</p>
+</div>
+
+<!-- Evidence Coverage -->
+<h2><span class="section-num">Evidence Coverage + Market Data Coverage</span></h2>
+<div class="evidence-bar">
+<div style="width:55%;background:var(--green)">一级55%</div>
+<div style="width:20%;background:var(--yellow)">二级20%</div>
+<div style="width:15%;background:var(--blue)">三级15%</div>
+<div style="width:10%;background:var(--red)">AI推断10%</div>
+</div>
+<table>
+<tr><th>等级</th><th>占比</th><th>说明</th></tr>
+<tr><td>一级（SEC 6-K/季报）</td><td>55%</td><td>营收/EBITDA/现金流/capex/股本/现金</td></tr>
+<tr><td>二级（公司公告/新闻稿）</td><td>20%</td><td>Meta/微软合同、英伟达投资、宾州工厂</td></tr>
+<tr><td>三级（财经媒体/券商）</td><td>15%</td><td>中金/机构目标价/SemiAnalysis行业报告</td></tr>
+<tr><td>四级（AI推断）</td><td>10%</td><td>三情景估值/竞争对比/公允价值</td></tr>
+</table>
+<p><strong>市场数据核对</strong>：股价采用2026-07-31收盘190.41$（行情系统）；Yahoo盘中283.90$（时间点不同）；Q1财报时点103.76$。估值倍数随价格变化，请以最新行情为准。</p>
+<p><strong>未验证数据</strong>：Meta/微软合同交付进度细节、英伟达投资公允价值确认、客户集中度精确占比。</p>
+<p><strong>AI推断>10%：⚠️ 已警告</strong> — 三情景价格、公允价值区间、竞争对比为AI基于公开信息推断。</p>
+
+<hr>
+<div class="footer">
+<p>框架版本：V-2.4 | Research Constitution V-2.4</p>
+<p>生成日期：2026-08-02 | 分析师：小八 (WorkBuddy AI)</p>
+<p style="margin-top:8px;color:var(--red);font-size:0.75rem">⚠️ 本报告仅为独立研究参考，不构成投资建议。投资有风险，入市需谨慎。</p>
+</div>
+
+<script>
+new Chart(document.getElementById('revenueChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Q1 2025','Q2 2025','Q3 2025','Q4 2025','Q1 2026'],
+    datasets: [{
+      label: '季度营收(百万$)',
+      data: [50.9, 80, 130, 228, 399],
+      backgroundColor: ['#58a6ff','#58a6ff','#58a6ff','#d29922','#3fb950'],
+      borderRadius: 4
+    },{
+      label: '调整后EBITDA(百万$)',
+      data: [-53.7, -40, -20, 60, 129.5],
+      type: 'line',
+      borderColor: '#bc8cff',
+      backgroundColor: 'transparent',
+      borderWidth: 2,
+      pointBackgroundColor: '#bc8cff',
+      tension: 0.3
+    }]
+  },
+  options: {
+    plugins: { legend: { labels: { color:'#8b949e' } } },
+    scales: { x: { ticks: { color:'#8b949e' } }, y: { ticks: { color:'#8b949e' } } }
+  }
+});
+
+new Chart(document.getElementById('fisherChart'), {
+  type: 'radar',
+  data: {
+    labels: ['产品潜力','成本效率','管理层','研发','销售','利润率','费用控','股东关系','管理深','业务独特'],
+    datasets: [{
+      label: 'Nebius',
+      data: [9,6,7,8,7,4,5,5,6,8],
+      borderColor: '#3fb950',
+      backgroundColor: 'rgba(63,185,80,0.1)',
+      pointBackgroundColor: '#3fb950'
+    },{
+      label: 'CoreWeave(对比)',
+      data: [8,5,6,7,8,4,5,5,5,7],
+      borderColor: '#58a6ff',
+      backgroundColor: 'rgba(88,166,255,0.05)',
+      pointBackgroundColor: '#58a6ff',
+      borderDash: [5,5]
+    }]
+  },
+  options: {
+    scales: { r: { min:0, max:10, ticks: { color:'#8b949e', stepSize:2 }, grid: { color:'#30363d' } } },
+    plugins: { legend: { labels: { color:'#8b949e' } } }
+  }
+});
+</script>
+</body></html>

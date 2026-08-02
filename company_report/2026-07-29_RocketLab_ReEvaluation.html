@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rocket Lab (RKLB) 重新评估 — 对比分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root{
+    --bg:#0f1419; --panel:#1a212b; --panel2:#222c38; --txt:#e6edf3; --muted:#9aa7b4;
+    --red:#ff5b5b; --green:#3fb950; --blue:#58a6ff; --yellow:#e3b341; --purple:#bc8cff;
+    --border:#2d3742;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;line-height:1.6}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 60px}
+  header{border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:24px}
+  h1{font-size:26px;margin:0 0 6px}
+  .sub{color:var(--muted);font-size:14px}
+  .score-banner{display:flex;gap:18px;flex-wrap:wrap;margin:18px 0}
+  .pill{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 18px;flex:1;min-width:150px}
+  .pill .k{color:var(--muted);font-size:12px}
+  .pill .v{font-size:24px;font-weight:700;margin-top:4px}
+  .up{color:var(--green)} .down{color:var(--red)} .neutral{color:var(--blue)}
+  section{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px;margin:18px 0}
+  section h2{margin:0 0 14px;font-size:19px;border-left:4px solid var(--blue);padding-left:10px}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+  th,td{border:1px solid var(--border);padding:9px 10px;text-align:left;vertical-align:top}
+  th{background:var(--panel2);color:var(--muted);font-weight:600}
+  tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+  .chart-box{position:relative;height:340px;margin:10px 0}
+  .note{font-size:12.5px;color:var(--muted);margin-top:6px}
+  .tag{display:inline-block;background:var(--panel2);border:1px solid var(--border);border-radius:6px;padding:1px 8px;font-size:12px;margin:2px}
+  .arrow{color:var(--green);font-weight:700}
+  .bad{color:var(--red);font-weight:700}
+  .mermaid{background:#0b1016;border:1px solid var(--border);border-radius:10px;padding:10px;margin-top:8px}
+  .verdict{border:1px solid var(--green);background:rgba(63,185,80,0.08)}
+  ul{margin:8px 0 8px 20px} li{margin:4px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Rocket Lab (RKLB) — 重新评估 / 对比分析</h1>
+  <div class="sub">对比基准：2026-06-30 深度报告 ｜ 当前日期：2026-07-29 ｜ 股价 $63.89 ｜ 市值 ~$37.0B</div>
+</header>
+
+<div class="score-banner">
+  <div class="pill"><div class="k">综合评分</div><div class="v up">69<span style="font-size:14px;color:var(--muted)">/100</span> <span class="up">▲4</span></div></div>
+  <div class="pill"><div class="k">Fisher 评分</div><div class="v up">75<span style="font-size:14px;color:var(--muted)">/100</span> <span class="up">▲4</span></div></div>
+  <div class="pill"><div class="k">投资建议</div><div class="v up">推荐·建仓 <span class="up">↑观察</span></div></div>
+  <div class="pill"><div class="k">估值判断</div><div class="v neutral">仍贵·已修复</div></div>
+</div>
+
+<section>
+  <h2>一、分数对比（上次 vs 本次）</h2>
+  <div class="chart-box"><canvas id="scoreChart"></canvas></div>
+  <div class="note">9 维度算术均值×10。估值从 2→4（市值 $56.7B→$37.0B，PS 83x→54x）；护城河 7→8（频谱+255万用户）；财务 4→5（Iridium 正 OEBITDA）。资本配置（Fisher）因 $80亿股票对价收购恶化 5→3。</div>
+</section>
+
+<section>
+  <h2>二、股价走势：从高点回撤 58%</h2>
+  <div class="chart-box"><canvas id="priceChart"></canvas></div>
+  <div class="note">52周高 $151（05-27）→ 上次报告日 $98（06-29）→ 现 $63.89（07-28）。07-16 跌破 Iridium 对价 collar 下限 $67.50，引发稀释担忧。</div>
+</section>
+
+<section>
+  <h2>三、与上次分析的本质区别</h2>
+  <table>
+    <tr><th>区别点</th><th>上次报告 (06-30)</th><th>本次 (07-29)</th></tr>
+    <tr><td><b>Iridium 收购</b></td><td class="bad">完全未提及（数据截断早于 06-29 公告）</td><td class="arrow">$80亿收购，商业模式质变</td></tr>
+    <tr><td><b>SpaceX IPO</b></td><td>作为"未来风险"推测</td><td class="arrow">已事实发生（SPCX，06-12，$1.77T）</td></tr>
+    <tr><td><b>估值基数</b></td><td>$56.7B / 83x PS → 严重高估(2)</td><td class="arrow">$37.0B / 54x PS → 仍贵但修复(4)</td></tr>
+    <tr><td><b>NSSL 合同</b></td><td>仅"Neutron 未首飞"</td><td class="bad">纠错：$2.4B 实为 Blue Origin 配额</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>四、公司实际变化（一级来源核实）</h2>
+  <div class="grid2">
+    <div>
+      <h3 style="color:var(--purple);font-size:15px">商业模式质变</h3>
+      <ul>
+        <li><span class="tag">$80亿</span>收购 Iridium（06-29）</li>
+        <li>255万+ 用户 · L-band 频谱 · 66–80 颗 LEO 卫星</li>
+        <li>Iridium 2025：收入 $871.7M，<b>OEBITDA $495M（57%）</b></li>
+        <li>对标 SpaceX/Starlink 一体化模型</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="color:var(--blue);font-size:15px">国防与运营里程碑</h3>
+      <ul>
+        <li><span class="tag">$266M</span>太空军最大发射合同（07-27）</li>
+        <li>Victus Haze：通知后 16h42m 发射（06-22）</li>
+        <li>Neutron AVac 二级发动机全程热试车通过（07-14）</li>
+        <li>纳入 Nasdaq-100（06-12）</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">纠错：网传"$2.4B NSSL 合同"不实——该额为 Blue Origin 的 NSSL Lane 2 配额；RKLB 仅 NSSL Lane 1"上车"，须 Neutron 首飞成功方能竞标具体任务订单。</div>
+</section>
+
+<section>
+  <h2>五、Value Drivers 更新（V-2.2）</h2>
+  <div class="mermaid">
+graph TD
+  A[RKLB 一体化航天平台] --> B[Neutron 首飞与复用 ★★★★★]
+  A --> C[Iridium 交易落地与整合 ★★★★★]
+  A --> D[L-band 频谱+255万用户 ★★★★★]
+  A --> E[国防合同转化 NSSL/SDA/Golden Dome ★★★★☆]
+  A --> F[积压订单/新增合同 ★★★★☆]
+  A --> G[FCF/调整后 EBITDA ★★★★☆]
+  A --> H[股份稀释率/collar VWAP ★★★★☆ 恶化]
+  A --> I[Non-GAAP 毛利率 ★★★☆☆]
+  A --> J[SpaceX SPCX 重定价 ★★★☆☆ 已兑现]
+  style C fill:#3fb95022,stroke:#3fb950
+  style D fill:#3fb95022,stroke:#3fb950
+  style H fill:#ff5b5b22,stroke:#ff5b5b
+  </div>
+  <div class="note">绿色＝本次新增/强化的核心 Driver；红色＝恶化的稀释变量。三项 ★★★★★ Driver 变化触发了本次重估。</div>
+</section>
+
+<section class="verdict">
+  <h2>六、最终结论</h2>
+  <table>
+    <tr><th>项目</th><th>结果</th></tr>
+    <tr><td>综合评分</td><td class="up">69/100（↑4，上次 65）</td></tr>
+    <tr><td>商业模式 / 护城河 / 财务</td><td>8 / 8 / 5（均上调）</td></tr>
+    <tr><td>当前估值判断</td><td>仍贵但大幅修复（54x PS vs 前期 83x）</td></tr>
+    <tr><td>投资建议</td><td class="up"><b>推荐（可开始建仓，分批）</b> — 上次：观察</td></tr>
+  </table>
+  <p style="margin:10px 0 0"><b>一句话总结：</b>公司从"好公司但太贵"变成"更好且更便宜"——Iridium 带来频谱级护城河与正现金流，股价却因 SpaceX IPO 与融资担忧回撤 35%。当前 $64 已具建仓价值，但属高波动二元标的，按 Neutron 首飞与 collar 进展分批布局。</p>
+</section>
+
+</div>
+
+<script>
+mermaid.initialize({startOnLoad:true,theme:'dark'});
+
+const dimLabels=['商业模式','行业','管理层','财务','护城河','成长性','估值','风险','Fisher'];
+const oldScores=[7,9,7,4,7,9,2,5,7.1];
+const newScores=[8,9,7,5,8,9,4,5,7.5];
+
+new Chart(document.getElementById('scoreChart'),{
+  type:'bar',
+  data:{labels:dimLabels,datasets:[
+    {label:'上次 (06-30)',data:oldScores,backgroundColor:'#58a6ff88',borderColor:'#58a6ff',borderWidth:1},
+    {label:'本次 (07-29)',data:newScores,backgroundColor:'#3fb95088',borderColor:'#3fb950',borderWidth:1}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{labels:{color:'#e6edf3'}},
+      title:{display:true,text:'9 维度评分对比（满分10）',color:'#e6edf3'}},
+    scales:{x:{ticks:{color:'#9aa7b4'},grid:{color:'#2d3742'}},
+      y:{min:0,max:10,ticks:{color:'#9aa7b4'},grid:{color:'#2d3742'}}}}
+});
+
+const pLabels=['05-27 高','06-12','06-29 上次报告','07-14','07-16 破collar','07-28 当前'];
+const pData=[151,100.5,98.01,78.8,67.35,63.89];
+new Chart(document.getElementById('priceChart'),{
+  type:'line',
+  data:{labels:pLabels,datasets:[{
+    label:'RKLB 股价 (USD)',
+    data:pData,
+    borderColor:'#e3b341',backgroundColor:'#e3b34122',fill:true,
+    tension:0.3,pointRadius:5,pointBackgroundColor:'#e3b341'
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{labels:{color:'#e6edf3'}},
+      title:{display:true,text:'股价走势：52周高 $151 → 当前 $63.89（回撤约58%）',color:'#e6edf3'}},
+    scales:{x:{ticks:{color:'#9aa7b4'},grid:{color:'#2d3742'}},
+      y:{min:55,max:160,ticks:{color:'#9aa7b4'},grid:{color:'#2d3742'}}}}
+});
+</script>
+</body>
+</html>
