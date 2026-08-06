@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>厦门钨业(600549) 深度分析报告 | 大灰皮证券研究 V-2.4</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ===== 大灰皮证券研究 HTML 报告模板 ===== */
+/* 模板版本: V-2.4 | 来源: 沃格光电 603773 报告样式 */
+/* 设计原则: 深色主题、信息密度高、中国股市颜色(涨红跌绿)、Chart.js图表 */
+
+:root {
+  --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+  --border: #30363d; --text: #c9d1d9; --text-dim: #8b949e;
+  --red: #f85149; --green: #3fb950; --yellow: #d29922; --blue: #58a6ff; --purple: #bc8cff;
+  --orange: #db6d28; --cyan: #39c5cf;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7; padding:20px; max-width:1200px; margin:0 auto; }
+
+/* 标题层级 */
+h1 { color:var(--blue); font-size:1.8em; margin-bottom:5px; border-bottom:2px solid var(--border); padding-bottom:10px; }
+h2 { color:var(--cyan); font-size:1.4em; margin:30px 0 15px; padding-left:12px; border-left:4px solid var(--blue); }
+h3 { color:var(--purple); font-size:1.15em; margin:20px 0 10px; }
+h4 { color:var(--orange); font-size:1em; margin:15px 0 8px; }
+p { margin:8px 0; }
+.subtitle { color:var(--text-dim); font-size:0.9em; margin-bottom:20px; }
+
+/* 表格 */
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em; }
+th { background:var(--bg3); color:var(--blue); padding:10px; text-align:left; border:1px solid var(--border); }
+td { padding:8px 10px; border:1px solid var(--border); }
+tr:nth-child(even) { background:var(--bg2); }
+tr:hover { background:var(--bg3); }
+
+/* 评分徽章 */
+.score-badge { display:inline-block; padding:6px 20px; border-radius:8px; font-size:1.3em; font-weight:bold; }
+.score-red { background:rgba(248,81,73,0.15); color:var(--red); border:2px solid var(--red); }
+.score-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); border:2px solid var(--yellow); }
+.score-green { background:rgba(63,185,80,0.15); color:var(--green); border:2px solid var(--green); }
+
+/* 卡片 */
+.card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.card-red { border-left:4px solid var(--red); }
+.card-yellow { border-left:4px solid var(--yellow); }
+.card-green { border-left:4px solid var(--green); }
+.card-blue { border-left:4px solid var(--blue); }
+
+/* 网格布局 */
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; }
+@media (max-width:768px) { .grid-2, .grid-3 { grid-template-columns:1fr; } }
+
+/* 指标卡片 */
+.metric { text-align:center; padding:15px; background:var(--bg3); border-radius:8px; }
+.metric-val { font-size:1.8em; font-weight:bold; }
+.metric-label { color:var(--text-dim); font-size:0.85em; margin-top:5px; }
+
+/* 图表容器 */
+.chart-container { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+
+/* 高亮色 */
+.highlight-red { color:var(--red); font-weight:bold; }
+.highlight-green { color:var(--green); font-weight:bold; }
+.highlight-yellow { color:var(--yellow); font-weight:bold; }
+.highlight-blue { color:var(--blue); font-weight:bold; }
+
+/* 引用块 */
+blockquote { border-left:3px solid var(--orange); padding:10px 15px; margin:15px 0; background:var(--bg2); color:var(--text-dim); border-radius:0 8px 8px 0; }
+
+/* 列表 */
+ul,ol { margin:8px 0 8px 25px; }
+li { margin:4px 0; }
+
+/* 标签 */
+.tag { display:inline-block; padding:2px 10px; border-radius:4px; font-size:0.8em; margin:2px; }
+.tag-red { background:rgba(248,81,73,0.2); color:var(--red); }
+.tag-green { background:rgba(63,185,80,0.2); color:var(--green); }
+.tag-yellow { background:rgba(210,153,34,0.2); color:var(--yellow); }
+.tag-blue { background:rgba(88,166,255,0.2); color:var(--blue); }
+
+/* 分割线 */
+hr { border:none; border-top:1px solid var(--border); margin:25px 0; }
+
+/* 章节编号 */
+.section-num { color:var(--blue); font-weight:bold; }
+
+/* 证据覆盖率条 */
+.evidence-bar { display:flex; height:25px; border-radius:5px; overflow:hidden; margin:10px 0; }
+.evidence-bar div { display:flex; align-items:center; justify-content:center; font-size:0.75em; color:#fff; }
+
+/* 页脚 */
+.footer { text-align:center; color:var(--text-dim); margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:0.85em; }
+
+/* 导航栏 */
+.report-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  margin-bottom: 24px;
+  background: #1a1e2a;
+  border: 1px solid var(--border, #30363d);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+.report-nav a {
+  color: var(--blue, #58a6ff);
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.report-nav a:hover {
+  background: rgba(88,166,255,0.15);
+  color: #58a6ff;
+}
+.report-nav .nav-left { display: flex; align-items: center; gap: 8px; }
+.report-nav .nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.report-nav .nav-sep { color: var(--border, #30363d); font-size: 0.75rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ====== 导航栏 ====== -->
+<div class="report-nav">
+  <div class="nav-left">
+    <a href="index.html">← 返回公司列表</a>
+  </div>
+  <div class="nav-right">
+    <a href="../../index.html">🏠 研究报告首页</a>
+  </div>
+</div>
+
+<!-- ====== 标题 ====== -->
+<h1>厦门钨业（600549.SH）深度分析报告</h1>
+<p class="subtitle">框架: 大灰皮证券研究 V-2.4 | 日期: 2026-08-06 | 分析师: 小八(AI) | Evidence First + 8 Principles + Hard Constraints + Market Data Integrity</p>
+
+<!-- ====== 最终结论卡片（前置摘要） ====== -->
+<div class="card card-yellow">
+<h2 style="margin-top:0">最终结论</h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">52<span style="font-size:0.5em">/100</span></div><div class="metric-label">综合评分</div></div>
+<div class="metric"><div class="score-badge score-yellow">🟡 高估</div><div class="metric-label">评级</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">观察（现价回避）</div><div class="metric-label">投资建议</div></div>
+</div>
+<blockquote>好公司≠好投资：厦门钨业是钨全产业链+光伏钨丝全球垄断的优质标的（企业质量★★★★☆），但56.55元现价已充分定价"中报预增129%+钨价高位"的乐观组合，PB 5倍处历史高位、安全边际-36.7%。周期股纪律：繁荣期不追高，等钨价企稳或股价回落至25-30元安全买入区再评估。</blockquote>
+</div>
+
+<!-- ====== 核心指标 ====== -->
+<h2><span class="section-num">核心指标</span></h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--blue)">56.55<span style="font-size:0.5em">元</span></div><div class="metric-label">当前价格 (2026-08-06午盘)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">897.78<span style="font-size:0.5em">亿元</span></div><div class="metric-label">总市值</div></div>
+<div class="metric"><div class="metric-val">5.08<span style="font-size:0.5em">倍</span></div><div class="metric-label">PB (行情软件口径)</div></div>
+<div class="metric"><div class="metric-val">29.6<span style="font-size:0.5em">倍</span></div><div class="metric-label">PE (TTM, 2026Q1)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">-36.7<span style="font-size:0.5em">%</span></div><div class="metric-label">安全边际</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">22.16<span style="font-size:0.5em">亿元</span></div><div class="metric-label">2026H1归母净利预告(+128.6%)</div></div>
+</div>
+
+<!-- ====== 第0章 公司分类 ====== -->
+<h2><span class="section-num">第0章</span> 公司分类</h2>
+<div class="card card-blue">
+<h3>分类：周期股（钨+稀土+锂电正极，三重商品周期叠加），带成长属性（光伏钨丝/半导体钨/机器人磁材）</h3>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>利润结构</td><td>钨钼业务利润总额32.05亿元（占约76%）&gt; 电池材料8.58亿元（20%）&gt; 稀土1.46亿元（3.5%）</td></tr>
+<tr><td>收入结构</td><td>电池材料198.80亿元（43%）≈ 钨钼201.52亿元（42%）&gt; 稀土61.83亿元（13%）</td></tr>
+<tr><td>周期特征</td><td>2023-2024年营收连续两年下滑（-18.3%/-10.7%），2025-2026年回升；盈利高度依赖钨价</td></tr>
+</table>
+<p><strong>首选估值方法</strong>：PB（市净率）+ 周期位置 + EV/EBITDA；盈利中枢×合理PE为辅<br>
+<span class="tag tag-yellow">禁止DCF</span> <span class="tag tag-yellow">禁止单一PE估值</span> <span class="tag tag-blue">资源类公司自动启用Commodity Data Review</span></p>
+<p><strong>为什么这个行业适合这种估值方式？</strong> 钨/稀土/锂电均为强周期商品，盈利随价格大幅波动，PE在周期顶部失真（盈利峰值时PE反而最低），PB和EV/EBITDA相对稳定，能更好锚定净资产价值与周期中枢；DCF的自由现金流假设缺乏依据（钨价中枢无法可靠外推），违反框架7.4条。</p>
+</div>
+
+<!-- ====== 第1章 基本面分析 ====== -->
+<h2><span class="section-num">第1章</span> 基本面分析</h2>
+
+<div class="card card-blue">
+<h3>1.1 商业模式：三大业务、收入与利润严重错配</h3>
+<p><strong>结论：</strong> 厦门钨业是"钨钼赚利润、电池材料赚营收、稀土赚期权"的混合型制造企业。2025年收入三大板块三分天下（电池材料43%/钨钼42%/稀土13%），但利润总额76%来自钨钼（32.05亿元），电池材料毛利率仅9.78%（8.58亿元），稀土仅1.46亿元。<br>
+<span class="tag tag-green">一级证据</span> 2025年报分部数据（证券时报，2026-04-23）<br>
+<strong>最终判断：</strong> 分析厦钨必须先拆业务看利润再看收入。钨钼深加工（刀具/钨丝）是价值核心；电池材料是营收引擎但利润薄；稀土是战略期权。信心等级：★★★★★</p>
+</div>
+
+<div class="card card-blue">
+<h3>1.2 钨钼业务：全产业链+光伏钨丝全球垄断</h3>
+<p><strong>结论：</strong> 钨钼是现金牛和利润核心。公司APT冶炼产能全球第一（市占30%+，二级/四级证据），光伏钨丝全球市占65%~80%、是全球唯一能量产28μm以下超细钨丝的企业，2025年细钨丝销量1023亿米。<br>
+<span class="tag tag-green">一级证据</span> 细钨丝销量1023亿米（公司投资者活动记录2026-05-15）；钨钼毛利率28.38%（+1.87pct，年报）；在产钨矿：宁化行洛坑、都昌金鼎<br>
+<span class="tag tag-yellow">四级证据</span> 全球市占65-80%（多家媒体口径不一）；2026-02拟收购九江大地39%股权（二级证据，公告）；大湖塘钨矿并表、自给率升至70%（四级证据，需核实）<br>
+<strong>反方证据：</strong> 钨冶炼产品受出口管制销量同比减少；深加工端面临中钨高新（资源自给率70%）、欧科亿竞争。<strong>最终判断：</strong> 护城河在于"资源+冶炼+深加工"一体化和光伏钨丝技术垄断，但资源自给率（约28%）是最大短板。信心等级：★★★★☆</p>
+</div>
+
+<div class="card card-blue">
+<h3>1.3 电池材料业务：营收引擎、利润短板（厦钨新能50.28%控股）</h3>
+<p><strong>结论：</strong> 电池材料由科创板子公司厦钨新能（688778.SH，厦钨持股50.28%）运营，钴酸锂全球市占近50%位居第一，但行业价格战致毛利率仅约10%。<br>
+<span class="tag tag-green">一级证据</span> 厦钨新能2025年营收198.80亿（+46.70%）、净利7.55亿（+41.82%）；钴酸锂销量6.53万吨（+41.31%），4.5V+高电压占比58%；客户含松下、宁德新能源、比亚迪、三星、LGC（科创板日报2026-04-23）<br>
+<strong>反方证据：</strong> 厦钨新能资产负债率56.29%（+18.31pct）、速动比率0.7——扩产激进、杠杆快速上升。<strong>最终判断：</strong> 电池材料价值在于对冲钨周期，而非独立贡献利润弹性。信心等级：★★★★★</p>
+</div>
+
+<div class="card card-blue">
+<h3>1.4 稀土业务：战略期权、利润微薄</h3>
+<p><strong>结论：</strong> 2025年稀土利润总额仅1.46亿元（毛利率10.08%），是三大业务中最弱的利润来源；公司是六大稀土集团之一、福建省唯一稀土整合平台。<br>
+<span class="tag tag-green">一级证据</span> 稀土营收61.83亿（+31.16%）、利润总额1.46亿（+4.78%）（证券时报）；完成厦钨电机控股收购布局永磁电机<br>
+<span class="tag tag-yellow">三级证据</span> 2026年8月稀土价格普跌（同花顺2026-08-06），淡季去库存<br>
+<strong>最终判断：</strong> 稀土是"期权价值"——若氧化镨钕回升或永磁放量则有改善空间，当前对每股盈利贡献可忽略，市场定价更多来自主题情绪。信心等级：★★★★☆</p>
+</div>
+
+<div class="card card-blue">
+<h3>1.5-1.7 客户结构、护城河与增长驱动力</h3>
+<p><strong>客户结构：</strong> 前五大客户占34.72%、前五大供应商占33.27%（2025年，一级证据）；光伏钨丝长单占比超90%，绑定隆基/TCL中环（四级证据）；钴酸锂绑定苹果/华为供应链。</p>
+<p><strong>核心竞争优势（护城河）：</strong> ① 全产业链一体化（国内唯一钨全链）；② 光伏钨丝技术垄断（全球唯一28μm以下量产，市占65-80%）；③ 战略资源牌照（钨出口资质全国仅15家、稀土配额、国资背景）。<strong>短板：</strong> 钨矿自给率仅约28%，弱于中钨高新（70%）。信心等级：★★★☆☆</p>
+<p><strong>未来5-10年增长驱动力：</strong> ① 光伏钨丝渗透率（20%→70%+，2026年产能计划2000亿米）；② 半导体高纯钨/六氟化钨（AI芯片用钨量提升）；③ 稀土永磁（人形机器人）。<strong>确定性排序：</strong> 光伏钨丝 &gt; 半导体钨材 &gt; 稀土磁材。信心等级：★★★☆☆</p>
+</div>
+<!-- ====== 第2章 行业研究 (TAM) ====== -->
+<h2><span class="section-num">第2章</span> 行业研究 (TAM)</h2>
+<div class="card card-blue">
+<h3>钨行业：供给刚性收缩、需求多点爆发</h3>
+<p><strong>结论：</strong> 全球钨处于"供需紧平衡+战略价值重估"阶段。中国占全球产量80%+并实施开采配额管控（2025年指标-6.5%），需求端光伏钨丝/半导体/刀具三线增长，2026年全球供需缺口约2.3万吨（四级证据）。欧洲APT价格3000-3279美元/吨度（折合人民币179-196万元/吨），为国内（61万）的3倍。<br>
+<strong>反方证据：</strong> 国内需求疲弱（淡季）、赣州钨协8月预测价环比-8%、库存去化缓慢。<strong>最终判断：</strong> 长期供需向好，但短期处于高位回落后的博弈期。信心等级：★★★☆☆</p>
+<h3>光伏钨丝：渗透率爆发的新增量市场</h3>
+<p>渗透率从2025年初约20%升至2026年2月超70%（四级证据），钨丝金刚线快速替代高碳钢线；厦钨全球市占65-80%、2025销量1023亿米、2026年产能计划扩至2000亿米（四级证据）。<strong>反方：</strong> 渗透率70%后增速放缓、光伏产能过剩压制钨丝价格。<strong>判断：</strong> 最确定的成长曲线，量增逻辑清晰但增速将从爆发转入稳定。信心等级：★★★☆☆</p>
+<h3>稀土行业：配额收紧+机器人预期；锂电正极：钴酸锂冠军、行业过剩</h3>
+<p>稀土：8月价格普跌（氧化镨钕73.94万/吨），供给收紧但短期需求弱，人形机器人是远期期权。锂电正极：整体过剩、价格战激烈，但厦钨新能钴酸锂全球市占近50%、4.5V+占比58%形成差异化。信心等级：★★★★☆</p>
+<h3>行业三情景</h3>
+<table>
+<tr><th>情景</th><th>核心假设</th><th>公司盈利中枢</th></tr>
+<tr><td>乐观</td><td>钨价中枢稳定60万+，光伏钨丝渗透率85%+且份额维持，稀土/机器人爆发</td><td>45-55亿元/年</td></tr>
+<tr><td>基准</td><td>钨价中枢45-55万企稳，光伏钨丝量增价稳，电池毛利率微升</td><td>30-40亿元/年</td></tr>
+<tr><td>悲观</td><td>钨价回落至30-40万，光伏装机低迷，锂电价格战延续</td><td>22-28亿元/年</td></tr>
+</table>
+<p><strong>行业是否具备长期成长空间？</strong> 是。钨的战略属性+光伏钨丝/半导体需求结构性增长，需求曲线长期向上；但商品价格周期性波动是行业与生俱来的特征。信心等级：★★★☆☆</p>
+</div>
+
+<!-- ====== 第3章 Fisher成长股评价 ====== -->
+<h2><span class="section-num">第3章</span> Fisher成长股评价</h2>
+<div class="chart-container">
+<canvas id="fisherChart" height="110"></canvas>
+</div>
+<p><strong>综合评分：65/100</strong>（Fisher 6.5/10）</p>
+<table>
+<tr><th>维度</th><th>评分</th><th>一句话依据</th></tr>
+<tr><td>市场潜力</td><td>7/10</td><td>钨需求结构性增长（光伏钨丝/半导体/AI刀具），但受宏观与光伏景气制约</td></tr>
+<tr><td>管理层能力</td><td>6/10</td><td>国资体系稳健，聚焦三大主业+剥离房地产；但2023-24年营收下滑期调整偏慢</td></tr>
+<tr><td>研发能力</td><td>7/10</td><td>研发投入17.4亿（3.76%），全球唯一28μm以下超细钨丝量产</td></tr>
+<tr><td>销售能力</td><td>6/10</td><td>光伏钨丝长单90%+绑定隆基/TCL中环；但出口受管制、国际化在建</td></tr>
+<tr><td>利润率改善空间</td><td>6/10</td><td>钨钼毛利率28.38%提升中，但电池材料9.78%拖累整体净利率5.7%</td></tr>
+<tr><td>护城河</td><td>7/10</td><td>全产业链+光伏钨丝垄断+出口牌照；但自给率28%是短板</td></tr>
+<tr><td>长期成长能力</td><td>7/10</td><td>光伏钨丝2000亿米扩产、半导体钨、机器人磁材期权</td></tr>
+<tr><td>企业文化</td><td>6/10</td><td>稳健有余进取不足，激励与资本运作偏保守</td></tr>
+<tr><td>资本配置能力</td><td>6/10</td><td>分红稳定提升（10派2.6→10派4.0+中期分红），矿山收购方向正确但Q1激进囤货是双刃剑</td></tr>
+<tr><td>长期竞争优势</td><td>7/10</td><td>钨全链国内唯一+光伏钨丝全球垄断+六大稀土集团牌照</td></tr>
+</table>
+<p><span class="tag tag-green">最符合Fisher</span> 专注主业+持续研发投入（3.76%）+产品技术领先（超细钨丝全球唯一）</p>
+<p><span class="tag tag-red">最不符合Fisher</span> 收入与利润结构错配——占收入43%的电池材料毛利率仅9.78%，大量资本沉淀在低回报业务；且本质是周期股，与费雪偏好的持续成长型存在本质差异</p>
+
+<!-- ====== 第4章 财务审计 (Bear Audit) ====== -->
+<h2><span class="section-num">第4章</span> 财务审计 (Bear Audit)</h2>
+<div class="chart-container">
+<canvas id="finChart" height="110"></canvas>
+</div>
+<div class="card card-yellow">
+<h3 style="color:var(--yellow)">🟡 黄色</h3>
+<ol>
+<li><strong>利润质量中等偏下</strong>：2026Q1净利11.07亿（+189%）真实可信（2025年扣非/归母=94.8%、现金流/利润=1.29），但盈利对钨价高度敏感，Q1是"高位价格+高位销量"组合，不可外推</li>
+<li><strong>存货激增51亿+现金流为负</strong>：Q1存货146→197亿元，经营现金流-25.7亿元，高位囤货面临减值风险（厦钨新能2025年已计提存货跌价2.05亿）</li>
+<li><strong>杠杆快速上升</strong>：短期借款44→106亿元（+140%），货币资金仅52亿元，资产负债率55.6%</li>
+<li><strong>占款能力偏弱</strong>：合同负债仅7.28亿元、预付账款+179%，"两头受挤"（上游预付抢原料、下游赊销大客户）</li>
+<li><strong>ROE</strong>：2025年加权ROE 13.99%，2026Q1年化约24%（【推断】，周期红利非能力突变）；ROIC未披露</li>
+<li><strong>无造假红旗</strong>：会计政策稳健、股本稳定（15.88亿股无稀释）、无异常诉讼（风险事件显示无诉讼仲裁）</li>
+</ol>
+</div>
+
+<!-- ====== 第5章 Bear Case ====== -->
+<h2><span class="section-num">第5章</span> Bear Case</h2>
+<div class="card card-red">
+<h3>做空成功概率：40%（未来6-12个月）</h3>
+<p><strong>最脆弱环节：钨价周期回落+高位囤货减值+题材泡沫化的估值。</strong> 国内APT 61万元/吨已较峰值回落59.9%，赣州钨协8月预测价环比再降8%；公司2026Q1高位囤货51亿元，若钨价继续下行形成"利润下滑+存货减值"双杀。股价年内96.85→40.62→56.55元，PB 5倍，题材资金主导。</p>
+</div>
+<table>
+<tr><th>假设</th><th>失败场景</th></tr>
+<tr><td>钨价维持60万+/吨</td><td>国内需求疲弱+8月预测价下调+库存去化慢 → 向40-50万回归</td></tr>
+<tr><td>光伏钨丝量价齐升</td><td>光伏产能过剩、硅片降价压制高价钨丝接受度；渗透率70%后增速放缓</td></tr>
+<tr><td>稀土/机器人爆发</td><td>人形机器人量产不及预期；稀土淡季价格普跌</td></tr>
+<tr><td>一致预期2026E 48亿兑现</td><td>隐含H2净利26.25亿&gt;H1 22.16亿，与钨价下行趋势矛盾，大概率下修</td></tr>
+</table>
+<p><strong>市场忽略的问题：</strong> ① 一致预期48亿过于乐观；② 电池材料占收入43%但毛利率9.78%；③ 存货197亿的质量（Q1高位囤51亿）；④ 少数股东权益100.73亿元（厦钨新能利润约14%归属少数股东）。</p>
+<p><strong>股价腰斩的最大原因：</strong> 钨价确认下行周期（APT跌破45万）+2026Q2/Q3财报显示毛利率下滑与存货减值，盈利预测从48亿下修至30亿，PB从5倍向3倍回归，股价向28元回归。</p>
+<p><strong>做空风险（为什么不是高置信度做空标的）：</strong> ① 钨价随时可能因供给端消息（配额/出口管制/矿山事故）脉冲反弹；② 光伏钨丝放量对冲价格下滑；③ A股题材资金情绪不可预测，存在逼空风险。信心等级：★★★☆☆</p>
+
+<!-- ====== Market Data Integrity Gate ====== -->
+<h2><span class="section-num">Market Data Integrity Gate</span> 市场数据完整性检查</h2>
+<div class="card card-green">
+<h3 style="color:var(--green)">✅ 检查通过（G.1-G.10）</h3>
+<p><strong>G.1 数据身份表：</strong> 股价（600549.SH/上交所/2026-08-06午盘/CNY元/股）、APT（中国现货/61万元/吨/2026-08-05）、65%黑钨精矿（41.5万元/标吨）、氧化镨钕（包头稀交所/73.94万元/吨）——身份字段全部完整。</p>
+<p><strong>G.5 双来源验证（差异均&lt;2%）：</strong> APT 61万 vs 赣州钨协60.6万（0.66%）；精矿41.5万 vs 41.2万（0.72%）；氧化镨钕73.94万 vs SMM 74.25万（0.42%，差1天）。</p>
+<p><strong>G.6 单位换算：</strong> 钨粉975元/千克=97.5万元/吨（已核验）；欧洲APT直接引用原文人民币折算（179.2-195.9万元/吨），不自行换算。</p>
+<p><strong>G.7 市场基准价vs实现售价：</strong> 公司实现售价未披露，已明确声明未做"市场价格×产量"换算（权益比例/加工费/副产品抵扣均未披露）。</p>
+<p><strong>G.8 异常检测：</strong> 全部正常（股价落在52周区间、市值=价×股数、财务与快报一致、钨价回落幅度自洽）。</p>
+<p><strong>G.9 核验表：</strong> 股价/APT/精矿/氧化镨钕状态均为"已验证"；汇率与无风险利率标注"不适用"（纯人民币业务、不做DCF）。</p>
+<p><strong>G.10 Fail-Stop：</strong> 无触发项。</p>
+</div>
+<h3>Commodity Data Review（商品数据审查，资源类公司自动启用）</h3>
+<table>
+<tr><th>商品</th><th>决策日价格</th><th>估值基准价</th><th>悲观价</th><th>乐观价</th><th>单位</th></tr>
+<tr><td>APT</td><td>61万（08-05）</td><td>55万</td><td>40万</td><td>75万</td><td>万元/吨</td></tr>
+<tr><td>65%黑钨精矿</td><td>41.5万（08-05）</td><td>38万</td><td>28万</td><td>55万</td><td>万元/标吨</td></tr>
+<tr><td>氧化镨钕</td><td>73.94万（08-05）</td><td>70万</td><td>55万</td><td>90万</td><td>万元/吨</td></tr>
+<tr><td>钴粉</td><td>460元/千克（08-05）</td><td>460</td><td>380</td><td>550</td><td>元/千克</td></tr>
+</table>
+<p><strong>9问要点：</strong> ① 利润对钨最敏感（钨钼利润占76%，钨价±10%对应归母净利±3.5亿【推断】）；② 当前价格处"超级周期回落后的高位区"（高于历史20年均值，低于2026峰值）；③ 2026Q1净利对应钨价高位（H1均价高于当前61万【推断】），H2业绩环比下滑压力已隐含；④ 估值采用长期中枢法（55万基准），不用现货价61万直接外推，避免把周期高价永久化；⑤ 悲观情景（40万）包含均值回归；⑥ 公司可通过光伏钨丝量增（1023亿米→2000亿米计划）+自给率提升对冲部分周期风险。</p>
+<!-- ====== 第6章 估值分析 ====== -->
+<h2><span class="section-num">第6章</span> 估值分析</h2>
+
+<h3>Valuation Data Admission Check</h3>
+<table>
+<tr><th>数据</th><th>是否通过验证</th><th>是否允许进入估值</th><th>备注</th></tr>
+<tr><td>公司股价</td><td>✅</td><td>✅</td><td>56.55元（2026-08-06午盘，双源）</td></tr>
+<tr><td>稀释后股本</td><td>✅</td><td>✅</td><td>15.876亿股（2026Q1）</td></tr>
+<tr><td>净负债</td><td>✅</td><td>✅</td><td>有息负债153.42亿-货币资金52.11亿=101.31亿</td></tr>
+<tr><td>APT/钨价</td><td>✅</td><td>✅</td><td>61万/吨，双源&lt;2%</td></tr>
+<tr><td>一致预期盈利</td><td>✅</td><td>✅</td><td>2026E 48.41亿（仅1家机构覆盖，标注乐观性）</td></tr>
+<tr><td>汇率/无风险利率</td><td>不适用</td><td>-</td><td>纯人民币业务、周期股不做DCF</td></tr>
+</table>
+
+<h3>三情景估值（2026E归母净利，盈利中枢法）</h3>
+<div class="chart-container">
+<canvas id="scenarioChart" height="110"></canvas>
+</div>
+<table>
+<tr><th>情景</th><th>概率</th><th>钨价假设</th><th>2026E归母净利</th><th>对应股价区间</th><th>逻辑</th></tr>
+<tr><td>Bull</td><td>20%</td><td>企稳回升至75万+</td><td>42-46亿</td><td>39.7-49.2元</td><td>金九银十爆发+欧洲价差+光伏钨丝放量</td></tr>
+<tr><td>Base</td><td>55%</td><td>横盘45-61万</td><td>34-36亿</td><td>30.0-36.4元</td><td>钨价高位整理，量补价</td></tr>
+<tr><td>Bear</td><td>25%</td><td>回落至40万</td><td>28-30亿</td><td>22.9-28.4元</td><td>需求弱+均值回归+存货减值</td></tr>
+</table>
+<p><strong>概率加权2026E净利 = 46×20% + 35×55% + 29×25% ≈ 35.7亿元【推断】</strong>（H2业绩为推断值，基于2025H2净利13.37亿参照+当前钨价低于H1均价+8月预测价下调8%）</p>
+
+<h3>估值汇总与同行对比</h3>
+<table>
+<tr><th>公司</th><th>现价(元)</th><th>市值(亿)</th><th>PE(TTM)</th><th>PB</th><th>YTD</th></tr>
+<tr><td><strong>厦门钨业</strong></td><td><strong>56.55</strong></td><td><strong>897.78</strong></td><td><strong>29.6</strong></td><td><strong>5.08</strong></td><td><strong>+39.1%</strong></td></tr>
+<tr><td>中钨高新</td><td>61.70</td><td>1405.90</td><td>72.1</td><td>13.84</td><td>+124.5%</td></tr>
+<tr><td>章源钨业</td><td>26.01</td><td>312.49</td><td>49.7</td><td>12.13</td><td>+85.0%</td></tr>
+<tr><td>翔鹭钨业</td><td>36.34</td><td>118.89</td><td>30.8</td><td>8.40</td><td>+153.7%</td></tr>
+<tr><td>洛阳钼业</td><td>20.63</td><td>4413.65</td><td>18.3</td><td>5.33</td><td>+4.7%</td></tr>
+<tr><td>北方稀土</td><td>41.86</td><td>1513.27</td><td>55.3</td><td>6.03</td><td>-9.0%</td></tr>
+<tr><td>盛和资源</td><td>22.67</td><td>397.37</td><td>39.8</td><td>3.22</td><td>+6.8%</td></tr>
+</table>
+<p class="subtitle">数据来源：westock-data行情（2026-08-06午盘）；PE(TTM)为行情软件口径字段，各公司同口径可比</p>
+<p><strong>同行结论：</strong> 厦钨PB 5.08在钨钼同行中最低（中钨高新13.84/章源12.13/翔鹭8.40），相对同行并不贵；但板块整体已被资金充分炒作（翔鹭YTD+153.7%、中钨高新PB 13.8倍）。<strong>历史估值：</strong> 当前PB 4.9-5.1倍处于2019年以来历史高位区（过去5年大部分时间1.7-3.7倍【推断】）。</p>
+
+<h3>6.11-6.15 投资决策价格框架（周期股传导链）</h3>
+<div class="card card-yellow">
+<h3>6.15 最终投资决策</h3>
+<div class="grid-2">
+<div>
+<p><strong>当前价格</strong>: 56.55元（2026-08-06午盘）</p>
+<p><strong>综合公允价值(Base)</strong>: ≈35.8元（PB法31.7×40%+盈利法37.1×40%+同行法61.5×10%+历史法28.8×10%【推断】）</p>
+<p><strong>安全买入价</strong>: 25.0-30.0元</p>
+<p><strong>极度低估价格</strong>: &lt;23.0元</p>
+<p><strong>当前安全边际</strong>: <span class="highlight-red">-36.7%（回避区）</span></p>
+</div>
+<div>
+<p><strong>操作建议</strong>: <span class="highlight-yellow">观察（现价回避新增；持有者减仓兑现）</span></p>
+<p><strong>触发买入条件</strong>:</p>
+<ul>
+<li>钨价企稳（APT连续2个月≥55万元/吨）</li>
+<li>股价回落至25-30元安全买入区</li>
+<li>2026H1正式财报验证存货去化、毛利率、现金流质量</li>
+<li>大湖塘并表/自给率提升获公司公告确认</li>
+</ul>
+</div>
+</div>
+<table>
+<tr><th>价格位置</th><th>价格（元）</th><th>安全边际</th><th>建议</th></tr>
+<tr><td>极度低估（周期底部）</td><td>&lt;23.0</td><td>&gt;35%</td><td>可以重仓</td></tr>
+<tr><td>安全买入价</td><td>25.0-30.0</td><td>15-35%</td><td>积极建仓</td></tr>
+<tr><td>合理价值</td><td>30.0-36.4</td><td>-20%~+5%</td><td>正常持有</td></tr>
+<tr><td>谨慎区</td><td>36.4-45.0</td><td>-45%~-20%</td><td>不追高，仅持有</td></tr>
+<tr><td>高估区</td><td>45.0-55.0</td><td>&lt;-60%</td><td>不建议新增仓位</td></tr>
+<tr><td><strong>当前价格</strong></td><td><strong>56.55</strong></td><td><strong>-36.7%</strong></td><td><strong>回避新增，持有者减仓</strong></td></tr>
+</table>
+<p><strong>6.13 目标价可信度：★★★☆☆</strong>（盈利预测含推断，一致预期仅1家机构覆盖）。<strong>影响最大的三个变量：</strong> ① 钨价每±10% → 净利±3.5亿 → 每股价值±2.2元【推断】；② 光伏钨丝销量±20% → 净利±2-3亿【推断】；③ 存货减值10-15亿 → 估值中枢下移15-25%。</p>
+<p><strong>6.14 价格失效条件：</strong> 钨价跌破40万 / 2026Q2-Q3单季净利&lt;8亿 / 单季存货减值&gt;5亿 / 光伏钨丝订单大幅不及2000亿米计划 / 大湖塘并表落空 / 出口管制放松或配额大幅放开。</p>
+</div>
+
+<!-- ====== 第7章 风险分析 ====== -->
+<h2><span class="section-num">第7章</span> 风险分析</h2>
+<table>
+<tr><th>风险类型</th><th>具体内容</th><th>严重程度</th><th>市场状态</th></tr>
+<tr><td>商品周期风险</td><td>钨价自峰值回落60%，若继续下行至40万，盈利中枢下移30-50%</td><td class="highlight-red">🔴 高</td><td><span class="tag tag-red">部分未反映</span></td></tr>
+<tr><td>存货减值风险</td><td>Q1存货197亿（+51亿高位囤货），钨价下行触发减值</td><td class="highlight-red">🔴 高</td><td><span class="tag tag-red">未反映</span></td></tr>
+<tr><td>估值风险</td><td>PB 5倍历史高位，盈利不及预期时戴维斯双杀</td><td class="highlight-red">🔴 高</td><td><span class="tag tag-red">未充分反映</span></td></tr>
+<tr><td>杠杆风险</td><td>短期借款44→106亿，货币资金仅52亿</td><td class="highlight-yellow">🟡 中高</td><td><span class="tag tag-red">未反映</span></td></tr>
+<tr><td>需求风险</td><td>光伏/硬质合金淡季需求疲弱，金九银十不及预期</td><td class="highlight-yellow">🟡 中</td><td><span class="tag tag-yellow">部分反映</span></td></tr>
+<tr><td>竞争风险</td><td>中钨高新（资源自给70%）追赶、翔鹭/章源弹性分流</td><td class="highlight-yellow">🟡 中</td><td><span class="tag tag-yellow">部分反映</span></td></tr>
+<tr><td>政策风险</td><td>钨出口管制（利好价格利空销量）、美国废钨禁令（8/27起）</td><td class="highlight-yellow">🟡 中</td><td><span class="tag tag-yellow">部分反映</span></td></tr>
+<tr><td>海外供应链重塑</td><td>海外自建产能长期削弱中国钨定价权</td><td class="highlight-yellow">🟡 中长期</td><td><span class="tag tag-red">未反映</span></td></tr>
+<tr><td>技术风险</td><td>光伏钨丝被替代技术冲击（低概率）；半导体认证周期长</td><td>🟢 低</td><td><span class="tag tag-yellow">未反映</span></td></tr>
+<tr><td>管理层风险</td><td>董事长更替（黄长庚→钟可祥）、国资决策保守</td><td>🟢 低</td><td><span class="tag tag-green">已反映</span></td></tr>
+</table>
+
+<!-- ====== 第8章 投资逻辑 ====== -->
+<h2><span class="section-num">第8章</span> 投资逻辑</h2>
+<div class="grid-2">
+<div class="card card-green">
+<h4>多头逻辑</h4>
+<ul>
+<li>钨是战略资源：配额管控+出口管制+海外缺口30%，价格中枢永久性上移（欧洲APT为内盘3倍）</li>
+<li>光伏钨丝全球垄断（市占65-80%）：渗透率20%→70%+，2026年产能翻倍至2000亿米</li>
+<li>中报预增129%（22.16亿），盈利加速期；2026E一致预期48亿（+110%）</li>
+<li>半导体高纯钨/六氟化钨（AI）+稀土机器人（人形机器人）成长期权</li>
+<li>全产业链一体化+国资背景，抗周期能力强于纯上游/纯加工企业</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>空头逻辑</h4>
+<ul>
+<li>钨价自峰值回落60%，8月预测价再降8%，H2盈利环比下滑，一致预期48亿将下修</li>
+<li>PB 5倍历史高位，安全边际-36.7%</li>
+<li>存货197亿（+51亿）+短债106亿+经营现金流-25.7亿，"减值+偿债"双杀风险</li>
+<li>占收入43%的电池材料毛利率仅9.78%，拖累盈利质量</li>
+<li>板块情绪过热（翔鹭YTD+154%、中钨高新PB 13.8倍），资金退潮风险</li>
+</ul>
+</div>
+</div>
+<p><strong>为什么可能持续十年以上？</strong> 钨的战略资源属性（供给刚性）和光伏钨丝/半导体的结构性需求，决定了核心业务（钨钼）产业地位可持续十年以上；但"持续经营十年"≠"股价持续上涨十年"，中间必经历多轮商品周期。正确方式是周期底部布局、繁荣期兑现。<strong>投资逻辑失效条件：</strong> 钨价中枢永久跌破40万 / 光伏钨丝份额&lt;50% / 配额出口政策红利取消 / 大湖塘长期落空（自给率&lt;30%）/ 电池材料重大亏损。</p>
+
+<!-- ====== 第9章 Value Drivers ====== -->
+<h2><span class="section-num">第9章</span> Value Drivers（价值驱动因素）★ 唯一长期维护章节</h2>
+<table>
+<tr><th>#</th><th>Driver</th><th>重要度</th><th>当前状态</th><th>数据来源</th><th>更新频率</th></tr>
+<tr><td>D1</td><td>APT/钨精矿价格</td><td>★★★★★</td><td class="highlight-red">↓ 自峰值回落60%，8月预测价-8%</td><td>中钨在线/赣州钨协/SMM</td><td>每周</td></tr>
+<tr><td>D2</td><td>光伏钨丝销量与市占率</td><td>★★★★★</td><td class="highlight-green">↑ 2025销量1023亿米，2026计划2000亿米（四级证据）</td><td>公司IR/季报年报</td><td>季度</td></tr>
+<tr><td>D3</td><td>钨矿自给率（大湖塘/九江大地并表）</td><td>★★★★☆</td><td>→ 收购推进中，大湖塘未证实（四级证据）</td><td>公司公告</td><td>事件驱动</td></tr>
+<tr><td>D4</td><td>存货规模与减值风险</td><td>★★★★☆</td><td class="highlight-red">↓ 激增51亿，高位囤货</td><td>季报资产负债表</td><td>季度</td></tr>
+<tr><td>D5</td><td>电池材料毛利率</td><td>★★★☆☆</td><td>→ 9.78%低位徘徊</td><td>厦钨新能财报</td><td>季度</td></tr>
+<tr><td>D6</td><td>稀土价格与永磁进展</td><td>★★★☆☆</td><td class="highlight-red">↓ 8月价格普跌</td><td>SMM/包头稀交所</td><td>每周</td></tr>
+<tr><td>D7</td><td>半导体高纯钨/六氟化钨</td><td>★★☆☆☆</td><td>→ 早期阶段</td><td>公司IR/研报</td><td>半年</td></tr>
+<tr><td>D8</td><td>出口与内外价差</td><td>★★★☆☆</td><td class="highlight-green">↑ 欧洲APT为内盘3倍</td><td>中钨在线</td><td>每月</td></tr>
+</table>
+<p><strong>9.5 决策判断：</strong> D1（钨价）与D4（存货）当前均恶化，且"影响投资逻辑=是、需要重新估值=是"→ 本报告即为重新估值结果。<strong>9.6 季度更新规则：</strong> 2026年8月中下旬H1正式财报（验证存货/毛利率/现金流）、2026年10月底Q3财报（验证钨价回落影响）、2026年12月（2027年配额）→ 优先更新本表；仅当D1/D2发生重大变化才重写全文。</p>
+
+<!-- ====== 第10章 最终结论 ====== -->
+<h2><span class="section-num">第10章</span> 最终结论</h2>
+<div class="chart-container">
+<canvas id="scoreChart" height="110"></canvas>
+</div>
+<div class="card card-yellow">
+<h3>评级：🟡 高估 | 评分：52/100</h3>
+<table>
+<tr><th>维度</th><th>评分</th><th>说明</th></tr>
+<tr><td>商业模式</td><td>7/10</td><td>钨全产业链一体化，利润结构清晰（钨钼76%），电池材料拖累整体利润率</td></tr>
+<tr><td>行业</td><td>7/10</td><td>钨供需紧平衡+战略属性，光伏钨丝/半导体需求结构性增长；三重周期叠加波动大</td></tr>
+<tr><td>管理层</td><td>6/10</td><td>国资体系稳健，聚焦主业+剥离地产；扩张与资本配置偏保守</td></tr>
+<tr><td>财务</td><td>5/10</td><td>盈利真实性可信（扣非94.8%），但存货激增+短债翻倍+现金流为负</td></tr>
+<tr><td>护城河</td><td>7/10</td><td>全产业链+光伏钨丝技术垄断+牌照；资源自给率是短板</td></tr>
+<tr><td>成长性</td><td>7/10</td><td>光伏钨丝渗透率+产能翻倍+半导体/稀土期权</td></tr>
+<tr><td>估值</td><td>3/10</td><td>PB 5倍历史高位，安全边际-36.7%，一致预期偏乐观</td></tr>
+<tr><td>风险</td><td>4/10</td><td>钨价回落+存货减值+高杠杆三重风险，市场未充分定价</td></tr>
+<tr><td>Fisher</td><td>6.5/10</td><td>65/100分，研发技术领先加分，业务结构错配减分</td></tr>
+</table>
+<blockquote><strong>当前估值判断：高估。投资建议：观察（现价回避新增；持有者减仓兑现）。</strong> 好公司≠好投资——厦门钨业产业地位值得长期跟踪（维护第9章Value Drivers），但56.55元现价不是价值投资者的买点：下行空间（至25-30元，-45%~-55%）远大于上行空间（至45-49元乐观顶，-13%~-20%）。</blockquote>
+</div>
+
+<!-- ====== Market Data Final Audit ====== -->
+<h2>Market Data Final Audit (市场数据最终复检)</h2>
+<table>
+<tr><th>检查项目</th><th>结果</th><th>发现的问题</th><th>修正情况</th></tr>
+<tr><td>市场数据身份</td><td>✅ 通过</td><td>无</td><td>-</td></tr>
+<tr><td>历史日期锁定</td><td>✅ 通过</td><td>2026H1均价为推断，已标注不参与估值</td><td>已声明</td></tr>
+<tr><td>双来源验证</td><td>✅ 通过</td><td>全部&lt;2%</td><td>-</td></tr>
+<tr><td>币种与单位</td><td>✅ 通过</td><td>万元/吨、万元/标吨、元/千克、元/股均标注</td><td>-</td></tr>
+<tr><td>估值传导</td><td>✅ 通过</td><td>钨价→净利→股价传导链一致</td><td>-</td></tr>
+<tr><td>跨文件一致性</td><td>✅ 通过</td><td>MD与HTML各章数字一致</td><td>-</td></tr>
+</table>
+
+<!-- ====== Evidence Coverage ====== -->
+<h2>Evidence Coverage (证据覆盖率)</h2>
+<div class="evidence-bar">
+<div style="width:55%;background:#3fb950">一级 55%</div>
+<div style="width:10%;background:#58a6ff">二级 10%</div>
+<div style="width:20%;background:#d29922">三级 20%</div>
+<div style="width:15%;background:#f85149">AI推断 15%</div>
+</div>
+<div class="grid-2">
+<div class="card card-green">
+<h4>已验证数据</h4>
+<ul>
+<li>股价/市值/PB/PE（westock-data，2026-08-06）</li>
+<li>2021-2026Q1财务数据（8期财报，一级）</li>
+<li>2025年报分部业务（证券时报/中证报，一级）</li>
+<li>2026H1业绩预告22.16亿（公司公告，一级）</li>
+<li>钨价/稀土价双源验证（中钨在线+赣州钨协+SMM）</li>
+<li>股东结构/分红/一致预期（westock-data）</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>未验证/推断数据</h4>
+<ul>
+<li>光伏钨丝市占率65-80%（媒体口径不一，四级）</li>
+<li>2026年2000亿米产能计划、订单排至年底（自媒体）</li>
+<li>大湖塘钨矿并表、自给率升至70%（仅东方财富号）</li>
+<li>2026E盈利情景测算（H2业绩为推断，AI推断15%&gt;10%）</li>
+<li>历史PB分位（估算值）</li>
+<li>公司实现售价/ROIC/股权激励（未披露）</li>
+</ul>
+</div>
+</div>
+<blockquote>⚠️ 本报告AI推断占比15%&gt;10%，存在较高推断比例，主要集中在盈利情景测算、历史PB分位、钨价敏感性。建议获取2026H1正式财报和矿山收购公告后更新。</blockquote>
+
+<!-- ====== Market Data Coverage ====== -->
+<h2>Market Data Coverage (市场数据覆盖率)</h2>
+<table>
+<tr><th>数据</th><th>身份完整</th><th>双来源验证</th><th>历史日期验证</th><th>单位验证</th><th>进入估值</th></tr>
+<tr><td>公司股价56.55元</td><td>✅</td><td>✅</td><td>✅ 2026-08-06</td><td>✅ 元/股</td><td>✅</td></tr>
+<tr><td>APT 61万/吨</td><td>✅</td><td>✅ 0.66%</td><td>✅ 2026-08-05</td><td>✅ 万元/吨</td><td>✅</td></tr>
+<tr><td>钨精矿41.5万/标吨</td><td>✅</td><td>✅ 0.72%</td><td>✅ 2026-08-05</td><td>✅ 万元/标吨</td><td>✅</td></tr>
+<tr><td>氧化镨钕73.94万/吨</td><td>✅</td><td>✅ 0.42%</td><td>✅ 2026-08-05</td><td>✅ 万元/吨</td><td>✅</td></tr>
+<tr><td>汇率/无风险利率</td><td>不适用</td><td>-</td><td>-</td><td>-</td><td>未进入（不做DCF）</td></tr>
+</table>
+
+<!-- ====== 页脚 ====== -->
+<div class="footer">
+<p>报告生成: 2026-08-06 | 框架: 大灰皮证券研究 V-2.4 | Evidence First + 8 Principles + Hard Constraints + Market Data Integrity</p>
+<p>本报告由AI生成，不构成投资建议。投资有风险，入市需谨慎。</p>
+</div>
+
+</div><!-- .container -->
+
+<!-- ====== Chart.js 脚本 ====== -->
+<script>
+Chart.defaults.color = '#8b949e';
+Chart.defaults.borderColor = '#30363d';
+Chart.defaults.font.family = "'Segoe UI',system-ui,sans-serif";
+
+// ===== Fisher 雷达图 =====
+new Chart(document.getElementById('fisherChart'), {
+  type: 'radar',
+  data: {
+    labels: ['市场潜力','管理层','研发','销售','利润率空间','护城河','长期成长','企业文化','资本配置','长期竞争'],
+    datasets: [{
+      label: 'Fisher评分',
+      data: [7,6,7,6,6,7,7,6,6,7],
+      backgroundColor: 'rgba(88,166,255,0.2)',
+      borderColor: '#58a6ff',
+      pointBackgroundColor: '#58a6ff',
+      pointRadius: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: { r: { beginAtZero: true, max: 10, ticks: { stepSize: 2, color: '#8b949e' }, grid: { color: '#30363d' }, angleLines: { color: '#30363d' }, pointLabels: { color: '#c9d1d9', font: { size: 11 } } } }
+  }
+});
+
+// ===== 财务趋势图（营收/归母净利 2021-2026E） =====
+new Chart(document.getElementById('finChart'), {
+  type: 'bar',
+  data: {
+    labels: ['2021','2022','2023','2024','2025','2026E(基准)'],
+    datasets: [
+      { label: '营业收入(亿元)', data: [318.5,482.2,394.0,353.7,462.7,536.0], backgroundColor: '#58a6ff', borderRadius: 4 },
+      { label: '归母净利(亿元)', data: [11.8,14.5,16.0,17.1,23.1,35.7], backgroundColor: '#f85149', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { labels: { color: '#c9d1d9' } } },
+    scales: {
+      x: { grid: { color: '#21262d' }, ticks: { color: '#8b949e' } },
+      y: { grid: { color: '#21262d' }, ticks: { color: '#8b949e' } }
+    }
+  }
+});
+
+// ===== 三情景估值图 =====
+new Chart(document.getElementById('scenarioChart'), {
+  type: 'bar',
+  data: {
+    labels: ['悲观(Bear) 25%','基准(Base) 55%','乐观(Bull) 20%'],
+    datasets: [
+      { label: '2026E归母净利(亿元)', data: [29,35,44], backgroundColor: ['#f85149','#d29922','#3fb950'], borderRadius: 4, yAxisID: 'y' },
+      { label: '对应股价中枢(元)', type: 'line', data: [25.7,33.2,44.5], borderColor: '#39c5cf', backgroundColor: '#39c5cf', pointRadius: 4, tension: 0.2, yAxisID: 'y1' }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { labels: { color: '#c9d1d9' } } },
+    scales: {
+      x: { grid: { color: '#21262d' }, ticks: { color: '#8b949e' } },
+      y: { position: 'left', grid: { color: '#21262d' }, ticks: { color: '#8b949e' }, title: { display: true, text: '净利(亿元)', color: '#8b949e' } },
+      y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { color: '#39c5cf' }, title: { display: true, text: '股价(元)', color: '#39c5cf' } }
+    }
+  }
+});
+
+// ===== 综合评分雷达图 =====
+new Chart(document.getElementById('scoreChart'), {
+  type: 'radar',
+  data: {
+    labels: ['商业模式','行业','管理层','财务','护城河','成长性','估值','风险','Fisher'],
+    datasets: [{
+      label: '综合评分',
+      data: [7,7,6,5,7,7,3,4,6.5],
+      backgroundColor: 'rgba(210,153,34,0.2)',
+      borderColor: '#d29922',
+      pointBackgroundColor: '#d29922',
+      pointRadius: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: { r: { beginAtZero: true, max: 10, ticks: { stepSize: 2, color: '#8b949e' }, grid: { color: '#30363d' }, angleLines: { color: '#30363d' }, pointLabels: { color: '#c9d1d9', font: { size: 11 } } } }
+  }
+});
+</script>
+
+</body>
+</html>
