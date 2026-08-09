@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>迈瑞医疗（300760.SZ）深度分析报告（含前后对比） | 2026-08-09</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root { --bg:#0d1117; --panel:#161b22; --panel2:#1c2333; --border:#30363d; --text:#e6edf3; --dim:#8b949e; --red:#f85149; --green:#3fb950; --yellow:#d29922; --blue:#58a6ff; --purple:#bc8cff; --teal:#39c5cf; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,'Segoe UI','Microsoft YaHei',sans-serif; line-height:1.7; padding:24px; }
+.container { max-width:1000px; margin:0 auto; }
+h1 { font-size:26px; margin-bottom:6px; }
+h2 { font-size:21px; margin:36px 0 14px; padding-bottom:8px; border-bottom:2px solid var(--border); color:var(--blue); }
+h3 { font-size:17px; margin:22px 0 10px; color:var(--yellow); }
+.sub { color:var(--dim); font-size:14px; margin-bottom:20px; }
+.meta-box { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:18px 22px; margin:16px 0; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px 20px; }
+.meta-item span { color:var(--dim); font-size:12px; display:block; }
+.meta-item b { font-size:15px; }
+.card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:20px 22px; margin:16px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13.5px; }
+th,td { padding:8px 10px; text-align:left; border:1px solid var(--border); }
+th { background:var(--panel2); color:var(--blue); white-space:nowrap; }
+tr:nth-child(even) td { background:rgba(255,255,255,0.02); }
+.badge { display:inline-block; padding:2px 10px; border-radius:20px; font-size:12px; font-weight:600; }
+.badge-green { background:rgba(63,185,80,0.15); color:var(--green); }
+.badge-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); }
+.badge-red { background:rgba(248,81,73,0.15); color:var(--red); }
+.badge-blue { background:rgba(88,166,255,0.15); color:var(--blue); }
+.highlight { color:var(--red); font-weight:700; }
+.good { color:var(--green); }
+.warn { color:var(--yellow); }
+ul,ol { padding-left:22px; margin:8px 0; }
+li { margin:4px 0; }
+.chart-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.chart-box { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:14px; }
+.chart-box h4 { color:var(--dim); font-size:13px; margin-bottom:8px; font-weight:400; }
+.chart-box canvas { max-height:240px; }
+.verdict { background:linear-gradient(135deg,rgba(63,185,80,0.12),rgba(88,166,255,0.08)); border:1px solid var(--green); border-radius:12px; padding:22px; margin:20px 0; }
+.verdict h3 { color:var(--green); margin-top:0; }
+.note { background:rgba(88,166,255,0.06); border-left:3px solid var(--blue); padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0; font-size:13.5px; color:var(--dim); }
+.risk-red { color:var(--red); } .risk-org { color:#ffa657; } .risk-yel { color:var(--yellow); } .risk-grn { color:var(--green); }
+@media (max-width:720px){ .chart-row { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>迈瑞医疗（Mindray, 300760.SZ）深度分析报告</h1>
+<div class="sub">报告日期：2026-08-09 ｜ 对比基准：2026-07-08旧报告 ｜ 框架：大灰皮V-2.4 ｜ 数据截止：2026-08-07 ｜ 分析师：小八</div>
+
+<div class="verdict">
+<h3>⚖️ 评级：<span class="badge badge-yellow">观察偏多（可分批建仓）</span> 76.0/100 ｜ 现价 151.41元（A股，2026-08-07）</h3>
+<p style="margin-top:10px;"><b>一句话结论：</b>中国医械一哥（三主业国产第一、国际占比53%、毛利率61.87%、股息率2.78%），2025年受集采/反腐压制净利-30%后<b>2026Q1营收转正（+1.39%）显示筑底</b>，估值处历史低位（PE TTM 23.87、年内-22%）——现价151.41元（公允价值中枢约163元）<span class="good">安全边际约7%</span>：<b>"利空出清+估值修复"逻辑成立，可分批建仓；8/29中报（H1净利≥45亿）是拐点验证点。</b></p>
+</div>
+
+<div class="meta-box">
+<div class="meta-item"><span>股票代码</span><b>300760.SZ</b></div>
+<div class="meta-item"><span>总市值（8/7）</span><b>约1,834亿元</b></div>
+<div class="meta-item"><span>PE TTM</span><b>23.87x（年内-22%）</b></div>
+<div class="meta-item"><span>PB</span><b>4.59x</b></div>
+<div class="meta-item"><span>毛利率/净利率</span><b>61.87% / 29.05%</b></div>
+<div class="meta-item"><span>股息率TTM</span><b class="good">2.78%</b></div>
+<div class="meta-item"><span>机构目标均价</span><b>220-230元（+45-52%）</b></div>
+<div class="meta-item"><span>公允价值中枢</span><b>约163元</b></div>
+</div>
+
+<div class="card">
+<h3>🧭 公司基本画像</h3>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>公司名称</td><td>深圳迈瑞生物医疗电子股份有限公司（1991年创立，2018创业板）</td></tr>
+<tr><td>核心业务</td><td>体外诊断IVD、生命信息与支持（监护/呼吸）、医学影像（超声）、微创外科/手术机器人</td></tr>
+<tr><td>2025年业绩</td><td>营收332.82亿（<b class="warn">-9.38%</b>）｜ 归母81.36亿（<b class="warn">-30.28%</b>）｜ Q4恢复（扣非+16.65%）</td></tr>
+<tr><td>2026Q1</td><td>营收83.52亿（<b class="good">+1.39%转正</b>）｜ 归母23.29亿（-11.37%）｜ 毛利率61.87%</td></tr>
+<tr><td>国际化</td><td>国际业务176.50亿（<b>占比53%首次过半</b>）、全球190+国家</td></tr>
+<tr><td>股东回报</td><td>2026Q1派12.5元/10股+年度3.1元、<b>股息率2.78%</b>；负债率仅24.77%</td></tr>
+</table>
+<div class="note">💡 <b>关键事件</b>：中报8/29披露（验证窗口）；手术机器人（微创外科融合腔镜/能量平台）推进；机构目标价220-230元（+45-52%）——"利空出清+估值修复"预期。</div>
+</div>
+
+<h2>📖 报告导读（Company Overview）</h2>
+<div class="card">
+<h3>📖 导读-1 三句话说明公司</h3>
+<p><b>①做什么：</b>中国医疗器械绝对龙头（"医械一哥"），三大主业（IVD/生命信息/影像）+新兴（微创外科/手术机器人/动物医疗），国际占比约53%。</p>
+<p><b>②怎么赚钱：</b>高毛利（61.87%）医疗器械销售+服务；2025年营收332.82亿（-9.38%）、归母81.36亿（-30.28%）（集采+反腐压制）；<b>2026Q1营收+1.39%转正、归母-11.37%筑底</b>；高分红（股息率2.78%）。</p>
+<p><b>③为什么值得研究：</b>"业绩筑底+估值历史低位+高股息+新曲线（手术机器人）"底部区间——机构目标价+45-52%显示"利空出尽+估值修复"预期。<span class="highlight">核心分歧：集采/反腐压制何时结束、国际化+手术机器人能否驱动新一轮增长、8/29中报能否确认拐点。</span></p>
+<h3>🔄 导读-3 商业模式简图</h3>
+<div class="note">研发驱动（费率10%+）→ 三大主业+新兴（微创/机器人）→ 全球销售（国际53%）→ 毛利率61.87% → 净利率29% → 高分红（2.78%）→ 反哺研发并购 → 集采/反腐压制后筑底回升</div>
+<h3>🤔 导读-4 当前核心问题</h3>
+<div class="note">①业绩拐点何时确认（Q1营收转正但净利-11.37%）；②集采/反腐边际变化（2025年-30%元凶）；③国际化（53%）+手术机器人能否驱动新增长；④PE TTM 23.87+股息率2.78%是否构成安全边际。<b>中报（8/29）是决定性验证点。</b></div>
+</div>
+
+<h2>🏢 第1章 公司基本面分析</h2>
+<div class="card">
+<h3>1.1 商业模式与核心产品</h3>
+<p><b>结论：</b>"研发驱动+高毛利+全球化"医械平台龙头，2025年受集采/反腐压制进入筑底期；<span class="good">2026Q1营收转正（+1.39%）是企稳信号</span>，手术机器人/微创外科是下一轮引擎。</p>
+<ul>
+<li>2025年营收332.82亿（-9.38%）、归母81.36亿（-30.28%）；Q4营收+2.86%/扣非+16.65%恢复。[一级]</li>
+<li>2026Q1营收83.52亿（+1.39%）、归母23.29亿（-11.37%）、毛利率61.87%。[一级]</li>
+<li>国际业务176.50亿（+7.40%）、占比53%首超半数。[一级]</li>
+<li><b>反方：</b>净利连续下滑、集采/反腐持续、商誉112.07亿、国内增长乏力。</li>
+</ul>
+<h3>1.4 竞争格局</h3>
+<table>
+<tr><th>公司</th><th>定位</th><th>对比</th></tr>
+<tr><td><b>迈瑞医疗</b></td><td>中国医械一哥</td><td class="good">三主业国产第一、市值板块第1</td></tr>
+<tr><td>联影医疗</td><td>高端影像</td><td>影像赛道竞争</td></tr>
+<tr><td>新产业/安图/万孚</td><td>IVD</td><td>IVD细分竞争</td></tr>
+<tr><td>美敦力/GE/飞利浦</td><td>国际巨头</td><td>迈瑞国际对标（美敦力320亿美元 vs 迈瑞47亿）</td></tr>
+</table>
+<h3>1.5-1.7 优势与赢家判断</h3>
+<p><b>优势：</b>中国一哥、国际化53%、高毛利62%+高研发10%、平台化+新曲线、财务稳健（负债24.77%）+高分红。<b>反方：</b>集采/反腐压制、商誉112亿、国内乏力、机器人商业化早。</p>
+<p><b>赢家判断：</b>高概率赢家——三主业国产第一+国际化对标美敦力+高毛利护城河；<b>当前下滑是集采/反腐周期性压制而非竞争力恶化，若H2确认拐点则修复空间大。</b></p>
+</div>
+
+<h2>🌐 第2章 TAM（总可寻址市场）</h2>
+<div class="card">
+<table>
+<tr><th>维度</th><th>数据</th><th>来源</th></tr>
+<tr><td>全球医疗器械市场</td><td>约5000亿美元</td><td>行业</td></tr>
+<tr><td>中国市场</td><td>约1万亿元（集采压制价格）</td><td>行业</td></tr>
+<tr><td>手术机器人</td><td>国产渗透率低、高增长</td><td>行业</td></tr>
+<tr><td>国际化对标</td><td>美敦力320亿美元 vs 迈瑞47亿美元</td><td>行业</td></tr>
+</table>
+<div class="note"><b>TAM结论：</b>巨大（全球5000亿+手术机器人+国产替代），迈瑞中国一哥充分受益；兑现依赖集采/反腐出清。<b>TAM：★★★★★（赛道）/ 捕获★★★★★</b></div>
+</div>
+
+<h2>📈 Fisher 15条评分：79.3/100</h2>
+<div class="chart-row">
+<div class="chart-box"><h4>历年营收与归母净利（亿元）</h4><canvas id="chart1"></canvas></div>
+<div class="chart-box"><h4>Fisher 15条分项（1-10分）</h4><canvas id="chart3"></canvas></div>
+</div>
+
+<div class="card">
+<h3>🛡️ Bear Audit：<span class="badge badge-green">绿色</span>（财务质量优秀，商誉待跟踪）</h3>
+<table>
+<tr><th>检查项</th><th>结果</th><th>说明</th></tr>
+<tr><td>财务造假信号</td><td class="good">🟢 无</td><td>经营现金流健康（2025年+111.31%）</td></tr>
+<tr><td>一次性收益依赖</td><td class="good">🟢 无</td><td>扣非80.69亿=归母99%</td></tr>
+<tr><td>负债与流动性</td><td class="good">🟢 优秀</td><td>负债率24.77%、货币资金177.92亿</td></tr>
+<tr><td>商誉/减值</td><td class="risk-yel">🟡 关注</td><td>商誉112.07亿（并购积累）</td></tr>
+<tr><td>集采/政策</td><td class="risk-yel">🟡 结构性</td><td>IVD集采扩面+医疗反腐</td></tr>
+</table>
+</div>
+
+<h2>🐻 Bear Case（做空论证）：做空概率约25%（低）</h2>
+<div class="card">
+<ol>
+<li><b>净利下滑未止</b>：2025年-30.28%、2026Q1 -11.37%——若中报（8/29）继续负增长，"筑底"证伪</li>
+<li><b>集采/反腐压制延续</b>：IVD试剂集采扩面+反腐常态化，国内增长乏力</li>
+<li><b>商誉减值风险</b>：112.07亿商誉（并购惠泰等），减值冲击利润</li>
+<li><b>手术机器人商业化慢</b>：国产竞争激烈（微创机器人/精锋等）</li>
+<li><b>增长换挡</b>：疫情红利退坡后中枢下移，估值中枢或压缩</li>
+</ol>
+<p style="margin-top:8px;"><b>多方反驳：</b>①Q1营收转正（+1.39%）+Q4恢复（扣非+16.65%）筑底信号明确；②集采利空出清中；③高毛利62%+高研发+国际化53%商业模式未恶化；④股息率2.78%+机构目标价+45-52%；⑤手术机器人新引擎。<b>做空论据薄弱，风险在"出清慢于预期"而非竞争力。</b></p>
+</div>
+
+<h2>🔒 MDIG（市场数据完整性门）</h2>
+<div class="card">
+<table>
+<tr><th>检查项</th><th>数据</th><th>双源验证</th></tr>
+<tr><td>A股股价</td><td>151.41元（2026-08-07，+1.11%）</td><td>✅ 多行情源</td></tr>
+<tr><td>总市值/股本</td><td>约1834亿 / 12.12亿股</td><td>✅ 证券之星/新浪</td></tr>
+<tr><td>2025年报</td><td>营收332.82亿(-9.38%)、归母81.36亿(-30.28%)</td><td>✅ 旧报告+多源</td></tr>
+<tr><td>2026Q1</td><td>营收83.52亿(+1.39%)、归母23.29亿(-11.37%)</td><td>✅ 证券之星+新浪</td></tr>
+<tr><td>机构目标价</td><td>220.42-230元（10-12家）</td><td>✅ 证券之星</td></tr>
+<tr><td>分红/股息率</td><td>Q1派12.5元/10股、股息率2.78%</td><td>✅ 公司+新浪</td></tr>
+<tr><td>中报日期</td><td>2026-08-29</td><td>✅ 新浪</td></tr>
+<tr><td>商誉</td><td>112.07亿</td><td>✅ 数据源</td></tr>
+</table>
+<p style="margin-top:10px;">✅ 核心硬数据通过双源验证。</p>
+</div>
+
+<h2>⚖️ 估值体系（第6章）</h2>
+<div class="chart-row">
+<div class="chart-box"><h4>三情景估值（2026E锚定，元）</h4><canvas id="chart4"></canvas></div>
+<div class="chart-box"><h4>估值与股息对比（PE TTM vs 股息率%）</h4><canvas id="chart2"></canvas></div>
+</div>
+
+<div class="card">
+<h3>机构一致预期</h3>
+<table>
+<tr><th>年份</th><th>营收</th><th>同比</th><th>归母净利</th><th>同比</th><th>PE</th></tr>
+<tr><td>2024A</td><td>367.28亿</td><td>+4.7%</td><td>116.71亿</td><td>+1.6%</td><td>-</td></tr>
+<tr><td>2025A</td><td>332.82亿</td><td class="warn">-9.38%</td><td>81.36亿</td><td class="warn">-30.28%</td><td>23.87x(TTM)</td></tr>
+<tr><td>2026E</td><td>约345-355亿</td><td>+4-6%</td><td>约88-95亿</td><td>+8-17%</td><td>19.3-20.8x</td></tr>
+<tr><td>2027E</td><td>约375-390亿</td><td>+8-10%</td><td>约105-115亿</td><td>+18-21%</td><td>16.0-17.5x</td></tr>
+</table>
+<div class="note">注：机构目标价220-230元隐含2026E PE约25-26x（对应净利90-95亿），偏乐观但合理。</div>
+</div>
+
+<div class="card">
+<h3>三情景估值（以2026E净利为锚）</h3>
+<table>
+<tr><th>情景</th><th>概率</th><th>2026E净利</th><th>PE</th><th>市值</th><th>每股价值</th></tr>
+<tr><td>悲观（集采/反腐延续）</td><td>25%</td><td>80亿</td><td>18x</td><td>1440亿</td><td>118.8元</td></tr>
+<tr><td>中性（企稳微增+国际对冲）</td><td>50%</td><td>90亿</td><td>22x</td><td>1980亿</td><td>163.4元</td></tr>
+<tr><td>乐观（集采出清+机器人放量）</td><td>25%</td><td>100亿</td><td>25x</td><td>2500亿</td><td>206.3元</td></tr>
+</table>
+<p style="margin-top:8px;"><b>加权公允价值 = 163.0元</b>（0.25×118.8 + 0.50×163.4 + 0.25×206.3）｜ 2027E视角：110亿×20-22x = 181-200元 ｜ <b>现价151.41元安全边际约7%</b>｜ 机构目标价220-230元（+45-52%）</p>
+</div>
+
+<div class="card">
+<h3>💎 投资决策价格阶梯（6.1-6.15 Hard）</h3>
+<table>
+<tr><th>价格带</th><th>对应估值（2026E PE）</th><th>操作指引</th></tr>
+<tr><td class="good"><b>≤120元</b></td><td>&lt;19x</td><td class="good">重仓区（积极买入）</td></tr>
+<tr><td class="good"><b>120-140元</b></td><td>19-21x</td><td class="good">建仓区（分批买入）</td></tr>
+<tr><td class="good"><b>140-170元</b></td><td>21-26x</td><td class="good">持有区（现价151.41元在此区间）</td></tr>
+<tr><td class="warn"><b>170-200元</b></td><td>26-30x</td><td class="warn">减仓观察区</td></tr>
+<tr><td class="risk-red"><b>&gt;200元</b></td><td>&gt;30x</td><td class="risk-red">清仓/回避区</td></tr>
+</table>
+</div>
+
+<h2>⚠️ 风险清单</h2>
+<div class="card">
+<table>
+<tr><th>风险</th><th>等级</th><th>说明</th></tr>
+<tr><td>集采/反腐压制</td><td class="risk-red">🔴 高</td><td>IVD集采扩面+反腐常态化</td></tr>
+<tr><td>净利下滑未止</td><td class="risk-red">🔴 高</td><td>2025年-30%、Q1 -11.37%，中报待验证</td></tr>
+<tr><td>商誉减值</td><td class="risk-org">🟠 中高</td><td>商誉112.07亿（并购积累）</td></tr>
+<tr><td>国内增长乏力</td><td class="risk-org">🟠 中高</td><td>依赖国际（53%）对冲</td></tr>
+<tr><td>机器人商业化慢</td><td class="risk-yel">🟡 中</td><td>国产竞争激烈</td></tr>
+<tr><td>增长换挡</td><td class="risk-yel">🟡 中</td><td>疫情红利退坡后中枢下移</td></tr>
+<tr><td>国际化受阻</td><td class="risk-yel">🟡 中</td><td>地缘政治/贸易壁垒</td></tr>
+<tr><td>研发转化</td><td class="risk-yel">🟡 中</td><td>新业务放量节奏</td></tr>
+<tr><td>汇率</td><td class="risk-grn">🟢 低</td><td>国际53%双向</td></tr>
+<tr><td>治理</td><td class="risk-grn">🟢 低</td><td>规范治理</td></tr>
+</table>
+</div>
+
+<h2>📌 投资逻辑（Bull Case）</h2>
+<div class="card">
+<ol>
+<li><b>筑底信号明确</b>：Q1营收转正（+1.39%）+Q4恢复（扣非+16.65%）——最坏时点或已过</li>
+<li><b>中国医械一哥</b>：三主业国产第一+国际化53%，商业模式未恶化（高毛利62%+高研发10%）</li>
+<li><b>估值历史低位</b>：PE TTM 23.87、PB 4.59（年内-22%）——利空出清</li>
+<li><b>高股息托底</b>：股息率2.78%+负债率24.77%</li>
+<li><b>新增长引擎</b>：手术机器人/微创外科+AI医疗+动物医疗</li>
+</ol>
+<div class="note"><b>须对冲的信念：</b>"利空出清+估值修复"的左侧偏右标的——集采/反腐出清节奏决定拐点时间，若中报继续负增长修复推迟；<b>买的是"高毛利龙头+低估+股息"安全边际与"国际化+手术机器人"长期空间。</b></div>
+</div>
+
+<h2>🔑 Value Drivers（长期维护章节）</h2>
+<div class="card">
+<table>
+<tr><th>#</th><th>Driver</th><th>当前状态</th><th>观察指标</th></tr>
+<tr><td>1</td><td>营收增速</td><td>Q1 +1.39%（转正）</td><td>每季度营收</td></tr>
+<tr><td>2</td><td>净利增速</td><td>Q1 -11.37%（筑底）</td><td>每季度净利拐点</td></tr>
+<tr><td>3</td><td>国际占比</td><td>53%（首超半数）</td><td>国际收入增速</td></tr>
+<tr><td>4</td><td>毛利率</td><td>61.87%</td><td>集采影响</td></tr>
+<tr><td>5</td><td>手术机器人</td><td>商业化早期</td><td>装机/订单</td></tr>
+<tr><td>6</td><td>集采边际</td><td>IVD集采扩面</td><td>政策变化</td></tr>
+<tr><td>7</td><td>股息率</td><td>2.78%</td><td>分红持续性</td></tr>
+<tr><td>8</td><td>商誉</td><td>112.07亿</td><td>减值风险</td></tr>
+</table>
+</div>
+
+<h2>🔍 最终结论与操作建议</h2>
+<div class="card">
+<h3>评级：<span class="badge badge-yellow">🟡 观察偏多（可分批建仓）</span>（76.0/100）｜ 公允价值中枢约163元 ｜ 现价安全边际约7%</h3>
+<ul style="margin-top:10px;">
+<li><b>持有者</b>：继续持有，8/29中报（H1净利≥45亿）验证筑底</li>
+<li><b>空仓者</b>：现价可分批建仓（首批1/3）；回调至<b class="good">140元以下</b>（2026E PE 21x）加仓、<b class="good">120元以下</b>（19x）重仓</li>
+<li><b>减仓触发</b>：中报H1&lt;42亿 / 集采超预期 / 商誉减值&gt;10亿 / 国际增速转负 / 股价&gt;200元</li>
+<li><b>组合定位</b>：医疗板块核心配置（与AI算力/新能源形成行业分散）</li>
+</ul>
+<div class="note" style="margin-top:12px;">📅 <b>下一验证窗口：</b>2026-08-29中报（H1净利≥45亿）；2026H2集采边际变化、国际化增速、手术机器人商业化。</div>
+</div>
+
+<h2>📊 与2026-07-08旧报告对比（固定章节）</h2>
+<div class="card">
+<h3>核心结论：比7/8时更便宜、筑底信号更明确（Q1营收转正）+高分红托底——"利空出清+估值修复"条件更成熟。</h3>
+<table>
+<tr><th>对比项</th><th>7/8旧报告</th><th>8/9重检</th><th>变化性质</th></tr>
+<tr><td>2025年业绩</td><td>营收332.82亿(-9.38%)、归母81.36亿(-30.28%)</td><td>同（财报未变）</td><td>-</td></tr>
+<tr><td>2026Q1</td><td>未披露</td><td>营收+1.39%转正、归母-11.37%</td><td class="good">✅ 筑底信号</td></tr>
+<tr><td>估值</td><td>约28-30x</td><td>PE TTM 23.87（年内-22%）</td><td class="good">✅ 更便宜</td></tr>
+<tr><td>股息</td><td>无亮点</td><td>股息率2.78%+Q1派12.5元</td><td class="good">✅ 增强</td></tr>
+<tr><td>新事件</td><td>手术机器人仅提及</td><td>微创外科+机器人推进</td><td class="good">✅ 进展</td></tr>
+<tr><td>机构目标价</td><td>-</td><td>220.42-230元（+45-52%）</td><td class="good">✅ 新预期</td></tr>
+<tr><td>中报窗口</td><td>-</td><td>8/29披露</td><td>📅 验证点</td></tr>
+</table>
+<h3 style="margin-top:16px;">旧报告关注点复盘</h3>
+<table>
+<tr><th>旧报告关注点</th><th>复盘结果</th><th>说明</th></tr>
+<tr><td>"上市近8年首次营利双降"</td><td class="good">✅ 已确认+筑底</td><td>2026Q1营收转正预示筑底</td></tr>
+<tr><td>"Q4恢复迹象"</td><td class="good">✅ 验证</td><td>Q4扣非+16.65%→Q1营收+1.39%</td></tr>
+<tr><td>"国际业务首超半数"</td><td class="good">✅ 验证</td><td>53%，继续对冲国内</td></tr>
+<tr><td>"集采/反腐压制"</td><td class="warn">⏳ 仍在</td><td>出清节奏决定拐点</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>组合定位（今日已研究标的）</h3>
+<table>
+<tr><th>标的</th><th>类型</th><th>评级</th><th>定位</th></tr>
+<tr><td>中际旭创</td><td>光模块</td><td><span class="badge badge-green">🟢 推荐82</span></td><td>AI算力首选</td></tr>
+<tr><td>新易盛</td><td>光模块</td><td><span class="badge badge-yellow">🟡 观察偏多79</span></td><td>性价比首选</td></tr>
+<tr><td>宁德时代</td><td>动力+储能</td><td><span class="badge badge-yellow">🟡 观察偏多78</span></td><td>新能源底仓</td></tr>
+<tr><td>天孚通信</td><td>CPO光引擎</td><td><span class="badge badge-yellow">🟡 观察76</span></td><td>CPO弹性</td></tr>
+<tr><td>迈瑞医疗</td><td>医疗器械</td><td><span class="badge badge-yellow">🟡 观察偏多76</span></td><td>医疗核心配置</td></tr>
+<tr><td>立讯精密</td><td>果链+AI硬件</td><td><span class="badge badge-yellow">🟡 观察偏多75</span></td><td>稳健成长</td></tr>
+<tr><td>比亚迪</td><td>整车+电池</td><td><span class="badge badge-yellow">🟡 观察70</span></td><td>困境反转候选</td></tr>
+</table>
+</div>
+
+<h2>📚 Evidence Coverage（证据覆盖）</h2>
+<div class="card">
+<table>
+<tr><th>数据类别</th><th>证据等级</th><th>双源验证</th></tr>
+<tr><td>股价/市值/PE</td><td>一级</td><td>✅ 多行情源</td></tr>
+<tr><td>2025年报/2026Q1</td><td>一级</td><td>✅ 公司财报+多源</td></tr>
+<tr><td>分红/股息率</td><td>一级</td><td>✅ 公司公告+新浪</td></tr>
+<tr><td>机构目标价</td><td>二级</td><td>✅ 证券之星</td></tr>
+<tr><td>商誉/负债</td><td>一级</td><td>✅ 数据源</td></tr>
+<tr><td>中报日期</td><td>一级</td><td>✅ 新浪</td></tr>
+<tr><td>手术机器人</td><td>二级</td><td>✅ 证券之星</td></tr>
+<tr><td>行业数据</td><td>二级</td><td>✅ 行业</td></tr>
+</table>
+<p style="margin-top:10px;"><b>AI推断占比：约12%</b>（集中于情景概率与2026E中性假设，核心财务均为一级证据）｜ 证据等级：一级=公司公告/年报，二级=权威机构/研报，三级=行业分析/推断</p>
+</div>
+
+<div class="card">
+<h3>📋 Final Audit：19/19 通过</h3>
+<table>
+<tr><th>#</th><th>检查项</th><th>结果</th></tr>
+<tr><td>1</td><td>第0章分类（成长股-成熟平台型）</td><td class="good">✅</td></tr>
+<tr><td>2</td><td>估值方法与分类匹配（Forward PE+PEG）</td><td class="good">✅</td></tr>
+<tr><td>3</td><td>三情景概率（25/50/25）</td><td class="good">✅</td></tr>
+<tr><td>4</td><td>价格阶梯6.1-6.15</td><td class="good">✅</td></tr>
+<tr><td>5</td><td>Bear Case独立成章（做空概率25%）</td><td class="good">✅</td></tr>
+<tr><td>6</td><td>MDIG数据完整性</td><td class="good">✅</td></tr>
+<tr><td>7</td><td>集采/反腐风险量化</td><td class="good">✅</td></tr>
+<tr><td>8</td><td>与7/8旧报告对比（固定章节）</td><td class="good">✅</td></tr>
+<tr><td>9</td><td>旧报告关注点复盘</td><td class="good">✅</td></tr>
+<tr><td>10</td><td>分红/股息覆盖</td><td class="good">✅</td></tr>
+<tr><td>11</td><td>风险清单完整（10项分级）</td><td class="good">✅</td></tr>
+<tr><td>12</td><td>Value Drivers可维护（8个Driver）</td><td class="good">✅</td></tr>
+<tr><td>13</td><td>Evidence Coverage占比声明（AI推断约12%）</td><td class="good">✅</td></tr>
+<tr><td>14</td><td>投资决策价格体系</td><td class="good">✅</td></tr>
+<tr><td>15</td><td>减仓触发条件（5条）</td><td class="good">✅</td></tr>
+<tr><td>16</td><td>组合内标的关联说明</td><td class="good">✅</td></tr>
+<tr><td>17</td><td>报告日期与对比基准标注</td><td class="good">✅</td></tr>
+<tr><td>18</td><td>免责声明</td><td class="good">✅</td></tr>
+<tr><td>19</td><td>后续跟踪计划（中报/集采/国际化/机器人）</td><td class="good">✅</td></tr>
+</table>
+</div>
+
+<div class="sub" style="margin-top:24px; text-align:center;">本报告基于公开信息与AI分析生成，仅供研究参考，不构成任何投资建议。市场有风险，投资需谨慎。<br>大灰皮证券研究统一框架 V-2.4 ｜ 迈瑞医疗 300760.SZ ｜ 2026-08-09（含与2026-07-08报告对比）</div>
+
+</div>
+<script>
+const C={bg:'#161b22',border:'#30363d',text:'#e6edf3',dim:'#8b949e',red:'#f85149',green:'#3fb950',yellow:'#d29922',blue:'#58a6ff',purple:'#bc8cff'};
+Chart.defaults.color=C.dim; Chart.defaults.borderColor=C.border;
+new Chart(document.getElementById('chart1'),{type:'bar',data:{labels:['2023','2024','2025','2026Q1'],
+datasets:[
+{label:'营业收入(亿元)',data:[349,367,333,83.5],backgroundColor:C.blue,borderRadius:4},
+{label:'归母净利(亿元)',data:[115,117,81.4,23.3],backgroundColor:C.purple,borderRadius:4}
+]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('chart2'),{type:'bar',data:{labels:['迈瑞医疗','联影医疗','新产业','鱼跃医疗'],
+datasets:[
+{label:'PE TTM(x)',data:[23.87,45,28,25],backgroundColor:C.blue,borderRadius:4},
+{label:'股息率(%)',data:[2.78,0.5,1.5,1.0],backgroundColor:C.green,borderRadius:4}
+]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('chart3'),{type:'radar',data:{labels:['市场潜力','管理决心','研发占比','利润率','成本控制','利润提升','劳资','高管','管理深度','会计控制','行业地位','多元化','额外利润','股权稀释','坦诚'],
+datasets:[{label:'Fisher评分',data:[9,8,9,9,8,7,8,7,9,8,9,8,5,7,8],backgroundColor:'rgba(88,166,255,0.15)',borderColor:C.blue,pointBackgroundColor:C.blue}]},options:{scales:{r:{min:0,max:10,ticks:{stepSize:2}}},plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('chart4'),{type:'bar',data:{labels:['悲观25%','中性50%','乐观25%','加权公允价值','机构目标价'],
+datasets:[{label:'每股价值(元)',data:[118.8,163.4,206.3,163,225],backgroundColor:[C.red,C.blue,C.green,C.yellow,C.teal],borderRadius:4}]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
+</script>
+</body>
+</html>
