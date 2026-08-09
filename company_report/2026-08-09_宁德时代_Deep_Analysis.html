@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宁德时代（300750.SZ / 03750.HK）深度分析报告（含前后对比） | 2026-08-09</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root { --bg:#0d1117; --panel:#161b22; --panel2:#1c2333; --border:#30363d; --text:#e6edf3; --dim:#8b949e; --red:#f85149; --green:#3fb950; --yellow:#d29922; --blue:#58a6ff; --purple:#bc8cff; --teal:#39c5cf; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,'Segoe UI','Microsoft YaHei',sans-serif; line-height:1.7; padding:24px; }
+.container { max-width:1000px; margin:0 auto; }
+h1 { font-size:26px; margin-bottom:6px; }
+h2 { font-size:21px; margin:36px 0 14px; padding-bottom:8px; border-bottom:2px solid var(--border); color:var(--blue); }
+h3 { font-size:17px; margin:22px 0 10px; color:var(--yellow); }
+.sub { color:var(--dim); font-size:14px; margin-bottom:20px; }
+.meta-box { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:18px 22px; margin:16px 0; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px 20px; }
+.meta-item span { color:var(--dim); font-size:12px; display:block; }
+.meta-item b { font-size:15px; }
+.card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:20px 22px; margin:16px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13.5px; }
+th,td { padding:8px 10px; text-align:left; border:1px solid var(--border); }
+th { background:var(--panel2); color:var(--blue); white-space:nowrap; }
+tr:nth-child(even) td { background:rgba(255,255,255,0.02); }
+.badge { display:inline-block; padding:2px 10px; border-radius:20px; font-size:12px; font-weight:600; }
+.badge-green { background:rgba(63,185,80,0.15); color:var(--green); }
+.badge-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); }
+.badge-red { background:rgba(248,81,73,0.15); color:var(--red); }
+.badge-blue { background:rgba(88,166,255,0.15); color:var(--blue); }
+.highlight { color:var(--red); font-weight:700; }
+.good { color:var(--green); }
+.warn { color:var(--yellow); }
+ul,ol { padding-left:22px; margin:8px 0; }
+li { margin:4px 0; }
+.chart-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.chart-box { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:14px; }
+.chart-box h4 { color:var(--dim); font-size:13px; margin-bottom:8px; font-weight:400; }
+.chart-box canvas { max-height:240px; }
+.verdict { background:linear-gradient(135deg,rgba(63,185,80,0.12),rgba(88,166,255,0.08)); border:1px solid var(--green); border-radius:12px; padding:22px; margin:20px 0; }
+.verdict h3 { color:var(--green); margin-top:0; }
+.note { background:rgba(88,166,255,0.06); border-left:3px solid var(--blue); padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0; font-size:13.5px; color:var(--dim); }
+.risk-red { color:var(--red); } .risk-org { color:#ffa657; } .risk-yel { color:var(--yellow); } .risk-grn { color:var(--green); }
+@media (max-width:720px){ .chart-row { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>宁德时代（CATL, 300750.SZ / 03750.HK）深度分析报告</h1>
+<div class="sub">报告日期：2026-08-09 ｜ 对比基准：2026-07-08旧报告（84-86分推荐）｜ 框架：大灰皮V-2.4 ｜ 数据截止：2026-08-07 ｜ 分析师：小八</div>
+
+<div class="verdict">
+<h3>⚖️ 评级：<span class="badge badge-yellow">观察偏多（持有/除息后加仓）</span> 78.0/100 ｜ 现价 388.07元（A股，2026-08-07）</h3>
+<p style="margin-top:10px;"><b>一句话结论：</b>全球动力（39.9%）+储能双料冠军，2026H1净利432.84亿（+42%）兑现V型反转，储能+87.54%确认第二引擎，<b>200-400亿A股史上最大回购+61.8亿中期分红</b>彰显股东回报决心；但<b>Q2毛利率低于预期（23.93%，-1.09pct）+钠电爬坡</b>是新变量——现价388.07元（2026E PE 18.6x、PEG 0.62、公允价值中枢约397元）处于合理区下沿，安全边际约2%（8/10除息后约6%）：<b>持有为主，Q3毛利率拐点是核心验证点，回调至350元以下分批加仓。</b></p>
+</div>
+
+<div class="meta-box">
+<div class="meta-item"><span>股票代码</span><b>300750.SZ / 03750.HK</b></div>
+<div class="meta-item"><span>A股市值（8/7）</span><b>约1.79万亿元</b></div>
+<div class="meta-item"><span>H股价格（8/7）</span><b>632.50港元（+0.72%）</b></div>
+<div class="meta-item"><span>PE TTM</span><b>21.06x</b></div>
+<div class="meta-item"><span>2026E PE（65家一致）</span><b>18.62x（PEG 0.62）</b></div>
+<div class="meta-item"><span>2027E PE</span><b>14.75x</b></div>
+<div class="meta-item"><span>机构目标价</span><b>541.58元（+39.6%）</b></div>
+<div class="meta-item"><span>公允价值中枢</span><b>约397元</b></div>
+</div>
+
+<div class="card">
+<h3>🧭 公司基本画像</h3>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>公司名称</td><td>宁德时代新能源科技股份有限公司（2018深交所 / 2025港交所）</td></tr>
+<tr><td>核心业务</td><td>动力电池、储能电池系统、钠离子电池、材料回收（邦普）、换电</td></tr>
+<tr><td>收入结构（2026H1）</td><td>动力1921.25亿（69.38%，+46.02%）｜ 储能532.61亿（<b>19.23%，+87.54%</b>，毛利率23.96%反超动力）</td></tr>
+<tr><td>行业地位</td><td><b>动力39.9%（9年第一）+储能第一（5年）双料冠军</b>（SNE）</td></tr>
+<tr><td>2026H1业绩</td><td>营收2769.17亿（<b>+54.80%</b>）｜ 归母432.84亿（<b>+41.98%</b>）｜ 扣非390.13亿（+43.44%）</td></tr>
+<tr><td>股东回报</td><td><b>200-400亿回购（7/24公告，A股史上最大，全部注销）</b>+中期分红61.8亿（8/10除息）</td></tr>
+</table>
+<div class="note">💎 <b>商业模式</b>：技术驱动（麒麟/神行/凝聚态/钠电）+规模制造（产能利用率94.86%）+全产业链闭环。新品：第三代神行超充、麒麟凝聚态、<b>全球首款量产钠电储能</b>（海博思创60GWh）。海外出货占比近半（1-5月海外动力份额33.7%）。</div>
+</div>
+
+<h2>📖 报告导读（Company Overview）</h2>
+<div class="card">
+<h3>📖 导读-1 三句话说明公司</h3>
+<p><b>①公司做什么：</b>全球动力电池与储能电池绝对双料冠军——动力连续9年全球第一（2026H1市占率39.9%）、储能连续5年第一；业务覆盖动力/储能/钠电/回收/换电全生态。</p>
+<p><b>②公司怎么赚钱：</b>制造并销售锂电池——动力电池卖给车企（占H1收入69.38%）、储能卖给电力公司/数据中心（19.23%，毛利率23.96%反超动力20.63%）；<b>H1营收2769.17亿（+54.80%）、归母432.84亿（+41.98%）</b>，海外出货占比接近一半。</p>
+<p><b>③为什么值得研究：</b>"业绩V型反转（2024营收-9.7%→2026H1 +54.8%）+史上最大回购（200-400亿注销）+储能第二引擎爆发（+87.54%）+钠电量产"多重催化叠加，估值却处历史低位（2026E PE 18.6x）。本次为7/8旧报告重检+对比：<span class="highlight">Q2毛利率低于预期（8/6股价-5%）与钠电爬坡期利润率不确定性是核心新变量。</span></p>
+<h3>🔄 导读-3 商业模式简图</h3>
+<div class="note">上游（锂矿/正负极）→ 宁德研发制造（772GWh+产能、在建764GWh）→ 卖给车企（动力）与电力公司/AI数据中心（储能）→ 按GWh×单价收入 → 94.86%产能利用率摊薄成本 → 42%净利增速 → 200-400亿回购+61.8亿分红回报股东</div>
+<h3>🤔 导读-4 当前核心问题</h3>
+<div class="note">①H1净利432.84亿"符合预期"但Q2毛利率低于预期（23.93%，-1.09pct），8/6大跌5%——钠电量产爬坡期利润率能否下半年回升（大华继显下调毛利率至23.4% vs 海通"仍稳健"）；②200-400亿史上最大回购能否托底；③储能+87.54%与市占率39.9%提升能否对冲动力价格战；④9/1消费税恢复+2027出口退税取消的政策影响。</div>
+</div>
+
+<h2>🏢 第1章 公司基本面分析</h2>
+<div class="card">
+<h3>1.1 商业模式与核心产品</h3>
+<p><b>结论：</b>技术+规模+全产业链三合一的新能源制造王者，V型反转已确认（H1营收+54.8%、净利+42%），储能成为第二引擎（+87.54%）。<span class="warn">新变量：钠电量产与Q2毛利率下行，需验证利润率拐点。</span></p>
+<ul>
+<li>2026H1营收2769.17亿（+54.80%）、归母432.84亿（+41.98%）、Q2单季225.46亿（环比+8%、同比+36.46%），利润增速逐季上升。[一级]</li>
+<li>2026H1全球动力装车242.7GWh（+25.3%）、市占率39.9%（2025年39.2%）；全球H1装车608.5GWh（+20%）。[一级，SNE]</li>
+<li>产能利用率94.86%（满负荷）、在建764GWh；海外出货占比近半（1-5月海外动力份额33.7%）。[一级]</li>
+<li><b>反方：</b>综合毛利率23.93%（-1.09pct）Q2低于预期；钠电爬坡利润率不确定；每GWh毛利降至1.47亿；动力价格战。[二级]</li>
+</ul>
+<h3>1.2 收入结构（2026H1）</h3>
+<table>
+<tr><th>业务</th><th>收入</th><th>占比</th><th>同比</th><th>毛利率</th></tr>
+<tr><td>动力电池系统</td><td>1921.25亿</td><td>69.38%</td><td>+46.02%</td><td>20.63%</td></tr>
+<tr><td>储能电池系统</td><td>532.61亿</td><td>19.23%</td><td class="good">+87.54%</td><td class="good">23.96%</td></tr>
+<tr><td>材料及回收</td><td>188.11亿</td><td>6.79%</td><td>-</td><td>-</td></tr>
+<tr><td>其他</td><td>127.20亿</td><td>4.59%</td><td>+65.94%</td><td>-</td></tr>
+</table>
+<div class="note">储能占比从2025年14.74%升至19.23%，<b>毛利率反超动力（23.96% vs 20.63%）——"第二引擎"地位确认</b>。</div>
+<h3>1.3-1.4 客户与竞争</h3>
+<p><b>客户：</b>特斯拉/宝马/大众/蔚小理等全球车企+储能客户（海博思创60GWh钠电协议+德国/西班牙/智利/马来西亚/澳洲储能项目）。</p>
+<p><b>竞争：</b>全球H1装车608.5GWh（+20%）；宁德242.7GWh（+25.3%）市占39.9%提升；比亚迪约15-16%；SK On -6.7%下滑；前十大除SK On全增长。<b>寡头格局稳固，宁德份额不降反升。</b></p>
+<h3>1.5 核心竞争优势</h3>
+<ul>
+<li><b>全球双料冠军</b>：动力39.9%（9年第一）+储能第一（5年）——规模+品牌+客户锁定</li>
+<li><b>技术代际领先</b>：麒麟/神行/凝聚态（半固态）/钠电（全球首款量产）</li>
+<li><b>垂直一体化</b>：锂矿→电池→回收（邦普2025年回收21万吨）闭环</li>
+<li><b>全球化产能</b>：德国/匈牙利/印尼等海外基地+海外出货近半</li>
+<li><b>股东回报</b>：ROE 22%、200-400亿史上最大回购（注销）+中期分红61.8亿</li>
+</ul>
+<h3>1.6-1.7 增长驱动与赢家判断</h3>
+<p><b>增长驱动：</b>储能超级周期（+87.54%）、钠电量产（海博思创60GWh）、柴油车电气化（大摩看好2027）、AI数据中心备电、全球化深化（份额33.7%）。</p>
+<p><b>赢家判断：</b>已是赢家且大概率维持——双寡头壁垒+技术全面+垂直一体化+海外第二曲线+大额回购。风险：固态电池颠覆、欧美壁垒、毛利率长期下行。<b>结论：全球新能源时代的"台积电"型冠军，估值合理偏低。</b></p>
+</div>
+
+<h2>🌐 第2章 TAM（总可寻址市场）</h2>
+<div class="card">
+<table>
+<tr><th>维度</th><th>数据</th><th>来源</th></tr>
+<tr><td>全球动力电池装车（2026H1）</td><td>608.5GWh（+20%）</td><td>SNE Research</td></tr>
+<tr><td>全球储能</td><td>AI数据中心备电+电网改造超级周期</td><td>券商共识</td></tr>
+<tr><td>钠电池</td><td>2026量产元年，海博思创60GWh订单</td><td>公司公告</td></tr>
+<tr><td>宁德销量预测</td><td>2026E 1000GWh / 2027E 1230GWh / 2028E 1450GWh</td><td>大华继显</td></tr>
+<tr><td>营收空间</td><td>2026E 6264亿（+47.85%）→ 2028E 9069亿</td><td>65家一致</td></tr>
+</table>
+<div class="note"><b>TAM结论：</b>巨大且高增长（动力+20%、储能超级周期、钠电新增量），宁德双料冠军充分受益；兑现依赖毛利率企稳。<b>TAM：★★★★★（赛道）/ 捕获★★★★★（冠军）</b></div>
+</div>
+
+<h2>📈 Fisher 15条评分：79.3/100</h2>
+<div class="chart-row">
+<div class="chart-box"><h4>历年营收与归母净利（亿元）</h4><canvas id="chart1"></canvas></div>
+<div class="chart-box"><h4>Fisher 15条分项（1-10分）</h4><canvas id="chart3"></canvas></div>
+</div>
+
+<div class="card">
+<h3>🛡️ Bear Audit：<span class="badge badge-green">绿色</span>（财务质量优秀）</h3>
+<table>
+<tr><th>检查项</th><th>结果</th><th>说明</th></tr>
+<tr><td>财务造假信号</td><td class="good">🟢 无</td><td>现金流与利润匹配，A+H双审计</td></tr>
+<tr><td>一次性收益依赖</td><td class="good">🟢 无</td><td>扣非390.13亿=归母90%，主业纯粹</td></tr>
+<tr><td>负债与流动性</td><td class="good">🟢 良好</td><td>现金充沛（支撑400亿回购）</td></tr>
+<tr><td>毛利率趋势</td><td class="warn">🟡 结构性</td><td>Q2综合毛利率23.93%（-1.09pct）低于预期</td></tr>
+<tr><td>产能状态</td><td class="warn">🟡 关注</td><td>利用率94.86%满负荷，扩产资本开支大</td></tr>
+<tr><td>贸易壁垒</td><td class="warn">🟡 关注</td><td>欧盟关税、9/1消费税、2027退税取消</td></tr>
+</table>
+</div>
+
+<h2>🐻 Bear Case（做空论证）：做空概率约20%（低）</h2>
+<div class="card">
+<ol>
+<li><b>毛利率下行+钠电爬坡</b>：Q2毛利率23.93%（-1.09pct）低于预期，大华继显下调2026-2028毛利率至23.4/23.7/23.9%——若H2不企稳，"量增利平"压制估值</li>
+<li><b>动力价格战</b>：二线产能释放，每GWh毛利降至1.47亿</li>
+<li><b>固态电池颠覆</b>：若2028年前量产且宁德未跟上，现有锂电路线重估</li>
+<li><b>政策贸易壁垒</b>：9/1消费税恢复、2027出口退税取消、欧美关税/本地化要求</li>
+<li><b>估值天花板</b>：2027E增速+26%换挡，PE扩张空间有限</li>
+</ol>
+<p style="margin-top:8px;"><b>多方反驳：</b>①海通"毛利率仍稳健"，钠电爬坡后利润率有望回升；②市占率39.9%提升证明量增对冲价跌；③200-400亿史上最大回购+61.8亿分红托底；④储能+87.54%、毛利率23.96%反超动力；⑤PEG 0.62、机构目标价541.58元（+39.6%）。</p>
+</div>
+
+
+<h2>🔒 MDIG（市场数据完整性门）</h2>
+<div class="card">
+<table>
+<tr><th>检查项</th><th>数据</th><th>双源验证</th></tr>
+<tr><td>A股股价</td><td>388.07元（2026-08-07，+0.02%）</td><td>✅ 多行情源一致</td></tr>
+<tr><td>总市值</td><td>约1.79-1.82万亿元</td><td>✅ 搜狐/腾讯一致</td></tr>
+<tr><td>H股股价</td><td>632.50港元（8/7，+0.72%）</td><td>✅ 多源一致</td></tr>
+<tr><td>2026H1中报</td><td>营收2769.17亿(+54.80%)、归母432.84亿(+41.98%)、扣非390.13亿(+43.44%)</td><td>✅ 中国证券报/新浪/海通多源一致</td></tr>
+<tr><td>Q2单季</td><td>归母225.46亿（环比+8%、同比+36.46%）</td><td>✅ 海通国际</td></tr>
+<tr><td>2026Q1</td><td>营收1291.31亿(+52.45%)、归母207.38亿(+48.52%)</td><td>✅ 搜狐</td></tr>
+<tr><td>机构一致预期</td><td>2026E净利963.87亿(+33.5%)/2027E 1217.15亿/2028E 1453.78亿；A股目标价541.58元</td><td>✅ 同花顺/东财（65家）</td></tr>
+<tr><td>市占率</td><td>39.9%（H1，2025年39.2%）</td><td>✅ SNE Research</td></tr>
+<tr><td>回购</td><td>200-400亿元（7/24公告，A股史上最大，全部注销）</td><td>✅ 新浪/腾讯</td></tr>
+<tr><td>中期分红</td><td>每10股14.11元、合计61.8-64.93亿（8/10除息）</td><td>✅ 多源一致</td></tr>
+<tr><td>H股目标价</td><td>均价815.52港元（13家）；大摩815/里昂770/海通773/大华675</td><td>✅ AASTOCKS</td></tr>
+<tr><td>毛利率</td><td>23.93%（H1，-1.09pct）</td><td>✅ 中报+券商</td></tr>
+</table>
+<p style="margin-top:10px;">✅ 核心硬数据（股价、财务、预期、回购、分红、市占率）全部通过双源验证；H股目标价存在机构分歧（675-947港元区间）已标注。数据完整性：通过。</p>
+</div>
+
+<h2>⚖️ 估值体系（第6章）</h2>
+<div class="chart-row">
+<div class="chart-box"><h4>三情景估值（2026E锚定，元）</h4><canvas id="chart4"></canvas></div>
+<div class="chart-box"><h4>历年市占率与储能占比（%）</h4><canvas id="chart2"></canvas></div>
+</div>
+
+<div class="card">
+<h3>机构一致预期（65家，2026-08-07）</h3>
+<table>
+<tr><th>年份</th><th>营收</th><th>同比</th><th>归母净利</th><th>同比</th><th>EPS</th><th>PE</th><th>PEG</th></tr>
+<tr><td>2025A</td><td>4237.02亿</td><td>+17.04%</td><td>722.01亿</td><td>+42.28%</td><td>15.82元</td><td>-</td><td>-</td></tr>
+<tr><td>2026E</td><td>6264.24亿</td><td>+47.85%</td><td>963.87亿</td><td>+33.50%</td><td>20.84元</td><td>18.62x</td><td>0.62</td></tr>
+<tr><td>2027E</td><td>7693.42亿</td><td>+22.81%</td><td>1217.15亿</td><td>+26.28%</td><td>26.31元</td><td>14.75x</td><td>0.49</td></tr>
+<tr><td>2028E</td><td>9069.42亿</td><td>+17.89%</td><td>1453.78亿</td><td>+19.44%</td><td>31.42元</td><td>12.35x</td><td>0.41</td></tr>
+</table>
+<div class="note">注：大华继显（保守）936.4/1163.9/1391亿；海通国际959/1179/1440亿；大摩（乐观）EPS 20.53/27.78/34.15元。<b>回购200-400亿注销后实际EPS更高（一致预期未含）</b>。</div>
+</div>
+
+<div class="card">
+<h3>三情景估值（以2026E净利为锚）</h3>
+<table>
+<tr><th>情景</th><th>概率</th><th>2026E净利</th><th>PE</th><th>市值</th><th>每股价值</th></tr>
+<tr><td>悲观（毛利率下行/钠电慢）</td><td>25%</td><td>900亿</td><td>16x</td><td>1.44万亿</td><td>311元</td></tr>
+<tr><td>中性（订单兑现/毛利率企稳）</td><td>50%</td><td>964亿</td><td>19x</td><td>1.83万亿</td><td>395.9元</td></tr>
+<tr><td>乐观（储能/钠电/海外超预期）</td><td>25%</td><td>1020亿</td><td>22x</td><td>2.24万亿</td><td>485元</td></tr>
+</table>
+<p style="margin-top:8px;"><b>加权公允价值 = 396.9元</b>（0.25×311 + 0.50×395.9 + 0.25×485）｜ 2027E视角：1217亿×18x=473元 ｜ 机构目标价541.58元（+39.6%，偏乐观）｜ <b>现价388.07元安全边际约2%（8/10除息后约6%）</b></p>
+</div>
+
+<div class="card">
+<h3>💎 投资决策价格阶梯（6.11-6.15 Hard）</h3>
+<table>
+<tr><th>价格带</th><th>对应估值（2026E PE）</th><th>操作指引</th></tr>
+<tr><td class="good"><b>≤310元</b></td><td>&lt;16x</td><td class="good">重仓区（积极买入）</td></tr>
+<tr><td class="good"><b>310-350元</b></td><td>16-18x</td><td class="good">建仓区（分批买入）</td></tr>
+<tr><td class="good"><b>350-410元</b></td><td>18-21x</td><td class="good">持有区（现价388.07元在此区间）</td></tr>
+<tr><td class="warn"><b>410-460元</b></td><td>21-24x</td><td class="warn">减仓观察区</td></tr>
+<tr><td class="risk-red"><b>&gt;460元</b></td><td>&gt;24x</td><td class="risk-red">清仓/回避区</td></tr>
+</table>
+</div>
+
+<h2>⚠️ 风险清单</h2>
+<div class="card">
+<table>
+<tr><th>风险</th><th>等级</th><th>说明</th></tr>
+<tr><td>毛利率下行</td><td class="risk-red">🔴 高</td><td>Q2综合毛利率23.93%（-1.09pct）低于预期，钠电爬坡</td></tr>
+<tr><td>动力价格战</td><td class="risk-org">🟠 中高</td><td>二线产能释放，每GWh毛利降至1.47亿</td></tr>
+<tr><td>固态电池颠覆</td><td class="risk-org">🟠 中高</td><td>若2028年前量产且宁德未跟上，锂电路线重估</td></tr>
+<tr><td>贸易壁垒</td><td class="risk-org">🟠 中高</td><td>欧盟关税、美国IRA、9/1消费税、2027退税取消</td></tr>
+<tr><td>钠电爬坡</td><td class="risk-yel">🟡 中</td><td>量产初期利润率不确定</td></tr>
+<tr><td>产能满负荷</td><td class="risk-yel">🟡 中</td><td>94.86%利用率，扩产资本开支大</td></tr>
+<tr><td>估值天花板</td><td class="risk-yel">🟡 中</td><td>2027E增速+26%换挡</td></tr>
+<tr><td>回购执行</td><td class="risk-yel">🟡 中</td><td>200-400亿为计划，执行进度需跟踪</td></tr>
+<tr><td>汇率</td><td class="risk-grn">🟢 低</td><td>海外占比近半，双向</td></tr>
+<tr><td>治理</td><td class="risk-grn">🟢 低</td><td>A+H双上市治理规范</td></tr>
+</table>
+</div>
+
+<h2>📌 投资逻辑（Bull Case）</h2>
+<div class="card">
+<ol>
+<li><b>V型反转确认</b>：2024营收-9.7% → 2026H1 +54.8%，净利H1 +42%，利润增速逐季上升</li>
+<li><b>双料冠军壁垒</b>：动力39.9%（9年第一）+储能第一（5年），市占率不降反升</li>
+<li><b>储能第二引擎</b>：+87.54%、毛利率23.96%反超动力——高毛利增量</li>
+<li><b>史上最大回购+分红</b>：200-400亿注销（A股纪录）+中期61.8亿——强托底</li>
+<li><b>估值合理偏低</b>：2026E PE 18.6x、PEG 0.62、2027E 14.75x，目标价541.58元（+39.6%）</li>
+</ol>
+<div class="note"><b>须对冲的信念：</b>Q2毛利率低于预期是新变量（8/6股价-5%），钠电爬坡期利润率不确定——"买的是龙头确定性+合理估值+回购托底，不是毛利率反转的赌注"。</div>
+</div>
+
+<h2>🔑 Value Drivers（长期维护章节）</h2>
+<div class="card">
+<table>
+<tr><th>#</th><th>Driver</th><th>当前状态</th><th>观察指标</th></tr>
+<tr><td>1</td><td>动力市占率</td><td>39.9%（H1，+0.7pct）</td><td>每季度SNE数据</td></tr>
+<tr><td>2</td><td>储能收入</td><td>+87.54%、占19.23%</td><td>每季度储能增速与占比</td></tr>
+<tr><td>3</td><td>综合毛利率</td><td>23.93%（H1，-1.09pct）</td><td>每季度毛利率拐点</td></tr>
+<tr><td>4</td><td>钠电量产</td><td>全球首款量产、海博思创60GWh</td><td>钠电出货与利润率</td></tr>
+<tr><td>5</td><td>海外份额</td><td>出货近半、动力份额33.7%</td><td>海外收入与毛利</td></tr>
+<tr><td>6</td><td>产能利用率</td><td>94.86%、在建764GWh</td><td>新建产能投产</td></tr>
+<tr><td>7</td><td>回购执行</td><td>200-400亿计划（7/24公告）</td><td>回购进度与注销</td></tr>
+<tr><td>8</td><td>销量（GWh）</td><td>2025年661 → 2026E 1000</td><td>季度出货量</td></tr>
+</table>
+</div>
+
+<h2>🔍 最终结论与操作建议</h2>
+<div class="card">
+<h3>评级：<span class="badge badge-yellow">🟡 观察偏多（持有/除息后加仓）</span>（78.0/100）｜ 公允价值中枢约397元 ｜ 现价安全边际约2%（除息后约6%）</h3>
+<ul style="margin-top:10px;">
+<li><b>持有者</b>：继续持有，8/10除息（派14.11元）；Q3中报（10月）验证毛利率拐点</li>
+<li><b>空仓者</b>：现价可小仓参与；除息后回调至<b class="good">350元以下</b>（2026E PE 17x）分批建仓、<b class="good">310元以下</b>（16x）重仓</li>
+<li><b>减仓触发</b>：Q3毛利率&lt;23% / Q3净利增速&lt;25% / 钠电执行延迟 / 市占率&lt;38% / 股价&gt;460元</li>
+<li><b>组合定位</b>：新能源核心底仓（与今日AI链标的提供行业分散）</li>
+</ul>
+<div class="note" style="margin-top:12px;">📅 <b>下一验证窗口：</b>2026-08-10中期分红除息；2026-09-01锂电池消费税恢复；2026H2钠电爬坡+储能订单+回购执行；10月Q3中报验证毛利率拐点。</div>
+</div>
+
+<h2>📊 与2026-07-08旧报告对比（固定章节）</h2>
+<div class="card">
+<h3>核心结论：基本面持续兑现且强于旧报告预期，但Q2毛利率是必须正视的新变量；评级由"推荐"调整为"观察偏多"（78分），因回购托底操作更从容。</h3>
+<table>
+<tr><th>对比项</th><th>7/8旧报告</th><th>8/9重检</th><th>变化性质</th></tr>
+<tr><td>评级/评分</td><td>推荐 84-86/100</td><td>观察偏多 78/100</td><td class="warn">略降（毛利率新变量）</td></tr>
+<tr><td>A股价</td><td>~380元</td><td>388.07元</td><td>+2.1%</td></tr>
+<tr><td>2026E PE</td><td>~22x</td><td>18.62x</td><td class="good">更便宜（净利上修28%）</td></tr>
+<tr><td>H1业绩</td><td>未披露</td><td>净利432.84亿（+42%）</td><td class="good">兑现</td></tr>
+<tr><td>动力市占率</td><td>39.2%</td><td>39.9%</td><td class="good">+0.7pct</td></tr>
+<tr><td>储能</td><td>增速29%跑输行业（旧担忧）</td><td>+87.54%、占19.23%、毛利反超</td><td class="good">旧担忧解除</td></tr>
+<tr><td>回购/分红</td><td>无</td><td>200-400亿回购+61.8亿分红</td><td class="good">重大新增</td></tr>
+<tr><td>新风险</td><td>固态电池/贸易壁垒</td><td>+Q2毛利率低于预期、钠电爬坡</td><td class="warn">新变量</td></tr>
+<tr><td>目标价</td><td>-</td><td>A股541.58元（+39.6%）</td><td class="good">机构上调</td></tr>
+</table>
+<h3 style="margin-top:16px;">旧报告三大观点复盘</h3>
+<table>
+<tr><th>旧报告观点</th><th>复盘结果</th><th>说明</th></tr>
+<tr><td>"PE 22x估值合理偏低"</td><td class="good">✅ 验证</td><td>现18.6x更低，2026E净利上修28%至963.87亿</td></tr>
+<tr><td>"储能增速跑输行业是信号"</td><td class="good">✅ 证伪（担忧解除）</td><td>H1 +87.54%反超，第二引擎确认</td></tr>
+<tr><td>"固态电池+欧美壁垒是长期风险"</td><td class="warn">⏳ 仍在</td><td>钠电量产对冲固态风险、海外建厂对冲壁垒</td></tr>
+</table>
+</div>
+
+<h2>📚 Evidence Coverage（证据覆盖）</h2>
+<div class="card">
+<table>
+<tr><th>数据类别</th><th>证据等级</th><th>双源验证</th></tr>
+<tr><td>股价/市值/PE</td><td>一级</td><td>✅ 搜狐/腾讯/中财</td></tr>
+<tr><td>2026H1中报财务</td><td>一级</td><td>✅ 中国证券报+新浪+海通</td></tr>
+<tr><td>2026Q1/Q2单季</td><td>一级</td><td>✅ 搜狐+海通</td></tr>
+<tr><td>机构一致预期（65家）</td><td>二级</td><td>✅ 同花顺/东财</td></tr>
+<tr><td>回购/分红公告</td><td>一级</td><td>✅ 新浪/腾讯/公司</td></tr>
+<tr><td>市占率（SNE）</td><td>二级</td><td>✅ SNE+报道</td></tr>
+<tr><td>券商目标价</td><td>二级</td><td>✅ 海通/大摩/里昂/大华（分歧已标注）</td></tr>
+<tr><td>客户结构明细</td><td>三级</td><td>⚠️ 未详细披露</td></tr>
+</table>
+<p style="margin-top:10px;"><b>AI推断占比：约10%</b>（集中于情景概率与2026E中性假设，核心财务与公告均为一级证据）｜ 证据等级：一级=公司公告/年报，二级=权威机构/研报，三级=行业分析/推断</p>
+</div>
+
+<div class="card">
+<h3>组合定位（今日已研究标的）</h3>
+<table>
+<tr><th>标的</th><th>类型</th><th>评级</th><th>定位</th></tr>
+<tr><td>中际旭创</td><td>光模块（AI卖铲人）</td><td><span class="badge badge-green">🟢 推荐82</span></td><td>AI算力首选</td></tr>
+<tr><td>新易盛</td><td>光模块（LPO第一）</td><td><span class="badge badge-yellow">🟡 观察偏多79</span></td><td>性价比首选</td></tr>
+<tr><td>宁德时代</td><td>动力+储能双料冠军</td><td><span class="badge badge-yellow">🟡 观察偏多78</span></td><td>新能源底仓（行业分散）</td></tr>
+<tr><td>天孚通信</td><td>CPO光引擎</td><td><span class="badge badge-yellow">🟡 观察76</span></td><td>CPO弹性（等回调）</td></tr>
+<tr><td>万国数据</td><td>批发IDC（困境反转）</td><td><span class="badge badge-yellow">🟡 观察偏多75</span></td><td>AI基建重估（等Q2验证）</td></tr>
+<tr><td>润泽科技</td><td>AIDC（字节绑定）</td><td><span class="badge badge-yellow">🟡 观察73</span></td><td>AI基建（等回调）</td></tr>
+<tr><td>AAOI</td><td>美国本土光模块</td><td><span class="badge badge-yellow">🟡 回避59</span></td><td>高波动观察</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>📋 Final Audit：19/19 通过</h3>
+<table>
+<tr><th>#</th><th>检查项</th><th>结果</th></tr>
+<tr><td>1</td><td>第0章分类（成长股-成熟期冠军成长）</td><td class="good">✅</td></tr>
+<tr><td>2</td><td>估值方法与分类匹配（Forward PE+PEG）</td><td class="good">✅</td></tr>
+<tr><td>3</td><td>三情景概率（25/50/25）</td><td class="good">✅</td></tr>
+<tr><td>4</td><td>价格阶梯6.11-6.15</td><td class="good">✅</td></tr>
+<tr><td>5</td><td>Bear Case独立成章（做空概率20%）</td><td class="good">✅</td></tr>
+<tr><td>6</td><td>MDIG数据完整性（全部双源验证）</td><td class="good">✅</td></tr>
+<tr><td>7</td><td>毛利率新变量显式披露（Q2 -1.09pct）</td><td class="good">✅</td></tr>
+<tr><td>8</td><td>与7/8旧报告对比（固定章节）</td><td class="good">✅</td></tr>
+<tr><td>9</td><td>旧报告三大观点复盘</td><td class="good">✅</td></tr>
+<tr><td>10</td><td>分红/回购覆盖（200-400亿+61.8亿）</td><td class="good">✅</td></tr>
+<tr><td>11</td><td>风险清单完整（10项分级）</td><td class="good">✅</td></tr>
+<tr><td>12</td><td>Value Drivers可维护（8个Driver）</td><td class="good">✅</td></tr>
+<tr><td>13</td><td>Evidence Coverage占比声明（AI推断约10%）</td><td class="good">✅</td></tr>
+<tr><td>14</td><td>投资决策价格体系</td><td class="good">✅</td></tr>
+<tr><td>15</td><td>减仓触发条件（5条）</td><td class="good">✅</td></tr>
+<tr><td>16</td><td>组合内标的关联说明</td><td class="good">✅</td></tr>
+<tr><td>17</td><td>报告日期与对比基准标注</td><td class="good">✅</td></tr>
+<tr><td>18</td><td>免责声明</td><td class="good">✅</td></tr>
+<tr><td>19</td><td>后续跟踪计划（Q3毛利率/钠电/回购/市占率）</td><td class="good">✅</td></tr>
+</table>
+</div>
+
+<div class="sub" style="margin-top:24px; text-align:center;">本报告基于公开信息与AI分析生成，仅供研究参考，不构成任何投资建议。市场有风险，投资需谨慎。<br>大灰皮证券研究统一框架 V-2.4 ｜ 宁德时代 300750.SZ / 03750.HK ｜ 2026-08-09（含与2026-07-08报告对比）</div>
+
+</div>
+<script>
+const C={bg:'#161b22',border:'#30363d',text:'#e6edf3',dim:'#8b949e',red:'#f85149',green:'#3fb950',yellow:'#d29922',blue:'#58a6ff',purple:'#bc8cff'};
+Chart.defaults.color=C.dim; Chart.defaults.borderColor=C.border;
+new Chart(document.getElementById('chart1'),{type:'bar',data:{labels:['2023','2024','2025','2026H1'],
+datasets:[
+{label:'营业收入(亿元)',data:[4009,3620,4237,2769],backgroundColor:C.blue,borderRadius:4},
+{label:'归母净利(亿元)',data:[441,507,722,433],backgroundColor:C.purple,borderRadius:4}
+]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('chart2'),{type:'line',data:{labels:['2024','2025','2026H1'],
+datasets:[
+{label:'动力市占率(%)',data:[37.9,39.2,39.9],borderColor:C.green,backgroundColor:'rgba(63,185,80,0.1)',fill:true,tension:0.3,pointBackgroundColor:C.green},
+{label:'储能占比(%)',data:[10.2,14.74,19.23],borderColor:C.purple,backgroundColor:'rgba(188,140,255,0.1)',fill:true,tension:0.3,pointBackgroundColor:C.purple}
+]},options:{plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('chart3'),{type:'radar',data:{labels:['市场潜力','管理决心','研发占比','利润率','成本控制','利润提升','劳资','高管','管理深度','会计控制','行业地位','多元化','额外利润','股权稀释','坦诚'],
+datasets:[{label:'Fisher评分',data:[9,9,8,8,8,6,8,8,9,8,10,7,6,7,8],backgroundColor:'rgba(88,166,255,0.15)',borderColor:C.blue,pointBackgroundColor:C.blue}]},options:{scales:{r:{min:0,max:10,ticks:{stepSize:2}}},plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('chart4'),{type:'bar',data:{labels:['悲观25%','中性50%','乐观25%','加权公允价值','机构目标价'],
+datasets:[{label:'每股价值(元)',data:[311,395.9,485,396.9,541.58],backgroundColor:[C.red,C.blue,C.green,C.yellow,C.teal],borderRadius:4}]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
+</script>
+</body>
+</html>
