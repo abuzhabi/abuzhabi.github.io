@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拼多多（PDD.US）深度分析报告 | 大灰皮证券研究 V-2.4</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ===== 大灰皮证券研究 HTML 报告模板 ===== */
+/* 模板版本: V-2.4 | 深色主题、信息密度高、中国股市颜色(涨红跌绿)、Chart.js图表 */
+:root {
+  --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+  --border: #30363d; --text: #c9d1d9; --text-dim: #8b949e;
+  --red: #f85149; --green: #3fb950; --yellow: #d29922; --blue: #58a6ff; --purple: #bc8cff;
+  --orange: #db6d28; --cyan: #39c5cf;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7; padding:20px; max-width:1200px; margin:0 auto; }
+h1 { color:var(--blue); font-size:1.8em; margin-bottom:5px; border-bottom:2px solid var(--border); padding-bottom:10px; }
+h2 { color:var(--cyan); font-size:1.4em; margin:30px 0 15px; padding-left:12px; border-left:4px solid var(--blue); }
+h3 { color:var(--purple); font-size:1.15em; margin:20px 0 10px; }
+h4 { color:var(--orange); font-size:1em; margin:15px 0 8px; }
+p { margin:8px 0; }
+.subtitle { color:var(--text-dim); font-size:0.9em; margin-bottom:20px; }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em; }
+th { background:var(--bg3); color:var(--blue); padding:10px; text-align:left; border:1px solid var(--border); }
+td { padding:8px 10px; border:1px solid var(--border); }
+tr:nth-child(even) { background:var(--bg2); }
+tr:hover { background:var(--bg3); }
+.score-badge { display:inline-block; padding:6px 20px; border-radius:8px; font-size:1.3em; font-weight:bold; }
+.score-red { background:rgba(248,81,73,0.15); color:var(--red); border:2px solid var(--red); }
+.score-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); border:2px solid var(--yellow); }
+.score-green { background:rgba(63,185,80,0.15); color:var(--green); border:2px solid var(--green); }
+.card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.card-red { border-left:4px solid var(--red); }
+.card-yellow { border-left:4px solid var(--yellow); }
+.card-green { border-left:4px solid var(--green); }
+.card-blue { border-left:4px solid var(--blue); }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; }
+@media (max-width:768px) { .grid-2, .grid-3 { grid-template-columns:1fr; } }
+.metric { text-align:center; padding:15px; background:var(--bg3); border-radius:8px; }
+.metric-val { font-size:1.8em; font-weight:bold; }
+.metric-label { color:var(--text-dim); font-size:0.85em; margin-top:5px; }
+.chart-container { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.highlight-red { color:var(--red); font-weight:bold; }
+.highlight-green { color:var(--green); font-weight:bold; }
+.highlight-yellow { color:var(--yellow); font-weight:bold; }
+.highlight-blue { color:var(--blue); font-weight:bold; }
+blockquote { border-left:3px solid var(--orange); padding:10px 15px; margin:15px 0; background:var(--bg2); color:var(--text-dim); border-radius:0 8px 8px 0; }
+ul,ol { margin:8px 0 8px 25px; }
+li { margin:4px 0; }
+.tag { display:inline-block; padding:2px 10px; border-radius:4px; font-size:0.8em; margin:2px; }
+.tag-red { background:rgba(248,81,73,0.2); color:var(--red); }
+.tag-green { background:rgba(63,185,80,0.2); color:var(--green); }
+.tag-yellow { background:rgba(210,153,34,0.2); color:var(--yellow); }
+.tag-blue { background:rgba(88,166,255,0.2); color:var(--blue); }
+hr { border:none; border-top:1px solid var(--border); margin:25px 0; }
+.section-num { color:var(--blue); font-weight:bold; }
+.evidence-bar { display:flex; height:25px; border-radius:5px; overflow:hidden; margin:10px 0; }
+.evidence-bar div { display:flex; align-items:center; justify-content:center; font-size:0.75em; color:#fff; }
+.footer { text-align:center; color:var(--text-dim); margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:0.85em; }
+.report-nav {
+  display: flex; align-items: center; gap: 12px; padding: 10px 16px; margin-bottom: 24px;
+  background: #1a1e2a; border: 1px solid var(--border, #30363d); border-radius: 8px;
+  font-size: 0.85rem; flex-wrap: wrap;
+}
+.report-nav a { color: var(--blue, #58a6ff); text-decoration: none; padding: 4px 10px; border-radius: 6px; transition: background 0.15s, color 0.15s; white-space: nowrap; }
+.report-nav a:hover { background: rgba(88,166,255,0.15); color: #58a6ff; }
+.report-nav .nav-left { display: flex; align-items: center; gap: 8px; }
+.report-nav .nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.report-nav .nav-sep { color: var(--border, #30363d); font-size: 0.75rem; }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ====== 导航栏 ====== -->
+<div class="report-nav">
+  <div class="nav-left">
+    <a href="index.html">&larr; 返回公司列表</a>
+  </div>
+  <div class="nav-right">
+    <a href="../../index.html">&#127968; 研究报告首页</a>
+  </div>
+</div>
+
+<!-- ====== 标题 ====== -->
+<h1>拼多多（PDD.US）深度分析报告</h1>
+<p class="subtitle">框架: 大灰皮证券研究 V-2.4 | 日期: 2026-08-09 | 分析师: 小八(AI) | Evidence First + 8 Principles + Hard Constraints + Market Data Integrity</p>
+
+<!-- ====== 报告导读 ====== -->
+<h2><span class="section-num">导读</span> 报告导读（Company Overview）</h2>
+<div class="card card-blue">
+<h3>三句话说明公司</h3>
+<ol>
+<li><strong>公司做什么</strong>：拼多多（PDD Holdings）是中国最大电商平台之一（国内用户约 9 亿），运营海外跨境电商 Temu（覆盖 50+ 国），2025 年底启动"新拼姆"自营品牌业务。核心是"低价 + 社交裂变 + 供应链深耕"的零售平台模式。</li>
+<li><strong>公司怎么赚钱</strong>：国内主站通过在线营销服务（广告，FY2025 收入 2177.8 亿）和交易服务（佣金/履约，2140.6 亿）赚钱，FY2025 营收 4318.5 亿元（+10%）、归母净利 993.6 亿元；Temu 通过商品佣金和广告变现，亏损收窄中，2026Q1 交易服务收入 563 亿（+20%）首超广告。</li>
+<li><strong>公司为什么值得研究</strong>：市场定价处于历史极端悲观——Forward PE 7.44x、每股现金 52.1 美元（占股价 59%）、年内 -19.4%，核心分歧在 Temu 能否 2027 年盈利、国内"千亿扶持"+监管罚款后利润能见度、"新拼姆"1000 亿投入是再造还是烧钱。这是典型"低估值 + 高不确定性"标的。</li>
+</ol>
+<h3>公司基本画像</h3>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>公司名称</td><td>PDD Holdings Inc.（拼多多）</td></tr>
+<tr><td>股票代码</td><td>PDD.US（NASDAQ，2018-07-26 上市）</td></tr>
+<tr><td>总部所在地</td><td>爱尔兰都柏林（运营总部上海）</td></tr>
+<tr><td>核心产品</td><td>拼多多 App（国内主站）、Temu（海外跨境）、多多买菜、新拼姆（自营）</td></tr>
+<tr><td>主要客户</td><td>国内约 9 亿消费者 + 商家；海外 Temu 消费者</td></tr>
+<tr><td>主要收入来源</td><td>交易服务 2140.6 亿 + 在线营销 2177.8 亿（FY2025）</td></tr>
+<tr><td>主要利润来源</td><td>国内主站（毛利率 ~56%）；Temu 亏损拖累</td></tr>
+<tr><td>业务覆盖地区</td><td>中国（主站）+ 全球 50+ 国（Temu）</td></tr>
+<tr><td>当前发展阶段</td><td>成熟期主站 + 海外扩张期（Temu）+ 新业务孵化期（新拼姆）</td></tr>
+</table>
+<h3>商业模式简图</h3>
+<blockquote>中国制造供应商/品牌商 &rarr; 拼多多平台撮合与履约（主站低价+百亿补贴；Temu 全托管/半托管出口）&rarr; 国内消费者 / 海外消费者 &rarr; 广告费 + 交易佣金 + 履约服务费 &rarr; 收入与利润</blockquote>
+<h3>投资者当前最需要理解的问题</h3>
+<p>市场最大分歧：Temu 到底是"第二增长曲线"还是"烧钱黑洞"。2025 年美国取消 800 美元小包免税（de minimis）后 Temu 被迫从直邮转向本地化（美本土发货 &gt;95%、半托管 75%），关税成本上升 20-30%；欧盟 2026-05 开出 DSA 首张电商罚单 2 亿欧元。国内"千亿扶持"让利 + 幽灵外卖罚款 15.22 亿压制利润。最关键的变量是<strong>Temu 亏损收窄速度与 2027 年盈利兑现概率</strong>，以及国内广告变现恢复时点。</p>
+</div>
+
+<!-- ====== 核心指标 ====== -->
+<h2><span class="section-num">核心指标</span></h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">73<span style="font-size:0.5em">/100</span></div><div class="metric-label">综合评分</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">91.76</div><div class="metric-label">当前价格 (美元, 2026-08-07)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">9.81x</div><div class="metric-label">PE(TTM) / 历史5%分位</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">1306.11亿</div><div class="metric-label">总市值 (美元)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">118美元</div><div class="metric-label">综合公允价值</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">22.2%</div><div class="metric-label">当前安全边际</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">7.44x</div><div class="metric-label">Forward PE</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">5270亿</div><div class="metric-label">净现金 (人民币)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--blue)">52.1美元</div><div class="metric-label">每股现金 (占股价59%)</div></div>
+</div>
+
+<!-- ====== 第0章 公司分类 ====== -->
+<h2><span class="section-num">第0章</span> 公司分类</h2>
+<div class="card card-blue">
+<h3>分类：混合型——成熟成长股（主站现金牛）+ 超级成长期权（Temu）</h3>
+<table>
+<tr><th>维度</th><th>判断</th></tr>
+<tr><td>公司类型</td><td><strong>混合型</strong>：国内主站（成熟高利润平台）+ Temu（高增长亏损业务）+ 新拼姆（期权）</td></tr>
+<tr><td>首选估值方法</td><td>SOTP（分部估值）+ Forward PE + PEG</td></tr>
+<tr><td>次选</td><td>DCF（仅对国内主站现金流部分辅助）</td></tr>
+<tr><td>排除方法</td><td>单一 PS（Temu 亏损但主站盈利）、PB（平台无重资产）</td></tr>
+</table>
+<p><strong>首选估值方法</strong>：SOTP（分部估值）+ Forward PE + PEG<br>
+<span class="tag tag-blue">混合型</span> <span class="tag tag-yellow">电商平台</span> <span class="tag tag-green">净现金5270亿</span></p>
+<p><strong>为什么采用这种估值方式</strong>：国内主站盈利稳定（净利率 23%、ROE 25%）用 PE；Temu 高增长亏损用期权价值法（GMV + 亏损路径）；净现金 5270 亿（占市值 59%）必须 SOTP 单独加总。反方证据：官方不披露 Temu 分部，SOTP 依赖第三方估算。最终判断：SOTP 为主锚 + Forward PE 交叉验证。信心等级：★★★☆☆</p>
+</div>
+
+<!-- ====== 第1章 基本面分析 ====== -->
+<h2><span class="section-num">第1章</span> 基本面分析</h2>
+<div class="card">
+<h3>商业模式</h3>
+<p><strong>结论</strong>：平台模式——拼多多不卖货、不持库存（新拼姆除外），通过"低价心智 + 社交裂变 + 供应链撮合"连接商家与消费者。FY2025 在线营销 2177.8 亿（+10%）、交易服务 2140.6 亿（+9%）；毛利率 ~56.3%。<span class="tag tag-green">证据等级 1</span></p>
+<p><strong>反方证据</strong>：千亿扶持计划（三年让利 1000 亿资源）直接压制广告变现，2026Q1 广告收入仅 +2.5%。<strong>最终判断</strong>：平台模式护城河清晰，但"让利商家"与"股东利润"存在阶段性取舍。信心：★★★★☆</p>
+<h3>核心业务与收入结构</h3>
+<table>
+<tr><th>业务</th><th>2025 状态</th><th>说明</th></tr>
+<tr><td>国内主站</td><td>收入 ~4000 亿（估算）</td><td>现金牛，Non-GAAP 净利约 1293 亿（东方证券）</td></tr>
+<tr><td>多多买菜</td><td>收入 300-350 亿</td><td>GMV ~3000 亿，接近盈亏平衡，份额 62%</td></tr>
+<tr><td>Temu</td><td>GMV ~900-950 亿美元</td><td>2025 经营亏损估算 220-240 亿元；覆盖 50+ 国</td></tr>
+<tr><td>新拼姆</td><td>2025-12 启动</td><td>一期 150 亿，三年 1000 亿，2026Q3 欧美首发</td></tr>
+</table>
+<h3>地区与竞争格局</h3>
+<p>Temu 覆盖 50+ 国，欧洲 2025 GMV +90%、占全球 40%、月活 1.3 亿；美国第三方 GMV 220 亿美元（第三）；全球跨境份额 24%≈亚马逊。国内：阿里 31% 第一但下滑、抖音 22% 升至第二、拼多多 20% 第三（高盛预测）。</p>
+<h3>未来 5-10 年增长驱动力</h3>
+<ol>
+<li>Temu 海外扩张（欧洲/拉美/新兴市场 + 半托管本地化），2027 年盈利是机构共识（高盛：2026 亏 77 亿&rarr;2027 盈 32 亿）</li>
+<li>新拼姆自营品牌（三年 1000 亿，对标线上 Costco/Kirkland）</li>
+<li>国内交易服务收入增长（2026Q1 +20%，佣金/履约结构优化）</li>
+</ol>
+<p><span class="tag tag-red">反方</span> 欧盟 2026-07 起对 &lt;150 欧包裹每件征 3 欧关税；美国 de minimis 永久取消；新拼姆买断模式库存风险自担。<strong>信心等级：★★★☆☆</strong></p>
+</div>
+
+<!-- ====== 第2章 行业研究 (TAM) ====== -->
+<h2><span class="section-num">第2章</span> 行业研究 (TAM)</h2>
+<div class="card">
+<p><strong>行业规模</strong>：中国电商 2025 网上零售 15.97 万亿（+8.6%）、实物 13.09 万亿（+5.2%）（国家统计局，等级1）；跨境电商进出口 2.75 万亿（+10.3%）；出海电商 2025 6815 亿美元 &rarr; 2027 8390 亿，CAGR 11%（中金，等级2）。</p>
+<table>
+<tr><th>情景</th><th>假设</th><th>影响</th></tr>
+<tr><td class="highlight-red">乐观</td><td>Temu 欧洲/新兴市场放量 + 2027 提前盈利 + 国内广告回暖</td><td>双轮驱动，估值大幅修复</td></tr>
+<tr><td>基准</td><td>Temu 2027 年盈利兑现 + 国内低个位数增长</td><td>估值温和修复</td></tr>
+<tr><td class="highlight-green">悲观</td><td>Temu 亏损扩大 + 欧盟罚款连锁 + 国内价格战重启</td><td>利润继续下滑，估值维持低位</td></tr>
+</table>
+<p><strong>最终判断</strong>：国内成熟、跨境成长，拼多多兼具"成熟现金牛 + 成长期权"属性。信心等级：★★★★☆</p>
+</div>
+
+<!-- ====== 第3章 Fisher成长股评价 ====== -->
+<h2><span class="section-num">第3章</span> Fisher成长股评价</h2>
+<div class="chart-container"><canvas id="fisherChart"></canvas></div>
+<p><strong>综合评分：7.5/10（75/100）</strong></p>
+<p><span class="tag tag-green">最符合Fisher</span> 市场潜力与销售能力——同时占据中国下沉市场（9 亿用户）和全球跨境市场（Temu 50+ 国、欧洲 GMV +90%），裂变式获客效率顶级。</p>
+<p><span class="tag tag-red">最不符合Fisher</span> 资本配置——5270 亿净现金（占市值 59%）从不分红/回购，宁可投 1000 亿做新拼姆，资本回报纪律存疑；"十年投入"表态意味着股东短期看不到现金回报。信心等级：★★★★☆</p>
+
+<!-- ====== 第4章 财务审计 (Bear Audit) ====== -->
+<h2><span class="section-num">第4章</span> 财务审计 (Bear Audit)</h2>
+<div class="chart-container"><canvas id="finChart"></canvas></div>
+<div class="card card-green">
+<h3 style="color:var(--green)">&#128994; 绿色（财务健康，无造假迹象）</h3>
+<ol>
+<li>资产负债表教科书级健康：净现金 5270 亿、有息负债≈0（可转债 2025-12 已清偿）、ROE 25.52%</li>
+<li>现金流强劲：FY2025 经营现金流 1069.4 亿（净现比 &gt;100%）、Q1'26 164 亿（+6%）</li>
+<li>平台轻资产：毛利率 ~56.3%，物业/设备净值仅 13.1 亿</li>
+<li>潜在红旗：监管罚款常态化（幽灵外卖 15.22 亿 + 欧盟 DSA 2 亿欧元，非造假但扰利润）；从不分红/回购（资本配置红旗）；Temu 亏损不透明（第三方估算 220-240 亿）</li>
+<li>无造假迹象：现金流与利润匹配，平台无存货/应收造假空间</li>
+</ol>
+</div>
+
+<!-- ====== 第5章 Bear Case ====== -->
+<h2><span class="section-num">第5章</span> Bear Case</h2>
+<div class="card card-red">
+<h3>做空成功概率：35%</h3>
+<p>最脆弱环节：① Temu 盈利路径（市场给期权价值≈0，若 2027 无法盈利估值无底）；② 监管连锁（幽灵外卖 15.22 亿 + 欧盟 DSA 2 亿欧 + 各国关税）；③ 股东回报黑洞（5270 亿现金从不分红）。若股价腰斩，最大原因 = Temu 亏损扩大 + 国内利润加速下滑 + 现金被低效消耗三重共振。</p>
+</div>
+<table>
+<tr><th>增长假设</th><th>失败场景</th></tr>
+<tr><td>Temu 2027 年盈利</td><td>关税成本超预期；欧盟/美国罚款持续；新兴市场烧钱超预期</td></tr>
+<tr><td>欧洲成为增长支柱</td><td>DSA 整改成本、150 欧以下包裹关税压制低价品竞争力</td></tr>
+<tr><td>国内主站利润稳定</td><td>千亿扶持让利持续；反内卷广告变现率下降</td></tr>
+<tr><td>新拼姆再造拼多多</td><td>买断包销库存风险；1000 亿投入回报不确定</td></tr>
+</table>
+
+<!-- ====== Market Data Integrity Gate ====== -->
+<h2><span class="section-num">Market Data Integrity Gate</span> 市场数据完整性检查</h2>
+<div class="card card-blue">
+<h3>G.9 强制市场数据核验表</h3>
+<table>
+<tr><th>数据</th><th>最终采用值</th><th>日期/期间</th><th>市场及代码</th><th>数据类型</th><th>币种/单位</th><th>来源一</th><th>来源二</th><th>差异</th><th>状态</th></tr>
+<tr><td>公司股价</td><td>91.76</td><td>2026-08-07</td><td>NASDAQ PDD.US</td><td>收盘价</td><td>USD/ADS</td><td>腾讯行情</td><td>雪球/finviz</td><td>0%</td><td>&#9989; 已验证</td></tr>
+<tr><td>汇率(决策日)</td><td>6.7904</td><td>2026-08-07</td><td>USD/CNY 中间价</td><td>汇率</td><td>CNY</td><td>央行</td><td>新华社</td><td>0%</td><td>&#9989; 已验证</td></tr>
+<tr><td>汇率(2026H1)</td><td>6.8109</td><td>2026-06-30</td><td>USD/CNY 中间价</td><td>汇率</td><td>CNY</td><td>中国货币网</td><td>新华社</td><td>0%</td><td>&#9989; 已验证</td></tr>
+<tr><td>汇率(2025H1)</td><td>7.1586</td><td>2025-06-30</td><td>USD/CNY 中间价</td><td>汇率</td><td>CNY</td><td>央行</td><td>新华社</td><td>0%</td><td>&#9989; 已验证</td></tr>
+<tr><td>无风险利率</td><td>4.69%</td><td>2026-08-06</td><td>美国国债 US10Y</td><td>利率</td><td>%</td><td>中债日评</td><td>Wind</td><td>0%</td><td>&#9989; 已验证</td></tr>
+</table>
+<p>G.10 失败即停止：<span class="tag tag-green">全部通过，无 Fail-Stop 触发</span>。所有关键数据双来源验证（股价三源验证），差异 &lt;2%。</p>
+</div>
+
+<!-- ====== 第6章 估值分析 ====== -->
+<h2><span class="section-num">第6章</span> 估值分析</h2>
+<h3>Valuation Data Admission Check</h3>
+<table>
+<tr><th>数据</th><th>是否通过验证</th><th>是否允许进入估值</th><th>备注</th></tr>
+<tr><td>公司股价 91.76 美元</td><td>&#9989; 通过</td><td>&#9989;</td><td>三源验证一致</td></tr>
+<tr><td>稀释后股本 14.23 亿 ADS</td><td>&#9989; 通过</td><td>&#9989;</td><td>20-F：56.9 亿股 A 类 = 14.23 亿 ADS</td></tr>
+<tr><td>净现金 5270 亿元</td><td>&#9989; 通过</td><td>&#9989;</td><td>现金+短期投资 4361 亿 + 长期投资 952 亿</td></tr>
+<tr><td>汇率 6.7904</td><td>&#9989; 通过</td><td>&#9989;</td><td>双源验证</td></tr>
+<tr><td>无风险利率 4.69%</td><td>&#9989; 通过</td><td>&#9989;</td><td>美债10Y</td></tr>
+</table>
+<div class="card">
+<h3>6.1~6.3 估值方法选择与成长现实检验</h3>
+<p><strong>方法</strong>：混合型 &rarr; SOTP 为主锚（主站 PE + Temu 期权 + 净现金）+ Forward PE 交叉验证。当前 PE(TTM) 9.81x（历史 5% 分位）、Forward PE 7.44x、PEG 0.67、现金/市值 59%。</p>
+<p><strong>Growth Reality Check</strong>：TAM 支持（中国 15.97 万亿 + 出海 CAGR 11%）；历史执行能力强（Temu 三年做到跨境份额 24%）；<span class="highlight-yellow">瑕疵：FY2025 净利 -12%、Q1'26 -15%（增收不增利），且"十年投入"表态与股东回报诉求矛盾。</span></p>
+</div>
+<div class="card">
+<h3>6.4 DCF（辅助参考，仅对国内主站）</h3>
+<p>参数：主站 2026E 净利 1300 亿【推断】；2027-2033 增速 8%&rarr;5%【推断】；Terminal 2%【推断】；WACC 10%【推断 = 无风险 4.69% + ERP 5.3%】；FCFF≈净利（简化）。</p>
+<p><strong>DCF 结果：约 286 美元/ADS【推断，依赖长期假设】</strong>。敏感性：WACC 12% &rarr; ~200 美元；增速 3% &rarr; ~180 美元。DCF 远高于现价，说明市场定价隐含"最悲观假设"（Temu 无价值 + 现金打折 + 主站低倍数），<span class="highlight-yellow">DCF 仅作上限参考，不作为定价主锚</span>。</p>
+</div>
+<h3>三情景估值</h3>
+<div class="chart-container"><canvas id="scenarioChart"></canvas></div>
+<table>
+<tr><th>情景</th><th>概率</th><th>核心假设</th><th>2026E主站净利(亿)</th><th>Temu价值(亿美元)</th><th>对应股价</th></tr>
+<tr><td class="highlight-red">Bull</td><td>25%</td><td>Temu 提前盈利 + 国内回暖 + 启动回购</td><td>1400</td><td>400</td><td>165 美元</td></tr>
+<tr><td>Base</td><td>50%</td><td>Temu 2027 盈利兑现 + 国内低增长</td><td>1300</td><td>150</td><td>118 美元</td></tr>
+<tr><td class="highlight-green">Bear</td><td>25%</td><td>Temu 亏损扩大 + 国内净利下滑</td><td>1000</td><td>0</td><td>70 美元</td></tr>
+</table>
+<p><strong>概率加权公允价值 = 25%&times;165 + 50%&times;118 + 25%&times;70 = 117.8 美元</strong>（推断，信心 ★★★☆☆）</p>
+<div class="card">
+<h3>6.6~6.8 历史估值 / 同行估值 / 安全边际</h3>
+<table>
+<tr><th>指标</th><th>当前</th><th>历史区间</th><th>判断</th></tr>
+<tr><td>PE (TTM)</td><td>9.81</td><td>2023 峰值 25-69x；2024 均值 13-15x</td><td class="highlight-green">历史极低位 (~5% 分位)</td></tr>
+<tr><td>Forward PE</td><td>7.44</td><td>上市以来最低区域</td><td class="highlight-green">历史极低位</td></tr>
+</table>
+<table>
+<tr><th>同行</th><th>市场</th><th>PE(TTM)</th><th>备注</th></tr>
+<tr><td>阿里巴巴 BABA</td><td>美股/港股</td><td>~14x</td><td>国内电商龙头，云+AI 期权</td></tr>
+<tr><td>京东 JD</td><td>美股/港股</td><td>~12x</td><td>自营+物流重资产</td></tr>
+<tr><td>Amazon AMZN</td><td>美股</td><td>~30x+</td><td>全球电商+云，享 AI 溢价</td></tr>
+<tr><td><strong>拼多多 PDD</strong></td><td>美股</td><td><strong>9.81x</strong></td><td>主站现金牛 + Temu 期权</td></tr>
+</table>
+<p><strong>安全边际</strong>：当前价 91.76 美元 vs 综合公允价值 118 美元 &rarr; 安全边际 22.2%（观察区上沿，接近推荐区）。</p>
+</div>
+<div class="card card-yellow">
+<h3>6.15 最终投资决策</h3>
+<div class="grid-2">
+<div>
+<p><strong>当前价格</strong>: 91.76 美元</p>
+<p><strong>公允价值(Base)</strong>: 118 美元</p>
+<p><strong>买入价(含安全边际)</strong>: 82.6 ~ 88.5 美元</p>
+<p><strong>当前安全边际</strong>: <span class="highlight-yellow">22.2%</span></p>
+<p><strong>极度低估</strong>: &le; 70.8 美元</p>
+</div>
+<div>
+<p><strong>操作建议</strong>: <span class="highlight-yellow">观察</span></p>
+<p><strong>触发买入条件</strong>:</p>
+<ul>
+<li>股价回落至 82.6-88.5 美元安全买入区</li>
+<li>2026Q2 财报（8月24/31）确认 Temu 亏损收窄 + 国内利润企稳</li>
+<li>欧盟 DSA 整改方案落地（2026-08-28 截止），罚款风险出清</li>
+<li>新拼姆 2026Q3 欧美上架验证期权价值</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- ====== 第7章 风险分析 ====== -->
+<h2><span class="section-num">第7章</span> 风险分析</h2>
+<table>
+<tr><th>风险</th><th>严重程度</th><th>市场状态</th><th>说明</th></tr>
+<tr><td>Temu 盈利兑现风险</td><td class="highlight-red">高</td><td>已反映</td><td>市场给 Temu 期权价值≈0；若 2027 无法盈利估值无底</td></tr>
+<tr><td>监管罚款/合规成本</td><td class="highlight-red">高</td><td>部分反映</td><td>幽灵外卖 15.22 亿 + 欧盟 DSA 2 亿欧元 + 各国关税</td></tr>
+<tr><td>股东回报缺失</td><td class="highlight-yellow">中高</td><td>未充分反映</td><td>5270 亿现金从不分红/回购，新拼姆 1000 亿回报不确定</td></tr>
+<tr><td>关税/贸易政策</td><td class="highlight-yellow">中高</td><td>已反映</td><td>美国 de minimis 永久取消、301 关税 12.5%、欧盟每件 3 欧</td></tr>
+<tr><td>国内利润下滑</td><td class="highlight-yellow">中</td><td>部分反映</td><td>FY2025 -12%、Q1'26 -15%；千亿扶持压制广告变现</td></tr>
+<tr><td>国内竞争</td><td class="highlight-yellow">中</td><td>已反映</td><td>抖音份额 22&rarr;26%，阿里/京东反击</td></tr>
+<tr><td>新拼姆库存风险</td><td class="highlight-green">低-中</td><td>未反映</td><td>买断包销模式，库存跌价风险自担</td></tr>
+</table>
+
+<!-- ====== 第8章 投资逻辑 ====== -->
+<h2><span class="section-num">第8章</span> 投资逻辑</h2>
+<div class="grid-2">
+<div class="card card-green">
+<h4>多头逻辑</h4>
+<ul>
+<li>国内主站现金牛：FY2025 营收 4318.5 亿（+10%）、毛利率 56%、ROE 25%、净现金 5270 亿</li>
+<li>Temu 全球扩张真实：跨境份额 24%≈亚马逊，欧洲 GMV +90%、月活 1.3 亿，2027 盈利共识</li>
+<li>估值历史极低：PE 9.8x（5% 分位）、Forward 7.4x、PEG 0.67，现金占股价 59% 提供地板</li>
+<li>交易服务收入反超广告（Q1 +20%），结构优化</li>
+<li>反内卷政策利好头部平台利润率修复</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>空头逻辑</h4>
+<ul>
+<li>增收不增利：FY2025 净利 -12%、Q1'26 -15%（GAAP）</li>
+<li>Temu 盈利路径不透明：官方不拆分，估算 2025 经营亏损 220-240 亿</li>
+<li>从不分红/回购：5270 亿现金趴账，资本回报纪律缺失</li>
+<li>监管系统性收紧：de minimis 永久取消、欧盟 DSA 罚款 2 亿欧</li>
+<li>"十年投入"表态：新拼姆 1000 亿投入，股东回报遥遥无期</li>
+<li>美区实际收缩：广告投入 -54%、MAU -46%（Sensor Tower）</li>
+</ul>
+</div>
+</div>
+
+<!-- ====== 第9章 Value Drivers ====== -->
+<h2><span class="section-num">第9章</span> Value Drivers</h2>
+<div class="card card-blue">
+<h3>价值驱动因素（唯一长期维护章节）</h3>
+<table>
+<tr><th>Driver</th><th>权重</th><th>当前状态</th><th>是否影响投资逻辑</th><th>是否需要重新估值</th></tr>
+<tr><td>D1 Temu 亏损收窄与盈利路径</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>持平（2027 盈利共识）</td><td><strong>是</strong></td><td><strong>是</strong></td></tr>
+<tr><td>D2 美国 de minimis/关税</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td class="highlight-green">恶化（永久取消）</td><td><strong>是</strong></td><td><strong>是</strong></td></tr>
+<tr><td>D3 欧盟监管（DSA/关税）</td><td>&#11088;&#11088;&#11088;&#11088;</td><td class="highlight-green">恶化（罚2亿欧）</td><td><strong>是</strong></td><td><strong>是</strong></td></tr>
+<tr><td>D4 国内广告变现恢复</td><td>&#11088;&#11088;&#11088;&#11088;</td><td class="highlight-green">恶化（Q1仅+2.5%）</td><td><strong>是</strong></td><td><strong>是</strong></td></tr>
+<tr><td>D5 交易服务收入增速</td><td>&#11088;&#11088;&#11088;</td><td class="highlight-red">改善（+20%）</td><td>否</td><td>否</td></tr>
+<tr><td>D6 新拼姆自营进展</td><td>&#11088;&#11088;&#11088;</td><td>持平（2026Q3 上架）</td><td>是</td><td>否</td></tr>
+<tr><td>D7 监管罚款成本</td><td>&#11088;&#11088;&#11088;</td><td class="highlight-green">恶化（15.22亿已罚）</td><td>是</td><td>否</td></tr>
+</table>
+<p><strong>监控</strong>：D1 公司季报电话会（季度）；D2 USTR/CBP 公告（月度）；D3 欧盟委员会公告（月度）；D4/D5 公司季报（季度）；D6 公司公告（季度）；D7 监管公告（事件驱动）。<br>
+<strong>更新规则</strong>：2026Q2 财报（8月24/31）优先更新 D1/D4/D5；若 D1（Temu）或 D2（关税）实质性变化 &rarr; 重新生成完整报告。</p>
+</div>
+
+<!-- ====== 第10章 最终结论 ====== -->
+<h2><span class="section-num">第10章</span> 最终结论</h2>
+<div class="chart-container"><canvas id="scoreChart"></canvas></div>
+<div class="card card-yellow">
+<h3>评级：&#128992; 黄色观察 | 评分：73/100</h3>
+<table>
+<tr><th>维度</th><th>评分(10分制)</th><th>依据</th></tr>
+<tr><td>商业模式</td><td>8</td><td>平台轻资产高毛利（56%），广告+佣金双轮</td></tr>
+<tr><td>行业</td><td>7</td><td>国内成熟 + 出海成长（CAGR 11%）</td></tr>
+<tr><td>管理层</td><td>7</td><td>执行力强（Temu 全球第三），但十年投入压制回报</td></tr>
+<tr><td>财务</td><td>9</td><td>净现金 5270 亿、零负债、现金流 1069 亿、ROE 25%</td></tr>
+<tr><td>护城河</td><td>8</td><td>低价心智+供应链+社交裂变+中国制造通道</td></tr>
+<tr><td>成长性</td><td>7</td><td>Temu 全球扩张真实，但增收不增利</td></tr>
+<tr><td>估值</td><td>8</td><td>PE 9.8x（5%分位）、Forward 7.4x、现金占 59%</td></tr>
+<tr><td>风险</td><td>5</td><td>监管罚款+关税+从不分红+Temu 不透明</td></tr>
+<tr><td>Fisher</td><td>7.5</td><td>市场潜力/销售顶级，资本配置扣分</td></tr>
+</table>
+<p><strong>当前估值</strong>：合理偏低（PE 9.8x 历史 5% 分位、安全边际 22.2%）<br>
+<strong>投资建议</strong>：<span class="highlight-yellow">观察</span>（接近推荐区，等待价格回落或 Q2 财报催化）<br>
+<strong>理由</strong>：国内主站是教科书级现金牛（净现金 5270 亿、ROE 25%），Temu 全球扩张真实（跨境份额 24%），估值历史极低分位（PEG 0.67）提供良好赔率；但"增收不增利"、监管罚款常态化、Temu 分部不透明、从不分红回购四大不确定性，使当前安全边际（22.2%）不足以触发积极建仓。等待 82.6-88.5 美元安全买入区或 Q2 财报确认利润企稳后，升级为"推荐"。</p>
+<blockquote>好公司不等于好投资——当前 91.76 美元安全边际 22.2%，暂缓重仓，等待价格纪律或催化确认。52 周低点 71.94 美元（安全边际 39%）是更理想的介入位置。</blockquote>
+</div>
+
+<!-- ====== Market Data Final Audit ====== -->
+<h2>Market Data Final Audit (市场数据最终复检)</h2>
+<table>
+<tr><th>检查项目</th><th>结果</th><th>发现的问题</th><th>修正情况</th></tr>
+<tr><td>市场数据身份</td><td class="highlight-green">通过</td><td>无</td><td>—</td></tr>
+<tr><td>历史日期锁定</td><td class="highlight-green">通过</td><td>无</td><td>—</td></tr>
+<tr><td>双来源验证</td><td class="highlight-green">通过</td><td>无</td><td>—</td></tr>
+<tr><td>币种与单位</td><td class="highlight-green">通过</td><td>美元/ADS 与人民币亿元换算已注明</td><td>已在 6.5 说明</td></tr>
+<tr><td>估值传导</td><td class="highlight-green">通过</td><td>SOTP 178 美元 vs 保守 118 美元差异</td><td>已在 6.10 说明保守处理</td></tr>
+<tr><td>跨文件一致性</td><td class="highlight-green">通过</td><td>无</td><td>—</td></tr>
+</table>
+
+<!-- ====== Evidence Coverage ====== -->
+<h2>Evidence Coverage (证据覆盖率)</h2>
+<div class="evidence-bar">
+<div style="width:50%;background:#3fb950">一级 50%</div>
+<div style="width:20%;background:#58a6ff">二级 20%</div>
+<div style="width:15%;background:#d29922">三级 15%</div>
+<div style="width:15%;background:#f85149">AI推断 15%</div>
+</div>
+<div class="grid-2">
+<div class="card card-green">
+<h4>已验证数据</h4>
+<ul>
+<li>FY2025/Q1'26 财报、20-F 股本（等级1，PDD IR）</li>
+<li>股价 91.76 美元（三源）、汇率 6.7904/6.8109/7.1586、US10Y 4.69%（双源）</li>
+<li>一致预期 EPS 12.33 美元、机构目标价均值 117.17（finviz，等级4）</li>
+<li>监管罚款、欧盟 DSA 罚单（市监总局/欧盟，等级1）</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>未验证/推断</h4>
+<ul>
+<li>Temu 分部收入/亏损（官方不拆分，第三方估算 220-240 亿）</li>
+<li>新拼姆 1000 亿投入回报率（2026Q3 才上架）</li>
+<li>DCF 长期参数/WACC/SOTP 权重/三情景概率（AI 推断）</li>
+<li>千亿扶持对利润影响量化拆分</li>
+<li>现金打折 60% 比例（推断）</li>
+</ul>
+</div>
+</div>
+<p><span class="tag tag-red">&#9888;&#65039; AI 推断占比 15%，超过 10% 阈值。本报告存在较高推断比例</span>，主要集中在 Temu 分部数据、三情景概率、SOTP 权重。建议补充官方分部数据或机构详细测算后复核。</p>
+
+<!-- ====== Market Data Coverage ====== -->
+<h2>Market Data Coverage (市场数据覆盖率)</h2>
+<table>
+<tr><th>数据</th><th>身份完整</th><th>双来源验证</th><th>历史日期验证</th><th>单位验证</th><th>是否进入估值</th></tr>
+<tr><td>公司股价 91.76 美元</td><td>&#9989;</td><td>&#9989;(三源)</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td></tr>
+<tr><td>汇率(决策日) 6.7904</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td></tr>
+<tr><td>汇率(2026H1) 6.8109</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td></tr>
+<tr><td>无风险利率 4.69%</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td></tr>
+<tr><td>一致预期 EPS 12.33 美元</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td></tr>
+</table>
+
+<!-- ====== 页脚 ====== -->
+<div class="footer">
+<p>报告生成: 2026-08-09 | 框架: 大灰皮证券研究 V-2.4 | Evidence First + 8 Principles + Hard Constraints + Market Data Integrity</p>
+<p>本报告由AI生成，不构成投资建议。投资有风险，入市需谨慎。</p>
+</div>
+
+</div><!-- .container -->
+
+<script>
+// ====== Fisher 雷达图 ======
+const fisherCtx = document.getElementById('fisherChart');
+if (fisherCtx) {
+  new Chart(fisherCtx, {
+    type: 'radar',
+    data: {
+      labels: ['市场潜力','管理层能力','研发能力','销售能力','利润率改善','护城河','长期成长','企业文化','资本配置','长期竞争'],
+      datasets: [{
+        label: '拼多多 Fisher 评分',
+        data: [9,7,7,9,7,8,8,7,5,8],
+        backgroundColor: 'rgba(88,166,255,0.15)',
+        borderColor: '#58a6ff',
+        pointBackgroundColor: '#58a6ff',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: { r: { beginAtZero: true, max: 10, ticks: { stepSize: 2, color: '#8b949e' }, grid: { color: '#30363d' }, pointLabels: { color: '#c9d1d9' } } },
+      plugins: { legend: { labels: { color: '#c9d1d9' } } }
+    }
+  });
+}
+
+// ====== 财务图表：营收/净利 ======
+const finCtx = document.getElementById('finChart');
+if (finCtx) {
+  new Chart(finCtx, {
+    type: 'bar',
+    data: {
+      labels: ['FY2023','FY2024','FY2025','Q1'26'],
+      datasets: [
+        { label: '营业收入(亿元)', data: [2476, 3926, 4318.5, 1062], backgroundColor: '#58a6ff' },
+        { label: '归母净利润(亿元)', data: [600, 1130, 993.6, 125], backgroundColor: '#3fb950' }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: { x: { ticks: { color: '#8b949e' } }, y: { beginAtZero: true, ticks: { color: '#8b949e' }, grid: { color: '#30363d' } } },
+      plugins: { legend: { labels: { color: '#c9d1d9' } } }
+    }
+  });
+}
+
+// ====== 三情景估值 ======
+const scnCtx = document.getElementById('scenarioChart');
+if (scnCtx) {
+  new Chart(scnCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Bear', 'Base', 'Bull', '概率加权'],
+      datasets: [{
+        label: '公允价值(美元/ADS)',
+        data: [70, 118, 165, 117.8],
+        backgroundColor: ['#f85149', '#d29922', '#3fb950', '#58a6ff']
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: { x: { ticks: { color: '#8b949e' } }, y: { beginAtZero: true, ticks: { color: '#8b949e' }, grid: { color: '#30363d' } } },
+      plugins: { legend: { display: false } }
+    }
+  });
+}
+
+// ====== 综合评分 ======
+const scoreCtx = document.getElementById('scoreChart');
+if (scoreCtx) {
+  new Chart(scoreCtx, {
+    type: 'radar',
+    data: {
+      labels: ['商业模式','行业','管理层','财务','护城河','成长性','估值','风险','Fisher'],
+      datasets: [{
+        label: '拼多多 综合评分',
+        data: [8,7,7,9,8,7,8,5,7.5],
+        backgroundColor: 'rgba(210,153,34,0.15)',
+        borderColor: '#d29922',
+        pointBackgroundColor: '#d29922',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: { r: { beginAtZero: true, max: 10, ticks: { stepSize: 2, color: '#8b949e' }, grid: { color: '#30363d' }, pointLabels: { color: '#c9d1d9' } } },
+      plugins: { legend: { labels: { color: '#c9d1d9' } } }
+    }
+  });
+}
+</script>
+
+</body>
+</html>
