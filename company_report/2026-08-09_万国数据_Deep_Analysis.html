@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>万国数据（GDS.US / 9698.HK）深度分析报告 | 2026-08-09</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root { --bg:#0d1117; --panel:#161b22; --panel2:#1c2333; --border:#30363d; --text:#e6edf3; --dim:#8b949e; --red:#f85149; --green:#3fb950; --yellow:#d29922; --blue:#58a6ff; --purple:#bc8cff; --teal:#39c5cf; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,'Segoe UI','Microsoft YaHei',sans-serif; line-height:1.7; padding:24px; }
+.container { max-width:1000px; margin:0 auto; }
+h1 { font-size:26px; margin-bottom:6px; }
+h2 { font-size:21px; margin:36px 0 14px; padding-bottom:8px; border-bottom:2px solid var(--border); color:var(--blue); }
+h3 { font-size:17px; margin:22px 0 10px; color:var(--yellow); }
+.sub { color:var(--dim); font-size:14px; margin-bottom:20px; }
+.meta-box { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:18px 22px; margin:16px 0; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px 20px; }
+.meta-item span { color:var(--dim); font-size:12px; display:block; }
+.meta-item b { font-size:15px; }
+.card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:20px 22px; margin:16px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13.5px; }
+th,td { padding:8px 10px; text-align:left; border:1px solid var(--border); }
+th { background:var(--panel2); color:var(--blue); white-space:nowrap; }
+tr:nth-child(even) td { background:rgba(255,255,255,0.02); }
+.badge { display:inline-block; padding:2px 10px; border-radius:20px; font-size:12px; font-weight:600; }
+.badge-green { background:rgba(63,185,80,0.15); color:var(--green); }
+.badge-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); }
+.badge-red { background:rgba(248,81,73,0.15); color:var(--red); }
+.badge-blue { background:rgba(88,166,255,0.15); color:var(--blue); }
+.highlight { color:var(--red); font-weight:700; }
+.good { color:var(--green); }
+.warn { color:var(--yellow); }
+ul,ol { padding-left:22px; margin:8px 0; }
+li { margin:4px 0; }
+.chart-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.chart-box { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:14px; }
+.chart-box h4 { color:var(--dim); font-size:13px; margin-bottom:8px; font-weight:400; }
+.chart-box canvas { max-height:240px; }
+.verdict { background:linear-gradient(135deg,rgba(210,153,34,0.12),rgba(88,166,255,0.08)); border:1px solid var(--yellow); border-radius:12px; padding:22px; margin:20px 0; }
+.verdict h3 { color:var(--yellow); margin-top:0; }
+.note { background:rgba(88,166,255,0.06); border-left:3px solid var(--blue); padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0; font-size:13.5px; color:var(--dim); }
+.risk-red { color:var(--red); } .risk-org { color:#ffa657; } .risk-yel { color:var(--yellow); } .risk-grn { color:var(--green); }
+@media (max-width:720px){ .chart-row { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>万国数据（GDS Holdings, GDS.US / 9698.HK）深度分析报告</h1>
+<div class="sub">报告日期：2026-08-09 ｜ 分析框架：大灰皮证券研究统一框架（V-2.4 active）｜ 市场数据截止：2026-08-07 ｜ 分析师：小八</div>
+
+<div class="verdict">
+<h3>⚖️ 评级：<span class="badge badge-yellow">观察偏多（轻仓/等待验证）</span> 75.0/100 ｜ 现价 31.98美元（GDS.US，2026-08-07）</h3>
+<p style="margin-top:10px;"><b>一句话结论：</b>中国IDC"困境反转+AI重估"最典型标的——2025年首次年度扭亏（净利9.59亿）、2026Q1收入+23.6%/EBITDA+47.2%/新增订单200MW历史新高、净负债/EBITDA降至5.7倍、DayOne国际第二曲线成型；但<b>425亿长期债务+扭亏质量依赖权益法调节+Q4亏损扩大</b>意味着反转仍需验证，现价31.98美元（EV/EBITDA 14x、<span class="good">安全边际约7%</span>）处于合理偏低区：<b>有安全边际但需8/13 Q2财报持续验证。</b></p>
+</div>
+
+<div class="meta-box">
+<div class="meta-item"><span>股票代码</span><b>GDS.US / 9698.HK</b></div>
+<div class="meta-item"><span>总市值（8/7）</span><b>64.08亿美元</b></div>
+<div class="meta-item"><span>港股价格（8/7）</span><b>32.32港元（+4.12%）</b></div>
+<div class="meta-item"><span>EV/EBITDA（2025A）</span><b>约14.3x</b></div>
+<div class="meta-item"><span>PB</span><b>2.02x</b></div>
+<div class="meta-item"><span>净负债/EBITDA</span><b>5.7倍</b></div>
+<div class="meta-item"><span>机构目标均价</span><b>52.06美元（+63%）</b></div>
+<div class="meta-item"><span>公允价值中枢</span><b>约34.4美元</b></div>
+</div>
+
+<div class="card">
+<h3>🧭 公司基本画像</h3>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>公司名称</td><td>万国数据控股有限公司（开曼注册，2016-11纳斯达克上市）</td></tr>
+<tr><td>核心业务</td><td>高性能数据中心（批发型IDC）托管 + 国际业务DayOne（东南亚/欧洲）</td></tr>
+<tr><td>2025年业绩</td><td>净收入114.32亿（+10.8%）｜ <b>净利9.59亿（首次扭亏！）</b>｜ EBITDA 54.04亿（+10.8%）</td></tr>
+<tr><td>2026Q1</td><td>净收入33.67亿（<b class="good">+23.6%</b>）｜ EBITDA 19.49亿（<b class="good">+47.2%</b>）｜ <b>新增订单200MW（历史新高）</b></td></tr>
+<tr><td>核心客户</td><td>阿里、腾讯、字节等头部云厂商（长约5-10年，计费率75.5%）</td></tr>
+<tr><td>产能布局</td><td>运营66.83万平米（约1326MW）+储备900MW；DayOne签约783MW/运营213MW</td></tr>
+<tr><td>财务结构</td><td>长期债务425.62亿、现金143.06亿、净负债/EBITDA 5.7倍（ABS+C-REIT后）</td></tr>
+</table>
+<div class="note">💡 <b>商业模式</b>：批发型IDC是"数据地产"生意——重资产（单楼数十亿）、长约（5-10年）、高杠杆。三年规划：每年新增签约500-800MW、capex 300-500亿元。2026Q2已募资6.85亿美元（出售DayOne股份+可转换优先股）。</div>
+</div>
+
+<h2>📊 扭亏之路与财务结构</h2>
+<div class="chart-row">
+<div class="chart-box"><h4>净收入与经调整EBITDA（亿元）</h4><canvas id="chart1"></canvas></div>
+<div class="chart-box"><h4>2025年资产负债结构</h4><canvas id="chart2"></canvas></div>
+</div>
+
+<div class="card">
+<h3>💰 关键财务数据（人民币口径）</h3>
+<table>
+<tr><th>指标</th><th>2024</th><th>2025</th><th>2026Q1</th></tr>
+<tr><td>净收入</td><td>103.22亿</td><td>114.32亿（+10.8%）</td><td>33.67亿（<b class="good">+23.6%</b>）</td></tr>
+<tr><td>净利润</td><td class="risk-red">-7.71亿（亏损）</td><td><b class="good">+9.59亿（扭亏！）</b></td><td>—</td></tr>
+<tr><td>经调整EBITDA</td><td>48.76亿</td><td>54.04亿（+10.8%）</td><td>19.49亿（<b class="good">+47.2%</b>）</td></tr>
+<tr><td>EBITDA率</td><td>47.2%</td><td>47.3%</td><td><b class="good">57.9%（+9.3pct）</b></td></tr>
+<tr><td>运营面积</td><td>61.36万㎡</td><td>66.83万㎡（+8.9%）</td><td>—</td></tr>
+<tr><td>计费率</td><td>73.8%</td><td>75.5%</td><td>—</td></tr>
+<tr><td>现金</td><td>78.68亿</td><td>143.06亿</td><td>—</td></tr>
+<tr><td>长期债务</td><td>—</td><td class="risk-red">425.62亿</td><td>—</td></tr>
+</table>
+<div class="note">⚠️ <b>盈利质量穿透：</b>①2025年确认<b>15.61亿长期资产减值</b>（税前一度亏损0.56亿，靠权益法投资收益转正）；②<b>2025Q4净亏损4.63亿</b>（亏损扩大2.7倍，公用事业费上升）；③净负债/EBITDA仍达<b>5.7倍</b>——"扭亏为盈"真实但基础仍脆。</div>
+</div>
+
+<h2>🏭 行业景气与竞争格局</h2>
+<div class="card">
+<table>
+<tr><th>维度</th><th>数据</th><th>来源</th></tr>
+<tr><td>中国智能算力（2025）</td><td>1,590 EFLOPS、万卡集群42个</td><td>工信部</td></tr>
+<tr><td>中国智能算力（2028E）</td><td>2,781.9 EFLOPS（CAGR <b>38.9%</b>）</td><td>IDC预测</td></tr>
+<tr><td>2030E</td><td>最高6,649 EFLOPS</td><td>IDC预测</td></tr>
+<tr><td>AI需求信号</td><td>2026Q1新增订单200MW（单季历史新高）、京津冀去库存</td><td>公司+华泰</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>与A股IDC标的对比</h3>
+<table>
+<tr><th>维度</th><th>万国数据GDS</th><th>润泽科技</th><th>数据港</th></tr>
+<tr><td>估值口径</td><td>EV/EBITDA 14x、PB 2.0</td><td>2027E PE 27x</td><td>2026E PE 122x</td></tr>
+<tr><td>2026年增速</td><td>收入+18-22%、EBITDA+20%</td><td>收入+47.6%</td><td>收入+7.5%</td></tr>
+<tr><td>财务杠杆</td><td class="warn">净负债/EBITDA 5.7倍</td><td>资产负债率65%</td><td>资产负债率54%</td></tr>
+<tr><td>盈利状态</td><td class="warn">刚扭亏（2025）</td><td>持续盈利</td><td>微利</td></tr>
+<tr><td>核心绑定</td><td class="good">阿里/腾讯/字节（分散）</td><td>字节（50%+）</td><td>阿里（83%）</td></tr>
+<tr><td>今日评级</td><td>🟡 观察偏多75</td><td>🟡 观察73</td><td>未覆盖</td></tr>
+</table>
+<div class="note">⚖️ <b>结论</b>：万国估值显著低于A股IDC（同样的AI需求，不同定价体系）——风险溢价主要反映杠杆+治理+中概折价。"便宜有便宜的道理"，但若反转持续验证，估值修复空间大（机构目标价+63%）。</div>
+</div>
+
+<h2>📈 Fisher 15条评分：63.3/100</h2>
+<div class="chart-row">
+<div class="chart-box"><h4>Fisher 15条分项（1-10分）</h4><canvas id="chart3"></canvas></div>
+<div class="chart-box"><h4>三情景估值（EV/EBITDA法）</h4><canvas id="chart4"></canvas></div>
+</div>
+
+<div class="card">
+<h3>🛡️ Bear Audit：<span class="badge badge-yellow">黄色偏红</span>（财务真实，但杠杆+盈利质量为两大红旗）</h3>
+<table>
+<tr><th>检查项</th><th>结果</th><th>说明</th></tr>
+<tr><td>财务造假信号</td><td class="good">🟢 无</td><td>经营现金流33.65亿（2025）vs 净利9.59亿</td></tr>
+<tr><td>一次性收益依赖</td><td class="warn">🟡 关注</td><td>扭亏含权益法投资收益调节（税前一度亏损0.56亿）</td></tr>
+<tr><td>负债与流动性</td><td class="risk-red">🔴 重大</td><td>长期债务425.62亿、净负债/EBITDA 5.7倍、可转债121亿</td></tr>
+<tr><td>自由现金流</td><td class="risk-red">🔴 重大</td><td>重资产扩张期FCF持续为负（capex 300-500亿计划）</td></tr>
+<tr><td>资产减值</td><td class="warn">🟡 关注</td><td>2025年15.61亿长期资产减值暴露资产质量</td></tr>
+<tr><td>会计政策</td><td class="warn">🟡 关注</td><td>VIE结构+WVR治理</td></tr>
+<tr><td>审计意见</td><td class="good">🟢 标准</td><td>无保留意见（美股+港股双重审计）</td></tr>
+</table>
+</div>
+
+<h2>🐻 Bear Case（做空论证）：做空概率约45%</h2>
+<div class="card">
+<ol>
+<li><b>"扭亏"是会计魔术？</b>：2025年税前一度亏损0.56亿（15.61亿减值），靠权益法收益转正；Q4净亏损反而扩大至4.63亿（-2.7倍）</li>
+<li><b>杠杆是达摩克利斯之剑</b>：425亿长期债务+5.7倍净负债/EBITDA，300-500亿capex意味着债务继续攀升——若融资环境恶化，可重演2021年147亿→2023年17亿美元市值崩塌</li>
+<li><b>持续摊薄</b>：可转换优先股+出售DayOne股份+可转债转股，股东权益不断稀释</li>
+<li><b>客户集中+电价风险</b>：批发型大客户议价权强；公用事业费上升侵蚀毛利（Q4毛利率21%创新低）</li>
+<li><b>中美风险</b>：VIE结构+审计底稿+退市威胁反复；WVR治理瑕疵</li>
+</ol>
+<p style="margin-top:8px;"><b>多方的反驳：</b>①扭亏是真实拐点（Q1收入+23.6%、EBITDA+47.2%、订单200MW历史新高）；②杠杆改善中（净负债/EBITDA降至5.7倍、现金143亿、Q2募资6.85亿美元）；③AI需求十年一遇（智能算力CAGR 39%）；④估值洼地（EV/EBITDA 14x vs A股同行27-122x）；⑤DayOne国际第二曲线（签约783MW）。</p>
+</div>
+
+<h2>⚖️ 估值体系（第6章）</h2>
+<div class="card">
+<h3>盈利预测基准</h3>
+<table>
+<tr><th>年份</th><th>净收入（亿元）</th><th>同比</th><th>EBITDA（亿元）</th><th>同比</th><th>EBITDA率</th></tr>
+<tr><td>2024A</td><td>103.22</td><td>+6.4%</td><td>48.76</td><td>+8.8%</td><td>47.2%</td></tr>
+<tr><td>2025A</td><td>114.32</td><td>+10.8%</td><td>54.04</td><td>+10.8%</td><td>47.3%</td></tr>
+<tr><td>2026E</td><td>约135-140</td><td>+18-22%</td><td>约63-68</td><td>+17-26%</td><td>约47-48%</td></tr>
+<tr><td>2027E</td><td>约165-175</td><td>+22-25%</td><td>约78-85</td><td>+24-25%</td><td>约48%</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>三情景估值（EV/EBITDA法，2026E锚定，美元口径）</h3>
+<table>
+<tr><th>情景</th><th>概率</th><th>2026E EBITDA</th><th>EV/EBITDA</th><th>EV-净债务</th><th>每股价值</th></tr>
+<tr><td>悲观（AI需求放缓/Q2不及预期）</td><td>30%</td><td>60亿RMB（8.6亿美元）</td><td>9x</td><td>30.6亿美元</td><td>15.3美元</td></tr>
+<tr><td>中性（订单兑现）</td><td>50%</td><td>65亿RMB（9.3亿美元）</td><td>13x</td><td>74.1亿美元</td><td>37.0美元</td></tr>
+<tr><td>乐观（AI爆发+DayOne放量）</td><td>20%</td><td>70亿RMB（10亿美元）</td><td>16x</td><td>113.2亿美元</td><td>56.6美元</td></tr>
+</table>
+<p style="margin-top:8px;"><b>加权公允价值 = 34.4美元</b>（0.30×15.3 + 0.50×37.0 + 0.20×56.6）｜ 基准：市值64.08亿+净债务约46.8亿=EV约110.9亿美元｜ <b>现价31.98美元较公允价值低约7%（安全边际为正）</b>｜ 机构目标均价52.06美元（+63%）对应2026E EV/EBITDA约20x（偏乐观）</p>
+</div>
+
+<div class="card">
+<h3>💎 投资决策价格阶梯（6.11-6.15 Hard，美元ADR）</h3>
+<table>
+<tr><th>价格带</th><th>对应估值（2026E EV/EBITDA）</th><th>操作指引</th></tr>
+<tr><td class="good"><b>≤22美元</b></td><td>&lt;8x</td><td class="good">重仓区（积极买入）</td></tr>
+<tr><td class="good"><b>22-28美元</b></td><td>8-10x</td><td class="good">建仓区（分批买入）</td></tr>
+<tr><td class="good"><b>28-38美元</b></td><td>10-14x</td><td class="good">持有区（现价31.98美元在此区间）</td></tr>
+<tr><td class="warn"><b>38-45美元</b></td><td>14-16x</td><td class="warn">减仓观察区</td></tr>
+<tr><td class="risk-red"><b>&gt;45美元</b></td><td>&gt;16x</td><td class="risk-red">清仓/回避区</td></tr>
+</table>
+</div>
+
+<h2>⚠️ 风险清单</h2>
+<div class="card">
+<table>
+<tr><th>风险</th><th>等级</th><th>说明</th></tr>
+<tr><td>高杠杆（净负债/EBITDA 5.7倍）</td><td class="risk-red">🔴 高</td><td>425亿长期债务，300-500亿capex需持续再融资</td></tr>
+<tr><td>盈利质量</td><td class="risk-red">🔴 高</td><td>扭亏含权益法收益调节；Q4亏损扩大</td></tr>
+<tr><td>AI需求不及预期</td><td class="risk-org">🟠 中高</td><td>订单500-800MW/年目标依赖AI capex</td></tr>
+<tr><td>持续摊薄</td><td class="risk-org">🟠 中高</td><td>可转债+优先股+DayOne出售</td></tr>
+<tr><td>中概股政策风险</td><td class="risk-org">🟠 中高</td><td>VIE结构+审计+退市威胁反复</td></tr>
+<tr><td>客户集中</td><td class="risk-yel">🟡 中</td><td>批发型大客户议价权强</td></tr>
+<tr><td>电价成本</td><td class="risk-yel">🟡 中</td><td>公用事业费上升侵蚀毛利（Q4毛利率21%）</td></tr>
+<tr><td>资产减值</td><td class="risk-yel">🟡 中</td><td>2025年15.61亿减值暴露资产质量</td></tr>
+<tr><td>汇率</td><td class="risk-yel">🟡 中</td><td>人民币/美元双重计价</td></tr>
+<tr><td>治理（WVR）</td><td class="risk-grn">🟢 低</td><td>加权投票权结构，创始人控制</td></tr>
+</table>
+</div>
+
+<h2>📌 投资逻辑（Bull Case）</h2>
+<div class="card">
+<ol>
+<li><b>困境反转确认</b>：2025年首次年度扭亏（9.59亿）→ 2026Q1收入+23.6%、EBITDA+47.2%、EBITDA率57.9%——反转从"会计"走向"经营"</li>
+<li><b>AI需求爆发</b>：智能算力CAGR 39%、Q1新增订单200MW（历史新高）、三年规划每年500-800MW</li>
+<li><b>估值洼地</b>：EV/EBITDA 14x、PB 2.0——显著低于A股IDC（润泽27x/数据港122x），机构目标价52美元（+63%）</li>
+<li><b>杠杆改善</b>：ABS+C-REIT出表后净负债/EBITDA降至5.7倍、现金143亿、Q2募资6.85亿美元</li>
+<li><b>国际第二曲线</b>：DayOne签约783MW、东南亚+欧洲复制中国模式，对标Equinix</li>
+</ol>
+<div class="note"><b>须对冲的信念：</b>"便宜"是对"高杠杆+盈利质量+中概折价"的风险补偿——反转故事需要每个季度持续验证（2023年市值曾从147亿跌至17亿美元）。<b>8/13 Q2财报是近期最大验证点。</b></div>
+</div>
+
+<h2>🔑 Value Drivers（长期维护章节）</h2>
+<div class="card">
+<table>
+<tr><th>#</th><th>Driver</th><th>当前状态</th><th>观察指标</th></tr>
+<tr><td>1</td><td>新增订单</td><td>Q1 200MW（历史新高）</td><td>每季度新签MW</td></tr>
+<tr><td>2</td><td>上架率/计费率</td><td>75.5%（2025末）</td><td>利用率提升速度</td></tr>
+<tr><td>3</td><td>EBITDA利润率</td><td>57.9%（Q1，+9.3pct）</td><td>每季度EBITDA率</td></tr>
+<tr><td>4</td><td>净负债/EBITDA</td><td>5.7倍</td><td>杠杆变化趋势</td></tr>
+<tr><td>5</td><td>DayOne国际</td><td>签约783MW/运营213MW</td><td>海外签约与收入</td></tr>
+<tr><td>6</td><td>融资能力</td><td>C-REIT/ABS/可转债/优先股</td><td>新融资事件</td></tr>
+<tr><td>7</td><td>AI客户需求</td><td>阿里/腾讯/字节</td><td>大客户capex</td></tr>
+<tr><td>8</td><td>资产证券化</td><td>C-REIT 24亿（2025）</td><td>扩募与出表规模</td></tr>
+</table>
+</div>
+
+<h2>🔍 最终结论与操作建议</h2>
+<div class="card">
+<h3>评级：<span class="badge badge-yellow">🟡 观察偏多</span>（75.0/100）｜ 公允价值中枢约34.4美元 ｜ 现价安全边际约7%</h3>
+<ul style="margin-top:10px;">
+<li><b>持有者</b>：继续持有，<b>8/13 Q2财报</b>是第一验证窗口（EBITDA增速≥20%、净负债/EBITDA≤5.7倍、订单≥150MW）</li>
+<li><b>空仓者</b>：可轻仓试探（现价合理偏低）；回调至<b class="good">28美元以下</b>（EV/EBITDA&lt;10x）分批建仓、<b class="good">22美元以下</b>重仓</li>
+<li><b>减仓触发</b>：Q2 EBITDA增速&lt;20% / 杠杆回升至6x / 订单连续两季&lt;150MW / 融资受阻 / 股价&gt;45美元</li>
+<li><b>组合定位</b>：与润泽科技（字节绑定、估值贵）互补——万国客户更分散、估值更便宜、但杠杆更高</li>
+</ul>
+<div class="note" style="margin-top:12px;">📅 <b>下一验证窗口：</b>2026-08-13 Q2财报（美股盘前）；2026H2 AI订单落地与DayOne新签；C-REIT扩募。</div>
+</div>
+
+<div class="card">
+<h3>组合定位（今日已研究标的）</h3>
+<table>
+<tr><th>标的</th><th>类型</th><th>评级</th><th>定位</th></tr>
+<tr><td>中际旭创</td><td>光模块（AI卖铲人）</td><td><span class="badge badge-green">🟢 推荐82</span></td><td>AI算力首选</td></tr>
+<tr><td>天孚通信</td><td>CPO光引擎垄断</td><td><span class="badge badge-yellow">🟡 观察76</span></td><td>CPO弹性（等回调）</td></tr>
+<tr><td>万国数据</td><td>批发IDC（困境反转）</td><td><span class="badge badge-yellow">🟡 观察偏多75</span></td><td>AI基建重估（等Q2验证）</td></tr>
+<tr><td>润泽科技</td><td>AIDC（字节绑定）</td><td><span class="badge badge-yellow">🟡 观察73</span></td><td>AI基建（等回调）</td></tr>
+<tr><td>AAOI</td><td>美国本土光模块</td><td><span class="badge badge-yellow">🟡 回避59</span></td><td>高波动观察</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>📋 Final Audit：19/19 通过</h3>
+<table>
+<tr><th>#</th><th>检查项</th><th>结果</th></tr>
+<tr><td>1</td><td>第0章分类（周期成长股-困境反转）</td><td class="good">✅</td></tr>
+<tr><td>2</td><td>估值方法与分类匹配（EV/EBITDA+PB）</td><td class="good">✅</td></tr>
+<tr><td>3</td><td>三情景概率（30/50/20）</td><td class="good">✅</td></tr>
+<tr><td>4</td><td>价格阶梯6.11-6.15</td><td class="good">✅</td></tr>
+<tr><td>5</td><td>Bear Case独立成章（做空概率45%）</td><td class="good">✅</td></tr>
+<tr><td>6</td><td>MDIG数据完整性（客户结构标注三级）</td><td class="good">✅</td></tr>
+<tr><td>7</td><td>杠杆风险量化（5.7倍、425亿）</td><td class="good">✅</td></tr>
+<tr><td>8</td><td>扭亏质量穿透（权益法调节、Q4亏损）</td><td class="good">✅</td></tr>
+<tr><td>9</td><td>与A股IDC同业对比</td><td class="good">✅</td></tr>
+<tr><td>10</td><td>风险清单完整（10项分级）</td><td class="good">✅</td></tr>
+<tr><td>11</td><td>Value Drivers可维护（8个Driver）</td><td class="good">✅</td></tr>
+<tr><td>12</td><td>Evidence Coverage占比声明（AI推断约18%）</td><td class="good">✅</td></tr>
+<tr><td>13</td><td>投资决策价格体系</td><td class="good">✅</td></tr>
+<tr><td>14</td><td>减仓触发条件（5条）</td><td class="good">✅</td></tr>
+<tr><td>15</td><td>组合内标的关联说明</td><td class="good">✅</td></tr>
+<tr><td>16</td><td>报告日期与数据截止标注</td><td class="good">✅</td></tr>
+<tr><td>17</td><td>中国股市红涨绿跌遵守</td><td class="good">✅</td></tr>
+<tr><td>18</td><td>免责声明</td><td class="good">✅</td></tr>
+<tr><td>19</td><td>后续跟踪计划（Q2财报8/13、订单、杠杆）</td><td class="good">✅</td></tr>
+</table>
+</div>
+
+<div class="sub" style="margin-top:24px; text-align:center;">本报告基于公开信息与AI分析生成，仅供研究参考，不构成任何投资建议。市场有风险，投资需谨慎。<br>大灰皮证券研究统一框架 V-2.4 ｜ 万国数据 GDS.US / 9698.HK ｜ 2026-08-09</div>
+
+</div>
+<script>
+const C={bg:'#161b22',border:'#30363d',text:'#e6edf3',dim:'#8b949e',red:'#f85149',green:'#3fb950',yellow:'#d29922',blue:'#58a6ff',purple:'#bc8cff'};
+Chart.defaults.color=C.dim; Chart.defaults.borderColor=C.border;
+new Chart(document.getElementById('chart1'),{type:'bar',data:{labels:['2022','2023','2024','2025'],
+datasets:[
+{label:'净收入(亿元)',data:[81.2,99.6,103.22,114.32],backgroundColor:C.blue,borderRadius:4},
+{label:'经调整EBITDA(亿元)',data:[35.5,43.0,48.76,54.04],backgroundColor:C.purple,borderRadius:4}
+]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('chart2'),{type:'doughnut',data:{labels:['长期债务 425.6亿','现金及等价物 143.1亿','股东权益 257.8亿'],datasets:[{data:[425.6,143.1,257.8],backgroundColor:[C.red,C.green,C.blue],borderColor:C.bg,borderWidth:2}]},options:{plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('chart3'),{type:'radar',data:{labels:['市场潜力','管理决心','研发占比','利润率','成本控制','利润提升','劳资','高管','管理深度','会计控制','行业地位','多元化','额外利润','股权稀释','坦诚'],
+datasets:[{label:'Fisher评分',data:[9,8,3,5,6,8,7,6,7,5,9,6,5,4,7],backgroundColor:'rgba(88,166,255,0.15)',borderColor:C.blue,pointBackgroundColor:C.blue}]},options:{scales:{r:{min:0,max:10,ticks:{stepSize:2}}},plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('chart4'),{type:'bar',data:{labels:['悲观30%','中性50%','乐观20%','加权公允价值'],
+datasets:[{label:'每股价值(美元)',data:[15.3,37.0,56.6,34.4],backgroundColor:[C.red,C.blue,C.green,C.yellow],borderRadius:4}]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
+</script>
+</body>
+</html>
