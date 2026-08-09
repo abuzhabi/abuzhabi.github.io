@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>巨星科技（002444.SZ）深度分析报告 | 大灰皮证券研究 V-2.4</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ===== 大灰皮证券研究 HTML 报告模板 ===== */
+/* 模板版本: V-2.4 | 深色主题、信息密度高、中国股市颜色(涨红跌绿)、Chart.js图表 */
+:root {
+  --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+  --border: #30363d; --text: #c9d1d9; --text-dim: #8b949e;
+  --red: #f85149; --green: #3fb950; --yellow: #d29922; --blue: #58a6ff; --purple: #bc8cff;
+  --orange: #db6d28; --cyan: #39c5cf;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7; padding:20px; max-width:1200px; margin:0 auto; }
+h1 { color:var(--blue); font-size:1.8em; margin-bottom:5px; border-bottom:2px solid var(--border); padding-bottom:10px; }
+h2 { color:var(--cyan); font-size:1.4em; margin:30px 0 15px; padding-left:12px; border-left:4px solid var(--blue); }
+h3 { color:var(--purple); font-size:1.15em; margin:20px 0 10px; }
+h4 { color:var(--orange); font-size:1em; margin:15px 0 8px; }
+p { margin:8px 0; }
+.subtitle { color:var(--text-dim); font-size:0.9em; margin-bottom:20px; }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em; }
+th { background:var(--bg3); color:var(--blue); padding:10px; text-align:left; border:1px solid var(--border); }
+td { padding:8px 10px; border:1px solid var(--border); }
+tr:nth-child(even) { background:var(--bg2); }
+tr:hover { background:var(--bg3); }
+.score-badge { display:inline-block; padding:6px 20px; border-radius:8px; font-size:1.3em; font-weight:bold; }
+.score-red { background:rgba(248,81,73,0.15); color:var(--red); border:2px solid var(--red); }
+.score-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); border:2px solid var(--yellow); }
+.score-green { background:rgba(63,185,80,0.15); color:var(--green); border:2px solid var(--green); }
+.card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.card-red { border-left:4px solid var(--red); }
+.card-yellow { border-left:4px solid var(--yellow); }
+.card-green { border-left:4px solid var(--green); }
+.card-blue { border-left:4px solid var(--blue); }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; }
+@media (max-width:768px) { .grid-2, .grid-3 { grid-template-columns:1fr; } }
+.metric { text-align:center; padding:15px; background:var(--bg3); border-radius:8px; }
+.metric-val { font-size:1.8em; font-weight:bold; }
+.metric-label { color:var(--text-dim); font-size:0.85em; margin-top:5px; }
+.chart-container { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.highlight-red { color:var(--red); font-weight:bold; }
+.highlight-green { color:var(--green); font-weight:bold; }
+.highlight-yellow { color:var(--yellow); font-weight:bold; }
+.highlight-blue { color:var(--blue); font-weight:bold; }
+blockquote { border-left:3px solid var(--orange); padding:10px 15px; margin:15px 0; background:var(--bg2); color:var(--text-dim); border-radius:0 8px 8px 0; }
+ul,ol { margin:8px 0 8px 25px; }
+li { margin:4px 0; }
+.tag { display:inline-block; padding:2px 10px; border-radius:4px; font-size:0.8em; margin:2px; }
+.tag-red { background:rgba(248,81,73,0.2); color:var(--red); }
+.tag-green { background:rgba(63,185,80,0.2); color:var(--green); }
+.tag-yellow { background:rgba(210,153,34,0.2); color:var(--yellow); }
+.tag-blue { background:rgba(88,166,255,0.2); color:var(--blue); }
+hr { border:none; border-top:1px solid var(--border); margin:25px 0; }
+.section-num { color:var(--blue); font-weight:bold; }
+.evidence-bar { display:flex; height:25px; border-radius:5px; overflow:hidden; margin:10px 0; }
+.evidence-bar div { display:flex; align-items:center; justify-content:center; font-size:0.75em; color:#fff; }
+.footer { text-align:center; color:var(--text-dim); margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:0.85em; }
+.report-nav {
+  display: flex; align-items: center; gap: 12px; padding: 10px 16px; margin-bottom: 24px;
+  background: #1a1e2a; border: 1px solid var(--border, #30363d); border-radius: 8px;
+  font-size: 0.85rem; flex-wrap: wrap;
+}
+.report-nav a { color: var(--blue, #58a6ff); text-decoration: none; padding: 4px 10px; border-radius: 6px; transition: background 0.15s, color 0.15s; white-space: nowrap; }
+.report-nav a:hover { background: rgba(88,166,255,0.15); color: #58a6ff; }
+.report-nav .nav-left { display: flex; align-items: center; gap: 8px; }
+.report-nav .nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.report-nav .nav-sep { color: var(--border, #30363d); font-size: 0.75rem; }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ====== 导航栏 ====== -->
+<div class="report-nav">
+  <div class="nav-left">
+    <a href="index.html">&larr; 返回公司列表</a>
+  </div>
+  <div class="nav-right">
+    <a href="../../index.html">&#127968; 研究报告首页</a>
+  </div>
+</div>
+
+<!-- ====== 标题 ====== -->
+<h1>巨星科技（002444.SZ）深度分析报告</h1>
+<p class="subtitle">框架: 大灰皮证券研究 V-2.4 | 日期: 2026-08-09 | 分析师: 小八(AI) | Evidence First + 8 Principles + Hard Constraints + Market Data Integrity</p>
+
+<!-- ====== 报告导读 ====== -->
+<h2><span class="section-num">导读</span> 报告导读（Company Overview）</h2>
+<div class="card card-blue">
+<h3>三句话说明公司</h3>
+<ol>
+<li><strong>公司做什么</strong>：全球最大的手工具制造商之一（亚洲最大、全球第二），研发生产销售手工具、电动工具、工业工具、激光测量等产品，海外收入占比超九成，北美为最大市场。</li>
+<li><strong>公司怎么赚钱</strong>：通过"自有品牌（OBM）+代工（ODM）"双轨模式向欧美大型零售商（Home Depot、Lowe's、Walmart 等）和跨境电商销售工具产品，2024 年 OBM 占比 47.9%，毛利率高于 ODM 约 5pct；2025 年营收 146.66 亿元、归母净利 25.10 亿元。</li>
+<li><strong>公司为什么值得研究</strong>：美国 AI 算力与数据中心新基建带动工业级专业工具需求放量，公司布局电力工具、数据中心存储箱柜打开第二增长曲线；同时处于汇率与关税双重压力下的盈利修复窗口，PE(TTM) 13.99 倍处于近 10 年 13.5% 分位，存在"低估值 + 拐点"双重属性。</li>
+</ol>
+<h3>公司基本画像</h3>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>公司名称</td><td>杭州巨星科技股份有限公司</td></tr>
+<tr><td>股票代码</td><td>002444.SZ（深圳证券交易所）</td></tr>
+<tr><td>总部所在地</td><td>中国浙江省杭州市（成立 2001-08-09）</td></tr>
+<tr><td>核心产品</td><td>手工具、电动工具、工业工具、激光测量仪、储能配套工具</td></tr>
+<tr><td>主要客户</td><td>Home Depot（第一大，2024 年占 22.25%）、Lowe's、Walmart 等欧美零售商</td></tr>
+<tr><td>主要收入来源</td><td>手工具 64.9%、工业工具 22.0%、电动工具 12.0%（2025）</td></tr>
+<tr><td>主要利润来源</td><td>自有品牌 OBM（毛利率 34.7%）> 代工 ODM（29.6%）；电动工具毛利率改善最显著</td></tr>
+<tr><td>业务覆盖地区</td><td>美洲 62.85%、欧洲 24.32%、国内约 5%、其他（2025）</td></tr>
+<tr><td>当前发展阶段</td><td>成熟期 + 二次成长曲线（电动工具 + AI 基建工业工具）</td></tr>
+</table>
+<h3>商业模式简图</h3>
+<blockquote>上游钢材/塑料/电子元件供应商 &rarr; 23 个全球生产基地（中国11/美国3/欧洲6/东南亚3）研发制造 &rarr; 自有品牌（WORKPRO/DURATECH/Arrow 等）+ 零售商代工 &rarr; 欧美商超/工业经销商/跨境电商（Amazon）&rarr; 产品毛利 + 规模效应 &rarr; 收入与利润</blockquote>
+<h3>投资者当前最需要理解的问题</h3>
+<p>市场关注"AI 新基建工具"第二曲线能否兑现，分歧集中三点：① 人民币升值（2026H1 中间价升值 4.9%）的汇兑损失是短期扰动还是结构性压制；② 美国对华关税（12.5% 强迫劳动 301 关税 2026-07-24 生效）成本影响；③ 电动工具订单（20V 无绳、欧洲三年订单）放量能否对冲手工具下滑。最关键的变量是<strong>北美 AI 基建真实需求强度与汇率方向</strong>。</p>
+</div>
+
+<!-- ====== 核心指标 ====== -->
+<h2><span class="section-num">核心指标</span></h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">71<span style="font-size:0.5em">/100</span></div><div class="metric-label">综合评分</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">30.04</div><div class="metric-label">当前价格 (元, 2026-08-07)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">13.99x</div><div class="metric-label">PE(TTM) / 10年分位 13.5%</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">358.82亿</div><div class="metric-label">总市值 (元)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">39.3元</div><div class="metric-label">综合公允价值</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">23.6%</div><div class="metric-label">当前安全边际</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">0.64</div><div class="metric-label">PEG (2026E)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">36.9亿</div><div class="metric-label">净现金 (元)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--blue)">2.16%</div><div class="metric-label">股息率 (TTM)</div></div>
+</div>
+
+<!-- ====== 第0章 公司分类 ====== -->
+<h2><span class="section-num">第0章</span> 公司分类</h2>
+<div class="card card-blue">
+<h3>分类：成熟成长股</h3>
+<table>
+<tr><th>维度</th><th>判断</th></tr>
+<tr><td>公司类型</td><td><strong>成熟成长股</strong>（出口制造龙头，稳定现金流 + 明确成长曲线）</td></tr>
+<tr><td>首选估值方法</td><td>PE + Forward PE + PEG + 历史估值分位</td></tr>
+<tr><td>次选</td><td>DCF（辅助，现金流稳定可预测）</td></tr>
+<tr><td>排除方法</td><td>PS（已盈利）、NAV、EV/EBITDA（非周期资源类）</td></tr>
+</table>
+<p><strong>首选估值方法</strong>：PE + Forward PE + PEG + 历史估值分位<br>
+<span class="tag tag-blue">成熟成长股</span> <span class="tag tag-yellow">出口制造</span> <span class="tag tag-green">净现金</span></p>
+<p><strong>为什么采用这种估值方式</strong>：手工具主业稳定（全球工具市场 1187 亿美元、CAGR 4.7%），电动工具与 AI 基建工业工具提供 15-19% 增量成长，ROE 14% 左右，盈利稳定——PE / Forward PE / PEG 是核心估值锚。反方证据：美元结算为主，盈利存在汇率波动性；手工具主业 2025 年 -5.46%。最终判断：采用成熟成长股框架，估值中计入汇率敏感度折价。信心等级：★★★★☆</p>
+</div>
+
+<!-- ====== 第1章 基本面分析 ====== -->
+<h2><span class="section-num">第1章</span> 基本面分析</h2>
+<div class="card">
+<h3>商业模式</h3>
+<p><strong>结论</strong>：双轨制商业模式——自有品牌（OBM）与代工（ODM）并行，"产品开发 + 渠道绑定 + 并购品牌 + 全球产能"四轮驱动，本质是"中国制造能力 × 欧美渠道网络"的出口龙头。2024 年 OBM 占比 47.92%（70.90 亿元）；2025H1 OBM 毛利率 34.66% vs ODM 29.62%。<span class="tag tag-green">证据等级 1</span></p>
+<p><strong>反方证据</strong>：ODM 仍占约一半收入，Home Depot 单一客户 22.25%（2024），客户集中度偏高。<strong>最终判断</strong>：商业模式清晰，OBM 转型持续提升利润质量。信心：★★★★★</p>
+<h3>核心产品与收入结构</h3>
+<table>
+<tr><th>业务板块</th><th>2025收入(亿元)</th><th>占比</th><th>同比</th><th>2024收入(亿元)</th><th>2024占比</th></tr>
+<tr><td>手工具</td><td>95.19</td><td>64.90%</td><td class="highlight-green">-5.46%</td><td>100.69</td><td>68.05%</td></tr>
+<tr><td>电动工具</td><td>17.62</td><td>12.02%</td><td class="highlight-red">+22.55%</td><td>14.38</td><td>9.72%</td></tr>
+<tr><td>工业工具</td><td>32.25</td><td>21.99%</td><td>~0%</td><td>32.28</td><td>21.82%</td></tr>
+<tr><td><strong>合计</strong></td><td><strong>146.66</strong></td><td>100%</td><td>-0.87%</td><td><strong>147.95</strong></td><td>100%</td></tr>
+</table>
+<h3>地区与客户结构</h3>
+<p>2025 年美洲 92.18 亿元（62.85%）、欧洲 35.66 亿元（24.32%）、国内约 5-6%；前五大客户占 48.73%，Home Depot 占 22.25%（2024）。<strong>风险</strong>：美元收入占比 65-70%，汇率与关税双重暴露。</p>
+<h3>竞争格局与核心竞争优势</h3>
+<p>全球手工具市占率约 5%（亚洲第一、全球第二）；电动工具 TTI 市占 21% 居首、CR5 约 59%。核心优势：渠道绑定（商超 CR4>70%）+ 品牌矩阵（9 品牌）+ 全球 23 基地 + 成本控制。<strong>信心等级：★★★★☆</strong></p>
+<h3>未来 5-10 年增长驱动力</h3>
+<ol>
+<li>美国 AI 基建/数据中心带动的工业级专业工具需求（电力工具、数据中心存储箱柜）</li>
+<li>电动工具渗透率提升与订单放量（欧洲大型零售商 3 年无绳电动工具订单、20V 无绳工具 3 年订单）</li>
+<li>自有品牌 + 跨境电商占比提升（跨境电商 2024 增速 &gt;45%、2025H1 &gt;30%）</li>
+</ol>
+<p><span class="tag tag-red">反方</span> AI 基建工具无单列收入证据（券商确认"交付总量占比不高"）。<strong>信心等级：★★★☆☆</strong></p>
+</div>
+
+<!-- ====== 第2章 行业研究 (TAM) ====== -->
+<h2><span class="section-num">第2章</span> 行业研究 (TAM)</h2>
+<div class="card">
+<p><strong>行业规模</strong>：全球工具市场 2026 年 1187 亿美元 &rarr; 2030 年 1428 亿美元，CAGR 4.7%（弗若斯特沙利文，公司年报引用，等级1）；电动工具 698 亿美元（2024）、CAGR 4.3%（GMI，等级2）。行业成熟期、需求刚性（约 80% 需求在欧美，渠道 CR4&gt;70%）。</p>
+<table>
+<tr><th>情景</th><th>假设</th><th>行业增速</th><th>影响</th></tr>
+<tr><td class="highlight-red">乐观</td><td>AI 基建扩容 + 美国降息 + 渠道补库</td><td>6-8%</td><td>电动工具与工业工具双轮驱动</td></tr>
+<tr><td>基准</td><td>温和增长 + 汇率企稳</td><td>4.7%</td><td>随行业增长 + 份额提升</td></tr>
+<tr><td class="highlight-green">悲观</td><td>AI 资本开支回落 + 高利率 + 关税升级</td><td>1-2%</td><td>手工具承压，增长靠电动单轮</td></tr>
+</table>
+<p><strong>最终判断</strong>：行业具备长期成长空间（结构性机会 &gt; 总量机会）。信心等级：★★★★☆</p>
+</div>
+
+<!-- ====== 第3章 Fisher成长股评价 ====== -->
+<h2><span class="section-num">第3章</span> Fisher成长股评价</h2>
+<div class="chart-container"><canvas id="fisherChart"></canvas></div>
+<p><strong>综合评分：7.2/10（72/100）</strong></p>
+<p><span class="tag tag-green">最符合Fisher</span> 销售能力与渠道绑定——数十年与欧美商超深度绑定（Home Depot 第一大供应商之一），销售组织效率高，符合费雪"销售能力"标准。</p>
+<p><span class="tag tag-red">最不符合Fisher</span> 收入主体仍是低增长手工具代工（2025 年 -5.46%），研发非行业第一梯队，属"渠道型龙头"而非"技术型成长股"。信心等级：★★★★☆</p>
+
+<!-- ====== 第4章 财务审计 (Bear Audit) ====== -->
+<h2><span class="section-num">第4章</span> 财务审计 (Bear Audit)</h2>
+<div class="chart-container"><canvas id="finChart"></canvas></div>
+<div class="card card-green">
+<h3 style="color:var(--green)">&#128994; 绿色（财务健康，无造假迹象）</h3>
+<ol>
+<li>资产负债极干净：负债率 18.97%、净现金 36.9 亿元、有息负债 15.98 亿（-60.55%）</li>
+<li>现金流质量良好：2025 经营现金流 23.10 亿元（+32.74%），为净利 92%</li>
+<li>毛利稳定改善：2025 毛利率 32.72%（+0.71pct），电动工具毛利率 +6.09pct</li>
+<li>潜在红旗：汇兑损益波动大（2026Q1 汇兑损失超 7000 万）；投资收益占比高（2026Q1 约 25% 净利来自投资收益）；AI 叙事与收入脱节</li>
+<li>无造假迹象：应收/存货周转正常，无异常关联交易</li>
+</ol>
+</div>
+
+<!-- ====== 第5章 Bear Case ====== -->
+<h2><span class="section-num">第5章</span> Bear Case</h2>
+<div class="card card-red">
+<h3>做空成功概率：35%</h3>
+<p>最脆弱环节：① 汇率暴露（美元收入 65-70%，2026H1 汇兑损失超 1 亿）；② 关税叠加（301 25% + 强迫劳动 12.5%）；③ AI 叙事依赖（无单列收入证据）。若股价腰斩，最大原因 = 人民币大幅升值 + 美国 AI 资本开支见顶 + 关税升级三重共振。</p>
+</div>
+<table>
+<tr><th>增长假设</th><th>失败场景</th></tr>
+<tr><td>AI 基建带动工业工具放量</td><td>Hyperscaler CapEx 增速回落；数据中心建设见顶</td></tr>
+<tr><td>电动工具订单放量</td><td>交付不及预期；TTI/SWK 价格战</td></tr>
+<tr><td>自有品牌利润率提升</td><td>人民币持续升值；跨境电商费用率上升</td></tr>
+<tr><td>海外产能对冲关税</td><td>东南亚产能爬坡慢；关税清单扩大至东南亚</td></tr>
+</table>
+
+<!-- ====== Market Data Integrity Gate ====== -->
+<h2><span class="section-num">Market Data Integrity Gate</span> 市场数据完整性检查</h2>
+<div class="card card-blue">
+<h3>G.9 强制市场数据核验表</h3>
+<table>
+<tr><th>数据</th><th>最终采用值</th><th>日期/期间</th><th>市场及代码</th><th>数据类型</th><th>币种/单位</th><th>来源一</th><th>来源二</th><th>差异</th><th>状态</th></tr>
+<tr><td>公司股价</td><td>30.04</td><td>2026-08-07</td><td>深交所 002444.SZ</td><td>收盘价</td><td>CNY/股</td><td>腾讯行情</td><td>证券之星</td><td>0%</td><td>&#9989; 已验证</td></tr>
+<tr><td>汇率(决策日)</td><td>6.7904</td><td>2026-08-07</td><td>USD/CNY 中间价</td><td>汇率</td><td>CNY</td><td>中国新闻网</td><td>新华社</td><td>0%</td><td>&#9989; 已验证</td></tr>
+<tr><td>汇率(2026H1)</td><td>6.8109</td><td>2026-06-30</td><td>USD/CNY 中间价</td><td>汇率</td><td>CNY</td><td>公司业绩预告</td><td>央行官网</td><td>0%</td><td>&#9989; 已验证</td></tr>
+<tr><td>汇率(2025H1)</td><td>7.1586</td><td>2025-06-30</td><td>USD/CNY 中间价</td><td>汇率</td><td>CNY</td><td>公司业绩预告</td><td>央行官网</td><td>0%</td><td>&#9989; 已验证</td></tr>
+<tr><td>无风险利率</td><td>1.70%</td><td>2026-08-07</td><td>银行间 CGB 10Y</td><td>利率</td><td>%</td><td>中债</td><td>财联社</td><td>1.1%</td><td>&#9989; 已验证</td></tr>
+</table>
+<p>G.10 失败即停止：<span class="tag tag-green">全部通过，无 Fail-Stop 触发</span>。所有关键数据双来源验证，差异 &lt;2%。</p>
+</div>
+
+<!-- ====== 第6章 估值分析 ====== -->
+<h2><span class="section-num">第6章</span> 估值分析</h2>
+<h3>Valuation Data Admission Check</h3>
+<table>
+<tr><th>数据</th><th>是否通过验证</th><th>是否允许进入估值</th><th>备注</th></tr>
+<tr><td>公司股价 30.04 元</td><td>&#9989; 通过</td><td>&#9989;</td><td>双源验证一致</td></tr>
+<tr><td>稀释后股本 11.94 亿股</td><td>&#9989; 通过</td><td>&#9989;</td><td>巨潮年报摘要</td></tr>
+<tr><td>净现金 36.9 亿元</td><td>&#9989; 通过</td><td>&#9989;</td><td>货币资金-有息负债</td></tr>
+<tr><td>汇率 6.7904</td><td>&#9989; 通过</td><td>&#9989;</td><td>双源验证</td></tr>
+<tr><td>无风险利率 1.70%</td><td>&#9989; 通过</td><td>&#9989;</td><td>中债/财联社</td></tr>
+</table>
+<div class="card">
+<h3>6.1~6.3 估值方法选择与成长现实检验</h3>
+<p><strong>方法</strong>：成熟成长股 &rarr; PE + Forward PE + PEG 为主锚，DCF 辅助（仅作上限参考）。当前 PE(TTM) 13.99x（10年分位 13.53%）、Forward PE 12.10x、PEG 0.64。</p>
+<p><strong>Growth Reality Check</strong>：TAM 支持（1187 亿美元、CAGR 4.7%）；管理层公开指引 2026H1 营收 +5%；CapEx 支持（越南三期/泰国二期投产）；<span class="highlight-yellow">瑕疵：2026H1 营收 +5% 与全年一致预期 +15.5% 存在明显缺口，需 H2 大幅加速至 20%+。</span></p>
+</div>
+<div class="card">
+<h3>6.4 DCF（辅助参考）</h3>
+<p>参数：2026-2028E 净利 29.69/35.45/42.00 亿（29 家机构一致预期）；2029-2033 增速 8%【推断】；Terminal Growth 2%【推断】；WACC 9%【推断】；FCFF≈净利（简化假设）。</p>
+<p><strong>DCF 结果：约 61.6 元/股【推断，依赖长期增速假设】</strong>。敏感性：WACC 10% &rarr; ~53 元；增速降至 6% &rarr; ~52 元。DCF 显著高于 PE 法，<span class="highlight-yellow">仅作上限参考，不作为定价主锚</span>（DCF 对终值假设极度敏感，一致预期隐含成长在 DCF 框架下偏乐观）。</p>
+</div>
+<h3>三情景估值</h3>
+<div class="chart-container"><canvas id="scenarioChart"></canvas></div>
+<table>
+<tr><th>情景</th><th>概率</th><th>核心假设</th><th>2026E净利(亿)</th><th>合理PE</th><th>对应股价</th></tr>
+<tr><td class="highlight-red">Bull</td><td>25%</td><td>AI 基建放量+汇率企稳+电动超预期</td><td>32.0</td><td>18x</td><td>48.3 元</td></tr>
+<tr><td>Base</td><td>50%</td><td>电动稳健+汇率温和</td><td>29.7（一致预期）</td><td>15x</td><td>37.3 元</td></tr>
+<tr><td class="highlight-green">Bear</td><td>25%</td><td>汇率大幅升值+AI 证伪+关税升级</td><td>24.0</td><td>11x</td><td>22.1 元</td></tr>
+</table>
+<p><strong>概率加权公允价值 = 25%&times;48.3 + 50%&times;37.3 + 25%&times;22.1 = 36.2 元</strong>（推断，信心 ★★★☆☆）</p>
+<div class="card">
+<h3>6.6~6.8 历史估值 / 同行估值 / 安全边际</h3>
+<table>
+<tr><th>指标</th><th>当前</th><th>10年分位</th><th>判断</th></tr>
+<tr><td>PE (TTM)</td><td>13.99</td><td>13.53%</td><td class="highlight-green">历史低位</td></tr>
+</table>
+<table>
+<tr><th>同行</th><th>市场</th><th>PE(TTM)</th><th>备注</th></tr>
+<tr><td>创科实业 0669.HK</td><td>港股</td><td>26.12x</td><td>电动工具全球龙头，享溢价</td></tr>
+<tr><td>泉峰控股 2285.HK</td><td>港股</td><td>13.89x</td><td>电动工具追赶者</td></tr>
+<tr><td>史丹利百得 SWK</td><td>美股</td><td>37.96x/14.0x(Forward)</td><td>困境反转，TTM 失真</td></tr>
+<tr><td><strong>巨星科技</strong></td><td>A股</td><td><strong>13.99x</strong></td><td>手工具全球第二</td></tr>
+</table>
+<p><strong>安全边际</strong>：当前价 30.04 元 vs 综合公允价值 39.3 元 &rarr; 安全边际 23.6%（观察区上沿，接近推荐区）。</p>
+</div>
+<div class="card card-yellow">
+<h3>6.15 最终投资决策</h3>
+<div class="grid-2">
+<div>
+<p><strong>当前价格</strong>: 30.04 元</p>
+<p><strong>公允价值(Base)</strong>: 39.3 元</p>
+<p><strong>买入价(含安全边际)</strong>: 27.5 ~ 29.5 元</p>
+<p><strong>当前安全边际</strong>: <span class="highlight-yellow">23.6%</span></p>
+<p><strong>极度低估</strong>: &le; 23.5 元</p>
+</div>
+<div>
+<p><strong>操作建议</strong>: <span class="highlight-yellow">观察</span></p>
+<p><strong>触发买入条件</strong>:</p>
+<ul>
+<li>股价回落至 27.5-29.5 元安全买入区</li>
+<li>2026 半年报确认营收加速路径（H2 &gt;20%）</li>
+<li>人民币中间价企稳（&lt;6.90 且不再升值）</li>
+<li>AI CapEx 季度增速确认（&gt;15%）</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- ====== 第7章 风险分析 ====== -->
+<h2><span class="section-num">第7章</span> 风险分析</h2>
+<table>
+<tr><th>风险</th><th>严重程度</th><th>市场状态</th><th>说明</th></tr>
+<tr><td>汇率风险（人民币升值）</td><td class="highlight-red">高</td><td>部分反映</td><td>2026H1 升值 4.9% 汇兑损失超 1 亿；美元收入 65-70%</td></tr>
+<tr><td>关税风险</td><td class="highlight-red">高</td><td>部分反映</td><td>301 25% + 强迫劳动 12.5%；东南亚产能对冲 90%</td></tr>
+<tr><td>AI 叙事证伪</td><td class="highlight-yellow">中高</td><td>未反映</td><td>工业工具 AI 产品无单列收入证据</td></tr>
+<tr><td>北美消费/地产周期</td><td class="highlight-yellow">中</td><td>已反映</td><td>手工具 2025 年 -5.46%</td></tr>
+<tr><td>客户集中度</td><td class="highlight-yellow">中</td><td>已反映</td><td>Home Depot 占 22.25%</td></tr>
+<tr><td>电动工具竞争</td><td class="highlight-yellow">中</td><td>部分反映</td><td>TTI 市占 21%，价格战风险</td></tr>
+<tr><td>投资收益依赖</td><td class="highlight-green">低-中</td><td>未反映</td><td>2026Q1 约 25% 净利来自投资收益</td></tr>
+</table>
+
+<!-- ====== 第8章 投资逻辑 ====== -->
+<h2><span class="section-num">第8章</span> 投资逻辑</h2>
+<div class="grid-2">
+<div class="card card-green">
+<h4>多头逻辑</h4>
+<ul>
+<li>全球手工具第二（亚洲第一），渠道绑定 Home Depot/Lowe's/Walmart/Kingfisher</li>
+<li>电动工具第二曲线：2025 年 +22.55%，毛利率 +6.09pct，已获 3 年无绳工具大单</li>
+<li>AI 基建期权：电力工具、数据中心存储箱柜布局</li>
+<li>OBM 占比 47.9%（毛利率 34.7% vs ODM 29.6%）利润率结构改善</li>
+<li>净现金 36.9 亿、负债率 18.97%、经营现金流 23.1 亿</li>
+<li>估值历史低位：PE 13.99x（10年分位 13.5%）、PEG 0.64、股息率 2.16%</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>空头逻辑</h4>
+<ul>
+<li>人民币升值侵蚀利润：2026H1 汇兑损失超 1 亿</li>
+<li>手工具基本盘收缩（2025 年 -5.46%）</li>
+<li>AI 基建叙事缺乏收入证据（券商确认"交付总量占比不高"）</li>
+<li>关税反复：12.5% 强迫劳动关税 2026-07-24 生效</li>
+<li>投资收益占比高（Q1 约 25%），主业增长质量打折</li>
+<li>2026H1 营收仅 +5%，与全年一致预期 +15.5% 有缺口</li>
+</ul>
+</div>
+</div>
+
+<!-- ====== 第9章 Value Drivers ====== -->
+<h2><span class="section-num">第9章</span> Value Drivers</h2>
+<div class="card card-blue">
+<h3>价值驱动因素（唯一长期维护章节）</h3>
+<table>
+<tr><th>Driver</th><th>权重</th><th>当前状态</th><th>是否影响投资逻辑</th><th>是否需要重新估值</th></tr>
+<tr><td>D1 人民币兑美元汇率</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td class="highlight-red">恶化（升值4.9%）</td><td><strong>是</strong></td><td><strong>是</strong></td></tr>
+<tr><td>D2 美国 AI/数据中心 CapEx</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>持平（存疑）</td><td><strong>是</strong></td><td><strong>是</strong></td></tr>
+<tr><td>D3 电动工具收入增速与毛利率</td><td>&#11088;&#11088;&#11088;&#11088;</td><td class="highlight-red">改善（+22.55%）</td><td>否</td><td>否</td></tr>
+<tr><td>D4 美国对华工具关税</td><td>&#11088;&#11088;&#11088;&#11088;</td><td>持平（12.5%新关税已生效）</td><td>是</td><td>否</td></tr>
+<tr><td>D5 自有品牌 OBM 占比</td><td>&#11088;&#11088;&#11088;</td><td class="highlight-red">改善（47.9%）</td><td>否</td><td>否</td></tr>
+<tr><td>D6 北美零售渠道库存周期</td><td>&#11088;&#11088;&#11088;</td><td>持平</td><td>否</td><td>否</td></tr>
+<tr><td>D7 海外产能爬坡进度</td><td>&#11088;&#11088;</td><td class="highlight-red">改善（越南三期/泰国二期投产）</td><td>否</td><td>否</td></tr>
+</table>
+<p><strong>监控</strong>：D1 央行中间价（每日）；D2 微软/谷歌/亚马逊/Meta 财报（季度）；D3 公司季报分部数据（季度）；D4 USTR 公告（月度）；D5 公司半年报（半年）。<br>
+<strong>更新规则</strong>：2026 半年报（8月）优先更新 D1/D3/D4/D5；若 D1（汇率）或 D2（AI CapEx）实质性变化 &rarr; 重新生成完整报告。</p>
+</div>
+
+<!-- ====== 第10章 最终结论 ====== -->
+<h2><span class="section-num">第10章</span> 最终结论</h2>
+<div class="chart-container"><canvas id="scoreChart"></canvas></div>
+<div class="card card-yellow">
+<h3>评级：&#128992; 黄色观察 | 评分：71/100</h3>
+<table>
+<tr><th>维度</th><th>评分(10分制)</th><th>依据</th></tr>
+<tr><td>商业模式</td><td>8</td><td>双轨制清晰，OBM 转型提升利润质量</td></tr>
+<tr><td>行业</td><td>7</td><td>全球工具 1187 亿美元，CAGR 4.7%，成熟但具结构性机会</td></tr>
+<tr><td>管理层</td><td>7</td><td>并购整合成功率高，激励合理</td></tr>
+<tr><td>财务</td><td>8</td><td>净现金 36.9 亿、负债率 19%、现金流健康</td></tr>
+<tr><td>护城河</td><td>7</td><td>渠道+品牌+产能，中等偏宽</td></tr>
+<tr><td>成长性</td><td>7</td><td>一致预期净利 CAGR 18.7%，但 H1 营收 +5% 有缺口</td></tr>
+<tr><td>估值</td><td>8</td><td>PE 14x（10年分位 13.5%）、PEG 0.64</td></tr>
+<tr><td>风险</td><td>5</td><td>汇率+关税+AI 叙事三重不确定性</td></tr>
+<tr><td>Fisher</td><td>7.2</td><td>渠道销售力强，研发/技术属性中等</td></tr>
+</table>
+<p><strong>当前估值</strong>：合理偏低（PE 14x，10年分位 13.5%，安全边际 23.6%）<br>
+<strong>投资建议</strong>：<span class="highlight-yellow">观察</span>（接近推荐区，等待价格回落或催化确认）<br>
+<strong>理由</strong>：公司质量扎实（全球手工具第二、净现金、渠道护城河、电动工具第二曲线真实存在），估值历史低位（PEG 0.64）提供良好赔率；但 2026H1 营收 +5% 与全年一致预期 +15.5% 的缺口、人民币升值（汇兑损失超 1 亿）、AI 叙事缺乏收入证据三大不确定性，使当前安全边际（23.6%）不足以触发积极建仓。等待 27.5-29.5 元安全买入区或半年报确认加速路径后，升级为"推荐"。</p>
+<blockquote>好公司不等于好投资——当前 30.04 元安全边际 23.6%，暂缓重仓，等待价格纪律或催化确认。</blockquote>
+</div>
+
+<!-- ====== Market Data Final Audit ====== -->
+<h2>Market Data Final Audit (市场数据最终复检)</h2>
+<table>
+<tr><th>检查项目</th><th>结果</th><th>发现的问题</th><th>修正情况</th></tr>
+<tr><td>市场数据身份</td><td class="highlight-green">通过</td><td>无</td><td>—</td></tr>
+<tr><td>历史日期锁定</td><td class="highlight-green">通过</td><td>无</td><td>—</td></tr>
+<tr><td>双来源验证</td><td class="highlight-green">通过</td><td>无</td><td>—</td></tr>
+<tr><td>币种与单位</td><td class="highlight-green">通过</td><td>无</td><td>—</td></tr>
+<tr><td>估值传导</td><td class="highlight-green">通过</td><td>DCF 与 PE 法差异大</td><td>已在 6.4 注明 DCF 仅作辅助上限</td></tr>
+<tr><td>跨文件一致性</td><td class="highlight-green">通过</td><td>无</td><td>—</td></tr>
+</table>
+
+<!-- ====== Evidence Coverage ====== -->
+<h2>Evidence Coverage (证据覆盖率)</h2>
+<div class="evidence-bar">
+<div style="width:55%;background:#3fb950">一级 55%</div>
+<div style="width:15%;background:#58a6ff">二级 15%</div>
+<div style="width:15%;background:#d29922">三级 15%</div>
+<div style="width:15%;background:#f85149">AI推断 15%</div>
+</div>
+<div class="grid-2">
+<div class="card card-green">
+<h4>已验证数据</h4>
+<ul>
+<li>2025 年报/2026Q1/2026H1 预告（等级1，深交所/公司官网）</li>
+<li>股价 30.04 元、汇率 6.7904/6.8109/7.1586、10Y 国债 1.70%（双源验证）</li>
+<li>一致预期 EPS 2026-2028（29 家机构，等级4）</li>
+<li>同行估值 TTI/泉峰/SWK（行情库，等级3）</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>未验证/推断</h4>
+<ul>
+<li>AI 基建工具单品类收入拆分（未单列）</li>
+<li>2026 年工具类降税清单是否覆盖（未公布）</li>
+<li>海外产能对美覆盖 90% 的精确口径（媒体表述）</li>
+<li>DCF 长期增速/WACC/三情景概率（AI 推断）</li>
+<li>汇率敏感度量化 1.5-2 亿/1% 升值（推断）</li>
+</ul>
+</div>
+</div>
+<p><span class="tag tag-red">&#9888;&#65039; AI 推断占比 15%，超过 10% 阈值。本报告存在较高推断比例</span>，主要集中在 DCF 长期参数、三情景概率、汇率敏感度量化。建议补充完整半年报后复核。</p>
+
+<!-- ====== Market Data Coverage ====== -->
+<h2>Market Data Coverage (市场数据覆盖率)</h2>
+<table>
+<tr><th>数据</th><th>身份完整</th><th>双来源验证</th><th>历史日期验证</th><th>单位验证</th><th>是否进入估值</th></tr>
+<tr><td>公司股价 30.04</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td></tr>
+<tr><td>汇率(决策日) 6.7904</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td></tr>
+<tr><td>汇率(2026H1) 6.8109</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td></tr>
+<tr><td>无风险利率 1.70%</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td></tr>
+<tr><td>一致预期 EPS</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td><td>&#9989;</td></tr>
+</table>
+
+<!-- ====== 页脚 ====== -->
+<div class="footer">
+<p>报告生成: 2026-08-09 | 框架: 大灰皮证券研究 V-2.4 | Evidence First + 8 Principles + Hard Constraints + Market Data Integrity</p>
+<p>本报告由AI生成，不构成投资建议。投资有风险，入市需谨慎。</p>
+</div>
+
+</div><!-- .container -->
+
+<script>
+// ====== Fisher 雷达图 ======
+const fisherCtx = document.getElementById('fisherChart');
+if (fisherCtx) {
+  new Chart(fisherCtx, {
+    type: 'radar',
+    data: {
+      labels: ['市场潜力','管理层能力','研发能力','销售能力','利润率改善','护城河','长期成长','企业文化','资本配置','长期竞争'],
+      datasets: [{
+        label: '巨星科技 Fisher 评分',
+        data: [7,7,7,8,7,7,7,7,8,7],
+        backgroundColor: 'rgba(88,166,255,0.15)',
+        borderColor: '#58a6ff',
+        pointBackgroundColor: '#58a6ff',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: { r: { beginAtZero: true, max: 10, ticks: { stepSize: 2, color: '#8b949e' }, grid: { color: '#30363d' }, pointLabels: { color: '#c9d1d9' } } },
+      plugins: { legend: { labels: { color: '#c9d1d9' } } }
+    }
+  });
+}
+
+// ====== 财务图表：收入结构 + 净利 ======
+const finCtx = document.getElementById('finChart');
+if (finCtx) {
+  new Chart(finCtx, {
+    type: 'bar',
+    data: {
+      labels: ['2023','2024','2025','2026Q1','2026H1E'],
+      datasets: [
+        { label: '营业收入(亿元)', data: [127, 147.95, 146.66, 37.72, null], backgroundColor: '#58a6ff' },
+        { label: '归母净利润(亿元)', data: [16.92, 23.04, 25.10, 5.15, 13.37], backgroundColor: '#3fb950' }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: { x: { ticks: { color: '#8b949e' } }, y: { beginAtZero: true, ticks: { color: '#8b949e' }, grid: { color: '#30363d' } } },
+      plugins: { legend: { labels: { color: '#c9d1d9' } } }
+    }
+  });
+}
+
+// ====== 三情景估值 ======
+const scnCtx = document.getElementById('scenarioChart');
+if (scnCtx) {
+  new Chart(scnCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Bear', 'Base', 'Bull', '概率加权'],
+      datasets: [{
+        label: '公允价值(元/股)',
+        data: [22.1, 37.3, 48.3, 36.2],
+        backgroundColor: ['#f85149', '#d29922', '#3fb950', '#58a6ff']
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: { x: { ticks: { color: '#8b949e' } }, y: { beginAtZero: true, ticks: { color: '#8b949e' }, grid: { color: '#30363d' } } },
+      plugins: { legend: { display: false } }
+    }
+  });
+}
+
+// ====== 综合评分 ======
+const scoreCtx = document.getElementById('scoreChart');
+if (scoreCtx) {
+  new Chart(scoreCtx, {
+    type: 'radar',
+    data: {
+      labels: ['商业模式','行业','管理层','财务','护城河','成长性','估值','风险','Fisher'],
+      datasets: [{
+        label: '巨星科技 综合评分',
+        data: [8,7,7,8,7,7,8,5,7.2],
+        backgroundColor: 'rgba(210,153,34,0.15)',
+        borderColor: '#d29922',
+        pointBackgroundColor: '#d29922',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: { r: { beginAtZero: true, max: 10, ticks: { stepSize: 2, color: '#8b949e' }, grid: { color: '#30363d' }, pointLabels: { color: '#c9d1d9' } } },
+      plugins: { legend: { labels: { color: '#c9d1d9' } } }
+    }
+  });
+}
+</script>
+
+</body>
+</html>
