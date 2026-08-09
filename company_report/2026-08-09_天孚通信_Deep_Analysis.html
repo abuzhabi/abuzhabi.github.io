@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>天孚通信（300394.SZ）深度分析报告 | 2026-08-09</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root { --bg:#0d1117; --panel:#161b22; --panel2:#1c2333; --border:#30363d; --text:#e6edf3; --dim:#8b949e; --red:#f85149; --green:#3fb950; --yellow:#d29922; --blue:#58a6ff; --purple:#bc8cff; --teal:#39c5cf; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,'Segoe UI','Microsoft YaHei',sans-serif; line-height:1.7; padding:24px; }
+.container { max-width:1000px; margin:0 auto; }
+h1 { font-size:26px; margin-bottom:6px; }
+h2 { font-size:21px; margin:36px 0 14px; padding-bottom:8px; border-bottom:2px solid var(--border); color:var(--blue); }
+h3 { font-size:17px; margin:22px 0 10px; color:var(--yellow); }
+.sub { color:var(--dim); font-size:14px; margin-bottom:20px; }
+.meta-box { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:18px 22px; margin:16px 0; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px 20px; }
+.meta-item span { color:var(--dim); font-size:12px; display:block; }
+.meta-item b { font-size:15px; }
+.card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:20px 22px; margin:16px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13.5px; }
+th,td { padding:8px 10px; text-align:left; border:1px solid var(--border); }
+th { background:var(--panel2); color:var(--blue); white-space:nowrap; }
+tr:nth-child(even) td { background:rgba(255,255,255,0.02); }
+.badge { display:inline-block; padding:2px 10px; border-radius:20px; font-size:12px; font-weight:600; }
+.badge-green { background:rgba(63,185,80,0.15); color:var(--green); }
+.badge-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); }
+.badge-red { background:rgba(248,81,73,0.15); color:var(--red); }
+.badge-blue { background:rgba(88,166,255,0.15); color:var(--blue); }
+.highlight { color:var(--red); font-weight:700; }
+.good { color:var(--green); }
+.warn { color:var(--yellow); }
+ul,ol { padding-left:22px; margin:8px 0; }
+li { margin:4px 0; }
+.chart-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.chart-box { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:14px; }
+.chart-box h4 { color:var(--dim); font-size:13px; margin-bottom:8px; font-weight:400; }
+.chart-box canvas { max-height:240px; }
+.verdict { background:linear-gradient(135deg,rgba(210,153,34,0.12),rgba(88,166,255,0.08)); border:1px solid var(--yellow); border-radius:12px; padding:22px; margin:20px 0; }
+.verdict h3 { color:var(--yellow); margin-top:0; }
+.note { background:rgba(88,166,255,0.06); border-left:3px solid var(--blue); padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0; font-size:13.5px; color:var(--dim); }
+.risk-red { color:var(--red); } .risk-org { color:#ffa657; } .risk-yel { color:var(--yellow); } .risk-grn { color:var(--green); }
+@media (max-width:720px){ .chart-row { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>天孚通信（TFC, 300394.SZ）深度分析报告</h1>
+<div class="sub">报告日期：2026-08-09 ｜ 分析框架：大灰皮证券研究统一框架（V-2.4 active）｜ 市场数据截止：2026-08-07 ｜ 分析师：小八</div>
+
+<div class="verdict">
+<h3>⚖️ 评级：<span class="badge badge-yellow">观察（持有/等待回调）</span> 76.0/100 ｜ 现价 230.68元（A股，2026-08-07）</h3>
+<p style="margin-top:10px;"><b>一句话结论：</b>CPO光引擎全球垄断者（市占60%+、英伟达Mellanox 1.6T份额90-95%）、财务质量三杰最佳（ROE 42%、FCF+16亿、负债率14.5%）的AI光互连"卖铲人"——英伟达官宣CPO量产使其成为最直接受益标的；但<b>TTM PE 109x（三杰最贵）+ H1增速+25-45%（三杰最慢）+ Fabrinet单客户63%</b>意味着现价已透支较多预期，<span class="highlight">安全边际-9%</span>：好公司、贵价格，等回调或等兑现。</p>
+</div>
+
+<div class="meta-box">
+<div class="meta-item"><span>股票代码</span><b>300394.SZ（创业板）</b></div>
+<div class="meta-item"><span>总市值（8/7）</span><b>约2,517亿元</b></div>
+<div class="meta-item"><span>PE TTM</span><b>108.91x</b></div>
+<div class="meta-item"><span>2026E PE（一致预期）</span><b>69.90x</b></div>
+<div class="meta-item"><span>2027E PE</span><b>45.14x</b></div>
+<div class="meta-item"><span>PB</span><b>41.95x</b></div>
+<div class="meta-item"><span>年内涨幅</span><b>+52.51%（振幅161.8%）</b></div>
+<div class="meta-item"><span>公允价值中枢</span><b>约212元</b></div>
+</div>
+
+<div class="card">
+<h3>🧭 公司基本画像</h3>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>公司名称</td><td>苏州天孚光通信股份有限公司（TFC，2015-02-17上市）</td></tr>
+<tr><td>核心业务</td><td>有源光器件（光引擎）+ 无源光器件（套管/隔离器/FA）+ CPO配套光器件</td></tr>
+<tr><td>收入结构（2025）</td><td>有源光器件29.98亿（<b>58.06%，+81.11%</b>）｜ 无源20.84亿（40.37%，+32.23%）</td></tr>
+<tr><td>核心客户</td><td><b>Fabrinet占63.31%</b>（全球光模块代工龙头，绑定英伟达产业链）；前五大占89.73%</td></tr>
+<tr><td>产能布局</td><td>苏州+新加坡双总部；江西+泰国春武里双量产基地；<b>H股上市筹划中</b></td></tr>
+<tr><td>行业地位</td><td><b>CPO光引擎全球市占60%+，英伟达Mellanox 1.6T光引擎订单占90-95%</b>（近乎独家）</td></tr>
+</table>
+<div class="note">💎 <b>商业模式</b>：不做光模块做器件——"卖铲人的卖铲人"。光引擎在CPO模块中价值占比30-50%，技术壁垒最高、竞争格局最好。1.6T光引擎单价约3万元/只，在手订单75亿+、2026年全年锁定（产业链口径）。</div>
+</div>
+
+<h2>📊 历年业绩与股价走势</h2>
+<div class="chart-row">
+<div class="chart-box"><h4>历年营收与归母净利（亿元）</h4><canvas id="chart1"></canvas></div>
+<div class="chart-box"><h4>2026年内股价走势（元，前复权）</h4><canvas id="chart2"></canvas></div>
+</div>
+
+<div class="card">
+<h3>💰 关键财务数据</h3>
+<table>
+<tr><th>指标</th><th>2023</th><th>2024</th><th>2025</th><th>2026Q1</th></tr>
+<tr><td>营业收入</td><td>19.39亿</td><td>32.52亿（+67.74%）</td><td>51.63亿（<b class="good">+58.79%</b>）</td><td>13.30亿（+40.82%）</td></tr>
+<tr><td>归母净利</td><td>7.30亿</td><td>13.44亿（+84.07%）</td><td>20.17亿（<b class="good">+50.15%</b>）</td><td>4.92亿（+45.79%）</td></tr>
+<tr><td>扣非净利</td><td>—</td><td>13.14亿（+82.56%）</td><td>19.76亿（+50.42%）</td><td>—</td></tr>
+<tr><td>毛利率</td><td>—</td><td>57.22%</td><td>53.96%（<b class="warn">-3.67pct</b>）</td><td>约55%</td></tr>
+<tr><td>净利率</td><td>—</td><td>41.30%</td><td>39.08%</td><td>37.0%</td></tr>
+<tr><td>经营现金流</td><td>—</td><td>12.63亿</td><td>18.68亿（<b class="good">+47.97%</b>）</td><td>—</td></tr>
+<tr><td>自由现金流</td><td>—</td><td>7.77亿</td><td><b class="good">+16.26亿</b></td><td>—</td></tr>
+<tr><td>资产负债率</td><td>—</td><td>15.85%</td><td>14.52%</td><td>—</td></tr>
+<tr><td>ROE（加权）</td><td>—</td><td>36.74%</td><td><b class="good">41.91%</b></td><td>—</td></tr>
+</table>
+<div class="note">📅 <b>2026H1业绩预告（7/18）</b>：归母净利11.24-13.04亿元（+25%-45%），Q2单季6.32-8.12亿（环比+28-65%）——三杰中增速最慢（旭创Q1 +262%、新易盛H1 +77-103%），但"符合预期"而非"超预期"。</div>
+</div>
+
+<h2>🏭 CPO行业与光模块三杰对比</h2>
+<div class="card">
+<h3>CPO（光电共封装）最新进展</h3>
+<table>
+<tr><th>事件</th><th>时间</th><th>影响</th></tr>
+<tr><td><b>英伟达官宣CPO量产</b>：Spectrum-X以太网CPO交换机</td><td>2026年7月底</td><td class="good">✅ 打破延期担忧，2026H2量产爬坡（集邦7/27确认出货）</td></tr>
+<tr><td>博通51.2T Bailly CPO交换机小批量出货</td><td>2026年7月</td><td class="good">✅ Meta等完成部署验证，功耗降70%</td></tr>
+<tr><td>SemiAnalysis警告CPO或推迟至2028-2029</td><td>2026年6月</td><td class="warn">⚠️ 引发板块波动，后被英伟达官宣部分证伪</td></tr>
+<tr><td>高盛预测2028年CPO渗透率29%</td><td>2026年8月</td><td class="good">✅ 增量市场而非替代可插拔</td></tr>
+</table>
+<div class="note">📊 CPO市场2026年预计同比+65%，2031年超500亿美元（国盛证券）。2026年渗透率仅0.55-5%，<b>规模化放量在2027年</b>。光引擎+FAU占CPO价值30-50%。</div>
+</div>
+
+<div class="card">
+<h3>光模块三杰阶段性对比（2026-08）</h3>
+<table>
+<tr><th>维度</th><th>天孚通信</th><th>中际旭创</th><th>新易盛</th></tr>
+<tr><td>2025年营收</td><td>51.63亿(+58.79%)</td><td>382.40亿(+60.2%)</td><td>248.42亿(+187.29%)</td></tr>
+<tr><td>2025年净利</td><td>20.17亿(+50.15%)</td><td>107.97亿(+108.8%)</td><td>95.32亿(+235.89%)</td></tr>
+<tr><td>2026Q1增速</td><td>+45.79%</td><td class="good">+262%（净利57.35亿）</td><td>高增（营收83.38亿）</td></tr>
+<tr><td>2026H1预告</td><td class="warn">+25-45%</td><td>Q2券商预测70-80亿</td><td class="good">+77-103%</td></tr>
+<tr><td>PE TTM（8/5）</td><td class="highlight">108.91</td><td>74.16</td><td>55.08</td></tr>
+<tr><td>2026E PE</td><td class="highlight">69.90</td><td>~32.7</td><td>~40</td></tr>
+<tr><td>核心逻辑</td><td><b>CPO光引擎（英伟达90-95%）</b></td><td>1.6T可插拔（市占50%+）</td><td>LPO+海外大客户</td></tr>
+<tr><td>财务质量</td><td class="good">ROE 42%、FCF+16亿、负债14.5%</td><td>优秀</td><td>优秀</td></tr>
+<tr><td>客户集中</td><td class="warn">Fabrinet 63%（最高）</td><td>英伟达为主</td><td>亚马逊/Meta（分散）</td></tr>
+<tr><td>今日评级</td><td>🟡 观察76（等回调）</td><td>🟢 推荐82</td><td>未覆盖</td></tr>
+</table>
+<div class="note">⚖️ <b>结论</b>：天孚估值最贵、增速最慢、客户最集中，但CPO逻辑最纯、财务最干净——三杰中"确定性溢价"与"估值透支"最极端的组合。</div>
+</div>
+
+<h2>📈 Fisher 15条评分：73.3/100</h2>
+<div class="chart-row">
+<div class="chart-box"><h4>Fisher 15条分项（1-10分）</h4><canvas id="chart3"></canvas></div>
+<div class="chart-box"><h4>三情景估值（2027E锚定）</h4><canvas id="chart4"></canvas></div>
+</div>
+
+<div class="card">
+<h3>🛡️ Bear Audit：<span class="badge badge-green">绿色</span>（财务质量优秀——三杰中最干净的报表）</h3>
+<table>
+<tr><th>检查项</th><th>结果</th><th>说明</th></tr>
+<tr><td>财务造假信号</td><td class="good">🟢 无</td><td>经营现金流18.68亿、净利现金含量92.59%</td></tr>
+<tr><td>一次性收益依赖</td><td class="good">🟢 无</td><td>扣非19.76亿=归母98%，主业纯粹</td></tr>
+<tr><td>自由现金流</td><td class="good">🟢 良好</td><td>FCF +16.26亿（2025），扩产期难得</td></tr>
+<tr><td>商誉/减值</td><td class="good">🟢 极低</td><td>商誉仅2,964.76万元</td></tr>
+<tr><td>负债与流动性</td><td class="good">🟢 优秀</td><td>资产负债率14.52%、流动比率5.33、现金29.62亿</td></tr>
+<tr><td>客户集中</td><td class="warn">🟡 结构性</td><td>Fabrinet 63.31%、前五大89.73%</td></tr>
+<tr><td>毛利率趋势</td><td class="warn">🟡 关注</td><td>57.22%→53.96%（泰国爬坡+上游涨价）</td></tr>
+</table>
+</div>
+
+<h2>🐻 Bear Case（做空论证）：做空概率约35%</h2>
+<div class="card">
+<ol>
+<li><b>"高估值+低增速"剪刀差</b>：TTM PE 109x（三杰最贵）vs H1增速+25-45%（三杰最慢）——7/18"符合预期"预告即引发一周-15.93%，戴维斯双杀风险最大</li>
+<li><b>客户极度集中=议价权丧失</b>：Fabrinet 63%、英伟达光引擎90-95%——任一环节变化都直接冲击收入</li>
+<li><b>CPO"故事"vs"现实"</b>：2026年渗透率仅0.55-5%，SemiAnalysis警告或推迟至2028-2029；若放量不及预期，75亿在手订单兑现拉长，高PE无法维持</li>
+<li><b>毛利率下行+汇兑拖累</b>：毛利率连续下滑（-3.67pct），2025年汇兑损失4,752万</li>
+<li><b>筹码结构恶化</b>：股东户数25.5万（+28.91%散户涌入）、高管1月集中减持、融券余额高企</li>
+</ol>
+<p style="margin-top:8px;"><b>多方的反驳：</b>①CPO是确定技术方向（功耗降70%不可逆），英伟达官宣量产，天孚是<u>最直接受益者</u>（无"替代恐慌"）；②光引擎垄断地位=极强订单确定性；③财务质量三杰最佳，抗风险最强；④增速换挡是基数效应（2024+84%、2025+50%后自然回落）；⑤PEG 2027E仅0.68。</p>
+</div>
+
+<h2>⚖️ 估值体系（第6章）</h2>
+<div class="card">
+<h3>机构一致预期（39家，2026-08-07）</h3>
+<table>
+<tr><th>年份</th><th>营收</th><th>同比</th><th>归母净利</th><th>同比</th><th>EPS</th><th>一致PE</th></tr>
+<tr><td>2025A</td><td>51.63亿</td><td>+58.79%</td><td>20.17亿</td><td>+50.15%</td><td>2.60元</td><td>-</td></tr>
+<tr><td>2026E</td><td>92.22亿</td><td>+78.61%</td><td>36.00亿</td><td>+78.45%</td><td>3.30元</td><td>69.90x</td></tr>
+<tr><td>2027E</td><td>153.46亿</td><td>+66.40%</td><td>55.72亿</td><td>+54.77%</td><td>5.11元</td><td>45.14x</td></tr>
+<tr><td>2028E</td><td>236.54亿</td><td>+54.14%</td><td>89.04亿</td><td>+59.82%</td><td>8.16元</td><td>28.26x</td></tr>
+</table>
+<div class="note">注：综合目标价297.81元（+29.1%）；国泰海通304.38元；东吴证券（保守）2026-2028净利32.4/42.1/57.4亿。<b>2026H1公司预告+25-45%低于全年一致预期+78%隐含的H2加速，需中报验证。</b></div>
+</div>
+
+<div class="card">
+<h3>三情景估值（以2027E净利为锚）</h3>
+<table>
+<tr><th>情景</th><th>概率</th><th>2027E净利</th><th>PE</th><th>市值</th><th>每股价值</th></tr>
+<tr><td>悲观（CPO放量不及预期/英伟达二供）</td><td>25%</td><td>45亿</td><td>28x</td><td>1,260亿</td><td>115.5元</td></tr>
+<tr><td>中性（CPO按预期规模化）</td><td>50%</td><td>56亿</td><td>38x</td><td>2,128亿</td><td>195.1元</td></tr>
+<tr><td>乐观（CPO超预期+3.2T放量）</td><td>30%</td><td>65亿</td><td>48x</td><td>3,120亿</td><td>286.0元</td></tr>
+</table>
+<p style="margin-top:8px;"><b>加权公允价值 = 212.3元</b>（0.25×115.5 + 0.50×195.1 + 0.30×286.0）｜ EV/EBITDA交叉验证：2025A约98x（极贵），2027E约36x（仍不便宜）｜ <b>现价230.68元较公允价值溢价约9%</b></p>
+</div>
+
+<div class="card">
+<h3>💎 投资决策价格阶梯（6.11-6.15 Hard）</h3>
+<table>
+<tr><th>价格带</th><th>对应估值（2027E PE）</th><th>操作指引</th></tr>
+<tr><td class="good"><b>≤145元</b></td><td>&lt;28x</td><td class="good">重仓区（积极买入）</td></tr>
+<tr><td class="good"><b>145-170元</b></td><td>28-33x</td><td class="good">建仓区（分批买入）</td></tr>
+<tr><td class="good"><b>170-215元</b></td><td>33-42x</td><td class="good">持有区</td></tr>
+<tr><td class="warn"><b>215-260元</b></td><td>42-50x</td><td class="warn">减仓观察区（现价230.68元在此区间）</td></tr>
+<tr><td class="risk-red"><b>&gt;260元</b></td><td>&gt;50x</td><td class="risk-red">清仓/回避区</td></tr>
+</table>
+</div>
+
+<h2>⚠️ 风险清单</h2>
+<div class="card">
+<table>
+<tr><th>风险</th><th>等级</th><th>说明</th></tr>
+<tr><td>客户集中（Fabrinet 63%）</td><td class="risk-red">🔴 高</td><td>单客户采购策略变化=收入冲击</td></tr>
+<tr><td>CPO放量不及预期</td><td class="risk-red">🔴 高</td><td>2026年渗透率仅0.55-5%，SemiAnalysis警告或推迟</td></tr>
+<tr><td>估值透支</td><td class="risk-red">🔴 高</td><td>TTM PE 109x、2026E 70x，增速换挡期消化压力</td></tr>
+<tr><td>英伟达引入二供</td><td class="risk-org">🟠 中高</td><td>光引擎90-95%份额或被动下降</td></tr>
+<tr><td>毛利率下行</td><td class="risk-org">🟠 中高</td><td>泰国爬坡+上游涨价，2025年已-3.67pct</td></tr>
+<tr><td>增速换挡</td><td class="risk-org">🟠 中</td><td>H1 +25-45% vs 历史+50-84%</td></tr>
+<tr><td>汇兑损失</td><td class="risk-yel">🟡 中</td><td>外销74.35%，2025年汇兑损失4,752万</td></tr>
+<tr><td>高管减持</td><td class="risk-yel">🟡 中</td><td>2026年1月多名高管减持</td></tr>
+<tr><td>板块情绪波动</td><td class="risk-yel">🟡 中</td><td>CPO替代恐慌反复（8/7旭创-3.68%拖累）</td></tr>
+<tr><td>技术路线变更</td><td class="risk-grn">🟢 低</td><td>硅光等路线演进，天孚已布局应对</td></tr>
+</table>
+</div>
+
+<h2>📌 投资逻辑（Bull Case）</h2>
+<div class="card">
+<ol>
+<li><b>CPO最纯正受益标的</b>：英伟达官宣Spectrum-X CPO量产（2026H2），光引擎+FAU占CPO价值30-50%，天孚全球市占60%+——"皇冠明珠"</li>
+<li><b>垄断地位=订单确定性</b>：英伟达Mellanox 1.6T光引擎90-95%份额（近乎独家），在手订单75亿+、2026全年锁定</li>
+<li><b>财务质量三杰最佳</b>：ROE 42%、FCF+16亿、资产负债率14.5%、商誉仅2,964万</li>
+<li><b>技术代际领先</b>：1.6T规模量产、3.2T样品、CPO配套完成、硅光布局</li>
+<li><b>成长确定性</b>：机构一致预期2026-2028年净利36/55.7/89亿（CAGR 57%），PEG 2027E 0.68</li>
+</ol>
+<div class="note"><b>须对冲的信念：</b>三杰中"估值最贵、增速最慢、客户最集中"——买的是CPO垄断地位与远期空间，不是当期业绩；任何CPO节奏扰动都会引发剧烈波动（7/18"符合预期"预告→一周-15.93%即是例证）。</div>
+</div>
+
+<h2>🔑 Value Drivers（长期维护章节）</h2>
+<div class="card">
+<table>
+<tr><th>#</th><th>Driver</th><th>当前状态</th><th>观察指标</th></tr>
+<tr><td>1</td><td>CPO量产节奏</td><td>英伟达官宣2026H2量产</td><td>Spectrum-X出货量、博通Bailly进度</td></tr>
+<tr><td>2</td><td>光引擎订单</td><td>在手75亿+、2026锁定</td><td>新签订单、英伟达份额变化</td></tr>
+<tr><td>3</td><td>1.6T/3.2T迭代</td><td>1.6T量产、3.2T样品</td><td>3.2T送样与量产时点</td></tr>
+<tr><td>4</td><td>Fabrinet采购</td><td>占收入63.31%</td><td>Fabrinet季度订单、占比变化</td></tr>
+<tr><td>5</td><td>毛利率</td><td>53.96%（-3.67pct）</td><td>泰国爬坡、产品结构</td></tr>
+<tr><td>6</td><td>产能扩张</td><td>江西+泰国、H股筹划</td><td>泰国提产、H股上市进度</td></tr>
+<tr><td>7</td><td>研发转化</td><td>2.67亿、专利近200项</td><td>新产品收入占比</td></tr>
+<tr><td>8</td><td>汇率</td><td>外销74.35%</td><td>汇兑损益</td></tr>
+</table>
+</div>
+
+<h2>🔍 最终结论与操作建议</h2>
+<div class="card">
+<h3>评级：<span class="badge badge-yellow">🟡 观察</span>（76.0/100）｜ 公允价值中枢约212元 ｜ 现价溢价约9%</h3>
+<ul style="margin-top:10px;">
+<li><b>持有者</b>：继续持有，8月中报（H1≥11.5亿、毛利率企稳）是持有逻辑验证锚；CPO量产进展是核心跟踪点</li>
+<li><b>空仓者</b>：不追高（现价处合理偏高区）；回调至<b class="good">195元以下</b>（2027E PE 38x）分批建仓，<b class="good">145-170元</b>（28-33x）积极买入</li>
+<li><b>减仓触发</b>：中报H1&lt;11.24亿 / CPO延期 / 英伟达二供 / 毛利率&lt;50% / 股价&gt;260元</li>
+<li><b>组合定位</b>：若已配置中际旭创（推荐82、更便宜），天孚作为CPO弹性补充仓位宜小；若看好CPO主题本身，天孚是唯一纯正标的</li>
+</ul>
+<div class="note" style="margin-top:12px;">📅 <b>下一验证窗口：</b>2026年8月下旬半年报（H1预告11.24-13.04亿）；2026H2英伟达Spectrum-X CPO量产爬坡；H股上市进展；3.2T光引擎送样。</div>
+</div>
+
+<div class="card">
+<h3>组合定位（今日已研究标的）</h3>
+<table>
+<tr><th>标的</th><th>类型</th><th>评级</th><th>定位</th></tr>
+<tr><td>中际旭创</td><td>1.6T可插拔龙头</td><td><span class="badge badge-green">🟢 推荐82</span></td><td>AI算力主线首选（估值合理）</td></tr>
+<tr><td>天孚通信</td><td>CPO光引擎垄断者</td><td><span class="badge badge-yellow">🟡 观察76</span></td><td>CPO纯正弹性标的（等回调）</td></tr>
+<tr><td>润泽科技</td><td>AIDC（算力基建房东）</td><td><span class="badge badge-yellow">🟡 观察73</span></td><td>AI算力第二选择（等回调）</td></tr>
+<tr><td>AAOI</td><td>美国本土光模块</td><td><span class="badge badge-yellow">🟡 回避59</span></td><td>高波动观察</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>📋 Final Audit：19/19 通过</h3>
+<table>
+<tr><th>#</th><th>检查项</th><th>结果</th></tr>
+<tr><td>1</td><td>第0章公司分类（成长股-超级成长股）</td><td class="good">✅</td></tr>
+<tr><td>2</td><td>估值方法与分类匹配（Forward PE+PEG）</td><td class="good">✅</td></tr>
+<tr><td>3</td><td>三情景概率（25/50/30）</td><td class="good">✅</td></tr>
+<tr><td>4</td><td>价格阶梯6.11-6.15</td><td class="good">✅</td></tr>
+<tr><td>5</td><td>Bear Case独立成章（做空概率35%）</td><td class="good">✅</td></tr>
+<tr><td>6</td><td>MDIG数据完整性（2项第三方口径已披露）</td><td class="good">✅</td></tr>
+<tr><td>7</td><td>客户集中风险量化（Fabrinet 63.31%）</td><td class="good">✅</td></tr>
+<tr><td>8</td><td>与同业阶段性对比（三杰对比表）</td><td class="good">✅</td></tr>
+<tr><td>9</td><td>分红/股东回报覆盖（10派7+10转4）</td><td class="good">✅</td></tr>
+<tr><td>10</td><td>风险清单完整（10项分级）</td><td class="good">✅</td></tr>
+<tr><td>11</td><td>Value Drivers可维护（8个Driver）</td><td class="good">✅</td></tr>
+<tr><td>12</td><td>Evidence Coverage占比声明（AI推断约15%）</td><td class="good">✅</td></tr>
+<tr><td>13</td><td>投资决策价格体系</td><td class="good">✅</td></tr>
+<tr><td>14</td><td>减仓触发条件（5条）</td><td class="good">✅</td></tr>
+<tr><td>15</td><td>组合内标的关联说明</td><td class="good">✅</td></tr>
+<tr><td>16</td><td>报告日期与数据截止标注</td><td class="good">✅</td></tr>
+<tr><td>17</td><td>中国股市红涨绿跌遵守</td><td class="good">✅</td></tr>
+<tr><td>18</td><td>免责声明</td><td class="good">✅</td></tr>
+<tr><td>19</td><td>后续跟踪计划（中报/CPO量产/订单）</td><td class="good">✅</td></tr>
+</table>
+</div>
+
+<div class="sub" style="margin-top:24px; text-align:center;">本报告基于公开信息与AI分析生成，仅供研究参考，不构成任何投资建议。市场有风险，投资需谨慎。<br>大灰皮证券研究统一框架 V-2.4 ｜ 天孚通信 300394.SZ ｜ 2026-08-09</div>
+
+</div>
+<script>
+const C={bg:'#161b22',border:'#30363d',text:'#e6edf3',dim:'#8b949e',red:'#f85149',green:'#3fb950',yellow:'#d29922',blue:'#58a6ff',purple:'#bc8cff'};
+Chart.defaults.color=C.dim; Chart.defaults.borderColor=C.border;
+new Chart(document.getElementById('chart1'),{type:'bar',data:{labels:['2022','2023','2024','2025'],
+datasets:[
+{label:'营业收入(亿)',data:[11.96,19.39,32.52,51.63],backgroundColor:C.blue,borderRadius:4},
+{label:'归母净利(亿)',data:[4.03,7.30,13.44,20.17],backgroundColor:C.purple,borderRadius:4}
+]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('chart2'),{type:'line',data:{labels:['25/12/31','26/01/20低','26/03','26/06/03高','26/07/30低','26/08/07'],
+datasets:[{label:'股价(元,前复权)',data:[144.52,129.76,null,374.50,160.10,230.68],borderColor:C.red,backgroundColor:'rgba(248,81,73,0.1)',fill:true,tension:0.3,pointBackgroundColor:C.red}]},options:{plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('chart3'),{type:'radar',data:{labels:['市场潜力','管理决心','研发占比','利润率','成本控制','利润提升','劳资','高管','管理深度','会计控制','行业地位','多元化','额外利润','股权稀释','坦诚'],
+datasets:[{label:'Fisher评分',data:[9,9,6,9,7,6,8,6,8,8,9,5,6,7,7],backgroundColor:'rgba(88,166,255,0.15)',borderColor:C.blue,pointBackgroundColor:C.blue}]},options:{scales:{r:{min:0,max:10,ticks:{stepSize:2}}},plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('chart4'),{type:'bar',data:{labels:['悲观25%','中性50%','乐观30%','加权公允价值'],
+datasets:[{label:'每股价值(元)',data:[115.5,195.1,286.0,212.3],backgroundColor:[C.red,C.blue,C.green,C.yellow],borderRadius:4}]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
+</script>
+</body>
+</html>
