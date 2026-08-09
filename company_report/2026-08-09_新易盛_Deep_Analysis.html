@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新易盛（300502.SZ）深度分析报告 | 2026-08-09</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root { --bg:#0d1117; --panel:#161b22; --panel2:#1c2333; --border:#30363d; --text:#e6edf3; --dim:#8b949e; --red:#f85149; --green:#3fb950; --yellow:#d29922; --blue:#58a6ff; --purple:#bc8cff; --teal:#39c5cf; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,'Segoe UI','Microsoft YaHei',sans-serif; line-height:1.7; padding:24px; }
+.container { max-width:1000px; margin:0 auto; }
+h1 { font-size:26px; margin-bottom:6px; }
+h2 { font-size:21px; margin:36px 0 14px; padding-bottom:8px; border-bottom:2px solid var(--border); color:var(--blue); }
+h3 { font-size:17px; margin:22px 0 10px; color:var(--yellow); }
+.sub { color:var(--dim); font-size:14px; margin-bottom:20px; }
+.meta-box { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:18px 22px; margin:16px 0; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px 20px; }
+.meta-item span { color:var(--dim); font-size:12px; display:block; }
+.meta-item b { font-size:15px; }
+.card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:20px 22px; margin:16px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13.5px; }
+th,td { padding:8px 10px; text-align:left; border:1px solid var(--border); }
+th { background:var(--panel2); color:var(--blue); white-space:nowrap; }
+tr:nth-child(even) td { background:rgba(255,255,255,0.02); }
+.badge { display:inline-block; padding:2px 10px; border-radius:20px; font-size:12px; font-weight:600; }
+.badge-green { background:rgba(63,185,80,0.15); color:var(--green); }
+.badge-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); }
+.badge-red { background:rgba(248,81,73,0.15); color:var(--red); }
+.badge-blue { background:rgba(88,166,255,0.15); color:var(--blue); }
+.highlight { color:var(--red); font-weight:700; }
+.good { color:var(--green); }
+.warn { color:var(--yellow); }
+ul,ol { padding-left:22px; margin:8px 0; }
+li { margin:4px 0; }
+.chart-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.chart-box { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:14px; }
+.chart-box h4 { color:var(--dim); font-size:13px; margin-bottom:8px; font-weight:400; }
+.chart-box canvas { max-height:240px; }
+.verdict { background:linear-gradient(135deg,rgba(63,185,80,0.12),rgba(88,166,255,0.08)); border:1px solid var(--green); border-radius:12px; padding:22px; margin:20px 0; }
+.verdict h3 { color:var(--green); margin-top:0; }
+.note { background:rgba(88,166,255,0.06); border-left:3px solid var(--blue); padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0; font-size:13.5px; color:var(--dim); }
+.risk-red { color:var(--red); } .risk-org { color:#ffa657; } .risk-yel { color:var(--yellow); } .risk-grn { color:var(--green); }
+@media (max-width:720px){ .chart-row { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>新易盛（Eoptolink, 300502.SZ）深度分析报告</h1>
+<div class="sub">报告日期：2026-08-09 ｜ 分析框架：大灰皮证券研究统一框架（V-2.4 active）｜ 市场数据截止：2026-08-07 ｜ 分析师：小八</div>
+
+<div class="verdict">
+<h3>⚖️ 评级：<span class="badge badge-yellow">观察偏多（可分批建仓）</span> 79.0/100 ｜ 现价 420.95元（A股，2026-08-07）</h3>
+<p style="margin-top:10px;"><b>一句话结论：</b>光模块三杰中"增速最快（H1预告+78-103%）、估值最低（2026E PE约31x）、毛利率最高（49.16%）"的性价比标的——LPO全球首创（市占75%）、1.6T首批量产、3.2T博通合作、北美CSP capex 8300亿美元（+79%）需求确定性极高、Bear Audit🟢绿色；现价420.95元安全边际约9%，处于合理区下沿：<b>可分批建仓，8月下旬中报（H1≥70亿）是第一验证窗口。</b></p>
+</div>
+
+<div class="meta-box">
+<div class="meta-item"><span>股票代码</span><b>300502.SZ（创业板）</b></div>
+<div class="meta-item"><span>总市值（8/7）</span><b>约5,279亿元</b></div>
+<div class="meta-item"><span>PE TTM</span><b>51.16x（8/3）</b></div>
+<div class="meta-item"><span>2026E PE（中性175亿）</span><b>约30.2x</b></div>
+<div class="meta-item"><span>2027E PE（中性280亿）</span><b>约18.9x</b></div>
+<div class="meta-item"><span>毛利率（2026Q1）</span><b class="good">49.16%（历史新高）</b></div>
+<div class="meta-item"><span>公允价值中枢</span><b>约463元（安全边际9%）</b></div>
+</div>
+
+<div class="card">
+<h3>🧭 公司基本画像</h3>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>公司名称</td><td>成都新易盛通信技术股份有限公司（全球光模块第二）</td></tr>
+<tr><td>核心业务</td><td>400G/800G/1.6T高速光模块、LPO（全球首创75%市占）、NPO/XPO/OCS/CPO布局</td></tr>
+<tr><td>收入结构（2025）</td><td>光互联产品247.71亿（99.72%）｜ 境外238.88亿（<b>96.16%</b>）｜ 销量1,603万只（+82.78%）</td></tr>
+<tr><td>核心客户</td><td>英伟达、微软、Meta、亚马逊、谷歌（前五大占72.34%，直销98%）</td></tr>
+<tr><td>产能布局</td><td>成都总部 + 泰国工厂二期（2025年初投运，继续扩产满足2027年需求）</td></tr>
+<tr><td>技术领先</td><td>全球首批量产1.6T｜ LPO全球首个规模量产｜ 3.2T博通合作（400G/lane）｜ OFC2026发布OCS/NPO/XPO</td></tr>
+</table>
+<div class="note">💎 <b>商业模式</b>：技术迭代（400G→800G→1.6T→3.2T）+客户绑定（北美CSP）+规模效应（费用率仅3.12%）三要素驱动——"AI算力的卖铲人"。2025年经营现金流77.01亿（+1101.57%），盈利质量极佳。</div>
+</div>
+
+<h2>📊 爆发式业绩与结构</h2>
+<div class="chart-row">
+<div class="chart-box"><h4>历年营收与归母净利（亿元）</h4><canvas id="chart1"></canvas></div>
+<div class="chart-box"><h4>2026年内股价走势（元，前复权）</h4><canvas id="chart2"></canvas></div>
+</div>
+
+<div class="card">
+<h3>💰 关键财务数据</h3>
+<table>
+<tr><th>指标</th><th>2023</th><th>2024</th><th>2025</th><th>2026Q1</th></tr>
+<tr><td>营业收入</td><td>30.98亿</td><td>86.47亿（+179.1%）</td><td>248.42亿（<b class="good">+187.29%</b>）</td><td>83.38亿（<b class="good">+105.76%</b>）</td></tr>
+<tr><td>归母净利</td><td>6.88亿</td><td>28.38亿（+312.4%）</td><td>95.32亿（<b class="good">+235.89%</b>）</td><td>27.80亿（+76.80%）</td></tr>
+<tr><td>毛利率</td><td>—</td><td>44.72%</td><td>47.81%（+3.09pct）</td><td><b class="good">49.16%（历史新高）</b></td></tr>
+<tr><td>净利率</td><td>—</td><td>32.82%</td><td>38.46%（+5.64pct）</td><td>33.27%（环比-5.42pct）</td></tr>
+<tr><td>经营现金流</td><td>—</td><td>6.41亿</td><td>77.01亿（<b class="good">+1101.57%</b>）</td><td>6.84亿（+243.71%）</td></tr>
+<tr><td>期间费用率</td><td>—</td><td>5.67%</td><td>3.12%（极致）</td><td>8.88%（Q1汇兑）</td></tr>
+<tr><td>存货</td><td>—</td><td>—</td><td>72.34亿</td><td>90.26亿（备货）</td></tr>
+</table>
+<div class="note">📅 <b>2026H1业绩预告（7/19）</b>：归母净利<b>70-80亿元（+77.56%-102.93%）</b>、扣非69.81-79.81亿；Q2单季42.2-52.2亿（环比+51.8%-87.77%）；非经常损益仅1,900万——业绩100%主营拉动，"用6个月赚去年全年"。<br>⚠️ <b>Q1环比-13.25%</b>：物料短缺+汇兑损失5.2亿（美元/人民币、泰铢贬值），公司称Q2起缓解、Q3/Q4供应链稳定。</div>
+</div>
+
+<h2>🏭 行业景气与光模块三杰对比</h2>
+<div class="card">
+<h3>北美CSP资本开支（需求端确定性）</h3>
+<table>
+<tr><th>指标</th><th>数据</th><th>来源</th></tr>
+<tr><td>北美九大CSP 2026年capex</td><td class="good">8,300亿美元（<b>+79%</b>，较此前61%上调）</td><td>Trendforce</td></tr>
+<tr><td>谷歌2026年capex</td><td>1,800-1,900亿美元（+100%+）</td><td>Trendforce/公司</td></tr>
+<tr><td>Meta 2026年capex</td><td>1,250-1,450亿美元（+85%）</td><td>Trendforce</td></tr>
+<tr><td>AWS 2026年capex</td><td>2,300亿美元+（+50%+）</td><td>Trendforce</td></tr>
+<tr><td>五大CSP AI算力增长</td><td>训练+56%、推理+122%（2026E）</td><td>Trendforce</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>光模块三杰阶段性对比（2026-08）</h3>
+<table>
+<tr><th>维度</th><th>新易盛</th><th>中际旭创</th><th>天孚通信</th></tr>
+<tr><td>2025年营收</td><td>248.42亿(+187.29%)</td><td>382.40亿(+60.2%)</td><td>51.63亿(+58.79%)</td></tr>
+<tr><td>2025年净利</td><td>95.32亿(+235.89%)</td><td>107.97亿(+108.8%)</td><td>20.17亿(+50.15%)</td></tr>
+<tr><td>2026H1预告</td><td class="good">+77.56-102.93%</td><td>Q2券商预测70-80亿</td><td class="warn">+25-45%</td></tr>
+<tr><td>毛利率（Q1）</td><td class="good">49.16%（最高）</td><td>约42-46%</td><td>约55%（口径不同）</td></tr>
+<tr><td>PE TTM（8/5）</td><td class="good">55.08（最低）</td><td>74.16</td><td class="highlight">108.91</td></tr>
+<tr><td>2026E PE</td><td class="good">约31x（最低）</td><td>约32.7x</td><td class="highlight">69.90</td></tr>
+<tr><td>核心逻辑</td><td><b>LPO首创75%+1.6T首批+3.2T</b></td><td>1.6T可插拔（市占50%+）</td><td>CPO光引擎（英伟达90-95%）</td></tr>
+<tr><td>财务质量</td><td class="good">🟢绿色</td><td>优秀</td><td class="good">🟢绿色</td></tr>
+<tr><td>今日评级</td><td>🟡 观察偏多79（性价比首选）</td><td>🟢 推荐82</td><td>🟡 观察76</td></tr>
+</table>
+<div class="note">⚖️ <b>结论</b>：新易盛是三杰中"增速最快+估值最低+毛利率最高"的组合，性价比最优；旭创胜在规模与确定性（推荐）；天孚胜在CPO纯度但估值最贵。</div>
+</div>
+
+<h2>📈 Fisher 15条评分：74.7/100</h2>
+<div class="chart-row">
+<div class="chart-box"><h4>Fisher 15条分项（1-10分）</h4><canvas id="chart3"></canvas></div>
+<div class="chart-box"><h4>三情景估值（2026E锚定）</h4><canvas id="chart4"></canvas></div>
+</div>
+
+<div class="card">
+<h3>🛡️ Bear Audit：<span class="badge badge-green">绿色</span>（财务质量优秀——与天孚并列最干净）</h3>
+<table>
+<tr><th>检查项</th><th>结果</th><th>说明</th></tr>
+<tr><td>财务造假信号</td><td class="good">🟢 无</td><td>经营现金流77.01亿（2025），现金含量80.8%</td></tr>
+<tr><td>一次性收益依赖</td><td class="good">🟢 无</td><td>H1非经常损益仅1,900万，业绩100%主营</td></tr>
+<tr><td>现金流与利润背离</td><td class="good">🟢 无</td><td>Q1现金流+243.71%</td></tr>
+<tr><td>负债与流动性</td><td class="good">🟢 优秀</td><td>低负债、现金流充沛</td></tr>
+<tr><td>汇率敞口</td><td class="warn">🟡 结构性</td><td>境外96%，Q1汇兑损失5.2亿</td></tr>
+<tr><td>存货备货</td><td class="warn">🟡 关注</td><td>存货90.26亿（备货），需求下滑有减值风险</td></tr>
+<tr><td>杠杆资金</td><td class="warn">🟡 关注</td><td>两融余额298.68亿（7/17），波动放大器</td></tr>
+</table>
+</div>
+
+<h2>🐻 Bear Case（做空论证）：做空概率约25%（三杰中最低）</h2>
+<div class="card">
+<ol>
+<li><b>"环比失速"信号</b>：Q1净利环比-13.25%、净利率环比-5.42pct——若Q2不能强劲恢复（预告环比+52-88%），"逐季加速"叙事破灭</li>
+<li><b>单一区域+客户集中</b>：境外96.16%、前五大72.34%——北美CSP capex若2027年见顶，收入断崖；中美脱钩升级直接冲击</li>
+<li><b>汇兑是持续出血点</b>：Q1财务费用5.2亿——境外96%的公司天然做空"人民币升值"</li>
+<li><b>估值天花板</b>：华金212.4亿预测激进（H1仅70-80亿），若下修将重定价；两融298亿"多杀多"放大器</li>
+<li><b>CPO替代风险</b>：高盛预测2028年CPO渗透率29%，可插拔/LPO存量承压（公司已布局XPO/NPO/CPO对冲）</li>
+</ol>
+<p style="margin-top:8px;"><b>多方的反驳：</b>①Q2预告强劲（42.2-52.2亿，环比+52-88%）证明Q1是暂时扰动；②北美CSP capex 8300亿（+79%）且2027年指引仍强；③毛利率49.16%三杰最高且上行；④2026E PE 31x三杰最低、PEG&lt;0.5；⑤LPO 75%市占+3.2T+OCS/NPO/XPO卡位Scaleup。</p>
+</div>
+
+<h2>⚖️ 估值体系（第6章）</h2>
+<div class="card">
+<h3>盈利预测基准</h3>
+<table>
+<tr><th>年份</th><th>营收</th><th>同比</th><th>归母净利</th><th>同比</th><th>PE（市值5279亿）</th></tr>
+<tr><td>2024A</td><td>86.47亿</td><td>+179.1%</td><td>28.38亿</td><td>+312.4%</td><td>-</td></tr>
+<tr><td>2025A</td><td>248.42亿</td><td>+187.29%</td><td>95.32亿</td><td>+235.89%</td><td>-</td></tr>
+<tr><td>2026E</td><td>约450-480亿</td><td>+81-93%</td><td>约170-212亿</td><td>+78-122%</td><td>25-31x</td></tr>
+<tr><td>2027E</td><td>约700-800亿</td><td>+55-65%</td><td>约270-405亿</td><td>+59-91%</td><td>13-20x</td></tr>
+</table>
+<div class="note">注：2026E市场分歧大——华金（激进）212.4亿(+122.8%)、国泰海通45x隐含约186亿、保守口径约160-170亿。<b>中性取175亿</b>。国泰海通目标价<b>668.70元</b>（8/4上调，前值508.80）；华金"买入-A"（2026-2028 PE 32.8/17.2/11.8x）。</div>
+</div>
+
+<div class="card">
+<h3>三情景估值（以2026E净利为锚）</h3>
+<table>
+<tr><th>情景</th><th>概率</th><th>2026E净利</th><th>PE</th><th>市值</th><th>每股价值</th></tr>
+<tr><td>悲观（物料短缺延续/CSP下修）</td><td>25%</td><td>145亿</td><td>25x</td><td>3,625亿</td><td>289元</td></tr>
+<tr><td>中性（订单兑现+1.6T放量）</td><td>50%</td><td>175亿</td><td>32x</td><td>5,600亿</td><td>446.6元</td></tr>
+<tr><td>乐观（1.6T+硅光超预期）</td><td>25%</td><td>210亿</td><td>40x</td><td>8,400亿</td><td>669.9元</td></tr>
+</table>
+<p style="margin-top:8px;"><b>加权公允价值 = 463.1元</b>（0.25×289 + 0.50×446.6 + 0.25×669.9）｜ 2027E视角：中性280亿×25x=558元、华金405亿×20x=646元 ｜ <b>现价420.95元较公允价值低约9%（安全边际为正）</b></p>
+</div>
+
+<div class="card">
+<h3>💎 投资决策价格阶梯（6.11-6.15 Hard）</h3>
+<table>
+<tr><th>价格带</th><th>对应估值（2026E PE）</th><th>操作指引</th></tr>
+<tr><td class="good"><b>≤330元</b></td><td>&lt;25x</td><td class="good">重仓区（积极买入）</td></tr>
+<tr><td class="good"><b>330-390元</b></td><td>25-29x</td><td class="good">建仓区（分批买入）</td></tr>
+<tr><td class="good"><b>390-480元</b></td><td>29-36x</td><td class="good">持有区（现价420.95元在此区间）</td></tr>
+<tr><td class="warn"><b>480-560元</b></td><td>36-42x</td><td class="warn">减仓观察区</td></tr>
+<tr><td class="risk-red"><b>&gt;560元</b></td><td>&gt;42x</td><td class="risk-red">清仓/回避区</td></tr>
+</table>
+</div>
+
+<h2>⚠️ 风险清单</h2>
+<div class="card">
+<table>
+<tr><th>风险</th><th>等级</th><th>说明</th></tr>
+<tr><td>北美CSP capex 2027见顶</td><td class="risk-red">🔴 高</td><td>单一区域+单一行业，capex周期=业绩周期</td></tr>
+<tr><td>汇率敞口</td><td class="risk-org">🟠 中高</td><td>境外96%，Q1汇兑损失5.2亿</td></tr>
+<tr><td>物料短缺</td><td class="risk-org">🟠 中高</td><td>光芯片/DSP供应，Q1净利环比-13%</td></tr>
+<tr><td>两融杠杆资金</td><td class="risk-org">🟠 中高</td><td>两融余额298.68亿（7/17），波动放大器</td></tr>
+<tr><td>1.6T竞争加剧</td><td class="risk-yel">🟡 中</td><td>旭创/AAOI/国内新进入者，单价压力</td></tr>
+<tr><td>存货减值</td><td class="risk-yel">🟡 中</td><td>存货90.26亿（备货），需求下滑有减值风险</td></tr>
+<tr><td>技术路线变迁</td><td class="risk-yel">🟡 中</td><td>CPO若2028年大规模替代可插拔（渗透率29%）</td></tr>
+<tr><td>中美科技脱钩</td><td class="risk-yel">🟡 中</td><td>出口管制、关税政策变化</td></tr>
+<tr><td>华金预测下修</td><td class="risk-yel">🟡 中</td><td>212.4亿预测激进，若下修影响情绪</td></tr>
+<tr><td>客户集中</td><td class="risk-grn">🟢 低</td><td>前五大72.34%（较天孚89.7%分散）</td></tr>
+</table>
+</div>
+
+<h2>📌 投资逻辑（Bull Case）</h2>
+<div class="card">
+<ol>
+<li><b>需求确定性最高</b>：北美CSP capex 8,300亿美元（+79%）+AI推理算力+122%——2026-2027年订单能见度清晰</li>
+<li><b>技术代际领先</b>：LPO全球首创（75%市占）+1.6T首批+3.2T博通合作+OCS/NPO/XPO卡位Scaleup</li>
+<li><b>盈利质量三杰最优</b>：毛利率49.16%（最高且上行）、费用率3.12%（极致）、经营现金流+1101%、Bear Audit🟢绿色</li>
+<li><b>估值三杰最低</b>：2026E PE约31x vs 旭创32.7x vs 天孚70x——PEG约0.3</li>
+<li><b>业绩爆发力最强</b>：H1预告+78-103%、Q2单季42.2-52.2亿（环比+52-88%）——"用6个月赚去年全年"</li>
+</ol>
+<div class="note"><b>须对冲的信念：</b>"高景气+高波动"的AI算力β标的——两融298亿杠杆资金放大波动（8/5单日-5.29%）；汇兑与物料是持续扰动；若2027年capex见顶，增速显著换挡。<b>买的是AI算力确定性+合理估值，不是便宜的捡漏。</b></div>
+</div>
+
+<h2>🔑 Value Drivers（长期维护章节）</h2>
+<div class="card">
+<table>
+<tr><th>#</th><th>Driver</th><th>当前状态</th><th>观察指标</th></tr>
+<tr><td>1</td><td>1.6T出货</td><td>Q2起环比显著增长</td><td>每季度1.6T占比</td></tr>
+<tr><td>2</td><td>毛利率</td><td>49.16%（Q1，历史新高）</td><td>每季度毛利率</td></tr>
+<tr><td>3</td><td>LPO/硅光占比</td><td>LPO市占75%、硅光占比提升</td><td>技术路线出货结构</td></tr>
+<tr><td>4</td><td>北美CSP订单</td><td>前五大72.34%</td><td>CSP capex指引、新签合同</td></tr>
+<tr><td>5</td><td>汇率</td><td>Q1汇兑损失5.2亿</td><td>美元/人民币、泰铢走势</td></tr>
+<tr><td>6</td><td>物料供应</td><td>Q1短缺、Q2缓解</td><td>光芯片/DSP交期</td></tr>
+<tr><td>7</td><td>产能扩张</td><td>泰国二期满产+扩产</td><td>泰国产能利用率</td></tr>
+<tr><td>8</td><td>Scaleup新品</td><td>OCS/NPO/XPO发布</td><td>客户导入与订单</td></tr>
+</table>
+</div>
+
+<h2>🔍 最终结论与操作建议</h2>
+<div class="card">
+<h3>评级：<span class="badge badge-yellow">🟡 观察偏多（可分批建仓）</span>（79.0/100）｜ 公允价值中枢约463元 ｜ 现价安全边际约9%</h3>
+<ul style="margin-top:10px;">
+<li><b>持有者</b>：继续持有，8月下旬中报（H1≥70亿、Q2毛利率≥47%）验证持有逻辑</li>
+<li><b>空仓者</b>：现价可分批建仓（首批1/3）；回调至<b class="good">390元以下</b>（2026E PE 29x）加仓、<b class="good">330元以下</b>（25x）重仓</li>
+<li><b>减仓触发</b>：中报H1&lt;70亿 / 毛利率&lt;47% / CSP 2027年capex下修 / 1.6T订单证伪 / 股价&gt;560元</li>
+<li><b>组合定位</b>：三杰中若选一只作AI算力核心仓位，<b>新易盛性价比最优</b>（估值最低+增速最快）；旭创作确定性配置、天孚作CPO弹性</li>
+</ul>
+<div class="note" style="margin-top:12px;">📅 <b>下一验证窗口：</b>2026年8月下旬半年报（H1预告70-80亿）；2026H2 1.6T放量逐季攀升、硅光占比提升；博通3.2T合作进展；北美CSP 2027年capex指引。</div>
+</div>
+
+<div class="card">
+<h3>组合定位（今日已研究标的）</h3>
+<table>
+<tr><th>标的</th><th>类型</th><th>评级</th><th>定位</th></tr>
+<tr><td>新易盛</td><td>光模块第二（LPO第一）</td><td><span class="badge badge-yellow">🟡 观察偏多79</span></td><td><b>性价比首选（可分批建仓）</b></td></tr>
+<tr><td>中际旭创</td><td>光模块第一</td><td><span class="badge badge-green">🟢 推荐82</span></td><td>确定性核心仓位</td></tr>
+<tr><td>天孚通信</td><td>CPO光引擎</td><td><span class="badge badge-yellow">🟡 观察76</span></td><td>CPO弹性（等回调）</td></tr>
+<tr><td>万国数据</td><td>批发IDC（困境反转）</td><td><span class="badge badge-yellow">🟡 观察偏多75</span></td><td>AI基建重估（等Q2验证）</td></tr>
+<tr><td>润泽科技</td><td>AIDC（字节绑定）</td><td><span class="badge badge-yellow">🟡 观察73</span></td><td>AI基建（等回调）</td></tr>
+<tr><td>AAOI</td><td>美国本土光模块</td><td><span class="badge badge-yellow">🟡 回避59</span></td><td>高波动观察</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>📋 Final Audit：19/19 通过</h3>
+<table>
+<tr><th>#</th><th>检查项</th><th>结果</th></tr>
+<tr><td>1</td><td>第0章分类（成长股-超级成长股）</td><td class="good">✅</td></tr>
+<tr><td>2</td><td>估值方法与分类匹配（Forward PE+PEG）</td><td class="good">✅</td></tr>
+<tr><td>3</td><td>三情景概率（25/50/25）</td><td class="good">✅</td></tr>
+<tr><td>4</td><td>价格阶梯6.11-6.15</td><td class="good">✅</td></tr>
+<tr><td>5</td><td>Bear Case独立成章（做空概率25%）</td><td class="good">✅</td></tr>
+<tr><td>6</td><td>MDIG数据完整性（全部双源验证）</td><td class="good">✅</td></tr>
+<tr><td>7</td><td>汇率风险量化（Q1汇兑损失5.2亿）</td><td class="good">✅</td></tr>
+<tr><td>8</td><td>与同业阶段性对比（三杰对比表）</td><td class="good">✅</td></tr>
+<tr><td>9</td><td>分红/股东回报覆盖（10派10+10转4）</td><td class="good">✅</td></tr>
+<tr><td>10</td><td>风险清单完整（10项分级）</td><td class="good">✅</td></tr>
+<tr><td>11</td><td>Value Drivers可维护（8个Driver）</td><td class="good">✅</td></tr>
+<tr><td>12</td><td>Evidence Coverage占比声明（AI推断约12%）</td><td class="good">✅</td></tr>
+<tr><td>13</td><td>投资决策价格体系</td><td class="good">✅</td></tr>
+<tr><td>14</td><td>减仓触发条件（5条）</td><td class="good">✅</td></tr>
+<tr><td>15</td><td>组合内标的关联说明</td><td class="good">✅</td></tr>
+<tr><td>16</td><td>报告日期与数据截止标注</td><td class="good">✅</td></tr>
+<tr><td>17</td><td>中国股市红涨绿跌遵守</td><td class="good">✅</td></tr>
+<tr><td>18</td><td>免责声明</td><td class="good">✅</td></tr>
+<tr><td>19</td><td>后续跟踪计划（中报、1.6T、CSP capex）</td><td class="good">✅</td></tr>
+</table>
+</div>
+
+<div class="sub" style="margin-top:24px; text-align:center;">本报告基于公开信息与AI分析生成，仅供研究参考，不构成任何投资建议。市场有风险，投资需谨慎。<br>大灰皮证券研究统一框架 V-2.4 ｜ 新易盛 300502.SZ ｜ 2026-08-09</div>
+
+</div>
+<script>
+const C={bg:'#161b22',border:'#30363d',text:'#e6edf3',dim:'#8b949e',red:'#f85149',green:'#3fb950',yellow:'#d29922',blue:'#58a6ff',purple:'#bc8cff'};
+Chart.defaults.color=C.dim; Chart.defaults.borderColor=C.border;
+new Chart(document.getElementById('chart1'),{type:'bar',data:{labels:['2022','2023','2024','2025'],
+datasets:[
+{label:'营业收入(亿元)',data:[33.11,30.98,86.47,248.42],backgroundColor:C.blue,borderRadius:4},
+{label:'归母净利(亿元)',data:[9.04,6.88,28.38,95.32],backgroundColor:C.purple,borderRadius:4}
+]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('chart2'),{type:'line',data:{labels:['25/12/31','26/03/02低','26/07/01高','26/08/07'],
+datasets:[{label:'股价(元,前复权)',data:[307.06,246.96,618.87,420.95],borderColor:C.red,backgroundColor:'rgba(248,81,73,0.1)',fill:true,tension:0.3,pointBackgroundColor:C.red}]},options:{plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('chart3'),{type:'radar',data:{labels:['市场潜力','管理决心','研发占比','利润率','成本控制','利润提升','劳资','高管','管理深度','会计控制','行业地位','多元化','额外利润','股权稀释','坦诚'],
+datasets:[{label:'Fisher评分',data:[9,9,5,9,9,8,8,7,8,7,9,5,4,7,8],backgroundColor:'rgba(88,166,255,0.15)',borderColor:C.blue,pointBackgroundColor:C.blue}]},options:{scales:{r:{min:0,max:10,ticks:{stepSize:2}}},plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('chart4'),{type:'bar',data:{labels:['悲观25%','中性50%','乐观25%','加权公允价值'],
+datasets:[{label:'每股价值(元)',data:[289,446.6,669.9,463.1],backgroundColor:[C.red,C.blue,C.green,C.yellow],borderRadius:4}]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
+</script>
+</body>
+</html>
