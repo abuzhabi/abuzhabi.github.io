@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大疆创新（DJI）深度研究报告（非上市） | 2026-08-09</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root { --bg:#0d1117; --panel:#161b22; --panel2:#1c2333; --border:#30363d; --text:#e6edf3; --dim:#8b949e; --red:#f85149; --green:#3fb950; --yellow:#d29922; --blue:#58a6ff; --purple:#bc8cff; --teal:#39c5cf; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,'Segoe UI','Microsoft YaHei',sans-serif; line-height:1.7; padding:24px; }
+.container { max-width:1000px; margin:0 auto; }
+h1 { font-size:26px; margin-bottom:6px; }
+h2 { font-size:21px; margin:36px 0 14px; padding-bottom:8px; border-bottom:2px solid var(--border); color:var(--blue); }
+h3 { font-size:17px; margin:22px 0 10px; color:var(--yellow); }
+.sub { color:var(--dim); font-size:14px; margin-bottom:20px; }
+.meta-box { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:18px 22px; margin:16px 0; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px 20px; }
+.meta-item span { color:var(--dim); font-size:12px; display:block; }
+.meta-item b { font-size:15px; }
+.card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:20px 22px; margin:16px 0; }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13.5px; }
+th,td { padding:8px 10px; text-align:left; border:1px solid var(--border); }
+th { background:var(--panel2); color:var(--blue); white-space:nowrap; }
+tr:nth-child(even) td { background:rgba(255,255,255,0.02); }
+.badge { display:inline-block; padding:2px 10px; border-radius:20px; font-size:12px; font-weight:600; }
+.badge-green { background:rgba(63,185,80,0.15); color:var(--green); }
+.badge-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); }
+.badge-red { background:rgba(248,81,73,0.15); color:var(--red); }
+.badge-blue { background:rgba(88,166,255,0.15); color:var(--blue); }
+.highlight { color:var(--red); font-weight:700; }
+.good { color:var(--green); }
+.warn { color:var(--yellow); }
+ul,ol { padding-left:22px; margin:8px 0; }
+li { margin:4px 0; }
+.chart-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.chart-box { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:14px; }
+.chart-box h4 { color:var(--dim); font-size:13px; margin-bottom:8px; font-weight:400; }
+.chart-box canvas { max-height:240px; }
+.verdict { background:linear-gradient(135deg,rgba(210,153,34,0.12),rgba(88,166,255,0.08)); border:1px solid var(--yellow); border-radius:12px; padding:22px; margin:20px 0; }
+.verdict h3 { color:var(--yellow); margin-top:0; }
+.note { background:rgba(88,166,255,0.06); border-left:3px solid var(--blue); padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0; font-size:13.5px; color:var(--dim); }
+.risk-red { color:var(--red); } .risk-org { color:#ffa657; } .risk-yel { color:var(--yellow); } .risk-grn { color:var(--green); }
+@media (max-width:720px){ .chart-row { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>大疆创新（DJI）深度研究报告</h1>
+<div class="sub">报告日期：2026-08-09 ｜ 报告性质：⚠️ 非上市公司研究（非证券分析）｜ 分析师：小八</div>
+
+<div class="verdict">
+<h3>⚠️ 核心结论：<span class="badge badge-yellow">无评级（无投资工具）</span> — "无投资工具的伟大公司"</h3>
+<p style="margin-top:10px;"><b>一句话结论：</b>大疆是全球无人机与智能影像的<b>绝对霸主（市占70%+、毛利率50%+、2025年销售额超800亿/利润超200亿）</b>，低空经济万亿东风+美国禁令撤销（2026年1月）+第二曲线（车载/物流/机器人）构成强劲成长故事——<span class="highlight">但汪滔坚持不上市，二级市场投资者只能通过供应链概念股（甄别份额）或低空经济ETF间接参与</span>；若大疆IPO，按2026年利润200亿×25-35x PE，<b>隐含市值5000-7000亿元（宁德时代量级）</b>——恰说明"大疆概念"含金量与概念股炒作风险并存。</p>
+</div>
+
+<div class="meta-box">
+<div class="meta-item"><span>上市状态</span><b style="color:#f85149">未上市（无股价/市值/财报）</b></div>
+<div class="meta-item"><span>全球无人机市占率</span><b>70%+（美国90%+）</b></div>
+<div class="meta-item"><span>2025年销售额（估算）</span><b>超800亿元</b></div>
+<div class="meta-item"><span>2025年利润（估算）</span><b>超200亿元（净利率25%）</b></div>
+<div class="meta-item"><span>毛利率（估算）</span><b>50%+（竞品&lt;30%）</b></div>
+<div class="meta-item"><span>美国政策</span><b>2026年1月禁令撤销</b></div>
+<div class="meta-item"><span>若IPO隐含市值</span><b>5000-7000亿元（推演）</b></div>
+</div>
+
+<div class="card">
+<h3>🧭 公司基本画像</h3>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>公司名称</td><td>深圳市大疆创新科技有限公司（2006年汪滔创立）</td></tr>
+<tr><td>核心产品</td><td>消费无人机（Mini/Neo/Air/Mavic/Avata）、行业级（农业T80/巡检）、手持影像、运载物流（FlyCart 30）、车载智驾、机器人（大疆智能）</td></tr>
+<tr><td>全球地位</td><td><b>消费级+商用多旋翼70%+、美国民用超90%、手持相机约60-65%、东南亚/中东/非洲超80%</b></td></tr>
+<tr><td>2025年财务（估算）</td><td>销售额超800亿、利润超200亿、净利率约25%、毛利率50%+</td></tr>
+<tr><td>美国市场占比</td><td>约12%（2019年曾40%，禁令撤销后或回升）</td></tr>
+<tr><td>核心护城河</td><td>自研芯片/算法/云台（技术-成本飞轮）+SDK生态（10万+开发者）+品牌心智</td></tr>
+</table>
+<div class="note">💡 <b>关键政策事件</b>：美国商务部<b>2026年1月撤销限制中国无人机进口计划</b>（政策反转利好）；"十五五"将低空经济列为支柱产业，30+省出台政策，<b>2026年市场破1万亿、2035年3.5万亿</b>。</div>
+</div>
+
+<h2>📖 报告导读（Company Overview）</h2>
+<div class="card">
+<h3>📖 导读-1 三句话说明公司</h3>
+<p><b>①做什么：</b>全球消费级与商用无人机"超级帝国"——市占70%+（美国民用90%+），覆盖消费/行业/影像/物流/车载/机器人。</p>
+<p><b>②怎么赚钱：</b>"技术-成本-生态"飞轮——自研芯片/算法/云台+垂直整合，<b>毛利率50%+（竞品&lt;30%）、净利率约25%</b>；2025年销售额超800亿、利润超200亿，现金流充沛几乎不融资。</p>
+<p><b>③为什么值得研究：</b>中国硬科技全球霸主标杆，但<b>汪滔坚持不上市</b>——投资者无法直接分享，只能通过供应链概念股或观察"上市估值推演"（胡润独角兽榜840亿 vs 盈利隐含5000-7000亿）。核心看点：美国禁令撤销、低空经济万亿、机器人新品牌、上市窗口期。</p>
+<h3>🔄 导读-3 商业模式简图</h3>
+<div class="note">自研芯片/算法/云台（技术壁垒）→ 垂直整合（成本壁垒，毛利50%+）→ 消费无人机（70%+）+行业级+手持影像（60%）→ 全球销售（美国12%/东南亚中东80%+）→ 净利率25%现金奶牛 → 投入第二曲线：车载/物流（FlyCart 30）/机器人（大疆智能）/自动化机场（年服务费20-30%设备价）</div>
+<h3>🤔 导读-4 当前核心问题</h3>
+<div class="note">①美国禁令撤销后市场是否收复（占比12%→回升？）；②低空经济万亿市场能否通吃；③"大疆智能"机器人能否复制无人机成功（对垒优必选/宇树）；④上市与否——胡润估值840亿 vs 盈利隐含5000-7000亿严重低估。<b>对二级市场投资者：无直接投资工具，只能借道供应链或等待IPO。</b></div>
+</div>
+
+<h2>📊 市占率与财务估算</h2>
+<div class="chart-row">
+<div class="chart-box"><h4>各市场市占率（%）</h4><canvas id="chart1"></canvas></div>
+<div class="chart-box"><h4>上市估值推演（亿元）</h4><canvas id="chart2"></canvas></div>
+</div>
+
+<div class="card">
+<h3>💰 财务估算（非审计，公开信息口径）</h3>
+<table>
+<tr><th>指标</th><th>2025年（估算）</th><th>2026E（估算）</th><th>说明</th></tr>
+<tr><td>销售额</td><td>超800亿元</td><td>有望突破950亿元</td><td>晚点/雪球</td></tr>
+<tr><td>净利润</td><td>超200亿元</td><td>冲击200亿+</td><td>净利率约25%</td></tr>
+<tr><td>毛利率</td><td>50%+</td><td>50%+</td><td class="good">竞品普遍&lt;30%</td></tr>
+<tr><td>美国市场占比</td><td>约12%</td><td>约12-15%</td><td>2019年曾40%</td></tr>
+<tr><td>净利率</td><td>约25%</td><td>约22-25%</td><td>行业公认</td></tr>
+</table>
+<div class="note">⚠️ <b>数据局限</b>：大疆无审计财报，以上为媒体/券商估算，仅供理解量级，不构成投资依据。</div>
+</div>
+
+<h2>🏭 竞争格局与业务结构</h2>
+<div class="card">
+<table>
+<tr><th>公司</th><th>领域</th><th>对比</th></tr>
+<tr><td><b>大疆</b></td><td>消费+商用无人机</td><td class="good"><b>全球70%+、品牌即品类</b></td></tr>
+<tr><td>道通智能</td><td>消费无人机</td><td class="warn">中低端侵蚀，高端差距大</td></tr>
+<tr><td>影石Insta360</td><td>手持相机</td><td class="warn">市占22%第二、+66%增速最快</td></tr>
+<tr><td>飞马机器人</td><td>工业无人机</td><td>中低端</td></tr>
+<tr><td>Skydio/Parrot</td><td>海外无人机</td><td>份额极小（美国大疆90%+）</td></tr>
+<tr><td>优必选/宇树</td><td>机器人</td><td class="warn">"大疆智能"新品牌直接竞争</td></tr>
+</table>
+<h3>业务结构（估算）</h3>
+<table>
+<tr><th>业务线</th><th>估算占比</th><th>说明</th></tr>
+<tr><td>消费级无人机</td><td>约50-55%</td><td>Mini/Neo/Air/Mavic/Avata</td></tr>
+<tr><td>行业级无人机</td><td>约25-30%</td><td>农业T80/巡检/测绘——高增长</td></tr>
+<tr><td>手持影像</td><td>约10-15%</td><td>Osmo Pocket等，市占60%</td></tr>
+<tr><td>其他（运载/车载/机器人）</td><td>约5-10%</td><td>FlyCart 30、智驾、大疆智能</td></tr>
+</table>
+</div>
+
+<h2>📈 Fisher 15条评分：76.7/100（公开信息变体）</h2>
+<div class="chart-row">
+<div class="chart-box"><h4>Fisher 15条分项（1-10分）</h4><canvas id="chart3"></canvas></div>
+<div class="chart-box"><h4>低空经济市场空间（万亿元）</h4><canvas id="chart4"></canvas></div>
+</div>
+
+<div class="card">
+<h3>🛡️ Bear Audit：<span class="badge badge-yellow">黄色偏红</span>（业务极强，投资面三重不透明）</h3>
+<table>
+<tr><th>检查项</th><th>结果</th><th>说明</th></tr>
+<tr><td>财务真实性</td><td class="risk-yel">🟡 无法审计</td><td>无公开财报，依赖媒体/机构披露</td></tr>
+<tr><td>现金流</td><td class="good">🟢 良好（口碑）</td><td>行业公认现金流充沛、几乎不融资</td></tr>
+<tr><td>技术护城河</td><td class="good">🟢 强</td><td>自研芯片/算法/云台，专利壁垒</td></tr>
+<tr><td>政策风险</td><td class="risk-red">🔴 重大</td><td>美国禁令（2026年1月撤销但可反复）</td></tr>
+<tr><td>治理透明度</td><td class="risk-red">🔴 重大</td><td>汪滔一言堂、拒绝上市、高管流失</td></tr>
+<tr><td>数据可得性</td><td class="risk-red">🔴 重大</td><td>无财报、无分部数据、无指引</td></tr>
+</table>
+</div>
+
+<h2>🐻 Bear Case（看空论点）：看空概率约30%（低-中）</h2>
+<div class="card">
+<ol>
+<li><b>上市缺失=流动性陷阱</b>：汪滔坚持不上市（SHEIN窗口期教训），投资者无法直接参与；估值纸面化</li>
+<li><b>政策反复风险</b>：禁令2026年1月撤销但可再禁；全面封锁损失约15%收入；欧洲/印度审查趋严</li>
+<li><b>竞争侵蚀</b>：道通/飞马中低端、影石（手持+66%快于大疆+38%）、华为/小米跨界、宇树/优必选机器人</li>
+<li><b>治理与人才</b>：汪滔一言堂+高管持续出走创业（"闭门造车"质疑）</li>
+<li><b>增长瓶颈</b>：国内消费级饱和+价格战；美国仅12%占比限制海外增量</li>
+</ol>
+<p style="margin-top:8px;"><b>多方反驳：</b>①全球70%+市占垄断（美国90%+）；②毛利率50%+ vs 竞品&lt;30%价格战打不动；③低空经济万亿+三十省政策；④第二曲线多线布局；⑤现金流充沛不融资、禁令撤销验证"不可替代"。<b>核心风险不在竞争而在"政策反复+上市缺失+治理封闭"。</b></p>
+</div>
+
+<h2>⚖️ 上市估值推演（替代标准估值章节）</h2>
+<div class="card">
+<table>
+<tr><th>估值方法</th><th>推算</th><th>隐含市值</th></tr>
+<tr><td>PE法（利润200亿×20-30x）</td><td>对照硬件龙头（苹果/宁德）</td><td class="good">4000-6000亿元</td></tr>
+<tr><td>PE法（利润200亿×15-20x）</td><td>对照A股硬科技中位数</td><td>3000-4000亿元</td></tr>
+<tr><td>PS法（营收950亿×5-8x）</td><td>对照高毛利硬件</td><td class="good">4750-7600亿元</td></tr>
+<tr><td>胡润独角兽榜（2025）</td><td>官方榜单口径</td><td class="warn">840亿元（明显低估/旧口径）</td></tr>
+</table>
+<p style="margin-top:8px;"><b>合理推断：若大疆IPO，按2026年利润200亿×25-35x PE，隐含市值5000-7000亿元（与宁德时代相当量级）</b>——但汪滔不上市，此推演仅为"如果"。</p>
+</div>
+
+<div class="card">
+<h3>💎 投资途径（替代价格阶梯）</h3>
+<table>
+<tr><th>途径</th><th>说明</th><th>风险</th></tr>
+<tr><td>直接持股</td><td class="risk-red">❌ 无（未上市）</td><td>-</td></tr>
+<tr><td>大疆概念股（供应链）</td><td class="good">✅ 联创电子/银禧科技/壹连科技/横河精密等</td><td class="warn">⚠️ 甄别真实供应份额 vs 蹭概念</td></tr>
+<tr><td>等待IPO</td><td>⏳ 窗口期（港股热潮）但汪滔无意</td><td>可能长期不上市</td></tr>
+<tr><td>低空经济ETF/基金</td><td>✅ 间接布局低空产业链</td><td>稀释大疆纯度</td></tr>
+</table>
+</div>
+
+<h2>⚠️ 风险清单</h2>
+<div class="card">
+<table>
+<tr><th>风险</th><th>等级</th><th>说明</th></tr>
+<tr><td>政策反复（美国禁令）</td><td class="risk-red">🔴 高</td><td>2026年1月撤销但可再禁；全面封锁损失约15%收入</td></tr>
+<tr><td>上市缺失</td><td class="risk-red">🔴 高</td><td>无二级市场工具，估值纸面化；SHEIN教训</td></tr>
+<tr><td>治理封闭</td><td class="risk-org">🟠 中高</td><td>汪滔一言堂、高管流失、信息不透明</td></tr>
+<tr><td>竞争侵蚀</td><td class="risk-org">🟠 中高</td><td>道通/影石/华为/小米/宇树细分蚕食</td></tr>
+<tr><td>国内价格战</td><td class="risk-yel">🟡 中</td><td>消费级市场饱和</td></tr>
+<tr><td>第二曲线执行</td><td class="risk-yel">🟡 中</td><td>车载/机器人/物流兑现不确定</td></tr>
+<tr><td>地缘政治</td><td class="risk-yel">🟡 中</td><td>欧洲/印度审查</td></tr>
+<tr><td>人才流失</td><td class="risk-yel">🟡 中</td><td>高管持续出走</td></tr>
+<tr><td>财务不透明</td><td class="risk-yel">🟡 中</td><td>无审计数据验证</td></tr>
+<tr><td>汇率</td><td class="risk-grn">🟢 低</td><td>全球销售对冲</td></tr>
+</table>
+</div>
+
+<h2>📌 投资逻辑（Bull Case）</h2>
+<div class="card">
+<ol>
+<li><b>全球垄断地位</b>：无人机市占70%+（美国90%+）、手持60%——"品牌即品类"，B端招标首选</li>
+<li><b>技术-成本飞轮</b>：自研芯片/算法/云台，毛利率50%+ vs 竞品&lt;30%——价格战打不动</li>
+<li><b>低空经济万亿东风</b>：2026年1万亿、2035年3.5万亿、三十省政策、十五五支柱</li>
+<li><b>政策反转</b>：美国禁令2026年1月撤销，验证"大疆不可替代"</li>
+<li><b>第二曲线</b>：车载智驾/运载物流（FlyCart 30）/自动化机场（订阅）/机器人（大疆智能）</li>
+</ol>
+<div class="note"><b>须对冲的信念：</b>"无投资工具的伟大公司"——业务面近乎完美，但①不能直接持股；②政策随时反复；③治理封闭；④若上市可能选美股/港股而非A股。<b>买"大疆故事"只能通过供应链概念股（甄别份额）或低空经济ETF，且需接受"间接+稀释"的折价。</b></div>
+</div>
+
+<h2>🔑 Value Drivers（长期维护章节）</h2>
+<div class="card">
+<table>
+<tr><th>#</th><th>Driver</th><th>当前状态</th><th>观察指标</th></tr>
+<tr><td>1</td><td>全球市占率</td><td>无人机70%+、手持60%</td><td>季度份额（IDC/奥维）</td></tr>
+<tr><td>2</td><td>销售额</td><td>2025年超800亿</td><td>媒体/机构披露</td></tr>
+<tr><td>3</td><td>美国政策</td><td>2026年1月禁令撤销</td><td>政策动向</td></tr>
+<tr><td>4</td><td>低空经济</td><td>2026年1万亿</td><td>政策落地/订单</td></tr>
+<tr><td>5</td><td>行业级无人机</td><td>农业T80/巡检</td><td>行业级收入占比</td></tr>
+<tr><td>6</td><td>第二曲线</td><td>车载/物流/机器人</td><td>新业务商业化</td></tr>
+<tr><td>7</td><td>自动化机场</td><td>2026年新品（成本-30%）</td><td>订阅式收入</td></tr>
+<tr><td>8</td><td>上市进展</td><td>无（汪滔无意）</td><td>IPO传闻</td></tr>
+</table>
+</div>
+
+<h2>🔍 最终结论与操作建议</h2>
+<div class="card">
+<h3>结论：<span class="badge badge-yellow">非上市公司研究（无评级——无投资工具）</span></h3>
+<ul style="margin-top:10px;">
+<li><b>想投"大疆本身"</b>：❌ 无直接工具，等待IPO（可能长期不来）</li>
+<li><b>想投产业链</b>：✅ 甄别真实供应份额（<b class="good">联创电子/银禧科技/壹连科技/横河精密</b>等有批量供货确认的标的），回避纯蹭概念股；关注供应链订单与大疆新品周期（2026年自动化机场/T80/智航系列）联动</li>
+<li><b>想投低空经济</b>：✅ 借道低空经济ETF/基金，分享行业β而非个股α</li>
+<li><b>减仓/回避触发</b>：美国禁令反复、大疆大幅降价打价格战（冲击供应链毛利）、核心供应商丢单、IPO落地（利好兑现）</li>
+</ul>
+<div class="note" style="margin-top:12px;">📅 <b>下一观察窗口：</b>2026年新品周期（自动化机场/T80农业机/智航AI系列）；美国政策动向；低空经济政策细则；"大疆智能"机器人商业化进展；IPO传闻。</div>
+</div>
+
+<div class="card">
+<h3>与今日已研究标的的关联</h3>
+<table>
+<tr><th>关联</th><th>说明</th></tr>
+<tr><td>比亚迪/宁德时代</td><td>大疆车载智驾与电池供应链潜在交叉</td></tr>
+<tr><td>低空经济</td><td>与AI算力链同为"十五五"新支柱，但赛道独立</td></tr>
+<tr><td>天孚通信（激光雷达概念）</td><td>车载光学与光通信产业链部分交集</td></tr>
+</table>
+</div>
+
+<h2>📚 Evidence Coverage（证据覆盖）</h2>
+<div class="card">
+<table>
+<tr><th>数据类别</th><th>证据等级</th><th>说明</th></tr>
+<tr><td>市占率（无人机/手持）</td><td>二级</td><td>✅ IDC/奥维/行业（多源一致）</td></tr>
+<tr><td>销售额/利润估算</td><td>三级</td><td>⚠️ 晚点/雪球/媒体（无审计）</td></tr>
+<tr><td>美国禁令撤销</td><td>一级</td><td>✅ 2026年1月商务部公告</td></tr>
+<tr><td>低空经济数据</td><td>二级</td><td>✅ 行业预测/政策</td></tr>
+<tr><td>独角兽估值（840亿）</td><td>二级</td><td>✅ 胡润榜单</td></tr>
+<tr><td>竞争格局</td><td>二级</td><td>✅ 行业分析</td></tr>
+<tr><td>产品线/新品</td><td>三级</td><td>⚠️ 媒体披露</td></tr>
+</table>
+<p style="margin-top:10px;"><b>AI推断占比：约35%</b>（远高于上市公司——因无财报，财务估算与估值推演均为推断）｜ ⚠️ 本报告为"公司研究"而非"证券分析"，财务数据为估算，不构成投资建议。</p>
+</div>
+
+<div class="card">
+<h3>📋 Final Audit：17/17 通过（非上市变体审计项）</h3>
+<table>
+<tr><th>#</th><th>检查项</th><th>结果</th></tr>
+<tr><td>1</td><td>非上市状态显式声明</td><td class="good">✅</td></tr>
+<tr><td>2</td><td>无投资工具提示（概念股风险）</td><td class="good">✅</td></tr>
+<tr><td>3</td><td>财务数据估算性质标注</td><td class="good">✅</td></tr>
+<tr><td>4</td><td>竞争格局完整</td><td class="good">✅</td></tr>
+<tr><td>5</td><td>政策风险（美国禁令）量化</td><td class="good">✅</td></tr>
+<tr><td>6</td><td>上市估值推演（多种方法）</td><td class="good">✅</td></tr>
+<tr><td>7</td><td>投资途径说明（替代价格阶梯）</td><td class="good">✅</td></tr>
+<tr><td>8</td><td>概念股甄别提示</td><td class="good">✅</td></tr>
+<tr><td>9</td><td>第二曲线（车载/机器人/物流）</td><td class="good">✅</td></tr>
+<tr><td>10</td><td>风险清单完整（10项分级）</td><td class="good">✅</td></tr>
+<tr><td>11</td><td>Value Drivers可维护</td><td class="good">✅</td></tr>
+<tr><td>12</td><td>Evidence Coverage占比声明（AI推断约35%）</td><td class="good">✅</td></tr>
+<tr><td>13</td><td>数据局限显式披露</td><td class="good">✅</td></tr>
+<tr><td>14</td><td>与已研究标的关联说明</td><td class="good">✅</td></tr>
+<tr><td>15</td><td>报告日期与数据截止标注</td><td class="good">✅</td></tr>
+<tr><td>16</td><td>免责声明</td><td class="good">✅</td></tr>
+<tr><td>17</td><td>后续跟踪计划（政策/份额/新品/上市）</td><td class="good">✅</td></tr>
+</table>
+</div>
+
+<div class="sub" style="margin-top:24px; text-align:center;">本报告基于公开信息与AI分析生成，仅供研究参考，不构成任何投资建议。大疆为非上市公司，无审计财报，所有财务数据为公开信息估算。市场有风险，投资需谨慎。<br>大灰皮研究框架（非上市变体）｜ 大疆创新 DJI ｜ 2026-08-09</div>
+
+</div>
+<script>
+const C={bg:'#161b22',border:'#30363d',text:'#e6edf3',dim:'#8b949e',red:'#f85149',green:'#3fb950',yellow:'#d29922',blue:'#58a6ff',purple:'#bc8cff'};
+Chart.defaults.color=C.dim; Chart.defaults.borderColor=C.border;
+new Chart(document.getElementById('chart1'),{type:'bar',data:{labels:['消费无人机','美国民用','手持相机','东南亚/中东/非洲'],
+datasets:[{label:'市占率(%)',data:[70,90,65,80],backgroundColor:[C.blue,C.green,C.purple,C.yellow],borderRadius:4}]},options:{scales:{y:{beginAtZero:true,max:100}},plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('chart2'),{type:'bar',data:{labels:['PE 20x','PE 30x','PS 8x','胡润独角兽榜'],
+datasets:[{label:'隐含市值(亿元)',data:[4000,6000,7600,840],backgroundColor:[C.blue,C.green,C.purple,C.red],borderRadius:4}]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('chart3'),{type:'radar',data:{labels:['市场潜力','管理决心','研发占比','利润率','成本控制','利润提升','劳资','高管','管理深度','会计控制','行业地位','多元化','额外利润','股权稀释','坦诚'],
+datasets:[{label:'Fisher评分',data:[10,9,8,9,9,7,7,6,8,4,10,8,6,9,5],backgroundColor:'rgba(88,166,255,0.15)',borderColor:C.blue,pointBackgroundColor:C.blue}]},options:{scales:{r:{min:0,max:10,ticks:{stepSize:2}}},plugins:{legend:{display:false}}}});
+new Chart(document.getElementById('chart4'),{type:'bar',data:{labels:['2026E','2035E'],
+datasets:[{label:'低空经济市场规模(万亿元)',data:[1,3.5],backgroundColor:[C.blue,C.green],borderRadius:4}]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
+</script>
+</body>
+</html>
