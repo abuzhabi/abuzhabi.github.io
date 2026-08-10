@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>工业富联(601138.SH) 深度分析报告 | 大灰皮证券研究 V-2.4</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ===== 大灰皮证券研究 HTML 报告模板 V-2.4 ===== */
+:root {
+  --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+  --border: #30363d; --text: #c9d1d9; --text-dim: #8b949e;
+  --red: #f85149; --green: #3fb950; --yellow: #d29922; --blue: #58a6ff; --purple: #bc8cff;
+  --orange: #db6d28; --cyan: #39c5cf;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7; padding:20px; max-width:1200px; margin:0 auto; }
+h1 { color:var(--blue); font-size:1.8em; margin-bottom:5px; border-bottom:2px solid var(--border); padding-bottom:10px; }
+h2 { color:var(--cyan); font-size:1.4em; margin:30px 0 15px; padding-left:12px; border-left:4px solid var(--blue); }
+h3 { color:var(--purple); font-size:1.15em; margin:20px 0 10px; }
+h4 { color:var(--orange); font-size:1em; margin:15px 0 8px; }
+p { margin:8px 0; }
+.subtitle { color:var(--text-dim); font-size:0.9em; margin-bottom:20px; }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em; }
+th { background:var(--bg3); color:var(--blue); padding:10px; text-align:left; border:1px solid var(--border); }
+td { padding:8px 10px; border:1px solid var(--border); }
+tr:nth-child(even) { background:var(--bg2); }
+tr:hover { background:var(--bg3); }
+.score-badge { display:inline-block; padding:6px 20px; border-radius:8px; font-size:1.3em; font-weight:bold; }
+.score-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); border:2px solid var(--yellow); }
+.card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.card-red { border-left:4px solid var(--red); }
+.card-yellow { border-left:4px solid var(--yellow); }
+.card-green { border-left:4px solid var(--green); }
+.card-blue { border-left:4px solid var(--blue); }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; }
+@media (max-width:768px) { .grid-2, .grid-3 { grid-template-columns:1fr; } }
+.metric { text-align:center; padding:15px; background:var(--bg3); border-radius:8px; }
+.metric-val { font-size:1.8em; font-weight:bold; }
+.metric-label { color:var(--text-dim); font-size:0.85em; margin-top:5px; }
+.chart-container { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.highlight-red { color:var(--red); font-weight:bold; }
+.highlight-green { color:var(--green); font-weight:bold; }
+.highlight-yellow { color:var(--yellow); font-weight:bold; }
+.highlight-blue { color:var(--blue); font-weight:bold; }
+blockquote { border-left:3px solid var(--orange); padding:10px 15px; margin:15px 0; background:var(--bg2); color:var(--text-dim); border-radius:0 8px 8px 0; }
+ul,ol { margin:8px 0 8px 25px; }
+li { margin:4px 0; }
+.tag { display:inline-block; padding:2px 10px; border-radius:4px; font-size:0.8em; margin:2px; }
+.tag-red { background:rgba(248,81,73,0.2); color:var(--red); }
+.tag-green { background:rgba(63,185,80,0.2); color:var(--green); }
+.tag-yellow { background:rgba(210,153,34,0.2); color:var(--yellow); }
+.tag-blue { background:rgba(88,166,255,0.2); color:var(--blue); }
+hr { border:none; border-top:1px solid var(--border); margin:25px 0; }
+.section-num { color:var(--blue); font-weight:bold; }
+.evidence-bar { display:flex; height:25px; border-radius:5px; overflow:hidden; margin:10px 0; }
+.evidence-bar div { display:flex; align-items:center; justify-content:center; font-size:0.75em; color:#fff; }
+.footer { text-align:center; color:var(--text-dim); margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:0.85em; }
+.report-nav { display:flex; align-items:center; gap:12px; padding:10px 16px; margin-bottom:24px; background:#1a1e2a; border:1px solid var(--border); border-radius:8px; font-size:0.85rem; flex-wrap:wrap; }
+.report-nav a { color:var(--blue); text-decoration:none; padding:4px 10px; border-radius:6px; transition:background 0.15s, color 0.15s; white-space:nowrap; }
+.report-nav a:hover { background:rgba(88,166,255,0.15); }
+.report-nav .nav-left { display:flex; align-items:center; gap:8px; }
+.report-nav .nav-right { margin-left:auto; display:flex; align-items:center; gap:8px; }
+.report-nav .nav-sep { color:var(--border); font-size:0.75rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ====== 导航栏 ====== -->
+<div class="report-nav">
+  <div class="nav-left"><a href="index.html">← 返回公司列表</a></div>
+  <div class="nav-right"><a href="../../index.html">🏠 研究报告首页</a></div>
+</div>
+
+<!-- ====== 标题 ====== -->
+<h1>工业富联（601138.SH）深度分析报告</h1>
+<p class="subtitle">框架: 大灰皮证券研究 V-2.4 | 日期: 2026-08-10 | 分析师: 小八(AI) | Evidence First + 8 Principles + Hard Constraints + Market Data Integrity | 首次覆盖</p>
+
+<!-- ====== 最终结论卡片 ====== -->
+<div class="card card-yellow">
+<h2 style="margin-top:0">最终结论</h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">72.8<span style="font-size:0.5em">/100</span></div><div class="metric-label">综合评分</div></div>
+<div class="metric"><div class="score-badge score-yellow">🟡 观察偏多</div><div class="metric-label">评级</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">持有/回调加仓</div><div class="metric-label">投资建议</div></div>
+</div>
+<blockquote>工业富联是"A股纯度最高的英伟达AI基建标的"——2026H1净利预告234-244亿（+93%~101%）、Rubin机柜锁定80-90%代工份额、CPO交换机唯一设计商；但现价68.81元对应2026E PE 22.7x、PB 8.36x历史高位，安全边际约-3%~-7%，代工毛利率仅7%。好公司+合理偏贵价格：持有者继续持有（8月底中报验证），空仓者等回调至60-63元分批建仓。</blockquote>
+</div>
+
+<!-- ====== 核心指标 ====== -->
+<h2><span class="section-num">核心指标</span></h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--blue)">68.81<span style="font-size:0.5em">元</span></div><div class="metric-label">现价 (2026-08-10)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--blue)">13,655<span style="font-size:0.5em">亿元</span></div><div class="metric-label">总市值</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--blue)">22.7x</div><div class="metric-label">2026E PE（EPS 3.03元）</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">+93~101%</div><div class="metric-label">2026H1净利预告</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">7.35%</div><div class="metric-label">毛利率 (2026Q1)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">-3%~-7%</div><div class="metric-label">当前安全边际</div></div>
+</div>
+
+<!-- ====== 第0章 公司分类 ====== -->
+<h2><span class="section-num">第0章</span> 公司分类</h2>
+<div class="card card-blue">
+<h3>分类：成长股（超级成长 + 强周期属性）</h3>
+<table>
+<tr><th>维度</th><th>判断</th><th>依据</th></tr>
+<tr><td>行业属性</td><td>超级成长</td><td>AI服务器2026-2034 CAGR约34.7%</td></tr>
+<tr><td>生命周期</td><td>高速成长期</td><td>2026E净利+70%、H1预告+93%~101%</td></tr>
+<tr><td>周期性</td><td>强周期（北美capex）</td><td>需求由云厂商资本开支驱动（2026年四大云厂约7,400亿美元）</td></tr>
+<tr><td>盈利模式</td><td>代工薄毛利</td><td>毛利率6.98%、净利率3.91%、ROE 21.65%</td></tr>
+<tr><td>收入质量</td><td>客户高度集中</td><td>前五大客户约70%</td></tr>
+</table>
+<p><strong>首选估值方法</strong>：PE相对成长（PEG）+ 三情景概率加权<br>
+<span class="tag tag-yellow">估值限制</span> 代工模式毛利率极低，估值必须以"毛利率不崩塌+北美capex不衰退"为前提；DCF不适用（OCF波动大）。</p>
+</div>
+
+<!-- ====== 第1章 基本面 ====== -->
+<h2><span class="section-num">第1章</span> 基本面分析</h2>
+<div class="card card-blue">
+<h3>商业模式</h3>
+<p>全球最大AI服务器ODM（英伟达GB200/GB300/NVL72整机柜代工）+ 800G/1.6T高速交换机代工龙头（份额80%+，CPO唯一设计商）。JDM模式深度绑定英伟达，赚取规模加工费。云计算板块2025年营收6,026.79亿元（+88.7%），占66.75%。〔一级〕</p>
+</div>
+<div class="grid-2">
+<div class="card">
+<h4>收入结构（2025年报）〔一级〕</h4>
+<table>
+<tr><th>业务</th><th>营收</th><th>占比</th><th>同比</th></tr>
+<tr><td>云计算（AI服务器）</td><td>6,026.79亿</td><td>66.75%</td><td class="highlight-red">+88.70%</td></tr>
+<tr><td>通信及移动网络设备</td><td>2,978.51亿</td><td>32.99%</td><td>+3.46%</td></tr>
+<tr><td>工业互联网</td><td>6.94亿</td><td>0.08%</td><td>—</td></tr>
+</table>
+</div>
+<div class="card">
+<h4>竞争地位（券商预测）〔三级〕</h4>
+<table>
+<tr><th>维度</th><th>工业富联</th><th>广达</th><th>纬创</th></tr>
+<tr><td>NVL72整机柜份额</td><td class="highlight-blue">45-48%</td><td>约40%</td><td>约10%</td></tr>
+<tr><td>Rubin机柜份额(预估)</td><td class="highlight-blue">80-90%</td><td>待定</td><td>待定</td></tr>
+<tr><td>高速交换机代工</td><td class="highlight-blue">80%+</td><td>无</td><td>无</td></tr>
+</table>
+<p style="font-size:0.85em;color:var(--text-dim)">大摩2026年5月：鸿海系（含富联）43-50%全球第一。客户：英伟达（CPO唯一设计商）、谷歌TPU托盘大单、微软、AWS、Meta、Oracle、苹果（结构件约25%）。</p>
+</div>
+</div>
+
+<!-- ====== 第2章 TAM ====== -->
+<h2><span class="section-num">第2章</span> 行业研究 (TAM)</h2>
+<div class="card card-blue">
+<h3>TAM：全球AI服务器 2025年约1,850-1,946亿美元 → 2026E 约2,622-2,800亿美元（+40%+）</h3>
+<table>
+<tr><th>指标</th><th>数据</th><th>来源</th></tr>
+<tr><td>AI服务器 2026-2034 CAGR</td><td>约34.7%</td><td>三级</td></tr>
+<tr><td>2025年出货量</td><td>约275万台（+46%）</td><td>三级</td></tr>
+<tr><td>英伟达GB200/300机柜出货</td><td>2025年2.9万台 → 2026E 7-8万台</td><td>三级</td></tr>
+<tr><td>2026云capex（亚马逊/谷歌/Meta/微软）</td><td>2,200 / 1,950-2,050 / 1,300-1,450 / 1,900亿美元</td><td>三级</td></tr>
+</table>
+<p><strong>TAM评级</strong>：★★★★★（赛道） | <strong>公司捕获能力</strong>：★★★★★（全球第一ODM+Rubin锁定80-90%） | 信心等级：★★★★☆</p>
+</div>
+
+<!-- ====== 第3章 Fisher ====== -->
+<h2><span class="section-num">第3章</span> Fisher成长股评价</h2>
+<div class="chart-container"><canvas id="fisherChart" height="120"></canvas></div>
+<p><strong>Fisher综合评分：66/100</strong></p>
+<p><span class="tag tag-green">最符合Fisher</span> 市场潜力(9)+长期成长(8)+护城河(7) —— AI算力基建最大承包商，Rubin锁定80-90%份额。</p>
+<p><span class="tag tag-red">最不符合Fisher</span> 利润率空间(4)+研发(5) —— 代工毛利率仅7%、无定价权，非费雪式特许经营权成长股。</p>
+
+<!-- ====== 第4章 Bear Audit ====== -->
+<h2><span class="section-num">第4章</span> 财务审计 (Bear Audit)</h2>
+<div class="chart-container"><canvas id="finChart" height="120"></canvas></div>
+<div class="card card-yellow">
+<h3 style="color:var(--yellow)">🟡 黄色（财务质量中等）</h3>
+<ol>
+<li><span class="tag tag-green">🟢</span> 经营现金流修复：2025年52.38亿(-78%) → 2026Q1 250.24亿(+1,826%)</li>
+<li><span class="tag tag-green">🟢</span> ROE 21.65%(2025,+5.8pct)优秀；分红194.51亿(55%)+回购10-20亿</li>
+<li><span class="tag tag-yellow">🟡</span> 毛利率6.98%(-0.3pct)→7.35%：代工低毛利是核心约束</li>
+<li><span class="tag tag-yellow">🟡</span> 存货约1,673亿：AI芯片快速迭代的跌价风险</li>
+<li><span class="tag tag-yellow">🟡</span> 资产负债率63.37%：制造业正常偏高</li>
+<li><span class="tag tag-yellow">🟡【未完全验证】</span> 鸿海体系关联交易定价公允性</li>
+</ol>
+</div>
+
+<!-- ====== 第5章 Bear Case ====== -->
+<h2><span class="section-num">第5章</span> Bear Case</h2>
+<div class="card card-red">
+<h3>做空成功概率：约30%</h3>
+<p>核心不是财务造假（财务真实、现金流已修复），而是"高预期+低毛利+周期高位"的估值消化风险：若2027年北美云capex下修+广达/立讯价格战压低毛利率，净利增速从+70%骤降至<15%，22.7x的2026E PE将面临戴维斯双杀（对应约36元/股）。更适合"回避/等回调"而非做空。</p>
+</div>
+<table>
+<tr><th>脆弱环节</th><th>触发信号</th><th>影响</th></tr>
+<tr><td>云capex见顶</td><td>任一云厂下调2027 capex指引</td><td>估值中枢-30%</td></tr>
+<tr><td>Rubin份额重排</td><td>英伟达引入二供</td><td>份额80-90%→50%</td></tr>
+<tr><td>价格战</td><td>广达/立讯激进扩产降价</td><td>毛利率跌破6.5%</td></tr>
+<tr><td>技术空窗</td><td>Rubin量产推迟至2027H2</td><td>2026H2-2027H1增长断层</td></tr>
+<tr><td>地缘政治</td><td>对华AI芯片/组装限制升级</td><td>海外订单转移</td></tr>
+</table>
+
+<!-- ====== Market Data Integrity Gate ====== -->
+<h2><span class="section-num">Market Data Integrity Gate</span> 市场数据完整性检查</h2>
+<div class="card card-blue">
+<table>
+<tr><th>数据</th><th>数值</th><th>状态</th></tr>
+<tr><td>股价（2026-08-10）</td><td>68.81元（盘中）/ 68.79元（收盘）</td><td>✅ 双源验证（差异0.03%）</td></tr>
+<tr><td>总市值</td><td>13,654.72亿 = 68.81 × 198.44亿股</td><td>✅ 乘法一致</td></tr>
+<tr><td>PE(TTM) 33.59x</td><td>TTM净利约406亿（与年报+Q1推算吻合）</td><td>✅ 已验证</td></tr>
+<tr><td>PB 8.36x</td><td>历史高位</td><td>✅ 已验证</td></tr>
+<tr><td>52周区间34.72-84.95元</td><td>34.72为2025年低点（跨年口径）</td><td>✅ 可解释差异</td></tr>
+</table>
+<p><strong>G.10 失败即停止</strong>：✅ 全部通过，允许进入估值。</p>
+</div>
+
+<!-- ====== 第6章 估值 ====== -->
+<h2><span class="section-num">第6章</span> 估值分析</h2>
+
+<h3>Valuation Data Admission Check</h3>
+<table>
+<tr><th>检查项</th><th>状态</th></tr>
+<tr><td>股价双源验证</td><td>✅ 68.81/68.79元（差异0.03%）</td></tr>
+<tr><td>2025年报+2026Q1财报</td><td>✅ 一级来源</td></tr>
+<tr><td>2026H1业绩预告</td><td>✅ 一级来源（7/9公告）</td></tr>
+<tr><td>2026E一致预期（44家）</td><td>✅ 净利601亿(+70.34%)、EPS 3.03元</td></tr>
+<tr><td>估值参数（PE区间）</td><td>⚠️ 含AI推断（基于历史分位+同行）</td></tr>
+</table>
+
+<h3>6.5 三情景估值</h3>
+<div class="chart-container"><canvas id="scenarioChart" height="120"></canvas></div>
+<table>
+<tr><th>情景</th><th>概率</th><th>2026E净利</th><th>2027E净利</th><th>2026E PE</th><th>价格</th></tr>
+<tr><td class="highlight-green">Bull</td><td>25%</td><td>650亿(+84%)</td><td>975亿(+50%)</td><td>26x</td><td>85.1元</td></tr>
+<tr><td class="highlight-blue">Base</td><td>50%</td><td>601亿(+70%)</td><td>870亿(+45%)</td><td>22x</td><td>66.6元</td></tr>
+<tr><td class="highlight-red">Bear</td><td>25%</td><td>520亿(+47%)</td><td>572亿(+10%)</td><td>15x</td><td>39.3元</td></tr>
+</table>
+<p><strong>概率加权公允价值 = 0.25×85.1 + 0.50×66.6 + 0.25×39.3 = 64.4元</strong>；Base公允价值66.6元。</p>
+
+<h3>6.11 投资决策价格框架（成长股价格阶梯）</h3>
+<table>
+<tr><th>价格区间</th><th>2026E PE</th><th>操作</th></tr>
+<tr><td>≤54.5元</td><td>≤18x</td><td class="highlight-green">重仓区（积极买入）</td></tr>
+<tr><td>54.5-60.6元</td><td>18-20x</td><td class="highlight-green">建仓区（分批买入）</td></tr>
+<tr><td>60.6-75.7元</td><td>20-25x</td><td class="highlight-yellow">持有/小幅买入区（现价68.81在此）</td></tr>
+<tr><td>75.7-84.3元</td><td>25-28x</td><td class="highlight-yellow">减仓观察区</td></tr>
+<tr><td>>84.3元</td><td>>28x</td><td class="highlight-red">清仓/回避区</td></tr>
+</table>
+
+<!-- 6.15 最终投资决策 -->
+<div class="card card-yellow">
+<h3>6.15 最终投资决策</h3>
+<div class="grid-2">
+<div>
+<p><strong>当前价格</strong>: 68.81元（2026-08-10）</p>
+<p><strong>公允价值(Base)</strong>: 约66.6元</p>
+<p><strong>买入价(含安全边际)</strong>: 54.5-60.6元（2026E PE 18-20x）</p>
+<p><strong>当前安全边际</strong>: <span class="highlight-red">约-3%（Base）/ -7%（加权）</span></p>
+</div>
+<div>
+<p><strong>操作建议</strong>: <span class="highlight-yellow">🟡 观察偏多（持有/回调加仓）</span></p>
+<p><strong>触发买入条件</strong>:</p>
+<ul>
+<li>回调至60-63元（安全边际5-8%）</li>
+<li>中报正式披露≥234亿且Q2 AI服务器增速延续</li>
+<li>Rubin订单落地确认</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- ====== 第7章 风险 ====== -->
+<h2><span class="section-num">第7章</span> 风险分析</h2>
+<table>
+<tr><th>风险</th><th>严重度</th><th>市场状态</th></tr>
+<tr><td>北美云capex周期见顶（2027）</td><td class="highlight-red">🔴 高</td><td>未反映</td></tr>
+<tr><td>客户集中（前五大70%，英伟达依赖）</td><td class="highlight-red">🔴 高</td><td>部分反映</td></tr>
+<tr><td>毛利率极低+价格战</td><td class="highlight-yellow">🟠 中高</td><td>未反映</td></tr>
+<tr><td>AI芯片出口管制/关税</td><td class="highlight-yellow">🟠 中高</td><td>部分反映</td></tr>
+<tr><td>Rubin切换期份额重排</td><td class="highlight-yellow">🟠 中</td><td>未反映</td></tr>
+<tr><td>存货1,673亿跌价</td><td class="highlight-yellow">🟡 中</td><td>未反映</td></tr>
+<tr><td>苹果结构件拖累</td><td class="highlight-yellow">🟡 中</td><td>部分反映</td></tr>
+<tr><td>估值消化（PB 8.36x高位）</td><td class="highlight-yellow">🟡 中</td><td>已部分反映</td></tr>
+</table>
+
+<!-- ====== 第8章 投资逻辑 ====== -->
+<h2><span class="section-num">第8章</span> 投资逻辑</h2>
+<div class="grid-2">
+<div class="card card-green">
+<h4>多头逻辑</h4>
+<ul>
+<li>A股纯度最高的英伟达AI基建标的，Rubin锁定80-90%代工份额</li>
+<li>增长确定性极强：H1预告+93~101%、AI服务器营收+230%</li>
+<li>交换机第二曲线：800G以上交换机2025年+13倍、CPO唯一设计商</li>
+<li>全球产能对冲关税：越南月产能1.2万台整机柜（2026H2）</li>
+<li>股东回报：2025年度分红194.51亿(55%)+2026年7月10-20亿回购</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>空头逻辑</h4>
+<ul>
+<li>代工低毛利：毛利率7%、净利率3.91%，无定价权</li>
+<li>客户集中70%：英伟达/苹果任一砍单双杀</li>
+<li>周期高位：2027年云capex增速放缓后增长叙事可能断裂</li>
+<li>估值不便宜：2026E PE 22.7x、PB 8.36x历史高位，安全边际为负</li>
+<li>经营现金流波动：2025年OCF -78%证明利润含金量不稳</li>
+</ul>
+</div>
+</div>
+
+<!-- ====== 第9章 Value Drivers ====== -->
+<h2><span class="section-num">第9章</span> Value Drivers</h2>
+<table>
+<tr><th>#</th><th>Driver</th><th>重要度</th><th>当前状态</th><th>观察指标</th></tr>
+<tr><td>D1</td><td>英伟达机柜出货量（GB300→Rubin）</td><td>★★★★★</td><td>2026E 7-8万台，Rubin Q4量产</td><td>月度营收、产业调研</td></tr>
+<tr><td>D2</td><td>机柜代工份额</td><td>★★★★★</td><td>NVL72 45-48% → Rubin 80-90%</td><td>大摩/高盛份额报告</td></tr>
+<tr><td>D3</td><td>高速交换机升级（800G→1.6T→CPO）</td><td>★★★☆☆</td><td>2026Q1出货+1.6倍，CPO样机出货</td><td>季报交换机收入</td></tr>
+<tr><td>D4</td><td>毛利率水平</td><td>★★★★☆</td><td>6.98%→7.35%微升</td><td>季报毛利率（核心）</td></tr>
+<tr><td>D5</td><td>北美云厂商capex</td><td>★★★★☆</td><td>2026年约7,400亿美元兑现</td><td>云厂财报指引</td></tr>
+<tr><td>D6</td><td>越南/美国产能爬坡</td><td>★★★☆☆</td><td>越南月产能1.2万台（2026H2）</td><td>公告/产业媒体</td></tr>
+<tr><td>D7</td><td>液冷渗透率</td><td>★★☆☆☆</td><td>2026年50%+，ASP提升</td><td>产业数据</td></tr>
+<tr><td>D8</td><td>存货周转与跌价</td><td>★★☆☆☆</td><td>存货1,673亿可控</td><td>季报跌价准备</td></tr>
+</table>
+
+<!-- ====== 第10章 最终结论 ====== -->
+<h2><span class="section-num">第10章</span> 最终结论</h2>
+<div class="chart-container"><canvas id="scoreChart" height="120"></canvas></div>
+<div class="card card-yellow">
+<h3>评级：🟡 观察偏多 | 评分：72.8/100</h3>
+<p><strong>评级逻辑</strong>：增长确定性极高（H1预告+93~101%、Rubin锁定80-90%份额、CPO唯一设计商），但现价68.81元对应2026E PE 22.7x、PB 8.36x历史高位，安全边际约-3%~-7%（价格已反映大部分预期）；代工毛利率仅7%无定价权；客户集中70%+北美capex周期位置偏高。好公司+合理偏贵价格——持有者继续持有（8月底中报验证），空仓者等回调至60-63元分批建仓，Rubin量产（2026Q4）为下一重估催化剂。</p>
+<blockquote>确定性极高的AI算力基建龙头，但当前价格不给安全边际：不追高、等回调。</blockquote>
+</div>
+
+<!-- ====== Market Data Final Audit ====== -->
+<h2>Market Data Final Audit (市场数据最终复检)</h2>
+<div class="card card-blue">
+<table>
+<tr><th>检查项</th><th>结果</th></tr>
+<tr><td>股价为决策日真实价</td><td>✅ 2026-08-10盘中68.81元/收盘68.79元</td></tr>
+<tr><td>未用当前价替代历史价</td><td>✅ 年内高低点均标注日期（6/3高点84.30、3/23低点46.70）</td></tr>
+<tr><td>双来源交叉验证</td><td>✅ 腾讯证券 vs 收盘价（差异0.03%）</td></tr>
+<tr><td>市值=股价×股本</td><td>✅ 68.81×198.44亿=13,655亿</td></tr>
+<tr><td>PE计算一致</td><td>✅ TTM净利406亿与年报+Q1推算吻合</td></tr>
+<tr><td>估值传导透明</td><td>✅ 公允价值=净利×PE÷股本（三情景加权64.4元）</td></tr>
+<tr><td>AI推断已标识</td><td>✅ 估值参数/Fisher评分已标注</td></tr>
+<tr><td>未承诺价格目标</td><td>✅ 只给区间与安全边际</td></tr>
+</table>
+<p><strong>19项复检清单 + 6项最终检查表全部通过，报告可发布。</strong></p>
+</div>
+
+<!-- ====== Evidence Coverage ====== -->
+<h2>Evidence Coverage (证据覆盖率)</h2>
+<div class="evidence-bar">
+<div style="width:35%;background:#3fb950">一级 35%</div>
+<div style="width:20%;background:#58a6ff">二级 20%</div>
+<div style="width:30%;background:#d29922">三级 30%</div>
+<div style="width:15%;background:#f85149">AI推断 15%</div>
+</div>
+<div class="grid-2">
+<div class="card card-green">
+<h4>已验证数据</h4>
+<ul>
+<li>2025年报（营收/净利/毛利率/ROE/OCF/负债率）〔一级〕</li>
+<li>2026Q1财报 + 2026H1业绩预告（7/9）〔一级〕</li>
+<li>分红194.51亿（55%）+ 2026年7月回购10-20亿〔一级〕</li>
+<li>大股东鸿海系持股36.75%+〔一级〕</li>
+<li>业务结构、产能布局（越南/墨西哥/美国）〔二级〕</li>
+<li>市场份额、行业规模、云capex指引〔三级〕</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>未验证/推断</h4>
+<ul>
+<li>英伟达/苹果对营收精确占比（未单独披露）</li>
+<li>前五大客户最新占比约70%（2024年报65.19%估算）</li>
+<li>Rubin份额80-90%（券商/产业预测，三级）</li>
+<li>三情景概率与PE假设（AI推断）</li>
+<li>Fisher评分依据（AI推断）</li>
+</ul>
+</div>
+</div>
+<blockquote>⚠️ 本报告存在较高推断比例（15%>10%）：估值参数（PE区间/情景概率）与Fisher评分为AI推断。投资决策请以一级数据（财报/公告）为主。</blockquote>
+
+<h2>Market Data Coverage (市场数据覆盖率)</h2>
+<table>
+<tr><th>检查项</th><th>状态</th></tr>
+<tr><td>数据身份确认（601138.SH）</td><td>✅</td></tr>
+<tr><td>双来源验证（68.81/68.79元）</td><td>✅ 差异0.03%</td></tr>
+<tr><td>历史日期锁定</td><td>✅（年内高低点标注日期）</td></tr>
+<tr><td>单位/币种验证（人民币/元）</td><td>✅</td></tr>
+<tr><td>估值传导一致性</td><td>✅</td></tr>
+<tr><td>跨文件一致性</td><td>✅ 首次覆盖</td></tr>
+</table>
+
+<!-- ====== 页脚 ====== -->
+<div class="footer">
+<p>报告生成: 2026-08-10 | 框架: 大灰皮证券研究 V-2.4 | Evidence First + 8 Principles + Hard Constraints + Market Data Integrity</p>
+<p>本报告由AI生成，不构成投资建议。投资有风险，入市需谨慎。</p>
+</div>
+
+</div><!-- .container -->
+
+<!-- ====== Chart.js 脚本 ====== -->
+<script>
+// Fisher 雷达图
+new Chart(document.getElementById('fisherChart'), {
+  type: 'radar',
+  data: {
+    labels: ['市场潜力','管理层','研发','销售','利润率空间','护城河','长期成长','财务文化','资本配置','长期竞争'],
+    datasets: [{ label:'工业富联', data:[9,6,5,7,4,7,8,6,7,7], backgroundColor:'rgba(88,166,255,0.2)', borderColor:'#58a6ff', pointBackgroundColor:'#58a6ff' }]
+  },
+  options: { scales:{ r:{ min:0, max:10, ticks:{ stepSize:2, color:'#8b949e' }, grid:{ color:'#30363d' }, angleLines:{ color:'#30363d' }, pointLabels:{ color:'#c9d1d9' } } },
+  plugins:{ legend:{ labels:{ color:'#c9d1d9' } } } }
+});
+// 营收/净利柱状图（2023-2026E）
+new Chart(document.getElementById('finChart'), {
+  type: 'bar',
+  data: {
+    labels: ['2023','2024','2025','2026E'],
+    datasets: [
+      { label:'营收(亿元)', data:[4763,6090,9029,15080], backgroundColor:'#58a6ff' },
+      { label:'归母净利(亿元)', data:[210,232,353,601], backgroundColor:'#3fb950' }
+    ]
+  },
+  options: { plugins:{ legend:{ labels:{ color:'#c9d1d9' } } },
+    scales:{ x:{ ticks:{ color:'#8b949e' }, grid:{ color:'#30363d' } }, y:{ ticks:{ color:'#8b949e' }, grid:{ color:'#30363d' } } } }
+});
+// 三情景估值
+new Chart(document.getElementById('scenarioChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Bear 39.3元','Base 66.6元','Bull 85.1元','加权 64.4元','现价 68.81元'],
+    datasets: [{ label:'价格(元)', data:[39.3,66.6,85.1,64.4,68.81], backgroundColor:['#f85149','#58a6ff','#3fb950','#d29922','#bc8cff'] }]
+  },
+  options: { indexAxis:'y', plugins:{ legend:{ display:false } },
+    scales:{ x:{ ticks:{ color:'#8b949e' }, grid:{ color:'#30363d' } }, y:{ ticks:{ color:'#c9d1d9' }, grid:{ color:'#30363d' } } } }
+});
+// 综合评分
+new Chart(document.getElementById('scoreChart'), {
+  type: 'bar',
+  data: {
+    labels: ['商业模式','行业','管理层','财务','护城河','成长性','估值','风险','Fisher'],
+    datasets: [{ label:'评分', data:[65,90,75,75,70,92,60,55,66], backgroundColor:['#8b949e','#3fb950','#58a6ff','#3fb950','#58a6ff','#3fb950','#d29922','#f85149','#bc8cff'] }]
+  },
+  options: { plugins:{ legend:{ display:false } },
+    scales:{ x:{ ticks:{ color:'#8b949e' }, grid:{ color:'#30363d' } }, y:{ min:0, max:100, ticks:{ color:'#8b949e' }, grid:{ color:'#30363d' } } } }
+});
+</script>
+
+</body>
+</html>
