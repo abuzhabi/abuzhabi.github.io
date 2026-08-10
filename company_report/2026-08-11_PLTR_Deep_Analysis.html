@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palantir(PLTR.US) 深度分析报告 | 大灰皮证券研究 V-2.4</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ===== 大灰皮证券研究 HTML 报告模板 V-2.4 ===== */
+:root {
+  --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+  --border: #30363d; --text: #c9d1d9; --text-dim: #8b949e;
+  --red: #f85149; --green: #3fb950; --yellow: #d29922; --blue: #58a6ff; --purple: #bc8cff;
+  --orange: #db6d28; --cyan: #39c5cf;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7; padding:20px; max-width:1200px; margin:0 auto; }
+h1 { color:var(--blue); font-size:1.8em; margin-bottom:5px; border-bottom:2px solid var(--border); padding-bottom:10px; }
+h2 { color:var(--cyan); font-size:1.4em; margin:30px 0 15px; padding-left:12px; border-left:4px solid var(--blue); }
+h3 { color:var(--purple); font-size:1.15em; margin:20px 0 10px; }
+h4 { color:var(--orange); font-size:1em; margin:15px 0 8px; }
+p { margin:8px 0; }
+.subtitle { color:var(--text-dim); font-size:0.9em; margin-bottom:20px; }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em; }
+th { background:var(--bg3); color:var(--blue); padding:10px; text-align:left; border:1px solid var(--border); }
+td { padding:8px 10px; border:1px solid var(--border); }
+tr:nth-child(even) { background:var(--bg2); }
+tr:hover { background:var(--bg3); }
+.score-badge { display:inline-block; padding:6px 20px; border-radius:8px; font-size:1.3em; font-weight:bold; }
+.score-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); border:2px solid var(--yellow); }
+.card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.card-red { border-left:4px solid var(--red); }
+.card-yellow { border-left:4px solid var(--yellow); }
+.card-green { border-left:4px solid var(--green); }
+.card-blue { border-left:4px solid var(--blue); }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; }
+@media (max-width:768px) { .grid-2, .grid-3 { grid-template-columns:1fr; } }
+.metric { text-align:center; padding:15px; background:var(--bg3); border-radius:8px; }
+.metric-val { font-size:1.8em; font-weight:bold; }
+.metric-label { color:var(--text-dim); font-size:0.85em; margin-top:5px; }
+.chart-container { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.highlight-red { color:var(--red); font-weight:bold; }
+.highlight-green { color:var(--green); font-weight:bold; }
+.highlight-yellow { color:var(--yellow); font-weight:bold; }
+.highlight-blue { color:var(--blue); font-weight:bold; }
+blockquote { border-left:3px solid var(--orange); padding:10px 15px; margin:15px 0; background:var(--bg2); color:var(--text-dim); border-radius:0 8px 8px 0; }
+ul,ol { margin:8px 0 8px 25px; }
+li { margin:4px 0; }
+.tag { display:inline-block; padding:2px 10px; border-radius:4px; font-size:0.8em; margin:2px; }
+.tag-red { background:rgba(248,81,73,0.2); color:var(--red); }
+.tag-green { background:rgba(63,185,80,0.2); color:var(--green); }
+.tag-yellow { background:rgba(210,153,34,0.2); color:var(--yellow); }
+.tag-blue { background:rgba(88,166,255,0.2); color:var(--blue); }
+hr { border:none; border-top:1px solid var(--border); margin:25px 0; }
+.section-num { color:var(--blue); font-weight:bold; }
+.evidence-bar { display:flex; height:25px; border-radius:5px; overflow:hidden; margin:10px 0; }
+.evidence-bar div { display:flex; align-items:center; justify-content:center; font-size:0.75em; color:#fff; }
+.footer { text-align:center; color:var(--text-dim); margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:0.85em; }
+.report-nav { display:flex; align-items:center; gap:12px; padding:10px 16px; margin-bottom:24px; background:#1a1e2a; border:1px solid var(--border); border-radius:8px; font-size:0.85rem; flex-wrap:wrap; }
+.report-nav a { color:var(--blue); text-decoration:none; padding:4px 10px; border-radius:6px; transition:background 0.15s, color 0.15s; white-space:nowrap; }
+.report-nav a:hover { background:rgba(88,166,255,0.15); }
+.report-nav .nav-left { display:flex; align-items:center; gap:8px; }
+.report-nav .nav-right { margin-left:auto; display:flex; align-items:center; gap:8px; }
+.report-nav .nav-sep { color:var(--border); font-size:0.75rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ====== 导航栏 ====== -->
+<div class="report-nav">
+  <div class="nav-left"><a href="index.html">← 返回公司列表</a></div>
+  <div class="nav-right"><a href="../../index.html">🏠 研究报告首页</a></div>
+</div>
+
+<!-- ====== 标题 ====== -->
+<h1>Palantir（PLTR.US）深度分析报告</h1>
+<p class="subtitle">框架: 大灰皮证券研究 V-2.4 | 日期: 2026-08-11 | 分析师: 小八(AI) | Evidence First + 8 Principles + Hard Constraints + Market Data Integrity | 首次覆盖</p>
+
+<!-- ====== 最终结论卡片 ====== -->
+<div class="card card-yellow">
+<h2 style="margin-top:0">最终结论</h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">75.6<span style="font-size:0.5em">/100</span></div><div class="metric-label">综合评分</div></div>
+<div class="metric"><div class="score-badge score-yellow">🟡 观察</div><div class="metric-label">评级</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">回避当前价位</div><div class="metric-label">投资建议</div></div>
+</div>
+<blockquote>PLTR是"AI落地实施龙头+增长奇迹"——Q2营收+93%（史上最高）、美国商业+149%、NDR 157%、RPO+103%、毛利率84.7%、零负债现金$92亿。但现价$178.16对应PS(TTM)~70x、PE~150x（标普500最贵软件股），较公允价值$150-154高出15-19%，安全边际显著为负；+93%含政府大单基数效应，OpenAI DeployCo直接复刻模式，SBC净稀释$6亿。最好的公司+最贵的价格：当前价位严格回避，等回调至$145以下或Q3增速验证。</blockquote>
+</div>
+
+<!-- ====== 核心指标 ====== -->
+<h2><span class="section-num">核心指标</span></h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--blue)">$178.16</div><div class="metric-label">现价 (2026-08-10)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--blue)">$4,288<span style="font-size:0.5em">亿</span></div><div class="metric-label">总市值</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--blue)">~70x</div><div class="metric-label">PS(TTM)（PE~150x）</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">+93%</div><div class="metric-label">Q2'26营收增速</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">157%</div><div class="metric-label">NDR 净收入留存</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">-15~-19%</div><div class="metric-label">当前安全边际</div></div>
+</div>
+
+<!-- ====== 第0章 公司分类 ====== -->
+<h2><span class="section-num">第0章</span> 公司分类</h2>
+<div class="card card-blue">
+<h3>分类：SaaS（超级成长）</h3>
+<table>
+<tr><th>维度</th><th>判断</th><th>依据</th></tr>
+<tr><td>行业属性</td><td>SaaS（AI软件平台）</td><td>订阅+部署服务，NDR 157%、毛利率84.7%</td></tr>
+<tr><td>生命周期</td><td>超级成长（加速期）</td><td>Q2营收+93%（史上最高），FY26指引+82%</td></tr>
+<tr><td>盈利模式</td><td>高毛利软件+高人力部署</td><td>毛利率84.7%、调整后营业利润率62%</td></tr>
+<tr><td>资本属性</td><td>轻资产+高现金</td><td>现金$92亿、零负债</td></tr>
+</table>
+<p><strong>首选估值方法</strong>：PS（EV/Revenue）倍数 + 三情景概率加权<br>
+<span class="tag tag-red">估值限制</span> 估值处历史极端高位——任何估值必须以"增速≥40%持续至2027年"为前提，增速回落至30%以下则估值可能腰斩。</p>
+</div>
+
+<!-- ====== 第1章 基本面 ====== -->
+<h2><span class="section-num">第1章</span> 基本面分析</h2>
+<div class="card card-blue">
+<h3>商业模式</h3>
+<p>AI软件"落地实施层"品类创造者——不卖模型（OpenAI/Anthropic），而是通过Ontology本体层+驻场工程师（FDE）帮政府和企业把AI部署到业务流程。三产品：Gotham（国防情报）、Foundry（商业数据OS）、AIP（AI部署平台）。〔二级/一级〕</p>
+</div>
+<div class="grid-2">
+<div class="card">
+<h4>收入结构（2026Q2）〔一级〕</h4>
+<table>
+<tr><th>板块</th><th>收入</th><th>增速</th></tr>
+<tr><td>美国商业</td><td>$7.64亿</td><td class="highlight-red">+149%</td></tr>
+<tr><td>美国政府</td><td>$8.09亿</td><td class="highlight-red">+90%</td></tr>
+<tr><td>国际商业</td><td>$1.82亿</td><td>+26%</td></tr>
+<tr><td>国际政府</td><td>$1.81亿</td><td>+42%</td></tr>
+<tr><td><b>合计</b></td><td><b>$19.35亿</b></td><td class="highlight-red"><b>+93%</b></td></tr>
+</table>
+</div>
+<div class="card">
+<h4>客户与前瞻指标〔一级〕</h4>
+<table>
+<tr><th>指标</th><th>数值</th><th>增速</th></tr>
+<tr><td>美国商业客户</td><td>653家</td><td class="highlight-red">+35%</td></tr>
+<tr><td>总客户</td><td>1,049家</td><td>+24%</td></tr>
+<tr><td>NDR</td><td>157%</td><td>—</td></tr>
+<tr><td>RPO</td><td>$49亿</td><td class="highlight-red">+103%</td></tr>
+<tr><td>总RDV</td><td>$131亿</td><td class="highlight-red">+83%</td></tr>
+</table>
+<p style="font-size:0.85em;color:var(--text-dim)">前20大客户占收入39%、DoD约12%；美国占74%。</p>
+</div>
+</div>
+<div class="card">
+<h4>政府大单与竞争〔一级~三级〕</h4>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>政府大单</td><td>陆军10年$100亿框架、Maven $13亿、海军$4.48亿、太空军$2.18亿、英国国防部2.4亿英镑</td></tr>
+<tr><td>竞争</td><td>OpenAI DeployCo($40亿+150名FDE复刻模式)、Anthropic Ode($15亿)、微软Frontier($25亿)、Databricks/Snowflake</td></tr>
+<tr><td>主权AI</td><td>与英伟达合作（Nemotron+Blackwell Ultra本地部署）</td></tr>
+</table>
+</div>
+
+<!-- ====== 第2章 TAM ====== -->
+<h2><span class="section-num">第2章</span> 行业研究 (TAM)</h2>
+<div class="card card-blue">
+<h3>TAM：AI软件落地实施层，数千亿美元级</h3>
+<table>
+<tr><th>情景</th><th>假设</th><th>2027E营收</th></tr>
+<tr><td class="highlight-green">乐观</td><td>AI落地加速+政府扩容+主权AI放量</td><td>$140亿+（+70%）</td></tr>
+<tr><td class="highlight-blue">基准</td><td>AI落地稳步推进，增速自然放缓</td><td>$115-125亿（+45-55%）</td></tr>
+<tr><td class="highlight-red">悲观</td><td>AI泡沫破灭/OpenAI分流/预算削减</td><td>$95-105亿（+25-30%）</td></tr>
+</table>
+<p><strong>TAM评级</strong>：★★★★☆ | <strong>公司捕获能力</strong>：★★★★☆ | 信心等级：★★★☆☆</p>
+</div>
+
+<!-- ====== 第3章 Fisher ====== -->
+<h2><span class="section-num">第3章</span> Fisher成长股评价</h2>
+<div class="chart-container"><canvas id="fisherChart" height="120"></canvas></div>
+<p><strong>Fisher综合评分：76/100</strong></p>
+<p><span class="tag tag-green">最符合Fisher</span> 市场潜力(9)+利润率空间(9)+护城河(9) —— NDR 157%+毛利率84.7%+政府关系垄断是顶级画像。</p>
+<p><span class="tag tag-red">最不符合Fisher</span> 财务文化(6)+资本配置(5) —— SBC净稀释$6亿/年，Karp/Thiel持续抛售，内部人用脚投票。</p>
+
+<!-- ====== 第4章 Bear Audit ====== -->
+<h2><span class="section-num">第4章</span> 财务审计 (Bear Audit)</h2>
+<div class="chart-container"><canvas id="finChart" height="120"></canvas></div>
+<div class="card card-yellow">
+<h3 style="color:var(--yellow)">🟡 黄色（财务质量优秀，治理有瑕疵）</h3>
+<ol>
+<li><span class="tag tag-green">🟢</span> 毛利率84.7%、营业利润率47%、FCF利润率63%</li>
+<li><span class="tag tag-green">🟢</span> RPO $49亿(+103%)——未来收入能见度极高</li>
+<li><span class="tag tag-green">🟢</span> 零负债、现金$92亿</li>
+<li><span class="tag tag-red">🔴</span> SBC净稀释：FY25 SBC $6.84亿 vs 回购$0.75亿</li>
+<li><span class="tag tag-red">🔴</span> 内部人抛售：Karp($132-137)/Thiel($140-147)/Glazer持续卖出</li>
+<li><span class="tag tag-yellow">🟡</span> 客户集中（前20大39%、DoD 12%）+美国依赖（74%）</li>
+</ol>
+</div>
+
+<!-- ====== 第5章 Bear Case ====== -->
+<h2><span class="section-num">第5章</span> Bear Case</h2>
+<div class="card card-red">
+<h3>做空成功概率：约30-35%</h3>
+<p>核心不是财务造假（财务真实且优秀），而是"极端估值+增速拐点"的均值回归风险：现价隐含"增速≥40%持续至2027年+"，一旦增速回落（政府大单基数效应+AI叙事退潮），PS从52x压至20x以下，股价可能腰斩。但做空赔率差：Q2业绩刚验证增长、NDR 157%、空头Q2财报日浮亏$30亿（轧空风险极高）——更适合"回避/等回调"而非做空。</p>
+</div>
+<table>
+<tr><th>失败点</th><th>触发信号</th><th>影响</th></tr>
+<tr><td>增速骤降</td><td>Q3增速<60%（当前+93%）</td><td>PS压至20x以下，-40%</td></tr>
+<tr><td>政府预算削减</td><td>9月DoD FY27预算不利</td><td>政府收入下修</td></tr>
+<tr><td>OpenAI DeployCo竞争</td><td>大型客户转向DeployCo</td><td>商业增速分流</td></tr>
+<tr><td>AI叙事退潮</td><td>软件股估值系统性收缩</td><td>高倍数股补跌</td></tr>
+<tr><td>SBC持续稀释</td><td>每季净稀释>1.5亿</td><td>股东回报恶化</td></tr>
+</table>
+
+<!-- ====== Market Data Integrity Gate ====== -->
+<h2><span class="section-num">Market Data Integrity Gate</span> 市场数据完整性检查</h2>
+<div class="card card-blue">
+<table>
+<tr><th>数据</th><th>数值</th><th>状态</th></tr>
+<tr><td>股价（2026-08-10）</td><td>$178.16（收盘）</td><td>✅ 腾讯+Nasdaq双源验证</td></tr>
+<tr><td>总市值</td><td>约$4,288亿（腾讯）/ $4,134亿（流通口径）</td><td>✅ 口径差异已标注</td></tr>
+<tr><td>PS(TTM) ~69.6x</td><td>TTM营收$61.6亿推算</td><td>✅ 计算一致</td></tr>
+<tr><td>FY26指引</td><td>$81.5-81.58亿（+82%）</td><td>✅ 一级来源</td></tr>
+<tr><td>52周区间</td><td>$106.37-$207.52</td><td>✅ 已验证</td></tr>
+</table>
+<p><strong>G.10 失败即停止</strong>：✅ 全部通过，允许进入估值。</p>
+</div>
+
+<!-- ====== 第6章 估值 ====== -->
+<h2><span class="section-num">第6章</span> 估值分析</h2>
+
+<h3>Valuation Data Admission Check</h3>
+<table>
+<tr><th>检查项</th><th>状态</th></tr>
+<tr><td>股价验证</td><td>✅ $178.16（2026-08-10收盘）</td></tr>
+<tr><td>10-K + Q1/Q2财报</td><td>✅ 一级来源</td></tr>
+<tr><td>FY26指引（两次上调）</td><td>✅ 一级来源（$81.5亿）</td></tr>
+<tr><td>估值参数（PS倍数）</td><td>⚠️ 含AI推断</td></tr>
+</table>
+
+<h3>6.5 三情景估值</h3>
+<div class="chart-container"><canvas id="scenarioChart" height="120"></canvas></div>
+<table>
+<tr><th>情景</th><th>概率</th><th>2027E营收</th><th>2027E PS</th><th>价格</th></tr>
+<tr><td class="highlight-green">Bull</td><td>25%</td><td>$140亿(+72%)</td><td>40x</td><td>$233.6</td></tr>
+<tr><td class="highlight-blue">Base</td><td>50%</td><td>$120亿(+47%)</td><td>30x</td><td>$150.2</td></tr>
+<tr><td class="highlight-red">Bear</td><td>25%</td><td>$100亿(+23%)</td><td>20x</td><td>$83.4</td></tr>
+</table>
+<p><strong>概率加权公允价值 = 0.25×233.6 + 0.50×150.2 + 0.25×83.4 = 154.4美元</strong>；Base公允价值$150.2。</p>
+
+<h3>6.11 投资决策价格框架（SaaS价格阶梯，2027E PS为锚）</h3>
+<table>
+<tr><th>价格区间</th><th>2027E PS</th><th>操作</th></tr>
+<tr><td>≤$83</td><td>≤20x</td><td class="highlight-green">重仓区（积极买入）</td></tr>
+<tr><td>$83-$104</td><td>20-25x</td><td class="highlight-green">建仓区（分批买入）</td></tr>
+<tr><td>$104-$145</td><td>25-35x</td><td class="highlight-yellow">持有/小幅买入区</td></tr>
+<tr><td>$145-$166</td><td>35-40x</td><td class="highlight-yellow">减仓观察区</td></tr>
+<tr><td>>$166</td><td>>40x</td><td class="highlight-red">清仓/回避区（现价$178.16在此）</td></tr>
+</table>
+
+<!-- 6.15 最终投资决策 -->
+<div class="card card-yellow">
+<h3>6.15 最终投资决策</h3>
+<div class="grid-2">
+<div>
+<p><strong>当前价格</strong>: $178.16（2026-08-10收盘）</p>
+<p><strong>公允价值(Base)</strong>: 约$150.2</p>
+<p><strong>买入价(含安全边际)</strong>: $83-104（2027E PS 20-25x）</p>
+<p><strong>当前安全边际</strong>: <span class="highlight-red">约-18.6%（Base）/ -15.4%（加权）</span></p>
+</div>
+<div>
+<p><strong>操作建议</strong>: <span class="highlight-yellow">🟡 观察（好公司、极端贵价格——回避当前价位）</span></p>
+<p><strong>触发买入条件</strong>:</p>
+<ul>
+<li>回调至$145以下（2027E PS 35x）</li>
+<li>Q3增速>60%且指引维持</li>
+<li>OpenAI竞争未见效</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- ====== 第7章 风险 ====== -->
+<h2><span class="section-num">第7章</span> 风险分析</h2>
+<table>
+<tr><th>风险</th><th>严重度</th><th>市场状态</th></tr>
+<tr><td>极端估值（PS 52.6x FY26E，标普500最贵）</td><td class="highlight-red">🔴 极高</td><td>已反映（未定价回调）</td></tr>
+<tr><td>增速拐点（Q3<60%触发戴维斯双杀）</td><td class="highlight-red">🔴 高</td><td>未反映</td></tr>
+<tr><td>OpenAI DeployCo/Anthropic/微软竞争</td><td class="highlight-yellow">🟠 中高</td><td>部分反映</td></tr>
+<tr><td>政府预算政策（9月FY27审议）</td><td class="highlight-yellow">🟠 中高</td><td>部分反映</td></tr>
+<tr><td>SBC稀释（FY25净稀释$6亿）</td><td class="highlight-yellow">🟡 中</td><td>未反映</td></tr>
+<tr><td>内部人抛售（Karp/Thiel/Glazer）</td><td class="highlight-yellow">🟡 中</td><td>部分反映</td></tr>
+<tr><td>客户集中（前20大39%、DoD 12%）</td><td class="highlight-yellow">🟡 中</td><td>已反映</td></tr>
+<tr><td>AI泡沫论（软件股估值收缩）</td><td class="highlight-yellow">🟠 中高</td><td>部分反映</td></tr>
+</table>
+
+<!-- ====== 第8章 投资逻辑 ====== -->
+<h2><span class="section-num">第8章</span> 投资逻辑</h2>
+<div class="grid-2">
+<div class="card card-green">
+<h4>多头逻辑</h4>
+<ul>
+<li>AI落地实施龙头：Ontology+驻场模式20年积累，NDR 157%、RPO+103%</li>
+<li>增长加速：Q2营收+93%（史上最高）、美国商业+149%、指引两次上调</li>
+<li>政府壁垒：陆军$100亿框架、DoD关系垄断、FY26国防预算$1万亿</li>
+<li>商业模式优秀：毛利率84.7%、营业利润率47%、FCF利润率63%</li>
+<li>AI长期顺风：AI投资从基础设施向应用落地转移</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>空头逻辑</h4>
+<ul>
+<li>估值极端：PS(TTM)~70x、PE~150x、EV/EBITDA~142x</li>
+<li>增速不可持续：+93%含政府大单基数，2027年回落至<40%</li>
+<li>巨头围剿：OpenAI DeployCo($40亿+150名FDE)直接复刻模式</li>
+<li>SBC+内部人抛售：FY25净稀释$6亿，Karp/Thiel持续卖出</li>
+<li>客户/地域集中：前20大39%、美国74%、国际商业仅+26%</li>
+</ul>
+</div>
+</div>
+
+<!-- ====== 第9章 Value Drivers ====== -->
+<h2><span class="section-num">第9章</span> Value Drivers</h2>
+<table>
+<tr><th>#</th><th>Driver</th><th>重要度</th><th>当前状态</th><th>观察指标</th></tr>
+<tr><td>D1</td><td>美国商业营收增速</td><td>★★★★★</td><td>+149%（Q2）</td><td>季报</td></tr>
+<tr><td>D2</td><td>NDR（净收入留存）</td><td>★★★★★</td><td>157%</td><td>季报</td></tr>
+<tr><td>D3</td><td>RPO/TCV（合同储备）</td><td>★★★★☆</td><td>RPO $49亿(+103%)</td><td>10-Q</td></tr>
+<tr><td>D4</td><td>政府合同落地</td><td>★★★★☆</td><td>陆军$100亿框架、Maven</td><td>9月FY27预算审议</td></tr>
+<tr><td>D5</td><td>OpenAI DeployCo竞争</td><td>★★★★☆</td><td>2026/5成立，观察期</td><td>客户公告</td></tr>
+<tr><td>D6</td><td>SBC/回购</td><td>★★★☆☆</td><td>FY25净稀释$6亿</td><td>10-Q/10-K</td></tr>
+<tr><td>D7</td><td>国际业务/主权AI</td><td>★★★☆☆</td><td>国际商业+26%（最弱）</td><td>主权AI合同</td></tr>
+<tr><td>D8</td><td>增速持续性</td><td>★★★★★</td><td>+93%（Q2）</td><td>Q3财报（10月底）</td></tr>
+</table>
+
+<!-- ====== 第10章 最终结论 ====== -->
+<h2><span class="section-num">第10章</span> 最终结论</h2>
+<div class="chart-container"><canvas id="scoreChart" height="120"></canvas></div>
+<div class="card card-yellow">
+<h3>评级：🟡 观察 | 评分：75.6/100</h3>
+<p><strong>评级逻辑</strong>：增长与财务质量均为SaaS顶级（Q2 +93%、NDR 157%、RPO+103%、毛利率84.7%、零负债现金$92亿），但现价$178.16对应PS(TTM)~70x、PE~150x，较公允价值$150-154高出15-19%（安全边际显著为负）；+93%含政府大单基数效应、OpenAI DeployCo直接复刻模式、SBC净稀释$6亿+内部人抛售。最好的公司+最贵的价格：当前价位严格回避，等回调至$145以下（2027E PS 35x）或Q3增速验证后再评估。</p>
+<blockquote>基本面顶尖但估值透支，容错空间极小：等价格或增速拐点验证。</blockquote>
+</div>
+
+<!-- ====== Market Data Final Audit ====== -->
+<h2>Market Data Final Audit (市场数据最终复检)</h2>
+<div class="card card-blue">
+<table>
+<tr><th>检查项</th><th>结果</th></tr>
+<tr><td>股价为决策日真实价</td><td>✅ 2026-08-10收盘$178.16</td></tr>
+<tr><td>未用当前价替代历史价</td><td>✅ 52周高低/财报日标注</td></tr>
+<tr><td>双来源交叉验证</td><td>✅ 腾讯+Nasdaq</td></tr>
+<tr><td>市值=股价×股本</td><td>✅ 约$4,288亿（23.97亿股）</td></tr>
+<tr><td>PS计算一致</td><td>✅ TTM营收$61.6亿→PS~69.6x</td></tr>
+<tr><td>估值传导透明</td><td>✅ 公允价值=PS×2027E营收÷股本（三情景加权$154.4）</td></tr>
+<tr><td>AI推断已标识</td><td>✅ 估值参数/2027E营收已标注</td></tr>
+<tr><td>未承诺价格目标</td><td>✅ 只给区间与安全边际</td></tr>
+</table>
+<p><strong>19项复检清单 + 6项最终检查表全部通过，报告可发布。</strong></p>
+</div>
+
+<!-- ====== Evidence Coverage ====== -->
+<h2>Evidence Coverage (证据覆盖率)</h2>
+<div class="evidence-bar">
+<div style="width:40%;background:#3fb950">一级 40%</div>
+<div style="width:15%;background:#58a6ff">二级 15%</div>
+<div style="width:30%;background:#d29922">三级 30%</div>
+<div style="width:15%;background:#f85149">AI推断 15%</div>
+</div>
+<div class="grid-2">
+<div class="card card-green">
+<h4>已验证数据</h4>
+<ul>
+<li>10-K/10-Q/Q2财报（营收/毛利/利润/FCF/客户数）〔一级〕</li>
+<li>FY26指引（两次上调）、NDR 157%、RPO/TCV/RDV〔一级〕</li>
+<li>股权结构（Karp 3.9%/Thiel 4.1%、投票权50.8%）〔一级〕</li>
+<li>政府大单（陆军$100亿/Maven/海军）〔一级~三级〕</li>
+<li>目标价（Jefferies $80~BofA $255）、做空数据〔三级〕</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>未验证/推断</h4>
+<ul>
+<li>Top 100客户ARPU精确值</li>
+<li>AIP收入精确占比</li>
+<li>剔除非经常项的内生增速</li>
+<li>2027E营收预测（机构分歧$100-140亿）</li>
+<li>三情景概率与PS假设（AI推断）</li>
+</ul>
+</div>
+</div>
+<blockquote>⚠️ 本报告存在较高推断比例（15%>10%）：估值参数（PS区间/情景概率/2027E营收）为AI推断。投资决策请以一级数据（财报/指引）为主。</blockquote>
+
+<h2>Market Data Coverage (市场数据覆盖率)</h2>
+<table>
+<tr><th>检查项</th><th>状态</th></tr>
+<tr><td>数据身份确认（PLTR/NYSE）</td><td>✅</td></tr>
+<tr><td>双来源验证</td><td>✅（腾讯+Nasdaq）</td></tr>
+<tr><td>历史日期锁定</td><td>✅（52周高低、Q2财报日）</td></tr>
+<tr><td>单位/币种验证（美元）</td><td>✅</td></tr>
+<tr><td>估值传导一致性</td><td>✅</td></tr>
+<tr><td>跨文件一致性</td><td>✅ 首次覆盖</td></tr>
+</table>
+
+<!-- ====== 页脚 ====== -->
+<div class="footer">
+<p>报告生成: 2026-08-11 | 框架: 大灰皮证券研究 V-2.4 | Evidence First + 8 Principles + Hard Constraints + Market Data Integrity</p>
+<p>本报告由AI生成，不构成投资建议。投资有风险，入市需谨慎。</p>
+</div>
+
+</div><!-- .container -->
+
+<!-- ====== Chart.js 脚本 ====== -->
+<script>
+// Fisher 雷达图
+new Chart(document.getElementById('fisherChart'), {
+  type: 'radar',
+  data: {
+    labels: ['市场潜力','管理层','研发','销售','利润率空间','护城河','长期成长','财务文化','资本配置','长期竞争'],
+    datasets: [{ label:'Palantir', data:[9,7,9,8,9,9,8,6,5,6], backgroundColor:'rgba(88,166,255,0.2)', borderColor:'#58a6ff', pointBackgroundColor:'#58a6ff' }]
+  },
+  options: { scales:{ r:{ min:0, max:10, ticks:{ stepSize:2, color:'#8b949e' }, grid:{ color:'#30363d' }, angleLines:{ color:'#30363d' }, pointLabels:{ color:'#c9d1d9' } } },
+  plugins:{ legend:{ labels:{ color:'#c9d1d9' } } } }
+});
+// 财务柱状图（2023-2026E营收）
+new Chart(document.getElementById('finChart'), {
+  type: 'bar',
+  data: {
+    labels: ['2023','2024','2025','2026E'],
+    datasets: [
+      { label:'营收(亿美元)', data:[22.3,28.7,44.75,81.5], backgroundColor:'#58a6ff' },
+      { label:'增速(%)', data:[17,29,56,82], backgroundColor:'#3fb950', yAxisID:'y2' }
+    ]
+  },
+  options: { plugins:{ legend:{ labels:{ color:'#c9d1d9' } } },
+    scales:{ x:{ ticks:{ color:'#8b949e' }, grid:{ color:'#30363d' } },
+      y:{ ticks:{ color:'#8b949e' }, grid:{ color:'#30363d' } },
+      y2:{ position:'right', min:0, max:100, ticks:{ color:'#3fb950' }, grid:{ display:false } } } }
+});
+// 三情景估值
+new Chart(document.getElementById('scenarioChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Bear $83.4','Base $150.2','Bull $233.6','加权 $154.4','现价 $178.16'],
+    datasets: [{ label:'价格(美元)', data:[83.4,150.2,233.6,154.4,178.16], backgroundColor:['#f85149','#58a6ff','#3fb950','#d29922','#bc8cff'] }]
+  },
+  options: { indexAxis:'y', plugins:{ legend:{ display:false } },
+    scales:{ x:{ ticks:{ color:'#8b949e' }, grid:{ color:'#30363d' } }, y:{ ticks:{ color:'#c9d1d9' }, grid:{ color:'#30363d' } } } }
+});
+// 综合评分
+new Chart(document.getElementById('scoreChart'), {
+  type: 'bar',
+  data: {
+    labels: ['商业模式','行业','管理层','财务','护城河','成长性','估值','风险','Fisher'],
+    datasets: [{ label:'评分', data:[85,85,75,85,80,95,25,45,76], backgroundColor:['#8b949e','#3fb950','#58a6ff','#3fb950','#58a6ff','#3fb950','#f85149','#f85149','#bc8cff'] }]
+  },
+  options: { plugins:{ legend:{ display:false } },
+    scales:{ x:{ ticks:{ color:'#8b949e' }, grid:{ color:'#30363d' } }, y:{ min:0, max:100, ticks:{ color:'#8b949e' }, grid:{ color:'#30363d' } } } }
+});
+</script>
+
+</body>
+</html>
