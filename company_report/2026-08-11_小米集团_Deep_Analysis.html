@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小米集团(01810.HK) 深度分析报告 | 大灰皮证券研究 V-2.4</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ===== 大灰皮证券研究 HTML 报告模板 V-2.4 ===== */
+:root {
+  --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+  --border: #30363d; --text: #c9d1d9; --text-dim: #8b949e;
+  --red: #f85149; --green: #3fb950; --yellow: #d29922; --blue: #58a6ff; --purple: #bc8cff;
+  --orange: #db6d28; --cyan: #39c5cf;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7; padding:20px; max-width:1200px; margin:0 auto; }
+h1 { color:var(--blue); font-size:1.8em; margin-bottom:5px; border-bottom:2px solid var(--border); padding-bottom:10px; }
+h2 { color:var(--cyan); font-size:1.4em; margin:30px 0 15px; padding-left:12px; border-left:4px solid var(--blue); }
+h3 { color:var(--purple); font-size:1.15em; margin:20px 0 10px; }
+h4 { color:var(--orange); font-size:1em; margin:15px 0 8px; }
+p { margin:8px 0; }
+.subtitle { color:var(--text-dim); font-size:0.9em; margin-bottom:20px; }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em; }
+th { background:var(--bg3); color:var(--blue); padding:10px; text-align:left; border:1px solid var(--border); }
+td { padding:8px 10px; border:1px solid var(--border); }
+tr:nth-child(even) { background:var(--bg2); }
+tr:hover { background:var(--bg3); }
+.score-badge { display:inline-block; padding:6px 20px; border-radius:8px; font-size:1.3em; font-weight:bold; }
+.score-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); border:2px solid var(--yellow); }
+.card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.card-red { border-left:4px solid var(--red); }
+.card-yellow { border-left:4px solid var(--yellow); }
+.card-green { border-left:4px solid var(--green); }
+.card-blue { border-left:4px solid var(--blue); }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; }
+@media (max-width:768px) { .grid-2, .grid-3 { grid-template-columns:1fr; } }
+.metric { text-align:center; padding:15px; background:var(--bg3); border-radius:8px; }
+.metric-val { font-size:1.8em; font-weight:bold; }
+.metric-label { color:var(--text-dim); font-size:0.85em; margin-top:5px; }
+.chart-container { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.highlight-red { color:var(--red); font-weight:bold; }
+.highlight-green { color:var(--green); font-weight:bold; }
+.highlight-yellow { color:var(--yellow); font-weight:bold; }
+.highlight-blue { color:var(--blue); font-weight:bold; }
+blockquote { border-left:3px solid var(--orange); padding:10px 15px; margin:15px 0; background:var(--bg2); color:var(--text-dim); border-radius:0 8px 8px 0; }
+ul,ol { margin:8px 0 8px 25px; }
+li { margin:4px 0; }
+.tag { display:inline-block; padding:2px 10px; border-radius:4px; font-size:0.8em; margin:2px; }
+.tag-red { background:rgba(248,81,73,0.2); color:var(--red); }
+.tag-green { background:rgba(63,185,80,0.2); color:var(--green); }
+.tag-yellow { background:rgba(210,153,34,0.2); color:var(--yellow); }
+.tag-blue { background:rgba(88,166,255,0.2); color:var(--blue); }
+hr { border:none; border-top:1px solid var(--border); margin:25px 0; }
+.section-num { color:var(--blue); font-weight:bold; }
+.evidence-bar { display:flex; height:25px; border-radius:5px; overflow:hidden; margin:10px 0; }
+.evidence-bar div { display:flex; align-items:center; justify-content:center; font-size:0.75em; color:#fff; }
+.footer { text-align:center; color:var(--text-dim); margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:0.85em; }
+.report-nav { display:flex; align-items:center; gap:12px; padding:10px 16px; margin-bottom:24px; background:#1a1e2a; border:1px solid var(--border); border-radius:8px; font-size:0.85rem; flex-wrap:wrap; }
+.report-nav a { color:var(--blue); text-decoration:none; padding:4px 10px; border-radius:6px; transition:background 0.15s, color 0.15s; white-space:nowrap; }
+.report-nav a:hover { background:rgba(88,166,255,0.15); }
+.report-nav .nav-left { display:flex; align-items:center; gap:8px; }
+.report-nav .nav-right { margin-left:auto; display:flex; align-items:center; gap:8px; }
+.report-nav .nav-sep { color:var(--border); font-size:0.75rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ====== 导航栏 ====== -->
+<div class="report-nav">
+  <div class="nav-left"><a href="index.html">← 返回公司列表</a></div>
+  <div class="nav-right"><a href="../../index.html">🏠 研究报告首页</a></div>
+</div>
+
+<!-- ====== 标题 ====== -->
+<h1>小米集团（01810.HK）深度分析报告</h1>
+<p class="subtitle">框架: 大灰皮证券研究 V-2.4 | 日期: 2026-08-11 | 分析师: 小八(AI) | Evidence First + 8 Principles + Hard Constraints + Market Data Integrity | 首次覆盖</p>
+
+<!-- ====== 最终结论卡片 ====== -->
+<div class="card card-yellow">
+<h2 style="margin-top:0">最终结论</h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">71.6<span style="font-size:0.5em">/100</span></div><div class="metric-label">综合评分</div></div>
+<div class="metric"><div class="score-badge score-yellow">🟡 观察</div><div class="metric-label">评级</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">持有/等中报验证</div><div class="metric-label">投资建议</div></div>
+</div>
+<blockquote>小米是"汽车第二曲线真实+估值泡沫已出清"的标的——2025年汽车交付41.1万辆（+200%）验证产品力、股价较峰值59.9腰斩（-54%）、PE(TTM) 17.8x历史中低位、大额回购托底（80亿+）。但Q1经调整净利61亿（-43.1%）利润腰斩、汽车55万辆目标上半年完成率仅34%、汽车Q1转亏31亿、手机全球出货-19.2%（华为压制）。好公司+合理价格：持有者等8/18中报验证，空仓者等回调至23.5港元以下分批建仓。</blockquote>
+</div>
+
+<!-- ====== 核心指标 ====== -->
+<h2><span class="section-num">核心指标</span></h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--blue)">27.62<span style="font-size:0.5em">港元</span></div><div class="metric-label">现价 (2026-08-10)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--blue)">7,138<span style="font-size:0.5em">亿港元</span></div><div class="metric-label">总市值</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--blue)">17.78x</div><div class="metric-label">PE(TTM)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">41.1<span style="font-size:0.5em">万辆</span></div><div class="metric-label">2025汽车交付</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">-43.1%</div><div class="metric-label">Q1'26经调整净利</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">≈0%</div><div class="metric-label">当前安全边际</div></div>
+</div>
+
+<!-- ====== 第0章 公司分类 ====== -->
+<h2><span class="section-num">第0章</span> 公司分类</h2>
+<div class="card card-blue">
+<h3>分类：成长股（多元生态，汽车为第二曲线）</h3>
+<table>
+<tr><th>维度</th><th>判断</th><th>依据</th></tr>
+<tr><td>行业属性</td><td>多元成长</td><td>手机/IoT成熟 + 互联网高毛利 + 汽车第二曲线</td></tr>
+<tr><td>生命周期</td><td>成熟成长（新曲线孵化）</td><td>主业稳定，汽车从0到1（2025年41万辆）</td></tr>
+<tr><td>盈利模式</td><td>低毛利硬件+高毛利服务</td><td>手机10.9%、IoT 25.2%、互联网76.1%</td></tr>
+<tr><td>资本属性</td><td>重资产（汽车）</td><td>造车5年累计投入超400亿元</td></tr>
+</table>
+<p><strong>首选估值方法</strong>：PE（经调整净利）三情景 + 分部参考<br>
+<span class="tag tag-yellow">估值限制</span> 汽车2026年仍亏损，分部只能用PS/单量定价；Q1利润腰斩显示盈利波动大。</p>
+</div>
+
+<!-- ====== 第1章 基本面 ====== -->
+<h2><span class="section-num">第1章</span> 基本面分析</h2>
+<div class="card card-blue">
+<h3>商业模式</h3>
+<p>"人车家全生态"——手机+IoT+互联网+汽车四轮驱动，硬件获取用户、互联网变现利润、汽车打开第二曲线。2025年收入4,573亿（+25%）、经调整净利392亿（+43.8%）。〔一级〕</p>
+</div>
+<div class="grid-2">
+<div class="card">
+<h4>收入结构（2025年报）〔一级〕</h4>
+<table>
+<tr><th>板块</th><th>收入</th><th>占比</th><th>增速</th><th>毛利率</th></tr>
+<tr><td>智能手机</td><td>1,864亿</td><td>40.8%</td><td class="highlight-red">-2.8%</td><td>10.9%</td></tr>
+<tr><td>IoT</td><td>1,232亿</td><td>26.9%</td><td class="highlight-red">+18.3%</td><td>25.2%</td></tr>
+<tr><td>互联网</td><td>374亿</td><td>8.2%</td><td>+9.8%</td><td>76.1%</td></tr>
+<tr><td>汽车及创新</td><td>1,061亿</td><td>23.2%</td><td class="highlight-red">+223.8%</td><td>24.3%(EV)</td></tr>
+</table>
+</div>
+<div class="card">
+<h4>2026Q1 利润腰斩拆解〔一级〕</h4>
+<table>
+<tr><th>指标</th><th>Q1'26</th><th>同比</th></tr>
+<tr><td>收入</td><td>991亿</td><td class="highlight-red">-10.9%</td></tr>
+<tr><td>经调整净利</td><td>61亿</td><td class="highlight-red">-43.1%</td></tr>
+<tr><td>手机出货</td><td>3,380万台</td><td class="highlight-red">-19.2%</td></tr>
+<tr><td>手机ASP</td><td>1,310元</td><td class="highlight-green">+8.2%（创新高）</td></tr>
+<tr><td>EV收入</td><td>190亿</td><td class="highlight-green">+5.1%</td></tr>
+<tr><td>汽车分部经营</td><td>亏损31亿</td><td>单车亏约4万</td></tr>
+</table>
+<p style="font-size:0.85em;color:var(--text-dim)">主因：存储芯片涨价 + 汽车重资产折旧。</p>
+</div>
+</div>
+<div class="card">
+<h4>竞争格局</h4>
+<table>
+<tr><th>领域</th><th>格局</th><th>小米位置</th></tr>
+<tr><td>全球手机（2025）</td><td>三星19.7%/苹果19.1%</td><td class="highlight-blue">第三13.1%（Q1'26降至11-12%）</td></tr>
+<tr><td>中国手机（Q1'26）</td><td>华为20%第一</td><td class="highlight-red">第五12%（出货-35%）</td></tr>
+<tr><td>折叠屏</td><td>华为60%</td><td class="highlight-red">仅3%</td></tr>
+<tr><td>新能源SUV</td><td>Model Y第一</td><td class="highlight-green">YU7国产第一（1-4月8.16万辆）</td></tr>
+</table>
+<p style="font-size:0.85em;color:var(--text-dim)">汽车对手：特斯拉/比亚迪/鸿蒙智行/理想/蔚来/小鹏；2026年价格战趋缓（5月起15品牌涨价）。</p>
+</div>
+
+<!-- ====== 第2章 TAM ====== -->
+<h2><span class="section-num">第2章</span> 行业研究 (TAM)</h2>
+<div class="card card-blue">
+<h3>TAM：手机存量市场 + 汽车高渗透率低利润市场</h3>
+<table>
+<tr><th>情景</th><th>假设</th><th>小米汽车2026交付</th></tr>
+<tr><td class="highlight-green">乐观</td><td>价格战缓和+增程新车型放量</td><td>60万辆+（超目标）</td></tr>
+<tr><td class="highlight-blue">基准</td><td>按公司目标兑现</td><td>55万辆（上半年34%，下半年月均5.7-6万）</td></tr>
+<tr><td class="highlight-red">悲观</td><td>需求疲软+产能爬坡不及预期</td><td>&lt;45万辆（目标下修）</td></tr>
+</table>
+<p style="font-size:0.85em;color:var(--text-dim)">全球手机2026年出货预计10.8亿部（-13%）；中国新能源渗透率61.4%（4月首破60%）但行业利润率降至3.2%历史低位。</p>
+<p><strong>TAM评级</strong>：★★★☆☆ | <strong>公司捕获能力</strong>：★★★★☆ | 信心等级：★★★☆☆</p>
+</div>
+
+<!-- ====== 第3章 Fisher ====== -->
+<h2><span class="section-num">第3章</span> Fisher成长股评价</h2>
+<div class="chart-container"><canvas id="fisherChart" height="120"></canvas></div>
+<p><strong>Fisher综合评分：68/100</strong></p>
+<p><span class="tag tag-green">最符合Fisher</span> 研发(8)+管理层(8) —— 雷军团队汽车从0到41万辆/年的爆发执行力+自研芯片/智驾投入。</p>
+<p><span class="tag tag-red">最不符合Fisher</span> 利润率空间(5) —— 手机毛利率仅10.9%，汽车亏损期，利润高度依赖互联网（占收入8.2%）。</p>
+
+<!-- ====== 第4章 Bear Audit ====== -->
+<h2><span class="section-num">第4章</span> 财务审计 (Bear Audit)</h2>
+<div class="chart-container"><canvas id="finChart" height="120"></canvas></div>
+<div class="card card-yellow">
+<h3 style="color:var(--yellow)">🟡 黄色（财务质量中等）</h3>
+<ol>
+<li><span class="tag tag-green">🟢</span> 现金充裕（2025年配售净筹425亿港元），无债务风险</li>
+<li><span class="tag tag-green">🟢</span> 2025年经调整净利392亿（+43.8%），主业造血</li>
+<li><span class="tag tag-yellow">🟡</span> Q1经调整净利61亿（-43.1%）——存储涨价+汽车折旧</li>
+<li><span class="tag tag-red">🔴</span> 汽车分部：2025年全年+9亿（首次转正）→Q1'26亏损31亿（单车亏约4万）</li>
+<li><span class="tag tag-yellow">🟡</span> 手机毛利率降至10.1%（Q1），份额下滑</li>
+<li><span class="tag tag-green">🟢</span> 大额回购：2026年80亿+、新批200亿额度</li>
+</ol>
+</div>
+
+<!-- ====== 第5章 Bear Case ====== -->
+<h2><span class="section-num">第5章</span> Bear Case</h2>
+<div class="card card-red">
+<h3>做空成功概率：约30%</h3>
+<p>核心不是造假（财务真实），而是"汽车目标+利润拐点"的双重验证风险：若8/18中报显示交付节奏不足（上半年34%）或汽车亏损扩大，市场将下修2026全年预期；而手机基本盘又在华为挤压下下滑（Q1全球-19.2%、中国-35%），两头承压。但股价已从峰值腰斩（-54%）、PE历史中低位、大额回购托底——做空赔率一般，更适合"观察中报再决策"。</p>
+</div>
+<table>
+<tr><th>失败点</th><th>触发信号</th><th>影响</th></tr>
+<tr><td>汽车目标下修</td><td>中报下调55万辆目标</td><td>估值中枢-20%</td></tr>
+<tr><td>汽车扭亏推迟</td><td>Q3仍亏损</td><td>亏损叙事延长</td></tr>
+<tr><td>手机份额下滑</td><td>全球<11%、中国<12%</td><td>基本盘估值下移</td></tr>
+<tr><td>存储涨价持续</td><td>2026H2存储价格不回落</td><td>毛利继续受压</td></tr>
+<tr><td>高端化受阻</td><td>华为压制+折叠屏无起色</td><td>手机ASP见顶</td></tr>
+</table>
+
+<!-- ====== Market Data Integrity Gate ====== -->
+<h2><span class="section-num">Market Data Integrity Gate</span> 市场数据完整性检查</h2>
+<div class="card card-blue">
+<table>
+<tr><th>数据</th><th>数值</th><th>状态</th></tr>
+<tr><td>股价（2026-08-10）</td><td>27.62港元（收盘）</td><td>✅ moomoo+港交所双源验证</td></tr>
+<tr><td>总市值</td><td>7,137.60亿港元 = 27.62 × 约258.4亿股</td><td>✅ 乘法一致</td></tr>
+<tr><td>PE(TTM) 17.78x</td><td>与2025年报+Q1推算吻合</td><td>✅ 已验证</td></tr>
+<tr><td>52周区间</td><td>59.90 / 21.30港元</td><td>✅ 已验证</td></tr>
+<tr><td>汇率（港元/人民币）</td><td>约0.92</td><td>✅ 估算已标注</td></tr>
+</table>
+<p><strong>G.10 失败即停止</strong>：✅ 全部通过，允许进入估值。</p>
+</div>
+
+<!-- ====== 第6章 估值 ====== -->
+<h2><span class="section-num">第6章</span> 估值分析</h2>
+
+<h3>Valuation Data Admission Check</h3>
+<table>
+<tr><th>检查项</th><th>状态</th></tr>
+<tr><td>股价验证</td><td>✅ 27.62港元（2026-08-10收盘）</td></tr>
+<tr><td>2025年报+2026Q1财报</td><td>✅ 一级来源</td></tr>
+<tr><td>2026交付目标/中报日期</td><td>✅ 55万辆、8/18中报</td></tr>
+<tr><td>机构一致预期</td><td>✅ 目标均价46.3港元（分歧34.8-75）</td></tr>
+<tr><td>估值参数（PE区间）</td><td>⚠️ 含AI推断</td></tr>
+</table>
+
+<h3>6.5 三情景估值</h3>
+<div class="chart-container"><canvas id="scenarioChart" height="120"></canvas></div>
+<table>
+<tr><th>情景</th><th>概率</th><th>2026E经调整净利</th><th>2027E</th><th>2026E PE</th><th>价格</th></tr>
+<tr><td class="highlight-green">Bull</td><td>25%</td><td>320亿（汽车转盈）</td><td>430亿(+34%)</td><td>28x</td><td>37.7港元</td></tr>
+<tr><td class="highlight-blue">Base</td><td>50%</td><td>270亿（汽车亏120亿）</td><td>340亿(+26%)</td><td>24x</td><td>27.3港元</td></tr>
+<tr><td class="highlight-red">Bear</td><td>25%</td><td>210亿（目标下修）</td><td>250亿(+19%)</td><td>20x</td><td>17.7港元</td></tr>
+</table>
+<p><strong>概率加权公允价值 = 0.25×37.7 + 0.50×27.3 + 0.25×17.7 = 27.5港元</strong>；Base公允价值27.3港元。</p>
+
+<h3>6.11 投资决策价格框架（多元成长股价格阶梯）</h3>
+<table>
+<tr><th>价格区间</th><th>2026E PE</th><th>操作</th></tr>
+<tr><td>≤20.5港元</td><td>≤18x</td><td class="highlight-green">重仓区（积极买入）</td></tr>
+<tr><td>20.5-23.5港元</td><td>18-20.5x</td><td class="highlight-green">建仓区（分批买入）</td></tr>
+<tr><td>23.5-28.5港元</td><td>20.5-25x</td><td class="highlight-yellow">持有/小幅买入区（现价27.62在此）</td></tr>
+<tr><td>28.5-34港元</td><td>25-30x</td><td class="highlight-yellow">减仓观察区</td></tr>
+<tr><td>>34港元</td><td>>30x</td><td class="highlight-red">清仓/回避区</td></tr>
+</table>
+
+<!-- 6.15 最终投资决策 -->
+<div class="card card-yellow">
+<h3>6.15 最终投资决策</h3>
+<div class="grid-2">
+<div>
+<p><strong>当前价格</strong>: 27.62港元（2026-08-10收盘）</p>
+<p><strong>公允价值(Base)</strong>: 约27.3港元</p>
+<p><strong>买入价(含安全边际)</strong>: 20.5-23.5港元（2026E PE 18-20.5x）</p>
+<p><strong>当前安全边际</strong>: <span class="highlight-yellow">约+1%（Base）/ 0%（加权）</span></p>
+</div>
+<div>
+<p><strong>操作建议</strong>: <span class="highlight-yellow">🟡 观察（持有/等待8/18中报验证）</span></p>
+<p><strong>触发买入条件</strong>:</p>
+<ul>
+<li>回调至23.5港元以下（安全边际>10%）</li>
+<li>中报汽车交付节奏+扭亏路径清晰</li>
+<li>2026H2存储成本回落</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- ====== 第7章 风险 ====== -->
+<h2><span class="section-num">第7章</span> 风险分析</h2>
+<table>
+<tr><th>风险</th><th>严重度</th><th>市场状态</th></tr>
+<tr><td>汽车55万辆目标未兑现（上半年34%）</td><td class="highlight-red">🔴 高</td><td>部分反映（股价-54%）</td></tr>
+<tr><td>汽车亏损持续（Q1 -31亿，2026E或亏120亿）</td><td class="highlight-red">🔴 高</td><td>部分反映</td></tr>
+<tr><td>手机份额下滑（全球-19.2%、中国-35%）</td><td class="highlight-yellow">🟠 中高</td><td>部分反映</td></tr>
+<tr><td>存储芯片涨价（毛利承压）</td><td class="highlight-yellow">🟠 中高</td><td>已部分反映</td></tr>
+<tr><td>华为高端压制（折叠屏3% vs 60%）</td><td class="highlight-yellow">🟠 中高</td><td>部分反映</td></tr>
+<tr><td>新能源车价格战（行业利润率3.2%）</td><td class="highlight-yellow">🟡 中</td><td>已反映（趋缓）</td></tr>
+<tr><td>重资产折旧（汽车工厂60万产能）</td><td class="highlight-yellow">🟡 中</td><td>未反映</td></tr>
+<tr><td>无分红（股息率0%）</td><td class="highlight-yellow">🟡 低中</td><td>已反映（回购对冲）</td></tr>
+</table>
+
+<!-- ====== 第8章 投资逻辑 ====== -->
+<h2><span class="section-num">第8章</span> 投资逻辑</h2>
+<div class="grid-2">
+<div class="card card-green">
+<h4>多头逻辑</h4>
+<ul>
+<li>汽车第二曲线真实：2025年41.1万辆(+200%)、YU7国产SUV第一、新SU7 48天锁单8万+</li>
+<li>估值泡沫已出清：较峰值59.9腰斩(-54%)，PE(TTM) 17.8x历史中低位</li>
+<li>大额回购托底：2026年80亿+、新批200亿额度</li>
+<li>利润弹性：互联网(76.1%毛利)+汽车若Q3-Q4转盈，2027年弹性大</li>
+<li>AIOT+机器人期权：玄戒O1芯片、CyberOne机器人、澎湃OS</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>空头逻辑</h4>
+<ul>
+<li>利润腰斩：Q1经调整净利61亿(-43.1%)，存储+汽车双压</li>
+<li>汽车目标压力：上半年完成率34%，下半年月均需5.7-6万辆</li>
+<li>手机基本盘下滑：全球-19.2%、中国-35%，华为高端压制</li>
+<li>汽车烧钱未见底：5年投入400亿+，2026年或再亏120亿</li>
+<li>无分红+重资产：折旧吞噬自由现金流</li>
+</ul>
+</div>
+</div>
+
+<!-- ====== 第9章 Value Drivers ====== -->
+<h2><span class="section-num">第9章</span> Value Drivers</h2>
+<table>
+<tr><th>#</th><th>Driver</th><th>重要度</th><th>当前状态</th><th>观察指标</th></tr>
+<tr><td>D1</td><td>汽车交付量（55万辆目标）</td><td>★★★★★</td><td>上半年34%，下半年月均需5.7-6万</td><td>每月交付公告</td></tr>
+<tr><td>D2</td><td>汽车毛利率与扭亏</td><td>★★★★★</td><td>2025年24.3%→Q1'26 20.1%，单车亏4万</td><td>季报汽车分部</td></tr>
+<tr><td>D3</td><td>手机出货量与份额</td><td>★★★★☆</td><td>全球-19.2%、中国-35%</td><td>Counterpoint/Omdia</td></tr>
+<tr><td>D4</td><td>手机ASP/高端化</td><td>★★★☆☆</td><td>ASP 1,310元创新高(+8.2%)</td><td>季报</td></tr>
+<tr><td>D5</td><td>存储芯片价格</td><td>★★★★☆</td><td>2026年涨价中</td><td>DRAM/NAND现货价</td></tr>
+<tr><td>D6</td><td>互联网变现率</td><td>★★★☆☆</td><td>MAU 7.46亿，毛利率76.1%</td><td>季报互联网分部</td></tr>
+<tr><td>D7</td><td>汽车新车型（增程澎程等）</td><td>★★★☆☆</td><td>8月增程、Q3车型扩充</td><td>发布会/交付</td></tr>
+<tr><td>D8</td><td>回购执行</td><td>★★☆☆☆</td><td>2026年80亿+、新批200亿</td><td>回购公告</td></tr>
+</table>
+
+<!-- ====== 第10章 最终结论 ====== -->
+<h2><span class="section-num">第10章</span> 最终结论</h2>
+<div class="chart-container"><canvas id="scoreChart" height="120"></canvas></div>
+<div class="card card-yellow">
+<h3>评级：🟡 观察 | 评分：71.6/100</h3>
+<p><strong>评级逻辑</strong>：汽车第二曲线真实（2025年41.1万辆+200%）、估值泡沫出清（-54%）、PE 17.8x历史中低位、回购托底。但Q1利润腰斩（-43.1%）、汽车55万辆目标上半年完成率仅34%、汽车Q1转亏31亿、手机全球-19.2%（华为压制）。好公司+合理价格——现价安全边际≈0，持有者等8/18中报验证（汽车交付+扭亏路径），空仓者等回调至23.5港元以下分批建仓。</p>
+<blockquote>增长叙事真实但利润波动大、目标兑现存疑：等待中报决定性验证。</blockquote>
+</div>
+
+<!-- ====== Market Data Final Audit ====== -->
+<h2>Market Data Final Audit (市场数据最终复检)</h2>
+<div class="card card-blue">
+<table>
+<tr><th>检查项</th><th>结果</th></tr>
+<tr><td>股价为决策日真实价</td><td>✅ 2026-08-10收盘27.62港元</td></tr>
+<tr><td>未用当前价替代历史价</td><td>✅ 52周高低/峰值标注日期</td></tr>
+<tr><td>双来源交叉验证</td><td>✅ moomoo+港交所</td></tr>
+<tr><td>市值=股价×股本</td><td>✅ 7,137.60亿港元</td></tr>
+<tr><td>PE计算一致</td><td>✅ TTM 17.78x与年报+Q1推算吻合</td></tr>
+<tr><td>估值传导透明</td><td>✅ 公允价值=净利×PE÷股本（三情景加权27.5港元）</td></tr>
+<tr><td>AI推断已标识</td><td>✅ 估值参数/2026E净利区间已标注</td></tr>
+<tr><td>未承诺价格目标</td><td>✅ 只给区间与安全边际</td></tr>
+</table>
+<p><strong>19项复检清单 + 6项最终检查表全部通过，报告可发布。</strong></p>
+</div>
+
+<!-- ====== Evidence Coverage ====== -->
+<h2>Evidence Coverage (证据覆盖率)</h2>
+<div class="evidence-bar">
+<div style="width:40%;background:#3fb950">一级 40%</div>
+<div style="width:15%;background:#58a6ff">二级 15%</div>
+<div style="width:30%;background:#d29922">三级 30%</div>
+<div style="width:15%;background:#f85149">AI推断 15%</div>
+</div>
+<div class="grid-2">
+<div class="card card-green">
+<h4>已验证数据</h4>
+<ul>
+<li>2025年报（收入/经调整净利/分部毛利率）〔一级〕</li>
+<li>2026Q1财报（5/26）〔一级〕</li>
+<li>汽车交付量（2025年41.1万/2026H1 18.5万）〔一级〕</li>
+<li>回购（80亿+/200亿额度）、雷军持股23.4%〔一级〕</li>
+<li>机构目标价（高盛40/汇丰54/招银44.5等）〔三级〕</li>
+<li>行业份额（Counterpoint/Omdia）〔一级/三级〕</li>
+</ul>
+</div>
+<div class="card card-red">
+<h4>未验证/推断</h4>
+<ul>
+<li>2026年中报全文（8/18披露）</li>
+<li>2026全年经调整净利指引（机构分歧250-320亿）</li>
+<li>汽车单车成本明细</li>
+<li>存储涨价对2026H2的量化影响</li>
+<li>三情景概率与PE假设（AI推断）</li>
+</ul>
+</div>
+</div>
+<blockquote>⚠️ 本报告存在较高推断比例（15%>10%）：估值参数（PE区间/情景概率/2026E净利区间）为AI推断。投资决策请以一级数据（财报/公告）为主。</blockquote>
+
+<h2>Market Data Coverage (市场数据覆盖率)</h2>
+<table>
+<tr><th>检查项</th><th>状态</th></tr>
+<tr><td>数据身份确认（01810.HK）</td><td>✅</td></tr>
+<tr><td>双来源验证</td><td>✅（moomoo+港交所）</td></tr>
+<tr><td>历史日期锁定</td><td>✅（52周高低、2025年6月峰值）</td></tr>
+<tr><td>单位/币种验证（港元）</td><td>✅</td></tr>
+<tr><td>估值传导一致性</td><td>✅</td></tr>
+<tr><td>跨文件一致性</td><td>✅ 首次覆盖</td></tr>
+</table>
+
+<!-- ====== 页脚 ====== -->
+<div class="footer">
+<p>报告生成: 2026-08-11 | 框架: 大灰皮证券研究 V-2.4 | Evidence First + 8 Principles + Hard Constraints + Market Data Integrity</p>
+<p>本报告由AI生成，不构成投资建议。投资有风险，入市需谨慎。</p>
+</div>
+
+</div><!-- .container -->
+
+<!-- ====== Chart.js 脚本 ====== -->
+<script>
+// Fisher 雷达图
+new Chart(document.getElementById('fisherChart'), {
+  type: 'radar',
+  data: {
+    labels: ['市场潜力','管理层','研发','销售','利润率空间','护城河','长期成长','财务文化','资本配置','长期竞争'],
+    datasets: [{ label:'小米集团', data:[8,8,8,7,5,6,7,6,7,6], backgroundColor:'rgba(88,166,255,0.2)', borderColor:'#58a6ff', pointBackgroundColor:'#58a6ff' }]
+  },
+  options: { scales:{ r:{ min:0, max:10, ticks:{ stepSize:2, color:'#8b949e' }, grid:{ color:'#30363d' }, angleLines:{ color:'#30363d' }, pointLabels:{ color:'#c9d1d9' } } },
+  plugins:{ legend:{ labels:{ color:'#c9d1d9' } } } }
+});
+// 收入结构（2025年报）
+new Chart(document.getElementById('finChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['智能手机 40.8%','IoT 26.9%','汽车 23.2%','互联网 8.2%','其他 0.9%'],
+    datasets: [{ data:[40.8,26.9,23.2,8.2,0.9], backgroundColor:['#58a6ff','#3fb950','#bc8cff','#d29922','#8b949e'] }]
+  },
+  options: { plugins:{ legend:{ labels:{ color:'#c9d1d9' } } } }
+});
+// 三情景估值
+new Chart(document.getElementById('scenarioChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Bear 17.7港元','Base 27.3港元','Bull 37.7港元','加权 27.5港元','现价 27.62港元'],
+    datasets: [{ label:'价格(港元)', data:[17.7,27.3,37.7,27.5,27.62], backgroundColor:['#f85149','#58a6ff','#3fb950','#d29922','#bc8cff'] }]
+  },
+  options: { indexAxis:'y', plugins:{ legend:{ display:false } },
+    scales:{ x:{ ticks:{ color:'#8b949e' }, grid:{ color:'#30363d' } }, y:{ ticks:{ color:'#c9d1d9' }, grid:{ color:'#30363d' } } } }
+});
+// 综合评分
+new Chart(document.getElementById('scoreChart'), {
+  type: 'bar',
+  data: {
+    labels: ['商业模式','行业','管理层','财务','护城河','成长性','估值','风险','Fisher'],
+    datasets: [{ label:'评分', data:[70,70,85,75,65,75,70,55,68], backgroundColor:['#8b949e','#3fb950','#58a6ff','#3fb950','#58a6ff','#3fb950','#d29922','#f85149','#bc8cff'] }]
+  },
+  options: { plugins:{ legend:{ display:false } },
+    scales:{ x:{ ticks:{ color:'#8b949e' }, grid:{ color:'#30363d' } }, y:{ min:0, max:100, ticks:{ color:'#8b949e' }, grid:{ color:'#30363d' } } } }
+});
+</script>
+
+</body>
+</html>
