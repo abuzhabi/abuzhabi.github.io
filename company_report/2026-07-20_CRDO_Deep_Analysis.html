@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credo Technology Group (CRDO) 深度分析 - Research Constitution V-2.3</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0d1117;--surface:#161b22;--surface2:#21262d;--text:#c9d1d9;--text2:#8b949e;--accent:#f78166;--green:#3fb950;--yellow:#d2991d;--red:#f85149;--blue:#58a6ff;--purple:#bc8cff;--border:#30363d;--orange:#f0883e}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#1a2332,#161b22);border-radius:12px;padding:40px;margin-bottom:30px;border:1px solid var(--border)}
+.header h1{font-size:1.8rem;margin-bottom:8px}
+.header .sub{font-size:1.1rem;color:var(--text2)}
+.meta{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:600}
+.badge-yellow{background:rgba(210,153,29,0.15);color:var(--yellow);border:1px solid var(--yellow)}
+.badge-blue{background:rgba(88,166,255,0.15);color:var(--blue);border:1px solid var(--blue)}
+.badge-red{background:rgba(248,81,73,0.15);color:var(--red);border:1px solid var(--red)}
+.badge-green{background:rgba(63,185,80,0.15);color:var(--green);border:1px solid var(--green)}
+.toc{background:var(--surface);border-radius:12px;padding:25px 30px;margin-bottom:30px;border:1px solid var(--border)}
+.toc h3{color:var(--accent);margin-bottom:12px}
+.toc ol{padding-left:20px;columns:2}
+.toc li{margin:4px 0;font-size:0.9rem}
+.toc a{color:var(--blue);text-decoration:none}
+.toc a:hover{text-decoration:underline}
+.chapter{background:var(--surface);border-radius:12px;padding:30px;margin-bottom:20px;border:1px solid var(--border)}
+.chapter h2{font-size:1.4rem;border-bottom:2px solid var(--border);padding-bottom:10px;margin-bottom:20px}
+.chapter h3{font-size:1.15rem;color:var(--accent);margin:20px 0 10px}
+.chapter h4{color:var(--blue);margin:15px 0 8px}
+.chapter p{margin-bottom:10px}
+.chapter ul,.chapter ol{padding-left:20px;margin-bottom:10px}
+.chapter li{margin:3px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.88rem}
+th{background:var(--surface2);padding:8px 12px;text-align:left;font-weight:600;border-bottom:2px solid var(--border)}
+td{padding:8px 12px;border-bottom:1px solid rgba(48,54,61,0.5)}
+tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.rating{display:inline-block;padding:2px 8px;border-radius:4px;font-weight:700;font-size:0.8rem}
+.rg{background:rgba(63,185,80,0.15);color:var(--green)}
+.ry{background:rgba(210,153,29,0.15);color:var(--yellow)}
+.rr{background:rgba(248,81,73,0.15);color:var(--red)}
+.score-circle{width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:800;margin:15px auto;border:4px solid var(--yellow);color:var(--yellow)}
+.chart-box{background:var(--surface2);border-radius:8px;padding:20px;margin:15px 0}
+.chart-box canvas{max-height:380px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:768px){.grid2{grid-template-columns:1fr}.toc ol{columns:1}}
+blockquote{border-left:3px solid var(--accent);padding:8px 16px;margin:12px 0;background:rgba(247,129,102,0.05);border-radius:0 6px 6px 0}
+.callout{padding:14px 18px;border-radius:8px;margin:12px 0;font-size:0.9rem}
+.caution{background:rgba(210,153,29,0.08);border-left:4px solid var(--yellow)}
+.danger{background:rgba(248,81,73,0.08);border-left:4px solid var(--red)}
+.info{background:rgba(88,166,255,0.08);border-left:4px solid var(--blue)}
+.success{background:rgba(63,185,80,0.08);border-left:4px solid var(--green)}
+.conclusion{background:linear-gradient(135deg,rgba(210,153,29,0.08),rgba(248,81,73,0.04));border:2px solid var(--yellow);border-radius:12px;padding:30px;margin-top:25px}
+.decision-table{font-size:1rem}
+.decision-table td:first-child{font-weight:700;width:180px}
+.decision-table .big{font-size:1.3rem;font-weight:800}
+.evidence-bar{display:flex;height:24px;border-radius:12px;overflow:hidden;margin:10px 0}
+.evidence-bar div{display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:600}
+.ev-l1{background:var(--green);color:#000}
+.ev-l2{background:var(--blue);color:#000}
+.ev-l3{background:var(--yellow);color:#000}
+.ev-ai{background:var(--red);color:#fff}
+.footer{text-align:center;padding:30px;color:var(--text2);font-size:0.8rem}
+.warn-box{background:rgba(248,81,73,0.12);border:1px solid var(--red);border-radius:8px;padding:16px;margin:15px 0}
+.price-table td,.price-table th{text-align:center}
+.price-table .buy{color:var(--green);font-weight:700}
+.price-table .hold{color:var(--blue);font-weight:700}
+.price-table .caution-color{color:var(--yellow);font-weight:700}
+.price-table .avoid{color:var(--red);font-weight:700}
+
+.report-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  margin-bottom: 24px;
+  background: #1a1e2a;
+  border: 1px solid var(--border, #30363d);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+.report-nav a {
+  color: var(--blue, #58a6ff);
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.report-nav a:hover {
+  background: rgba(88,166,255,0.15);
+  color: #58a6ff;
+}
+.report-nav .nav-left { display: flex; align-items: center; gap: 8px; }
+.report-nav .nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.report-nav .nav-sep { color: var(--border, #30363d); font-size: 0.75rem; }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="report-nav">
+  <div class="nav-left">
+    <a href="index.html">← 返回公司列表</a>
+  </div>
+  <div class="nav-right">
+    <a href="../../index.html">🏠 研究报告首页</a>
+  </div>
+</div>
+<div class="header">
+<h1>Credo Technology Group (CRDO) 深度证券分析报告</h1>
+<div class="sub">Reserved.
+<div class="meta">
+<span class="badge badge-yellow">评级: 推荐 80/100</span>
+<span class="badge badge-blue">超级成长股</span>
+<span class="badge badge-red">$216.72 | 市值 $40.4B</span>
+<span class="badge badge-green">框架: Research Constitution V-2.3</span>
+</div>
+</div>
+
+<div class="toc">
+<h3>目录</h3>
+<ol>
+<li><a href="#overview">报告导读</a></li>
+<li><a href="#c0">第0章 公司分类</a></li>
+<li><a href="#c1">第1章 公司基本面分析</a></li>
+<li><a href="#c2">第2章 行业研究(TAM)</a></li>
+<li><a href="#c3">第3章 Fisher成长股评价</a></li>
+<li><a href="#c4">第4章 财务审计(Bear Audit)</a></li>
+<li><a href="#c5">第5章 Bear Case</a></li>
+<li><a href="#c6">第6章 估值分析(6.1-6.15)</a></li>
+<li><a href="#c7">第7章 风险分析</a></li>
+<li><a href="#c8">第8章 投资逻辑</a></li>
+<li><a href="#c9">第9章 Value Drivers</a></li>
+<li><a href="#c10">第10章 最终结论</a></li>
+<li><a href="#evidence">Evidence Coverage</a></li>
+</ol>
+</div>
+
+<!-- ==================== OVERVIEW ==================== -->
+<div class="chapter" id="overview">
+<h2>报告导读（Company Overview）</h2>
+
+<h3>1. 三句话说明公司</h3>
+<p><strong>① 公司做什么：</strong> Credo 研发并销售用于 AI 数据中心内部高速互联的芯片和线缆——最核心的产品是 Active Electrical Cable（主动式铜缆，AEC），在铜缆两端嵌入信号处理芯片，让 AI 服务器之间在 7 米以内实现不掉线的高速数据传输。</p>
+<p><strong>② 公司怎么赚钱：</strong> 向全球最大的云计算公司（Amazon AWS、Microsoft Azure、Meta、xAI/Oracle）销售 AEC 线缆成品和光纤 DSP 芯片。FY2026 收入 $1.34B 中约 95% 来自产品销售额，收入随 Hyperscaler 的 AI 数据中心建设节奏同步增长。</p>
+<p><strong>③ 公司为什么值得研究：</strong> Credo 在 AEC 芯片市场拥有约 88% 的份额（650 Group），是 AI 集群互联这个高增长细分领域的事实标准制定者。当前正处于客户从 2 家扩展到 5 家、产品从铜缆扩展到光互联、TAM 从 $3B 向 $10B+ 扩张的三重拐点。最大争议在于：超高增长能否持续 + 客户高度集中（前 4 大 &gt;90%）是否构成结构性风险。</p>
+
+<h3>2. 公司基本画像</h3>
+<table>
+<tr><th style="width:180px">项目</th><th>内容</th></tr>
+<tr><td>公司名称</td><td>Credo Technology Group Holding Ltd</td></tr>
+<tr><td>股票代码</td><td>CRDO</td></tr>
+<tr><td>上市市场</td><td>纳斯达克（NASDAQ）</td></tr>
+<tr><td>总部所在地</td><td>美国加州圣何塞</td></tr>
+<tr><td>成立时间</td><td>2008 年</td></tr>
+<tr><td>核心产品/服务</td><td>AEC、光学 DSP、PCIe Retimer、SerDes IP</td></tr>
+<tr><td>主要客户</td><td>AWS、Azure、Meta、xAI/Oracle（前 4 大 &gt;90%）</td></tr>
+<tr><td>主要收入来源</td><td>AEC 产品销售额（占总收入 ~60-70%）</td></tr>
+<tr><td>主要利润来源</td><td>AEC 产品销售额（毛利率 68%）</td></tr>
+<tr><td>业务覆盖地区</td><td>美国、中国、香港、台湾、全球</td></tr>
+<tr><td>所处行业</td><td>半导体—高速连接（AI数据中心互联）</td></tr>
+<tr><td>当前发展阶段</td><td><span class="badge badge-blue">高速增长期</span></td></tr>
+</table>
+<div class="callout info"><strong>说明：</strong> 收入和利润来源目前高度一致（AEC 产品既是收入主力也是利润主力）。光学 DSP 毛利率尚未披露，若未来占比提升可能拉低整体毛利率——需持续跟踪。</div>
+
+<h3>3. 商业模式简图</h3>
+<blockquote>台积电等晶圆代工厂（芯片制造）→ Credo 自研 SerDes/DSP 芯片设计 + 系统集成 → 向 Hyperscaler 直接销售 → 按出货量收取采购费 → 收入与利润</blockquote>
+<p>Credo 的独特之处：它不是只卖芯片的传统无晶圆公司，而是将芯片嵌入线缆成品中销售，每根 AEC 的价值量高于单独出售芯片。这是 68% 高毛利率的基础之一。</p>
+
+<h3>4. 投资者当前最需要理解的问题</h3>
+<div class="callout caution">市场关注 Credo 是因为它是 AI 基础设施中"卖铲子"的纯正标的——所有 AI 芯片都要靠 AEC 互联。最大分歧：+205% 超高增速能持续多久？AWS 会不会自研 AEC？最关键的变量：Hyperscaler AI CapEx 增速和 AEC 市场份额变化。</div>
+</div>
+
+<!-- ==================== CH 0 ==================== -->
+<div class="chapter" id="c0">
+<h2>第0章 | 公司分类（Valuation Classification）</h2>
+<table>
+<tr><th style="width:200px">项目</th><th>判断</th></tr>
+<tr><td><strong>公司类型</strong></td><td><span class="badge badge-blue">超级成长股（Super Growth Stock）</span></td></tr>
+<tr><td><strong>首选估值方法</strong></td><td>PEG + Forward PE + PS（辅助 DCF）</td></tr>
+<tr><td><strong>行业归属</strong></td><td>半导体 — 高速连接（AI数据中心互联）</td></tr>
+</table>
+<h3>分类依据</h3>
+<ul>
+<li>FY2026 收入 $1.34B，同比增长 <strong>205.7%</strong>，远超成熟成长股标准</li>
+<li>TAM 从 ~$3B 扩张至 <strong>$10B+</strong>（管理层指引，一级证据）</li>
+<li>毛利率 68% 高位稳定，符合高毛利科技公司特征</li>
+<li>AI 需求驱动，正处于基础设施投资超级周期早期</li>
+<li>盈利历史短（FY2024 亏损，FY2026 才大规模盈利）</li>
+</ul>
+<div class="callout info"><strong>证据来源</strong>：Credo FY2026 10-K（SEC，2026-07-02）、FY2026 Q4 Earnings Press Release（2026-06-01）<br><strong>信心等级</strong>：★★★★★</div>
+</div>
+
+<!-- ==================== CH 1 ==================== -->
+<div class="chapter" id="c1">
+<h2>第1章 | 公司基本面分析</h2>
+<h3>公司如何赚钱</h3>
+<table>
+<tr><th>业务板块</th><th>占比</th><th>核心产品</th><th>竞争地位</th></tr>
+<tr><td><strong>产品销售额</strong></td><td>~95%+</td><td>AEC / ZF Optics / DSP / Retimer</td><td>AEC主导(~88%份额)</td></tr>
+<tr><td><strong>IP授权+NRE</strong></td><td>~5%</td><td>SerDes IP / 定制设计</td><td>战略生态业务</td></tr>
+</table>
+<h3>客户结构</h3>
+<ul>
+<li>FY2026 Q4：<strong>4 家 Hyperscaler 各占 &gt;10%</strong>（推测：AWS ~42%、Microsoft ~25%、Meta、xAI/Oracle）</li>
+<li>第 5 家量产爬坡中（推测 Google）</li>
+<li>前 4 大客户占收入 &gt;90%</li>
+</ul>
+<h3>竞争格局</h3>
+<table>
+<tr><th>对手</th><th>代码</th><th>优势</th><th>Credo对策</th></tr>
+<tr><td>Marvell</td><td>MRVL</td><td>规模大、光学DSP强</td><td>AEC先行+低功耗差异</td></tr>
+<tr><td>Broadcom</td><td>AVGO</td><td>交换芯片平台绑定</td><td>利用Hyperscaler反垄断心理</td></tr>
+<tr><td>Astera Labs</td><td>ALAB</td><td>PCIe/CXL生态深耕</td><td>Toucan Retimer追赶</td></tr>
+</table>
+<div class="callout info"><strong>最终判断 ★★★★☆</strong>：Credo在AEC细分市场拥有事实性垄断（88%份额），但在光DSP和PCIe Retimer领域仍属挑战者。</div>
+</div>
+
+<!-- ==================== CH 2 ==================== -->
+<div class="chapter" id="c2">
+<h2>第2章 | 行业研究（TAM）</h2>
+<table>
+<tr><th>项目</th><th>数值</th><th>来源</th></tr>
+<tr><td>AEC芯片市场 2023→2028E</td><td>~$70M → ~$1.0B</td><td>CAGR 64% / JPMorgan</td></tr>
+<tr><td>Credo总TAM（管理层指引）</td><td><strong>$10B+</strong></td><td>Q4 FY2026 Earnings Call</td></tr>
+<tr><td>Hyperscaler CapEx 2025→2026E</td><td>$405B → $533B</td><td>Goldman Sachs</td></tr>
+</table>
+<div class="chart-box"><canvas id="scenarioChart"></canvas></div>
+<h3>未来十年趋势</h3>
+<table>
+<tr><th>趋势</th><th>对Credo的影响</th></tr>
+<tr><td>AI集群从训练→推理</td><td style="color:var(--green)">利好 — 连接密度增加</td></tr>
+<tr><td>1.6T→3.2T速率升级</td><td style="color:var(--green)">利好 — ASP提升</td></tr>
+<tr><td>机架规模8GPU→576GPU</td><td style="color:var(--green)">强力利好 — 每机架AEC用量9x</td></tr>
+<tr><td>数据中心电力限制</td><td style="color:var(--green)">利好 — 低功耗方案溢价</td></tr>
+</table>
+<div class="callout info"><strong>最终判断 ★★★★☆</strong>：行业具备极强长期成长空间。AI集群规模从千卡向十万卡演进是不可逆趋势。</div>
+</div>
+
+<!-- ==================== CH 3 ==================== -->
+<div class="chapter" id="c3">
+<h2>第3章 | Fisher成长股评价</h2>
+<div class="grid2">
+<div class="chart-box"><canvas id="fisherRadar"></canvas></div>
+<div class="chart-box"><canvas id="fisherBar"></canvas></div>
+</div>
+<div class="score-circle">81</div>
+<p style="text-align:center;color:var(--yellow);font-weight:700">Fisher综合评分: 81/100</p>
+<div class="callout info"><strong>最符合Fisher:</strong> 创造全新产品类别，不对称竞争。<br><strong>最不符合Fisher:</strong> 客户高度集中，SBC偏高。</div>
+</div>
+
+<!-- ==================== CH 4 ==================== -->
+<div class="chapter" id="c4">
+<h2>第4章 | 财务审计（Bear Audit）</h2>
+<table>
+<tr><th>审计项</th><th>数据</th><th>评估</th></tr>
+<tr><td>应收账款</td><td>$233.4M (17.5%)</td><td><span class="rating rg">正常</span></td></tr>
+<tr><td>存货</td><td>$250.8M (18.8%)</td><td><span class="rating ry">+179% YoY 关注</span></td></tr>
+<tr><td>经营现金流</td><td>$464.3M</td><td><span class="rating rg">强劲</span></td></tr>
+<tr><td>自由现金流</td><td>$407.0M</td><td><span class="rating rg">强劲</span></td></tr>
+<tr><td>毛利率</td><td>GAAP 68.0%</td><td><span class="rating rg">稳定高位</span></td></tr>
+<tr><td>ROIC</td><td>73.1%</td><td><span class="rating rg">极高</span></td></tr>
+<tr><td>股权激励(SBC)</td><td>~$181.5M (13.6%)</td><td><span class="rating ry">偏高</span></td></tr>
+<tr><td>净现金</td><td>$1.42B（零净负债）</td><td><span class="rating rg">堡垒</span></td></tr>
+</table>
+<div class="callout success"><strong>最终评级: 绿色</strong> — 强劲现金流+零负债+高毛利率+高ROIC。关注SBC偏高(+13.6%)和存货增长，但不构成红旗。</div>
+</div>
+
+<!-- ==================== CH 5 ==================== -->
+<div class="chapter" id="c5">
+<h2>第5章 | Bear Case（做空逻辑）</h2>
+<h3>最脆弱环节：客户高度集中 + Marvell/Broadcom挤压</h3>
+<table>
+<tr><th>假设</th><th>失败后果</th><th>概率</th></tr>
+<tr><td>客户多元化</td><td>AWS(~42%)自研AEC → 收入腰斩</td><td><span class="rating ry">中</span></td></tr>
+<tr><td>AI CapEx持续增长</td><td>AI ROI不能兑现 → Hyperscaler收紧</td><td><span class="rating ry">中</span></td></tr>
+<tr><td>AEC技术领先</td><td>Broadcom交换机捆绑替代</td><td><span class="rating ry">低-中</span></td></tr>
+</table>
+<p><strong>做空成功概率: 30%</strong> — 基本面强劲，但估值已在高位。</p>
+</div>
+
+<!-- ==================== CH 6 ==================== -->
+<div class="chapter" id="c6">
+<h2>第6章 | 估值分析</h2>
+
+<h3>6.2 核心估值指标（当前$216.72）</h3>
+<table>
+<tr><th>指标</th><th>当前值</th><th>同行</th><th>评估</th></tr>
+<tr><td>PE(TTM)</td><td>86.2x</td><td>MRVL 42x, AVGO 33x</td><td><span class="rating ry">偏高</span></td></tr>
+<tr><td>Forward PE</td><td>~49.6x</td><td>分析师共识 45-50x</td><td><span class="rating ry">合理偏高</span></td></tr>
+<tr><td>PEG</td><td>1.26x</td><td>MRVL 1.58x, ALAB 1.52x</td><td><span class="rating rg">合理</span></td></tr>
+<tr><td>PS(TTM)</td><td>30.2x</td><td>MRVL 15x, AVGO 18x</td><td><span class="rating ry">偏高</span></td></tr>
+</table>
+
+<h3>6.8 安全边际</h3>
+<table class="price-table">
+<tr><th>公允价值方法</th><th>公允价值</th><th>权重</th><th>加权</th></tr>
+<tr><td>PEG</td><td>~$250</td><td>40%</td><td>$100</td></tr>
+<tr><td>Forward PE</td><td>~$198</td><td>30%</td><td>$59</td></tr>
+<tr><td>DCF (三情景)</td><td>~$245</td><td>20%</td><td>$49</td></tr>
+<tr><td>同行调整</td><td>~$220</td><td>10%</td><td>$22</td></tr>
+<tr><td><strong>综合公允价值</strong></td><td colspan="3"><strong>~$230</strong></td></tr>
+</table>
+
+<table class="price-table">
+<tr><th>价格位置</th><th>价格区间</th><th>安全边际</th><th>建议</th></tr>
+<tr class="buy"><td>极度低估</td><td>&lt;$138</td><td>&gt;40%</td><td>可以重仓</td></tr>
+<tr class="buy"><td>安全买入价</td><td>$138-$173</td><td>25-40%</td><td>积极建仓</td></tr>
+<tr class="hold"><td>合理价值</td><td>$173-$253</td><td>10%~-10%</td><td>正常持有</td></tr>
+<tr class="caution-color"><td><strong>当前价格</strong></td><td><strong>$216.72</strong></td><td><strong>~5.8%</strong></td><td><strong>合理区底部</strong></td></tr>
+<tr class="caution-color"><td>谨慎区</td><td>$253-$276</td><td>-10%~-20%</td><td>仅持有</td></tr>
+<tr class="avoid"><td>高估区</td><td>&gt;$276</td><td>&lt;-20%</td><td>不新增</td></tr>
+</table>
+
+<h3>6.15 最终投资决策</h3>
+<table class="decision-table">
+<tr><td>当前价格</td><td><strong>$216.72</strong></td></tr>
+<tr><td>综合公允价值</td><td><strong>~$230</strong>（可信度 ★★★☆☆）</td></tr>
+<tr><td>安全买入价格</td><td><strong>$138 - $173</strong></td></tr>
+<tr><td>当前安全边际</td><td><strong>~5.8%</strong></td></tr>
+<tr><td>价格位置</td><td><span class="badge badge-blue">合理区底部</span></td></tr>
+<tr><td>投资建议</td><td><span class="badge badge-blue">推荐（小仓位建仓）</span></td></tr>
+<tr><td>企业质量</td><td>★★★★☆</td></tr>
+<tr><td>投资价值</td><td>★★★★☆</td></tr>
+</table>
+
+<div class="conclusion">
+<strong>核心回答: "现在是否值得投入新的资金？"</strong><br><br>
+Credo是AI基础设施中不可替代的连接层供应商，企业质量极佳。当前$216.72处于合理区底部，不是最佳买入点但也不算贵。建议在$173以下积极加仓，$138以下重仓。
+</div>
+</div>
+
+<!-- ==================== CH 7 ==================== -->
+<div class="chapter" id="c7">
+<h2>第7章 | 风险分析</h2>
+<div class="chart-box"><canvas id="riskChart"></canvas></div>
+</div>
+
+<!-- ==================== CH 8 ==================== -->
+<div class="chapter" id="c8">
+<h2>第8章 | 投资逻辑</h2>
+<p><strong>核心投资逻辑:</strong> Credo是AI集群互联瓶颈的唯一纯正受益者。</p>
+<p><strong>增长驱动:</strong> AEC渗透率提升 | 客户多元化 | 产品线扩张(ZF Optics+ALC+PCIe) | 速率升级(800G→1.6T→3.2T)</p>
+<p><strong>护城河:</strong> AEC芯片~88%份额 | Hyperscaler转换成本 | 客户反垄断需求 | 20+年SerDes IP</p>
+<p><strong>失效条件:</strong> Hyperscaler找到廉价AEC替代方案 | Marvell/Broadcom获30%+份额 | AI商业化失败</p>
+</div>
+
+<!-- ==================== CH 9 ==================== -->
+<div class="chapter" id="c9">
+<h2>第9章 | Value Drivers（价值驱动因素）</h2>
+<table>
+<tr><th>#</th><th>Driver</th><th>重要性</th><th>当前状态</th></tr>
+<tr><td>1</td><td><strong>Hyperscaler AI CapEx增速</strong></td><td><span class="rating rr">★★★★★</span></td><td>→ 稳健增长(+30%)</td></tr>
+<tr><td>2</td><td><strong>AEC市场份额</strong></td><td><span class="rating rr">★★★★★</span></td><td>→ ~88%，有压力</td></tr>
+<tr><td>3</td><td><strong>客户多元化进展</strong></td><td><span class="rating ry">★★★★☆</span></td><td>↑ 改善(4家&gt;10%)</td></tr>
+<tr><td>4</td><td><strong>光学新品量产节奏</strong></td><td><span class="rating ry">★★★★☆</span></td><td>→ 量产爬坡中</td></tr>
+<tr><td>5</td><td><strong>毛利率趋势</strong></td><td><span class="rating ry">★★★☆☆</span></td><td>→ 68%稳定</td></tr>
+<tr><td>6</td><td><strong>1.6T路线图执行</strong></td><td><span class="rating ry">★★★☆☆</span></td><td>→ 研发中按计划</td></tr>
+</table>
+<div class="chart-box"><canvas id="driverWeight"></canvas></div>
+<div class="callout info"><strong>下次更新:</strong> FY2027 Q1季报(预计2026年9月)</div>
+</div>
+
+<!-- ==================== CH 10 ==================== -->
+<div class="chapter" id="c10">
+<h2>第10章 | 最终结论</h2>
+<div class="grid2">
+<div class="chart-box"><canvas id="finalDonut"></canvas></div>
+<div>
+<h3>综合评分: 80/100</h3>
+<table>
+<tr><th>维度</th><th>评分</th></tr>
+<tr><td>商业模式</td><td>88/100</td></tr>
+<tr><td>行业</td><td>92/100</td></tr>
+<tr><td>管理层</td><td>82/100</td></tr>
+<tr><td>财务</td><td>85/100</td></tr>
+<tr><td>护城河</td><td>80/100</td></tr>
+<tr><td>成长性</td><td>90/100</td></tr>
+<tr><td>估值</td><td>60/100</td></tr>
+<tr><td>风险</td><td>65/100</td></tr>
+<tr><td>Fisher</td><td>81/100</td></tr>
+</table>
+</div>
+</div>
+<div class="conclusion">
+<h3 style="color:var(--yellow);margin-bottom:12px">评级: 推荐 (80/100) | 估值: 合理区底部 | 安全边际: ~5.8%</h3>
+<p>Credo是AI时代水龙头级别的公司——每建一座AI数据中心都要用到它的连接方案。建议在$173以下积极加仓，$138以下重仓。</p>
+</div>
+</div>
+
+<!-- ==================== EVIDENCE ==================== -->
+<div class="chapter" id="evidence">
+<h2>Evidence Coverage（证据覆盖率）</h2>
+<div class="evidence-bar">
+<div class="ev-l1" style="width:40%">一级 40%</div>
+<div class="ev-l2" style="width:25%">二级 25%</div>
+<div class="ev-l3" style="width:25%">三级 25%</div>
+<div class="ev-ai" style="width:10%">推断 10%</div>
+</div>
+<table>
+<tr><th>项目</th><th>占比</th></tr>
+<tr><td>一级证据（SEC文件、Earnings Press Release、Earnings Call）</td><td>40%</td></tr>
+<tr><td>二级证据（公司官网产品资料、Investor Presentation）</td><td>25%</td></tr>
+<tr><td>三级证据（BNP Paribas/Evercore研报、650 Group行业分析）</td><td>25%</td></tr>
+<tr><td>AI推断（DCF参数设定、情景概率分配）</td><td>10%</td></tr>
+</table>
+<h3>未验证数据</h3>
+<ul>
+<li>DCF公允价值参数（WACC、Terminal Growth）为行业标准推断</li>
+<li>AEC芯片市场88%份额来源于650 Group（三级证据）</li>
+<li>客户占比分配（AWS 42%等）为市场推测</li>
+</ul>
+<div class="warn-box"><strong>提示：</strong> AI推断占比10%，处于可接受范围。建议通过个人分析验证核心估值参数。</div>
+</div>
+
+<div class="footer">
+<p>报告生成时间: 2026-07-20 22:39 CST | 框架: Research Constitution V-2.2</p>
+<p style="color:var(--red);margin-top:4px">免责声明: 本报告仅用于研究参考，不构成任何投资建议。投资有风险，入市需谨慎。</p>
+<p style="margin-top:4px">下次更新触发: FY2027 Q1季报(预计2026年9月) → 优先更新第9章Value Drivers</p>
+</div>
+
+</div>
+
+<script>
+new Chart(document.getElementById('scenarioChart'),{type:'doughnut',data:{labels:['乐观(30%)','基准(50%)','悲观(20%)'],datasets:[{data:[30,50,20],backgroundColor:['#3fb950','#58a6ff','#f85149'],borderColor:'#0d1117',borderWidth:2}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:'#c9d1d9'}},title:{display:true,text:'行业三情景概率分布',color:'#c9d1d9'}}}});
+new Chart(document.getElementById('fisherRadar'),{type:'radar',data:{labels:['市场潜力','管理层','研发','销售','利润率','护城河','长期成长','企业文化','资本配置','竞争优势'],datasets:[{label:'Credo',data:[9,8,9,8,7,8,9,7,8,8],backgroundColor:'rgba(88,166,255,0.15)',borderColor:'#58a6ff',borderWidth:2,pointBackgroundColor:'#58a6ff'}]},options:{responsive:true,plugins:{legend:{labels:{color:'#c9d1d9'}}},scales:{r:{beginAtZero:true,max:10,grid:{color:'#30363d'},pointLabels:{color:'#8b949e',font:{size:10}},ticks:{backdropColor:'transparent',color:'#8b949e'}}}}});
+new Chart(document.getElementById('fisherBar'),{type:'bar',data:{labels:['市场潜力','研发','长期成长','竞争优势','护城河','管理层','销售','资本配置','利润率','文化'],datasets:[{label:'评分',data:[9,9,9,8,8,8,8,8,7,7],backgroundColor:['#3fb950','#3fb950','#3fb950','#3fb950','#3fb950','#58a6ff','#58a6ff','#58a6ff','#d2991d','#d2991d'],borderRadius:3}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{max:10,grid:{color:'#30363d'},ticks:{color:'#8b949e'}},y:{ticks:{color:'#8b949e'}}}}});
+new Chart(document.getElementById('riskChart'),{type:'bar',data:{labels:['客户集中','竞争','AI CapEx','估值压缩','技术','地缘政治','专利','整合'],datasets:[{label:'严重程度',data:[10,9,8,8,6,5,4,3],backgroundColor:['#f85149','#f85149','#d2991d','#d2991d','#d2991d','#58a6ff','#58a6ff','#3fb950'],borderRadius:3}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false},title:{display:true,text:'风险热力图',color:'#c9d1d9'}},scales:{x:{max:10,grid:{color:'#30363d'},ticks:{color:'#8b949e'}},y:{ticks:{color:'#8b949e'}}}}});
+new Chart(document.getElementById('driverWeight'),{type:'bar',data:{labels:['Hyperscaler CapEx','AEC份额','客户多元化','光学新品','毛利率','1.6T路线图'],datasets:[{label:'重要程度(1-5)',data:[5,5,4,4,3,3],backgroundColor:['#f85149','#f85149','#d2991d','#d2991d','#58a6ff','#58a6ff'],borderRadius:3}]},options:{responsive:true,plugins:{legend:{display:false},title:{display:true,text:'Value Drivers重要程度',color:'#c9d1d9'}},scales:{y:{max:5,grid:{color:'#30363d'},ticks:{color:'#8b949e',stepSize:1}},x:{ticks:{color:'#8b949e',font:{size:10}}}}});
+new Chart(document.getElementById('finalDonut'),{type:'doughnut',data:{labels:['行业(13.8)','成长性(13.5)','商业模式(13.2)','财务(12.8)','Fisher(12.2)','管理层(12.3)','护城河(12.0)','风险(9.8)','估值(9.0)'],datasets:[{data:[13.8,13.5,13.2,12.8,12.2,12.3,12.0,9.8,9.0],backgroundColor:['#3fb950','#3fb950','#58a6ff','#58a6ff','#58a6ff','#d2991d','#d2991d','#d2991d','#f85149'],borderColor:'#0d1117',borderWidth:2}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:'#c9d1d9',font:{size:9},padding:8}},title:{display:true,text:'综合评分构成 80/100',color:'#c9d1d9',font:{size:13}}}}});
+</script>
+</body>
+</html>

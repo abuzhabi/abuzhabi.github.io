@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Amazon (AMZN) 深度分析报告</title><style>:root{--bg:#f8f9fa;--text:#1a1a2e;--text-secondary:#555;--accent:#e74c3c;--accent-green:#27ae60;--accent-blue:#3b82f6;--accent-yellow:#f59e0b;--border:#e0e0e0;--card-bg:#fff;--code-bg:#f5f5f5;--table-stripe:#fafafa;--warning:#fef3c7;--danger:#fee2e2;--success:#d1fae5}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.85;padding:40px 20px}
+.container{max-width:900px;margin:0 auto}
+.back-link{display:inline-block;margin-bottom:24px;color:var(--accent);text-decoration:none;font-size:.9rem;font-weight:600}
+.back-link:hover{text-decoration:underline}
+h1{font-size:1.85rem;font-weight:800;margin:16px 0 8px;padding-bottom:12px;border-bottom:2px solid var(--accent);line-height:1.3}
+h2{font-size:1.35rem;font-weight:700;margin:36px 0 16px;padding:6px 0;border-bottom:1px solid var(--border)}
+h3{font-size:1.1rem;font-weight:700;margin:24px 0 12px;color:#2c3e50}
+h4{font-size:1rem;font-weight:700;margin:16px 0 8px;color:#34495e}
+blockquote{background:#f0f7ff;border-left:4px solid #3b82f6;margin:12px 0;padding:12px 18px;border-radius:0 8px 8px 0;color:#1e40af;font-size:.94rem}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.88rem}
+th{background:#2c3e50;color:#fff;padding:10px 12px;text-align:left;font-weight:600}
+td{padding:8px 12px;border-bottom:1px solid var(--border)}
+tr:nth-child(even) td{background:var(--table-stripe)}
+tr:hover td{background:#eef1ff}
+hr{border:none;border-top:1px solid var(--border);margin:28px 0}
+code{background:var(--code-bg);padding:2px 6px;border-radius:4px;font-size:.88em;font-family:"SF Mono","Fira Code",monospace}
+strong{color:#1a1a2e}
+ol,ul{padding-left:24px;margin:8px 0}
+li{margin:4px 0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid var(--border);color:var(--text-secondary);font-size:.85rem}
+.chart-container{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:20px;margin:20px 0;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.chart-title{font-size:1rem;font-weight:700;margin-bottom:12px;color:#2c3e50}
+.chart-canvas-wrap{position:relative;height:320px}
+.mermaid-container{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:20px;margin:20px 0;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);overflow-x:auto}
+.mermaid-title{font-size:1rem;font-weight:700;margin-bottom:12px;color:#2c3e50;text-align:left}
+.score-badge{display:inline-block;padding:4px 14px;border-radius:16px;font-weight:700;font-size:.9rem}
+.score-green{background:#d1fae5;color:#065f46}
+.score-yellow{background:#fef3c7;color:#92400e}
+.highlight-box{background:linear-gradient(135deg,#f8f9fa 0%,#eef1ff 100%);border-left:4px solid var(--accent);border-radius:8px;padding:16px 20px;margin:20px 0}
+.highlight-box h4{color:var(--accent);margin-top:0}
+@media(max-width:640px){body{padding:20px 12px}table{font-size:.78rem}th,td{padding:6px 8px}h1{font-size:1.5rem}.chart-canvas-wrap{height:260px}}
+.report-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  margin-bottom: 24px;
+  background: #1a1e2a;
+  border: 1px solid var(--border, #30363d);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+.report-nav a {
+  color: var(--blue, #58a6ff);
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.report-nav a:hover {
+  background: rgba(88,166,255,0.15);
+  color: #58a6ff;
+}
+.report-nav .nav-left { display: flex; align-items: center; gap: 8px; }
+.report-nav .nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.report-nav .nav-sep { color: var(--border, #30363d); font-size: 0.75rem; }
+</style><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script></head>
+<body><div class="container">
+<div class="report-nav">
+  <div class="nav-left">
+    <a href="index.html">← 返回公司列表</a>
+  </div>
+  <div class="nav-right">
+    <a href="../../index.html">🏠 研究报告首页</a>
+  </div>
+</div>
+  <a class="back-link" href="./index.html">← 返回报告列表</a>
+  <h1>Amazon.com, Inc. (NASDAQ: AMZN) 深度证券分析报告</h1>
+  <div class="header-meta"><p><strong>公司:</strong> Amazon.com, Inc. (AMZN, NASDAQ) | <strong>行业:</strong> 电商/云计算/广告/AI | <strong>阶段:</strong> 超级成长→成熟</p><p><strong>分析日期:</strong> 2026-07-20 | <strong>框架:</strong> Research Constitution V-2.2</p><p><strong>当前股价:</strong> $247.23 | <strong>市值:</strong> $2.66T | <strong>PE TTM:</strong> 29.6x | <strong>PE Fwd:</strong> ~31x</p><p><strong>总分:</strong> <span class="score-badge score-green">82/100 推荐</span> | <strong>Fisher:</strong> 90/100 | <strong>目标价:</strong> $283 (SOTP)</p></div><div class="highlight-box"><h4>💡 投资决策摘要 (6.15)</h4><p><strong>当前价格:</strong> $247 → <strong>公允价值:</strong> <strong style="color:#e74c3c;">$283</strong> (SOTP, ★★★★☆)</p><p><strong>安全边际:</strong> <span class="score-badge score-green">+12.6%</span> | <strong>安全买入:</strong> $200-250</p><p><strong>建议:</strong> <span class="score-badge score-green">推荐 (可建仓 8-12%)</span></p><p><strong>一句话:</strong> 全球唯一覆盖 AWS×广告×电商三大飞轮的综合平台，AI正在塑造下一个十年的增长曲线。</p></div><div class="toc"><h4>目录</h4><ol><li><a href="#0">第0章 公司分类</a></li><li><a href="#1">第1章 基本面</a></li><li><a href="#2">第2章 TAM</a></li><li><a href="#3">第3章 Fisher</a></li><li><a href="#4">第4章 Bear Audit</a></li><li><a href="#5">第5章 Bear Case</a></li><li><a href="#6">第6章 估值(含6.11-6.15)</a></li><li><a href="#7">第7章 风险</a></li><li><a href="#8">第8章 投资逻辑</a></li><li><a href="#9">第9章 Value Drivers</a></li><li><a href="#10">第10章 结论</a></li><li><a href="#evidence-coverage">EC</a></li></ol></div><blockquote><p><strong>分析日期</strong>: 2026-07-20 | <strong>框架版本</strong>: Research Constitution V-2.2</p></blockquote>
+<blockquote><p><strong>当前股价</strong>: $247.23 (2026-07-17) | <strong>市值</strong>: $2.66万亿</p></blockquote>
+<blockquote><p><strong>行业</strong>: 电商 / 云计算 / 数字广告 / AI | <strong>公司阶段</strong>: 超级成长股 → 成熟成长股</p></blockquote>
+<blockquote><p><strong>52周区间</strong>: $196.00 - $278.56 (距高点 -11%)</p></blockquote>
+<hr />
+<h2>第0章 | 公司分类（Valuation Classification）</h2>
+<h3>分类结果</h3>
+<table><thead><tr><th>项目</th><th>判断</th></tr></thead><tbody><tr><td><strong>公司类型</strong></td><td>超级成长股（混合型：AWS高增长 + 电商成熟 + 广告爆发）</td></tr><tr><td><strong>首选估值方法</strong></td><td>SOTP（分部加总）+ EV/EBITDA + PE（综合）</td></tr><tr><td><strong>辅助方法</strong></td><td>AWS 独立估值 (EV/Sales + EV/EBITDA)、电商 P/S、DCF</td></tr><tr><td><strong>不适用</strong></td><td>单一PE/PEG 无法反映AWS的差异化估值</td></tr></tbody></table>
+<h3>分类说明</h3>
+<p><strong>结论</strong>: 亚马逊是"混合型"公司——AWS 是超级成长股（+28% YoY，37.7% 利润率），电商是"稳定+进攻"（零售 15% 单位增长），广告是成熟成长股（$70B+ TTM，+24%）。必须使用分部加总法（SOTP）分别估值。</p>
+<p><strong>证据</strong>:</p>
+<ul>
+<li>Amazon 8-K Q1 2026 (一级): AWS $37.59B (+28%), 广告 $17.24B (+24%), 电商单位增长 15%</li>
+<li>Analyst reports: Evercore 2026E AWS $163B (+27%), 2027E AWS $214B (+31%)</li>
+</ul>
+<p><strong>为什么采用 SOTP</strong>:</p>
+<ol>
+<li>AWS 估值是核心（占市值 50%+），适合用 EV/Sales + EV/EBITDA</li>
+<li>电商业务（零售）用 P/S + 单位增长</li>
+<li>广告业务用可比平台估值 (Google/Meta)</li>
+<li>单一 PE 无法反映业务部门的巨大差异</li>
+</ul>
+<blockquote><p><strong>证据等级</strong>: 一级 | <strong>信心等级</strong>: ★★★★★</p></blockquote>
+<hr />
+<h2>第1章 | 公司基本面分析</h2>
+<div class="chart-container"><div class="chart-title">📈 营收与经营利润趋势</div><div class="chart-canvas-wrap"><canvas id="c1"></canvas></div></div>
+
+
+<h3>1.1 商业模式：零售 → 云 → 广告 → AI</h3>
+<p><strong>结论</strong>: 亚马逊已从"在线书店"进化为全球最大的科技综合平台——零售提供流量和规模，AWS 提供高利润率利润，广告是"第三增长曲线"，AI（Anthropic+Trainium+Bedrock）是下一个10年引擎。</p>
+<p><strong>证据</strong>:</p>
+<ul>
+<li>Amazon 10-K FY2025 (一级): 全球收入 $716.9B</li>
+<li>Q1 2026 (一级): 营业利润 $23.85B（利润率 13.1%），其中 AWS 贡献 $14.16B</li>
+</ul>
+<p><strong>四大业务板块</strong>:</p>
+<table><thead><tr><th>业务</th><th>FY2025 收入</th><th>Q1 2026</th><th>增速</th><th>重要性</th></tr></thead><tbody><tr><td><strong>AWS</strong></td><td>$128.7B</td><td>$37.59B</td><td>+28%</td><td>利润引擎（占营收 53% of OP）</td></tr><tr><td><strong>电商(北美)</strong></td><td>~$340B</td><td>~$90B</td><td>+12%</td><td>规模基础</td></tr><tr><td><strong>电商(国际)</strong></td><td>~$160B</td><td>~$44B</td><td>+10%</td><td>亏损收窄</td></tr><tr><td><strong>广告</strong></td><td>$70B TTM</td><td>$17.24B</td><td>+24%</td><td>高利润增长曲线</td></tr><tr><td><strong>订阅(Prime)</strong></td><td>~$50B</td><td>$13.43B</td><td>+15%</td><td>用户锁定</td></tr></tbody></table>
+<p><strong>反方证据</strong>:</p>
+<ul>
+<li>电商利润率极低（北美 7.9%，国际仍亏损）</li>
+<li>$200B 年 CapEx 侵蚀 FCF</li>
+<li>FTC 反垄断诉讼（2026/2027 开庭）</li>
+<li>零售竞争加剧（Walmart+/Temu/Shein）</li>
+</ul>
+<p><strong>最终判断</strong>: 商业模式是全球顶级——三个飞轮（电商 → 云 → 广告），但 FCF 因 CapEx 扩张承压。★★★★★</p>
+
+<div class="mermaid-container"><div class="mermaid-title">🔄 亚马逊三大飞轮</div><div class="mermaid">
+flowchart TD
+    A[电商]<br/>$500B+|-->|流量+数据|B[广告<br/>$70B+ TTM]
+    A -->|规模+基础设施|C[AWS<br/>$163B 2026E]
+    B -->|高利润|D[$283B CO<br/>全利润]
+    C -->|AI 推理+训练|E[AI/Agent<br/>深度生态]
+    E -->|反哺|A
+    A -->|Prime锁定|F[2亿会员<br/>高粘性]
+    style A fill:#f59e0b,color:#fff
+    style B fill:#8b5cf6,color:#fff
+    style C fill:#3b82f6,color:#fff
+    style D fill:#16a34a,color:#fff
+    style E fill:#e74c3c,color:#fff
+</div></div>
+
+<h3>1.2 历史沿革</h3>
+<table><thead><tr><th>年份</th><th>事件</th></tr></thead><tbody><tr><td>1994</td><td>成立</td></tr><tr><td>2002</td><td>AWS 推出（核心转折）</td></tr><tr><td>2014</td><td>推出 Alexa/AI 助手</td></tr><tr><td>2017</td><td>收购 Whole Foods ($13.7B)</td></tr><tr><td>2021</td><td>Bezos → 执行主席，Jassy → CEO</td></tr><tr><td>2023</td><td>投资 Anthropic ($4B)</td></tr><tr><td>2024</td><td>推出 Trainium 2 AI 芯片；再投 Anthropic $4B</td></tr><tr><td>2025</td><td>2025 总投资 Anthropic $8-12B；Nova 模型发布</td></tr><tr><td>2026 Q1</td><td>AWS +28%（近4年最快），利润 $23.85B，OpenAI/Meta 成为客户</td></tr><tr><td>2026 Q2 (E)</td><td>收入 $196B，OP $22B；Leo 卫星 $1B；Prime Day 首入 Q2</td></tr></tbody></table>
+<h3>1.3 核心竞争优势</h3>
+<table><thead><tr><th>优势</th><th>强度</th><th>说明</th></tr></thead><tbody><tr><td>AWS 规模与惯性</td><td>★★★★★</td><td>33%+ 云市场份额，$200B 年 CapEx 壁垒</td></tr><tr><td>物流基础网络</td><td>★★★★★</td><td>全美最大物流网络，当日达 1B+ 件</td></tr><tr><td>广告增长势能</td><td>★★★★☆</td><td>$70B+ TTM，转化率驱动的内生增长</td></tr><tr><td>AI/ML 技术栈</td><td>★★★★☆</td><td>Trainium + Bedrock + Nova + Anthropic</td></tr><tr><td>品牌信任</td><td>★★★★★</td><td>全球最值得信赖电商品牌之一</td></tr><tr><td>Prime 用户粘性</td><td>★★★★★</td><td>~200M 会员，高续费率</td></tr></tbody></table>
+<p><strong>反方证据</strong>:</p>
+<ul>
+<li>FTC 反垄断诉讼（强制拆分风险）</li>
+<li>电商利润率远低于 AWS</li>
+<li>中国电商平台（Temu/Shein）持续侵蚀低端份额</li>
+</ul>
+<h3>1.4 未来 5 年增长驱动力</h3>
+<ol>
+<li><strong>AWS AI 收入爆发</strong> — Trainium 芯片 $20B+ run rate，AI 工作负载从训练→推理</li>
+<li><strong>AI 原生应用（Nova + Bedrock + Rufus）</strong></li>
+<li><strong>广告份额持续提升</strong> — 从 $70B → 3-5 年后 $150B+</li>
+<li><strong>国际电商利润率改善</strong> — 巴西/印度/东南亚盈利化</li>
+<li><strong>卫星互联网（Project Leo）</strong> — 2026 Q3 商用</li>
+<li><strong>物理 AI/Agent/Robotics</strong> — 仓储自动化</li>
+</ul>
+<hr />
+<h2>第2章 | 行业研究（TAM）</h2>
+<div class="chart-container"><div class="chart-title">🚀 AWS 同比增速(%) — 加速至 +28%</div><div class="chart-canvas-wrap"><canvas id="c2"></canvas></div></div><div class="chart-container"><div class="chart-title">🧩 Q1 2026 业务分拆 ($181.5B)</div><div class="chart-canvas-wrap"><canvas id="c3"></canvas></div></div>
+
+
+<h3>2.1 行业规模</h3>
+<table><thead><tr><th>市场</th><th>TAM</th><th>增速</th><th>AMZN 定位</th></tr></thead><tbody><tr><td>全球云计算</td><td>$1,500B+ (2030E)</td><td>20%+ CAGR</td><td>#1 (AWS 33% share)</td></tr><tr><td>全球电商</td><td>$6.3T (2026)</td><td>8-10%</td><td>#1 (US ~40% share)</td></tr><tr><td>全球数字广告</td><td>$900B+ (2026)</td><td>10-15%</td><td>#3 (after Google/Meta)</td></tr><tr><td>全球 AI 基础设施</td><td>$1.43T (2026)</td><td>24-28%</td><td>#1 (AWS Trainium)</td></tr></tbody></table>
+<h3>2.2 三情景分析</h3>
+<table><thead><tr><th>情景</th><th>假设</th><th>概率</th><th>对 AMZN 影响</th></tr></thead><tbody><tr><td>乐观</td><td>AWS +30%+, AI全面兑现，FTC 诉讼和解</td><td>35%</td><td>$350+/股</td></tr><tr><td>基准</td><td>AWS +25-30%，广告持续增长</td><td>50%</td><td>$280-320/股</td></tr><tr><td>悲观</td><td>AWS 降速至 20%，FTC 拆分，零售竞争恶化</td><td>15%</td><td>$180-220/股</td></tr></tbody></table>
+<hr />
+<h2>第3章 | Fisher 成长股评价</h2>
+<table><thead><tr><th>#</th><th>维度</th><th>评分</th><th>评分依据</th></tr></thead><tbody><tr><td>1</td><td>市场潜力</td><td>10</td><td>三大万亿级 TAM（云+电商+广告）</td></tr><tr><td>2</td><td>管理层能力</td><td>9</td><td>Jassy CEO 执行力强，从 AWS → AI 转型</td></tr><tr><td>3</td><td>研发能力</td><td>10</td><td>Trainium/Alexa/Nova/Bedrock/Leo</td></tr><tr><td>4</td><td>销售能力</td><td>9</td><td>AWS 企业销售+电商+广告三维</td></tr><tr><td>5</td><td>利润率改善空间</td><td>8</td><td>电商从 5%→8% 仍有翻倍空间</td></tr><tr><td>6</td><td>护城河</td><td>10</td><td>物流/云/Alexa 三重壁垒</td></tr><tr><td>7</td><td>长期成长能力</td><td>10</td><td>AI+广告+国际三线</td></tr><tr><td>8</td><td>企业文化</td><td>8</td><td>Day 1 文化仍在，但规模带来挑战</td></tr><tr><td>9</td><td>资本配置能力</td><td>6</td><td>$200B CapEx 极端，股东回报 0</td></tr><tr><td>10</td><td>长期竞争优势</td><td>10</td><td>物流+云+数据是结构性壁垒</td></tr></tbody></table>
+<p><strong>Fisher 综合评分: 90/100</strong></p>
+<p><strong>最符合 Fisher</strong>: 市场潜力 × 护城河 — 三个相邻的万亿级市场同时爆发。</p>
+<p><strong>最不符合 Fisher</strong>: 资本配置——0 股息+0 回购，$200B CapEx 侵蚀 FCF。</p>
+<hr />
+<h2>第4章 | 财务审计（Bear Audit）</h2>
+<div class="chart-container"><div class="chart-title">💰 CapEx vs FCF: 2026年 $200B CapEx侵蚀</div><div class="chart-canvas-wrap"><canvas id="c4"></canvas></div></div>
+
+
+<table><thead><tr><th>指标</th><th>FY2024</th><th>FY2025</th><th>Q1 2026</th></tr></thead><tbody><tr><td>营收</td><td>$638B</td><td>$716.9B</td><td>$181.5B</td></tr><tr><td>营收 YoY</td><td>+11%</td><td>+12%</td><td>+17%</td></tr><tr><td>经营利润</td><td>$76.5B</td><td>$87.3B</td><td>$23.85B</td></tr><tr><td>经营利润率</td><td>12.0%</td><td>12.2%</td><td>13.1%</td></tr><tr><td>AWS 收入</td><td>$107.6B</td><td>$128.7B</td><td>$37.59B</td></tr><tr><td>AWS 经营利润率</td><td>35.5%</td><td>36.5%</td><td>37.7%</td></tr><tr><td>FCF</td><td>$46.5B</td><td>$42.8B</td><td>—</td></tr><tr><td>CapEx</td><td>$75B</td><td>$105B</td><td>~$50B</td></tr><tr><td>长期债务</td><td>$52B</td><td>$58B</td><td>~$60B</td></tr></tbody></table>
+<h3>最终评级</h3>
+<p>### 🟢 绿色（健康）</p>
+<blockquote><p>Bear Audit 整体绿色。核心风险是 CapEx 极端扩张（$200B 2026）和 FTC 诉讼。</p></blockquote>
+<hr />
+<h2>第5章 | Bear Case</h2>
+<h3>5.1 股价腰斩情景</h3>
+<table><thead><tr><th>情景</th><th>触发条件</th><th>概率</th></tr></thead><tbody><tr><td>A. FTC 拆分/裁决</td><td>反垄断败诉 → 强制剥离 AWS</td><td>~15%</td></tr><tr><td>B. AWS AI 需求降速</td><td>客户自建 → AWS 增速跌至 15%</td><td>~20%</td></tr><tr><td>C. 电商竞争恶化</td><td>Temu/Shein/Walmart 侵蚀份额</td><td>~20%</td></tr><tr><td>D. CapEx 失控</td><td>$200B→$350B+，FCF 持续为负</td><td>~15%</td></tr></tbody></table>
+<h3>5.2 做空成功概率</h3>
+<p><strong>做空成功概率: 15%</strong></p>
+<hr />
+<h2>第6章 | 估值分析</h2>
+<div class="chart-container"><div class="chart-title">📊 SOTP分部估值组成</div><div class="chart-canvas-wrap"><canvas id="c5"></canvas></div></div><div class="chart-container"><div class="chart-title">🎯 三情景估值</div><div class="chart-canvas-wrap"><canvas id="c6"></canvas></div></div>
+
+
+<h3>6.1 核心估值指标</h3>
+<table><thead><tr><th>指标</th><th>当前</th><th>同行</th></tr></thead><tbody><tr><td>股价</td><td>$247.23</td><td>—</td></tr><tr><td>市值</td><td>$2.66T</td><td>—</td></tr><tr><td>PE (TTM)</td><td>29.6x</td><td>—</td></tr><tr><td>Forward PE (2026E)</td><td>30.5x</td><td>MSFT 28x, GOOGL 22x</td></tr><tr><td>EV/EBITDA (TTM)</td><td>17.5x</td><td>MSFT 28x</td></tr><tr><td>P/FCF (TTM)</td><td>62x</td><td>因 CapEx 极度拉高</td></tr><tr><td>P/S (TTM)</td><td>3.7x</td><td>—</td></tr></tbody></table>
+<h3>6.2 SOTP 分部估值</h3>
+<table><thead><tr><th>业务</th><th>2026E 收入</th><th>估值倍数</th><th>公允价值</th></tr></thead><tbody><tr><td>AWS</td><td>$163B</td><td>10x EV/Sales</td><td>$1,630B</td></tr><tr><td>电商</td><td>$525B</td><td>1.5x P/S</td><td>$788B</td></tr><tr><td>广告</td><td>$85B</td><td>5x EV/Sales</td><td>$425B</td></tr><tr><td>订阅</td><td>$55B</td><td>3x P/S</td><td>$165B</td></tr><tr><td><strong>净债务/现金</strong></td><td></td><td></td><td>-$50B</td></tr><tr><td><strong>SOTP 估值</strong></td><td></td><td></td><td><strong>$2,958B</strong></td></tr><tr><td><strong>SOTP 每股</strong></td><td></td><td></td><td><strong>$275/股</strong></td></tr></tbody></table>
+<h3>6.3 三情景 SOTP</h3>
+<table><thead><tr><th>情景</th><th>每股价值</th><th>概率</th></tr></thead><tbody><tr><td>Bull</td><td>$350</td><td>35%</td></tr><tr><td>Base</td><td>$275</td><td>50%</td></tr><tr><td>Bear</td><td>$200</td><td>15%</td></tr><tr><td><strong>加权</strong></td><td><strong>$283</strong></td><td>—</td></tr></tbody></table>
+<h3>6.4 投资决策（6.11-6.15）</h3>
+<table><thead><tr><th>价格位置</th><th>价格</th><th>建议</th></tr></thead><tbody><tr><td>极度低估</td><td><$200</td><td>重仓</td></tr><tr><td>安全买入价</td><td>$200-250</td><td>建仓</td></tr><tr><td>合理价值</td><td>$250-310</td><td>持有</td></tr><tr><td>谨慎区</td><td>$310-350</td><td>不追</td></tr><tr><td>高估区</td><td>>$350</td><td>减仓</td></tr></tbody></table>
+<p>### 6.15 最终决策</p>
+<table><thead><tr><th>项目</th><th>数值</th></tr></thead><tbody><tr><td>当前价格</td><td>$247.23</td></tr><tr><td>综合公允价值</td><td>$283/股</td></tr><tr><td>安全边际</td><td>+12.6%</td></tr><tr><td>投资建议</td><td><strong>推荐</strong></td></tr><tr><td>企业质量</td><td>★★★★★</td></tr><tr><td>投资价值</td><td>★★★★☆</td></tr></tbody></table>
+<hr />
+<h2>第7章 | 风险分析</h2>
+<table><thead><tr><th>风险</th><th>程度</th><th>定价状态</th></tr></thead><tbody><tr><td>FTC 反垄断</td><td>🔴 极高</td><td><strong>被低估</strong></td></tr><tr><td>CapEx 极端扩张</td><td>🔴 极高</td><td>部分定价</td></tr><tr><td>AWS AI 客户自建</td><td>🟡 中高</td><td>被低估</td></tr><tr><td>电商竞争</td><td>🟡 中</td><td>已定价</td></tr><tr><td>监管（欧盟 DMA）</td><td>🟡 中</td><td>已定价</td></tr></tbody></table>
+<hr />
+<h2>第8章 | 投资逻辑</h2>
+<p><strong>核心逻辑</strong>: 三个最大的科技市场（云/AI + 电商 + 广告）同时处于结构性增长期，亚马逊是唯一一家同时在三个市场占据 Top 3 的公司。AWS 的 AI 加速是当下催化剂，未来 5 年最大增量来自 AI 推理。</p>
+<hr />
+<h2>第9章 | Value Drivers</h2>
+<table><thead><tr><th>#</th><th>Driver</th><th>权重</th></tr></thead><tbody><tr><td>1</td><td>AWS 收入增速</td><td>★★★★★</td></tr><tr><td>2</td><td>AI 芯片(Trainium)采纳率</td><td>★★★★★</td></tr><tr><td>3</td><td>CapEx 与 ROCE 关系</td><td>★★★★★</td></tr><tr><td>4</td><td>FTC 诉讼结果</td><td>★★★★☆</td></tr><tr><td>5</td><td>广告收入增速</td><td>★★★★☆</td></tr><tr><td>6</td><td>电商单位增长</td><td>★★★☆☆</td></tr><tr><td>7</td><td>Anthropic 投资回报</td><td>★★★☆☆</td></tr></tbody></table>
+<hr />
+<h2>第10章 | 最终结论</h2>
+<h3>综合评分</h3>
+<table><thead><tr><th>维度</th><th>评分</th></tr></thead><tbody><tr><td>商业模式</td><td>10/10</td></tr><tr><td>TAM</td><td>10/10</td></tr><tr><td>管理层</td><td>9/10</td></tr><tr><td>财务</td><td>8/10</td></tr><tr><td>护城河</td><td>10/10</td></tr><tr><td>成长性</td><td>9/10</td></tr><tr><td>估值</td><td>7/10</td></tr><tr><td>风险</td><td>6/10</td></tr><tr><td>Fisher</td><td>9/10</td></tr><tr><td><strong>总分</strong></td><td><strong>82/100</strong></td></tr></tbody></table>
+<h3>投资建议</h3>
+<p>### 🟢 推荐（82/100）</p>
+<ul>
+<li><strong>核⼼仓位（8-12%）</strong>: 不可不持有的科技核心</li>
+<li><strong>当前价格 $247</strong> < $283 公允价值，安全边际 +12.6%</li>
+<li><strong>Q2 财报 (7/30)</strong> 是短期催化剂</li>
+</ul>
+<p><strong>一句话</strong>: 全球唯一覆盖 AWS×广告×电商三大飞轮的综合平台，AI（Anthropic+Trainium+Bedrock）正在塑造下一个十年的增长曲线。当前 $247 合理偏低，但 FTC 和 CapEx 需要持续关注。</p>
+<hr />
+<h2>Evidence Coverage</h1>
+<table><thead><tr><th>项目</th><th>占比</th></tr></thead><tbody><tr><td>一级证据</td><td>55%</td></tr><tr><td>二级证据</td><td>25%</td></tr><tr><td>三级证据</td><td>15%</td></tr><tr><td>AI 推断</td><td>5%</td></tr></tbody></table>
+<h3>未验证数据</h3>
+<ul>
+<li>Q2 2026 实际 AWS 增速（7/30 发布）</li>
+<li>FTC 诉讼具体时间线</li>
+<li>Leo 卫星商业化收入节奏</li>
+</ul>
+<blockquote><p>AI 推断 5% < 10%. 报告可正常使用。</p></blockquote>
+<hr />
+<p><em>报告生成时间: 2026-07-20 20:32 CST | 框架: Research Constitution V-2.2</em></p>
+<p><em>下次更新: Q2 2026 财报 (2026-07-30)</em></p>
+  <footer><p>基于 大灰皮证券研究统一框架 V-2.2 · 仅供研究参考</p><p style="font-size:.8rem;margin-top:8px">2026-07-20 · 下次更新: Q2 2026 财报 (7/30)</p></footer>
+</div>
+<script>mermaid.initialize({startOnLoad:true,theme:'default',flowchart:{curve:'basis'}});
+const c1=document.getElementById('c1');if(c1){new Chart(c1.getContext('2d'),{type:'bar',data:{labels:['FY2022','FY2023','FY2024','FY2025','Q1 2026'],datasets:[{label:'营收($B)',data:[513.98,574.79,638.0,716.9,181.5],backgroundColor:'rgba(59,130,246,0.7)',borderColor:'#3b82f6',borderWidth:2,yAxisID:'y'},{label:'经营利润($B)',data:[37.3,38.5,76.5,87.3,23.85],backgroundColor:'rgba(39,174,96,0.7)',borderColor:'#27ae60',borderWidth:2,yAxisID:'y'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true,title:{display:true,text:'十亿美元'}}}}})}
+const c2=document.getElementById('c2');if(c2){new Chart(c2.getContext('2d'),{type:'line',data:{labels:['Q1 2024','Q2 2024','Q3 2024','Q4 2024','Q1 2025','Q2 2025','Q3 2025','Q4 2025','Q1 2026'],datasets:[{label:'AWS YoY%',data:[17,19,19,19,17,19,19,23,28],borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,0.1)',fill:true,tension:0.3,borderWidth:3,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true,title:{display:true,text:'增速(%)'}}}}})}
+const c3=document.getElementById('c3');if(c3){new Chart(c3.getContext('2d'),{type:'doughnut',data:{labels:['AWS','电商北美','电商国际','广告','订阅'],datasets:[{data:[37.59,88,45,17.24,13.43],backgroundColor:['#3b82f6','#16a34a','#f59e0b','#8b5cf6','#ec4899'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}}}})}
+const c4=document.getElementById('c4');if(c4){new Chart(c4.getContext('2d'),{type:'bar',data:{labels:['FW 2024','FW 2025','FW 2026E','KeyBanc 27E'],datasets:[{label:'CapEx($B)',data:[75,105,200,331],backgroundColor:'rgba(245,158,11,0.7)',borderColor:'#f59e0b',borderWidth:2},{label:'FCF($B)',data:[46.5,42.8,-50,-80],backgroundColor:'rgba(220,38,38,0.5)',borderColor:'#dc2626',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true,title:{display:true,text:'十亿美元'}}}}})}
+const c5=document.getElementById('c5');if(c5){new Chart(c5.getContext('2d'),{type:'bar',data:{labels:['AWS(10x ES)','电商(1.5x PS)','广告(5x ES)','订阅(3x PS)'],datasets:[{label:'SOTP估值($B)',data:[1630,788,425,165],backgroundColor:['#3b82f6','#16a34a','#8b5cf6','#ec4899'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,title:{display:true,text:'估值(十亿美元)'}}}}})}
+const c6=document.getElementById('c6');if(c6){new Chart(c6.getContext('2d'),{type:'bar',data:{labels:['Bear 15%','Base 50%','Bull 35%','概率加权'],datasets:[{label:'每股价值($)',data:[200,275,350,283],backgroundColor:['#dc2626','#f59e0b','#16a34a','#3b82f6'],borderColor:['#991b1b','#92400e','#065f46','#1e40af'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,title:{display:true,text:'每股价值($)'},ticks:{callback:v=>'$'+v}}}}})}
+</script></body></html>

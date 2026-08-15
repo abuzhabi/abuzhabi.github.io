@@ -1,0 +1,2744 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CoreWeave (CRWV) 深度分析报告 — 大灰皮证券研究</title>
+<style>
+:root {
+  --bg: #f8f9fa;
+  --text: #1a1a2e;
+  --text-secondary: #555;
+  --accent: #e74c3c;
+  --accent-green: #27ae60;
+  --accent-blue: #3b82f6;
+  --accent-yellow: #f59e0b;
+  --border: #e0e0e0;
+  --card-bg: #ffffff;
+  --code-bg: #f5f5f5;
+  --table-stripe: #fafafa;
+  --warning: #fef3c7;
+  --danger: #fee2e2;
+  --success: #d1fae5;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.85;
+  padding: 40px 20px;
+}
+.container { max-width: 900px; margin: 0 auto; }
+.back-link {
+  display: inline-block; margin-bottom: 24px; color: var(--accent);
+  text-decoration: none; font-size: 0.9rem; font-weight: 600;
+}
+.back-link:hover { text-decoration: underline; }
+
+h1 {
+  font-size: 1.85rem; font-weight: 800; margin: 16px 0 8px;
+  padding-bottom: 12px; border-bottom: 2px solid var(--accent); line-height: 1.3;
+}
+h2 {
+  font-size: 1.35rem; font-weight: 700; margin: 36px 0 16px;
+  padding: 6px 0; border-bottom: 1px solid var(--border); color: var(--text);
+}
+h3 {
+  font-size: 1.1rem; font-weight: 700; margin: 24px 0 12px; color: #2c3e50;
+}
+h4 { font-size: 1rem; font-weight: 700; margin: 16px 0 8px; color: #34495e; }
+
+blockquote {
+  background: #f0f7ff; border-left: 4px solid #3b82f6; margin: 12px 0;
+  padding: 12px 18px; border-radius: 0 8px 8px 0; color: #1e40af; font-size: 0.94rem;
+}
+
+p { margin: 8px 0; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.88rem;
+}
+th {
+  background: #2c3e50; color: white; padding: 10px 12px;
+  text-align: left; font-weight: 600;
+}
+td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+tr:nth-child(even) td { background: var(--table-stripe); }
+tr:hover td { background: #eef1ff; }
+
+hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+code {
+  background: var(--code-bg); padding: 2px 6px; border-radius: 4px;
+  font-size: 0.88em; font-family: "SF Mono", "Fira Code", monospace;
+}
+
+pre {
+  background: #1e1e2e; color: #cdd6f4; padding: 16px 20px;
+  border-radius: 8px; overflow-x: auto; margin: 12px 0;
+  font-size: 0.85rem; line-height: 1.5;
+}
+pre code { background: none; padding: 0; color: inherit; }
+
+strong { color: #1a1a2e; }
+ol, ul { padding-left: 24px; margin: 8px 0; }
+li { margin: 4px 0; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+footer {
+  text-align: center; margin-top: 48px; padding-top: 24px;
+  border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 0.85rem;
+}
+footer a { color: var(--accent); }
+
+/* Chart container */
+.chart-container {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.chart-title {
+  font-size: 1rem; font-weight: 700; margin-bottom: 12px; color: #2c3e50;
+}
+.chart-canvas-wrap { position: relative; height: 320px; }
+
+/* Mermaid container */
+.mermaid-container {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  overflow-x: auto;
+}
+.mermaid-title {
+  font-size: 1rem; font-weight: 700; margin-bottom: 12px; color: #2c3e50; text-align: left;
+}
+
+/* Score badge */
+.score-badge {
+  display: inline-block; padding: 4px 14px; border-radius: 16px;
+  font-weight: 700; font-size: 0.9rem;
+}
+.score-green { background: #d1fae5; color: #065f46; }
+.score-yellow { background: #fef3c7; color: #92400e; }
+.score-red { background: #fee2e2; color: #991b1b; }
+
+/* Highlight box */
+.highlight-box {
+  background: linear-gradient(135deg, #f8f9fa 0%, #eef1ff 100%);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+.highlight-box h4 { color: var(--accent); margin-top: 0; }
+
+/* Risk tag */
+.risk-tag {
+  display: inline-block; padding: 2px 8px; border-radius: 10px;
+  font-size: 0.78rem; font-weight: 600; margin: 0 2px;
+}
+.risk-high { background: var(--danger); color: #991b1b; }
+.risk-mid { background: var(--warning); color: #92400e; }
+.risk-low { background: var(--success); color: #065f46; }
+
+/* Info pill */
+.info-pill {
+  display: inline-block; padding: 2px 8px; border-radius: 10px;
+  background: #e0e7ff; color: #3730a3; font-size: 0.8rem; font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  body { padding: 20px 12px; }
+  table { font-size: 0.78rem; }
+  th, td { padding: 6px 8px; }
+  h1 { font-size: 1.5rem; }
+  .chart-canvas-wrap { height: 260px; }
+}
+
+.report-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  margin-bottom: 24px;
+  background: #1a1e2a;
+  border: 1px solid var(--border, #30363d);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+.report-nav a {
+  color: var(--blue, #58a6ff);
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.report-nav a:hover {
+  background: rgba(88,166,255,0.15);
+  color: #58a6ff;
+}
+.report-nav .nav-left { display: flex; align-items: center; gap: 8px; }
+.report-nav .nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.report-nav .nav-sep { color: var(--border, #30363d); font-size: 0.75rem; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+</head>
+<body>
+<div class="container">
+<div class="report-nav">
+  <div class="nav-left">
+    <a href="index.html">← 返回公司列表</a>
+  </div>
+  <div class="nav-right">
+    <a href="../../index.html">🏠 研究报告首页</a>
+  </div>
+</div>
+  <a class="back-link" href="./index.html">← 返回报告列表</a>
+  <h1>CoreWeave, Inc. (NASDAQ: CRWV) 深度证券分析报告</h1>
+  <div class="header-meta">
+  <p><strong>公司:</strong> CoreWeave, Inc. (CRWV, NASDAQ) | <strong>行业:</strong> AI 云基础设施 / Neocloud | <strong>阶段:</strong> 高速增长 + 持续亏损</p>
+  <p><strong>分析日期:</strong> 2026-07-20 | <strong>框架:</strong> Research Constitution V-2.2 (大灰皮证券研究统一框架)</p>
+  <p><strong>当前股价:</strong> $73.21 | <strong>市值:</strong> $39.7B | <strong>EV:</strong> $54.2B | <strong>PE (TTM):</strong> N/A</p>
+  <p><strong>综合评分:</strong> <span class="score-badge score-yellow">67/100 观察</span> | <strong>Fisher 评分:</strong> 64/100 | <strong>投资评级:</strong> <span class="score-badge score-yellow">观察（67/100）</span></p>
+</div>
+
+  <div class="highlight-box">
+<h4>💡 投资决策摘要 (6.15)</h4>
+<p><strong>当前价格</strong>: $73.21 → <strong>综合公允价值</strong>: <strong style="color:#e74c3c;">$112</strong> (情景加权, 可信度 ★★★☆☆)</p>
+<p><strong>当前安全边际</strong>: <span class="score-badge score-green">+34.6%</span> | <strong>安全买入价</strong>: $50-70 | <strong>极度低估</strong>: &lt;$50</p>
+<p><strong>投资建议</strong>: <span class="score-badge score-yellow">观察 - 可分批小仓位介入 (1-3%)</span></p>
+<p><strong>一句话总结</strong>: AI 时代最强"铁铲公司" — NVIDIA 11.5% 持股 + $99.4B 收入积压 + 全球 9/10 顶级 AI 客户，但 $21.6B 长期债务 + 持续减持 + GPU 涨价侵蚀毛利决定了不能重仓。</p>
+</div>
+  <div class="toc">
+<h3>目录</h3>
+<ol>
+  <li><a href="#0">第0章 公司分类</a></li>
+  <li><a href="#1">第1章 公司基本面分析</a></li>
+  <li><a href="#2">第2章 行业研究 (TAM)</a></li>
+  <li><a href="#3">第3章 Fisher 成长股评价</a></li>
+  <li><a href="#4">第4章 财务审计 (Bear Audit)</a></li>
+  <li><a href="#5">第5章 Bear Case</a></li>
+  <li><a href="#6">第6章 估值分析 (含 6.11-6.15)</a></li>
+  <li><a href="#7">第7章 风险分析</a></li>
+  <li><a href="#8">第8章 投资逻辑</a></li>
+  <li><a href="#9">第9章 Value Drivers</a></li>
+  <li><a href="#10">第10章 最终结论</a></li>
+  <li><a href="#evidence-coverage">Evidence Coverage</a></li>
+</ol>
+</div>
+
+<blockquote><p><strong>分析日期</strong>: 2026-07-20 | <strong>框架版本</strong>: Research Constitution V-2.2</p></blockquote>
+<blockquote><p><strong>当前股价</strong>: $73.21 (2026-07-17 收盘) | <strong>市值</strong>: $39.7B</p></blockquote>
+<blockquote><p><strong>行业</strong>: AI云基础设施 / GPU-as-a-Service (Neocloud) | <strong>公司阶段</strong>: 高速增长 + 持续亏损</p></blockquote>
+<blockquote><p><strong>52周区间</strong>: $33.51 - $153.20 (距高点 -52%)</p></blockquote>
+
+<hr />
+
+<h2>第0章 | 公司分类（Valuation Classification）</h2>
+
+<h3>分类结果</h3>
+
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>公司类型</strong></td>
+<td>超级成长股（Neocloud龙头，重资产+持续亏损）</td>
+</tr>
+<tr>
+<td><strong>首选估值方法</strong></td>
+<td>远期PS（Forward P/S）+ 远期EV/EBITDA + 装机GW估值</td>
+</tr>
+<tr>
+<td><strong>辅助方法</strong></td>
+<td>DCF三情景（极高不确定性）、可比公司倍数</td>
+</tr>
+<tr>
+<td><strong>不适用</strong></td>
+<td>PE / Forward PE / PEG（持续亏损）</td>
+</tr>
+</tbody>
+</table>
+
+<h3>分类说明</h3>
+
+<p><strong>结论</strong>: CoreWeave 属于"超级成长股"中的重资产 Neocloud 龙头。商业模式以多年期"Take-or-Pay"合同出租 GPU 算力，营收三年从 $0.16亿(2022) → $5.13亿(2025) 增长 32倍，但 EBITDA 利润率 60% 的同时 GAAP 净亏损持续扩大（2025年 -$11.67亿），核心矛盾是高额利息支出（2026Q1 单季 -$5.36亿）和重资本开支（2026指引 $310-350亿）。</p>
+
+<p><strong>证据</strong>:</p>
+<ul>
+<li>CoreWeave 10-K FY2025、10-Q Q1 2026（SEC Filing, 一级证据）：营收 $5.13B (FY2025) / $2.08B (Q1 2026)，归母净亏损 -$1.17B (FY2025) / -$0.74B (Q1 2026)</li>
+<li>长期债务 $17.5B (Q1 2026)，现金 $3.3B</li>
+<li>调整后 EBITDA 利润率 56-62% 但 GAAP 净亏损源于高额折旧+利息</li>
+</ul>
+
+<p><strong>为什么传统估值指标不适用</strong>:</p>
+<ul>
+<li><strong>PE / Forward PE</strong>: 持续净亏损，不适用</li>
+<li><strong>PEG</strong>: 无 PE 基础</li>
+<li><strong>DCF</strong>: 商业周期和需求曲线处于早期，远期假设极不确定（框架7.4）</li>
+<li><strong>适用</strong>: Forward P/S（基于2026/2027收入）、EV/EBITDA（基于调整后EBITDA）、EV/GW 装机容量对比</li>
+</ul>
+
+<p><strong>为什么选择 Forward P/S + EV/EBITDA</strong>:</p>
+<ol>
+<li>Neocloud 行业类似早期周期半导体/云服务，营收增长是首要驱动</li>
+<li>调整后EBITDA扣除了股权激励、折旧等非现金项目，反映核心运营盈利能力</li>
+<li>EV/GW 装机容量是行业新兴估值方法，反映产能稀缺性溢价</li>
+<li>历史可比公司（Nebius, Lambda, Applied Digital）也采用类似方法</li>
+</ul>
+
+<blockquote><p><strong>证据等级</strong>: 一级（SEC 10-K/10-Q） | <strong>信心等级</strong>: ★★★★★</p></blockquote>
+
+<hr />
+
+<h2>第1章 | 公司基本面分析</h2>
+
+<h3>1.1 商业模式：AI 专用 GPU 云租赁</h3>
+
+<p><strong>结论</strong>: CoreWeave 是"AI 时代的电力公司+硬件公司"——通过"采购 NVIDIA GPU → 建设数据中心 → 长期合同租赁给 AI 实验室和大型企业"模式运营，超过 98% 业务为多年期 Take-or-Pay 合同。</p>
+
+<p><strong>证据</strong>:</p>
+<ul>
+<li>CoreWeave 10-Q Q1 2026 (一级): 营收 $2.08B，Q1新增订单 $40B+，收入积压 $99.4B</li>
+<li>Morgan Stanley 报告 (二级): "CoreWeave超过98%的业务绑定多年期使用或付费长期合同"</li>
+<li>来源: SEC EDGAR, CoreWeave IR | 发布日期: 2026-05-12 | 证据等级: 一级</li>
+</ul>
+
+<p><strong>三大收入来源</strong>:</p>
+<ol>
+<li><strong>AI 训练</strong>（约 50%）：为 OpenAI、Anthropic、Mistral 等基础模型公司提供大规模训练集群</li>
+<li><strong>AI 推理</strong>（超过 50% Q1 2026）：为 Meta、IBM 等企业部署的 AI 模型提供推理算力</li>
+<li><strong>企业 AI 工作负载</strong>（增量）：金融交易（Jane Street、Hudson River Trading）、物理AI（World Labs、PhysicsX）、生物医药</li>
+</ul>
+
+<p><strong>反方证据</strong>:</p>
+<ul>
+<li>客户高度集中（前两大客户 2024 年占 77% 收入；2025年微软占 62-67%）</li>
+<li>Take-or-Pay 合同存在客户违约和重新谈判风险</li>
+<li>OpenAI CFO 2026年4月曾担忧无力支付算力合约</li>
+</ul>
+
+<p><strong>最终判断</strong>: 商业模式核心逻辑成立（GPU云需求真实存在），但风险集中度极高。★★★★☆</p>
+
+
+<div class="mermaid-container">
+<div class="mermaid-title">🔄 CoreWeave 商业模式: AI 时代铁铲公司</div>
+<div class="mermaid">
+flowchart LR
+    A[NVIDIA GPU<br/>H100/H200/GB200/GB300] -->|采购| B[CoreWeave<br/>数据中心]
+    B -->|自建+租赁| C[电力 1GW+]
+    B -->|MLOps 工具| D[收购: W&B<br/>OpenPipe, Marimo]
+    B -->|Take-or-Pay<br/>长期合同| E[OpenAI<br/>$22.4B]
+    B -->|长期合同| F[Microsoft<br/>62% 2025]
+    B -->|长期合同| G[Meta<br/>$21B]
+    B -->|长期合同| H[Anthropic]
+    B -->|新增| I[Jane Street<br/>$6B]
+    E --> J[AI 模型训练<br/>+ 推理]
+    F --> J
+    G --> J
+    H --> J
+    I --> K[金融/物理AI/生物]
+    style A fill:#76b900,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#f59e0b,color:#fff
+    style D fill:#3b82f6,color:#fff
+</div>
+</div>
+
+<h3>1.2 历史沿革</h3>
+
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2017</td>
+<td>成立 Atlantic Crypto，以加密货币挖矿为核心</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>转向 GPU 通用计算</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>营收 $0.16亿，净亏 $0.31亿</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>营收 $2.29亿，净亏 $5.94亿（爆发）</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>营收 $19.15亿，净亏 $8.63亿；OpenAI $11.9B 合同签署</td>
+</tr>
+<tr>
+<td>2025/3</td>
+<td>IPO 上市，定价 $40，融资 $15亿，估值 $19B；英伟达认购 $2.5亿锚定投资</td>
+</tr>
+<tr>
+<td>2025/5</td>
+<td>以 $1.7B 收购 Weights & Biases</td>
+</tr>
+<tr>
+<td>2025/7</td>
+<td>宣布以 $9B 全股方式收购 Core Scientific</td>
+</tr>
+<tr>
+<td>2025/8</td>
+<td>创始人及 Magnetar 锁定期到期，开始大规模减持</td>
+</tr>
+<tr>
+<td>2026/Q1</td>
+<td>营收积压 $99.4B，超越 1 GW 活跃电力</td>
+</tr>
+<tr>
+<td>2026/Q2</td>
+<td>完成 $8.5B DDTL 4.0 投资级融资；NVIDIA 加码 $20亿股权投资（持股升至 11.5%）</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>证据</strong>: CoreWeave S-1 招股书、10-K FY2025、新闻稿 (一级) | 信心等级: ★★★★★</p>
+
+<h3>1.3 核心产品和技术</h3>
+
+<table>
+<thead>
+<tr>
+<th>产品/服务</th>
+<th>描述</th>
+<th>竞争位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CoreWeave Cloud</td>
+<td>AI 专用 GPU 集群云平台</td>
+<td>行业第一</td>
+</tr>
+<tr>
+<td>拥有 GPU 种类</td>
+<td>NVIDIA H100, H200, GB200, GB300, RTX PRO 6000, A100, L40S</td>
+<td>首批部署 Blackwell</td>
+</tr>
+<tr>
+<td>部署能力</td>
+<td>1 GW 活跃电力，3.5 GW 签约电力，8 GW 2030 目标</td>
+<td>全球最大独立 AI 云</td>
+</tr>
+<tr>
+<td>软件平台</td>
+<td>收购 W&B、OpenPipe、Marimo、Poolside</td>
+<td>AI MLOps 工具链</td>
+</tr>
+<tr>
+<td>数据中心</td>
+<td>美国 + 欧洲（英国 £1.5B 扩张）</td>
+<td>32+ 站点</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>核心技术优势</strong>:</p>
+<ul>
+<li>SemiAnalysis ClusterMAX 2.0 唯一 Platinum 评级（84家供应商中）</li>
+<li>首批部署 NVIDIA GB300 NVL72 系统</li>
+<li>MLPerf 推理基准测试领先</li>
+<li>端到端部署时间行业领先</li>
+</ul>
+
+<p><strong>反方证据</strong>:</p>
+<ul>
+<li>软件护城河弱（参考 Morningstar 评级"无经济护城河"）</li>
+<li>长期差异化主要来自 NVIDIA 关系，非自有技术</li>
+</ul>
+
+<p><strong>最终判断</strong>: 技术运营能力领先，但长期护城河来自 NVIDIA 关系而非自研技术。★★★☆☆</p>
+
+<h3>1.4 股权结构与治理</h3>
+
+<table>
+<thead>
+<tr>
+<th>股东</th>
+<th>持股</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NVIDIA</td>
+<td>11.5%</td>
+<td>2026年Q1 $20亿股权投资</td>
+</tr>
+<tr>
+<td>创始人 (Intrator, McBee, Venturo)</td>
+<td>~18%</td>
+<td>联创 Intrator 仍持 10.4%</td>
+</tr>
+<tr>
+<td>Magnetar Financial</td>
+<td>~9.7%</td>
+<td>早期投资人，已减持近半</td>
+</tr>
+<tr>
+<td>机构 + 散户</td>
+<td>余下</td>
+<td>锁定期后流通盘扩大</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>证据</strong>:</p>
+<ul>
+<li>创始人自 2025/8 锁定期届满以来累计减持 $23亿+</li>
+<li>Magnetar 累计抛售 $55亿</li>
+<li>NVIDIA 11.5% 持股确认于 2026/Q1 公告</li>
+<li>来源: Washington Service, 10-Q | 证据等级: 一级</li>
+</ul>
+
+<p><strong>反方证据（公司方）</strong>: 所有减持均通过 10b5-1 预先安排交易计划，公司发言人称创始人"深度认同公司长期增长"。</p>
+
+<p><strong>最终判断</strong>: 大规模减持是流动性需求，但确实显示内部人对当前估值部分落袋。★★★☆☆</p>
+
+<h3>1.5 未来 5-10 年增长驱动力</h3>
+
+<ol>
+<li><strong>AI 推理需求爆发</strong>（核心）：Q1 2026 已超 50% 算力用于推理，CEO 判断"推理=AI 变现"</li>
+<li><strong>NVIDIA 关系深化</strong>：5 GW 基础设施合作 + 11.5% 持股</li>
+<li><strong>客户多元化</strong>：从 Microsoft 单一大客户 → Microsoft + OpenAI + Meta + Anthropic + Jane Street</li>
+<li><strong>国际扩张</strong>：英国 £2.5B 总投资，Stargate Norway（Nscale合作）</li>
+<li><strong>Core Scientific 整合</strong>：1.3 GW 自有电力，2027 年起年省 $5亿</li>
+</ul>
+
+<blockquote><p><strong>章节信心等级</strong>: ★★★★☆</p></blockquote>
+
+<hr />
+
+
+<div class="chart-container">
+<div class="chart-title">📈 营收与调整后EBITDA趋势 (FY2022 - Q1 2026)</div>
+<div class="chart-canvas-wrap"><canvas id="chartRevenue"></canvas></div>
+</div>
+
+<h2>第2章 | 行业研究（TAM）</h2>
+
+<h3>2.1 行业规模</h3>
+
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+<th>来源</th>
+<th>发布日期</th>
+<th>等级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全球 AI 数据中心支出 (2026)</td>
+<td>$1.43万亿</td>
+<td>Gartner</td>
+<td>2026/2</td>
+<td>一级</td>
+</tr>
+<tr>
+<td>全球 AI 总支出 (2026)</td>
+<td>$2.6万亿</td>
+<td>Gartner</td>
+<td>2026/2</td>
+<td>一级</td>
+</tr>
+<tr>
+<td>四大 Hyperscaler CapEx (2026)</td>
+<td>$7,250亿</td>
+<td>各家财报 + FT汇总</td>
+<td>2026/4-5</td>
+<td>一级</td>
+</tr>
+<tr>
+<td>四大 Hyperscaler CapEx (2027E)</td>
+<td>$1万亿+</td>
+<td>高盛、国信证券</td>
+<td>2026/5</td>
+<td>二级</td>
+</tr>
+<tr>
+<td>Neocloud + AI 创业 (2026)</td>
+<td>$1,900亿</td>
+<td>国信证券</td>
+<td>2026/5</td>
+<td>二级</td>
+</tr>
+<tr>
+<td>主权 AI 投入 (2026)</td>
+<td>$1,000亿+</td>
+<td>国信证券</td>
+<td>2026/5</td>
+<td>二级</td>
+</tr>
+<tr>
+<td>行业 CAGR (2026-2032)</td>
+<td>24-28%</td>
+<td>Grand View, MarketsandMarkets</td>
+<td>2026</td>
+<td>二级</td>
+</tr>
+<tr>
+<td>北美占全球比例</td>
+<td>37-40%</td>
+<td>Axis Intelligence</td>
+<td>2026/6</td>
+<td>二级</td>
+</tr>
+</tbody>
+</table>
+
+<h3>2.2 行业生命周期</h3>
+
+<p><strong>结论</strong>: AI 基础设施处于"超级建设期"。Hyperscaler 2026 年 CapEx 同比 +77% 至 $7,250亿，但高盛警告 CapEx/经营现金流已达 92%（高于互联网泡沫期 90%），存在"超级建设期"后期特征。</p>
+
+<p><strong>三情景分析</strong>:</p>
+
+<table>
+<thead>
+<tr>
+<th>情景</th>
+<th>假设</th>
+<th>概率</th>
+<th>对 CRWV 影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>乐观</td>
+<td>AI ROI 兑现 + CapEx 持续 + 推理爆发</td>
+<td>40%</td>
+<td>收入超预期，估值跃迁</td>
+</tr>
+<tr>
+<td>基准</td>
+<td>稳步增长 + 利润率承压</td>
+<td>40%</td>
+<td>收入达标，估值持平</td>
+</tr>
+<tr>
+<td>悲观</td>
+<td>AI ROI 证伪 + Hyperscaler 削减 CapEx</td>
+<td>20%</td>
+<td>订单放缓，估值压缩</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>反方证据</strong>:</p>
+<ul>
+<li>高盛 Covello 2024 报告："$1万亿问题——AI 解决什么 $1万亿的难题？"</li>
+<li>Acemoglu (MIT) 估算：未来 10 年 AI 仅提升 TFP 0.5-0.66%</li>
+<li>IBM 数据：企业 AI ROI 仅 5.9%（投入产出不经济）</li>
+</ul>
+
+<p><strong>最终判断</strong>: 行业绝对规模巨大且持续增长，但 ROI 可持续性存在合理怀疑。CRWV 高度暴露于 CapEx 周期。★★★★☆</p>
+
+<h3>2.3 Neocloud 子赛道</h3>
+
+<table>
+<thead>
+<tr>
+<th>公司</th>
+<th>状态</th>
+<th>估值/市值</th>
+<th>营收/ARR</th>
+<th>签约容量</th>
+<th>标志性客户</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CoreWeave (CRWV)</td>
+<td>上市</td>
+<td>$40-50B</td>
+<td>$5.13B (2025) / $18-19B ARR 目标</td>
+<td>1 GW 活跃 / 3.5 GW 签约</td>
+<td>OpenAI $22.4B, Meta $21B</td>
+</tr>
+<tr>
+<td>Nebius (NBIS)</td>
+<td>上市</td>
+<td>$55-60B</td>
+<td>$399M (Q1, +684%)</td>
+<td>800MW-1GW 目标</td>
+<td>Microsoft $17.4-19.4B, Meta $27B</td>
+</tr>
+<tr>
+<td>Crusoe</td>
+<td>私人</td>
+<td>>$10B</td>
+<td>n/a</td>
+<td>~1.2 GW (Stargate)</td>
+<td>OpenAI Stargate</td>
+</tr>
+<tr>
+<td>Nscale</td>
+<td>私人</td>
+<td>$14.6B</td>
+<td>n/a</td>
+<td>200K GB300s</td>
+<td>Microsoft Europe</td>
+</tr>
+<tr>
+<td>Together AI</td>
+<td>私人</td>
+<td>$7.5-8.3B</td>
+<td>~$1B ARR</td>
+<td>推理为主</td>
+<td>200+ models</td>
+</tr>
+<tr>
+<td>Lambda</td>
+<td>私人</td>
+<td>n/a (>$1.5B 融资)</td>
+<td>n/a</td>
+<td>训练为主</td>
+<td>NVIDIA/Microsoft</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>判断</strong>: Neocloud 是 AI 基础设施中最具弹性的子赛道，独立于 Hyperscaler 自建趋势。CoreWeave 是当前龙头但 Nebius 在快速追赶。★★★★☆</p>
+
+<hr />
+
+
+<div class="chart-container">
+<div class="chart-title">🌐 Neocloud 竞争对手对比 (2026)</div>
+<div class="chart-canvas-wrap"><canvas id="chartNeocloud"></canvas></div>
+</div>
+<div class="chart-container">
+<div class="chart-title">📊 Hyperscaler 2026 AI CapEx 拆分 (十亿美元)</div>
+<div class="chart-canvas-wrap"><canvas id="chartHyperscaler"></canvas></div>
+</div>
+
+<h2>第3章 | Fisher 成长股评价</h2>
+
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>维度</th>
+<th>评分</th>
+<th>评分依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>市场潜力</td>
+<td>10</td>
+<td>AI 算力 $1.43万亿 TAM，2030年 8 GW 目标对应数十亿营收空间</td>
+</tr>
+<tr>
+<td>2</td>
+<td>管理层能力</td>
+<td>6</td>
+<td>创始人从加密货币转型成功，CEO 执行力强，但 GAAP 持续亏损+大规模减持引发质疑</td>
+</tr>
+<tr>
+<td>3</td>
+<td>研发能力</td>
+<td>7</td>
+<td>收购 W&B/OpenPipe/Marimo/Polaris DS，ClusterMAX 唯一 Platinum，但非自研 GPU</td>
+</tr>
+<tr>
+<td>4</td>
+<td>销售能力</td>
+<td>9</td>
+<td>拿下 OpenAI、Microsoft、Meta、Anthropic、Jane Street 全部顶级客户</td>
+</tr>
+<tr>
+<td>5</td>
+<td>利润率改善空间</td>
+<td>5</td>
+<td>调整后 EBITDA 56% 优秀，但 GAAP 因利息和折旧持续承压；GPU 价格上涨压缩空间</td>
+</tr>
+<tr>
+<td>6</td>
+<td>护城河</td>
+<td>4</td>
+<td>Morningstar 评级"无经济护城河"；核心壁垒来自 NVIDIA 关系（可被削弱）</td>
+</tr>
+<tr>
+<td>7</td>
+<td>长期成长能力</td>
+<td>9</td>
+<td>收入积压 $99.4B 锁定未来 5 年增长；客户已覆盖全球 9/10 顶级 AI 公司</td>
+</tr>
+<tr>
+<td>8</td>
+<td>企业文化</td>
+<td>6</td>
+<td>加密货币起家快速转型文化，2024-2025 大规模扩张（员工翻倍），但稀释管理品质</td>
+</tr>
+<tr>
+<td>9</td>
+<td>资本配置能力</td>
+<td>3</td>
+<td>CapEx 从 $1.45B (2023) 飙升至 $31-35B (2026 指引) = 22倍；2026Q1 单季 CapEx $6.8B 远超 EBITDA $1.16B</td>
+</tr>
+<tr>
+<td>10</td>
+<td>长期竞争优势</td>
+<td>5</td>
+<td>首批部署 Blackwell、ClusterMAX 唯一 Platinum；但可被 Nebius/Crusoe/Nscale 复制</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Fisher 综合评分: 64/100</strong></p>
+
+<p><strong>最符合 Fisher</strong>: 在巨大新市场（AI 算力）中"先做到最大规模"，拿下所有顶级客户并签订 5 年长期合同——这是费雪"重仓赢家"思路的极致体现。</p>
+
+<p><strong>最不符合 Fisher</strong>: Fisher 极其重视"利润率改善空间"和"管理层业绩证明"。CoreWeave 调整后 EBITDA 60% 看似优秀，但 GAAP 因利息和折旧持续亏损；创始人 14 个月内累计减持 $23亿——这与费雪"管理层与股东利益高度一致"的核心思想相违背。</p>
+
+<blockquote><p><strong>信心等级</strong>: ★★★★☆</p></blockquote>
+
+<hr />
+
+<h2>第4章 | 财务审计（Bear Audit）</h2>
+
+<h3>4.1 关键财务数据</h3>
+
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>FY2023</th>
+<th>FY2024</th>
+<th>FY2025</th>
+<th>Q1 2026</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>营收</td>
+<td>$229M</td>
+<td>$1,915M</td>
+<td>$5,131M</td>
+<td>$2,078M</td>
+</tr>
+<tr>
+<td>营收 YoY</td>
+<td>+1331%</td>
+<td>+736%</td>
+<td>+168%</td>
+<td>+112%</td>
+</tr>
+<tr>
+<td>调整后 EBITDA</td>
+<td>n/a</td>
+<td>$1,335M (70%)</td>
+<td>$3,089M (60%)</td>
+<td>$1,157M (56%)</td>
+</tr>
+<tr>
+<td>GAAP 经营利润</td>
+<td>-$594M</td>
+<td>+$324M</td>
+<td>-$46M</td>
+<td>-$144M</td>
+</tr>
+<tr>
+<td>GAAP 净亏损</td>
+<td>-$594M</td>
+<td>-$863M</td>
+<td>-$1,167M</td>
+<td>-$740M</td>
+</tr>
+<tr>
+<td>利息支出</td>
+<td>n/a</td>
+<td>-$361M</td>
+<td>-$1,229M</td>
+<td>-$536M</td>
+</tr>
+<tr>
+<td>CapEx</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>$8-9B</td>
+<td>$6,786M</td>
+</tr>
+<tr>
+<td>现金及短期投资</td>
+<td>n/a</td>
+<td>$1,361M</td>
+<td>$3,127M</td>
+<td>$3,043M</td>
+</tr>
+<tr>
+<td>长期债务</td>
+<td>n/a</td>
+<td>$5,458M</td>
+<td>$14,665M</td>
+<td>$17,527M</td>
+</tr>
+<tr>
+<td>收入积压 (RPO)</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>$66.8B</td>
+<td>$99.4B</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>来源</strong>: CoreWeave 10-K FY2025, 10-Q Q1 2026 (SEC EDGAR) | 证据等级: 一级</p>
+
+<h3>4.2 做空视角审查</h3>
+
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>发现</th>
+<th>评级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>客户集中度</td>
+<td>Microsoft 62-67% (2025), 前两大 56% (Q1 2026)</td>
+<td>🔴🔴</td>
+</tr>
+<tr>
+<td>收入质量</td>
+<td>Take-or-Pay 合同长期可预测；无应收账款激增</td>
+<td>🟢</td>
+</tr>
+<tr>
+<td>经营现金流</td>
+<td>持续为负 (CapEx 远超 EBITDA)</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>自由现金流</td>
+<td>严重负值（FCF Margin 估算 -30-40%）</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>毛利率 (调整后)</td>
+<td>56-62% 表现优秀</td>
+<td>🟢</td>
+</tr>
+<tr>
+<td>ROIC</td>
+<td>负值（资本投入尚未回本）</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>股权激励</td>
+<td>Q1 2026 $1.53亿，占运营亏损 100%+</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>股本稀释</td>
+<td>2024→2025 股本 +106% (5.06亿股 vs 2.39亿股)</td>
+<td>🔴🔴</td>
+</tr>
+<tr>
+<td>债务结构</td>
+<td>$21.6B 长期债务 vs $3.3B 现金 = 6.5x 净杠杆</td>
+<td>🔴🔴</td>
+</tr>
+<tr>
+<td>融资依赖</td>
+<td>持续依赖 DDTL 4.0 ($8.5B 投资级贷款)</td>
+<td>🔴</td>
+</tr>
+<tr>
+<td>资本开支</td>
+<td>$31-35B (2026 指引) 是 2025 实际 3-4 倍</td>
+<td>🔴🔴</td>
+</tr>
+<tr>
+<td>会计政策变化</td>
+<td>无重大异常</td>
+<td>🟢</td>
+</tr>
+</tbody>
+</table>
+
+<h3>4.3 最终评级</h3>
+
+<h4>🟡 黄色（警惕）</h4>
+
+<p><strong>核心红旗</strong>:</p>
+<ol>
+<li>🔴 <strong>客户集中度</strong>: Microsoft 单一客户占 60%+；2026 Q1 OpenAI 新增 $22.4B 合同降低集中度但仍极高</li>
+<li>🔴 <strong>杠杆与利息</strong>: $21.6B 长期债务，Q1 2026 利息支出 $5.36亿（季度）≈ 调整后 EBITDA 50%</li>
+<li>🔴 <strong>CapEx 失控</strong>: 2026 指引 $310-350亿，是 2025 EBITDA 3.1B 的 10-11 倍</li>
+<li>🔴 <strong>创始人/早期股东减持</strong>: 联创减持 $23亿，Magnetar 减持 $55亿</li>
+<li>🟢 <strong>收入积压 $99.4B</strong>: 提供未来 5 年可见度</li>
+<li>🟢 <strong>调整后 EBITDA 56-62%</strong>: 显示核心运营能力优秀</li>
+<li>⚠️ <strong>OpenAI 信用风险</strong>: 2029 前预计烧光 $1150亿，可能重新谈判合同</li>
+</ul>
+
+<blockquote><p><strong>证据等级</strong>: 一级（SEC 原始文件） | <strong>信心等级</strong>: ★★★★★</p></blockquote>
+
+<hr />
+
+
+<div class="chart-container">
+<div class="chart-title">💰 CapEx vs 调整后EBITDA (单位: 十亿美元)</div>
+<div class="chart-canvas-wrap"><canvas id="chartCapex"></canvas></div>
+</div>
+<div class="chart-container">
+<div class="chart-title">🏢 客户集中度变化 (Microsoft 占比)</div>
+<div class="chart-canvas-wrap"><canvas id="chartConcentration"></canvas></div>
+</div>
+<div class="chart-container">
+<div class="chart-title">💼 债务与资本结构演进</div>
+<div class="chart-canvas-wrap"><canvas id="chartDebt"></canvas></div>
+</div>
+
+<h2>第5章 | Bear Case（完整做空逻辑）</h2>
+
+<h3>5.1 股价腰斩四大情景</h3>
+
+<table>
+<thead>
+<tr>
+<th>情景</th>
+<th>触发条件</th>
+<th>概率</th>
+<th>跌幅</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A. 客户集中度爆雷</strong></td>
+<td>Microsoft 削减 30% 订单或 OpenAI 重新谈判</td>
+<td>~30%</td>
+<td>-40~50%</td>
+</tr>
+<tr>
+<td><strong>B. AI 资本开支见顶</strong></td>
+<td>Hyperscaler 2027 CapEx 同比零增长或负增长</td>
+<td>~25%</td>
+<td>-50~60%</td>
+</tr>
+<tr>
+<td><strong>C. 利率+融资环境恶化</strong></td>
+<td>投资级评级被降 + 债务成本上升至 8%+</td>
+<td>~15%</td>
+<td>-30~40%</td>
+</tr>
+<tr>
+<td><strong>D. 创始人/早期股东抛售</strong></td>
+<td>持续大规模减持引发市场恐慌</td>
+<td>~20%</td>
+<td>-20~30%</td>
+</tr>
+<tr>
+<td><strong>E. 一次性黑天鹅</strong></td>
+<td>AI 安全事件/重大 GPU 供应链中断/重大技术替代</td>
+<td>~10%</td>
+<td>-50~70%</td>
+</tr>
+</tbody>
+</table>
+
+<h3>5.2 市场容易忽略的问题</h3>
+
+<ol>
+<li><strong>GPU 价格上涨已侵蚀利润率</strong> — A100/H100/H200/L40S 价格 Q1 环比上涨，5 月电话会承认组件短缺</li>
+<li><strong>客户从训练转向推理，CRWV 优势削弱</strong> — 推理对 GPU 规模要求低，Hyperscaler 自建更经济</li>
+<li><strong>Hyperscaler 自研芯片威胁</strong> — 微软 Maia、谷歌 TPU、亚马逊 Trainium 已占 10-30% 内部负载</li>
+<li><strong>OpenAI 信用风险</strong> — 2029 年前烧光 $1150亿，可能被迫重新谈判 $22.4B 合同</li>
+<li><strong>CapEx 超支风险</strong> — 2026 指引 $31-35B 较前次 $30-35B 上调；DDTL 4.0 需 1.15x 债务覆盖</li>
+<li><strong>Magnetar 持仓已腰斩</strong> — 9.7% 剩余持仓继续构成卖压</li>
+<li><strong>MSCI 风险</strong> — 高杠杆+治理（减持）问题可能影响指数纳入</li>
+<li><strong>Morningstar 经济护城河评级"无"</strong> — 长期竞争优势存疑</li>
+</ul>
+
+<h3>5.3 做空成功概率</h3>
+
+<p><strong>做空成功概率: 35%</strong></p>
+
+<p><strong>核心风险</strong>（做空方需要警惕）:</p>
+<ol>
+<li>NVIDIA 11.5% 持股提供隐性背书</li>
+<li>$99.4B 收入积压提供短期可见度</li>
+<li>AI 推理需求真实爆发</li>
+<li>政策支持 AI 基础设施建设</li>
+<li>高 Beta 标的下市场轧空风险</li>
+</ul>
+
+<hr />
+
+
+<div class="mermaid-container">
+<div class="mermaid-title">⚠️ 做空情景链 (Bear Case)</div>
+<div class="mermaid">
+flowchart TD
+    A[CRWV 当前 $73.21] --> B{触发条件}
+    B -->|30% 概率| C1[Microsoft 削减订单<br/>-40~50%]
+    B -->|25% 概率| C2[Hyperscaler CapEx 2027<br/>零增长 -50~60%]
+    B -->|20% 概率| C3[持续大规模减持<br/>-20~30%]
+    B -->|15% 概率| C4[利率+200bps<br/>-30~40%]
+    B -->|10% 概率| C5[黑天鹅 AI 事件<br/>-50~70%]
+    C1 --> D[股价腰斩区间<br/>$30-45]
+    C2 --> D
+    C3 --> E[温和下跌<br/>$50-60]
+    C4 --> E
+    C5 --> D
+    style A fill:#f59e0b,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style D fill:#dc2626,color:#fff
+    style E fill:#f59e0b,color:#fff
+</div>
+</div>
+
+<h2>第6章 | 估值分析</h2>
+
+<h3>6.1 为什么采用当前估值模型？</h3>
+
+<p><strong>公司类型</strong>: 重资产 Neocloud 超级成长股（持续亏损 + 调整后 EBITDA 高利润率）</p>
+
+<p><strong>可用方法及适用性</strong>:</p>
+<ul>
+<li>PE / Forward PE / PEG: 持续净亏损 ❌</li>
+<li>DCF: 远期假设极不确定（GPU 价格、电力价格、利率、客户违约概率），框架7.4 不建议 ⚠️</li>
+<li>Forward P/S: ✅ 行业可比（Nebius、Lambda）</li>
+<li>EV/EBITDA: ✅ 调整后 EBITDA 是行业标准</li>
+<li>EV/GW 装机: ✅ Neocloud 特色估值方法</li>
+<li>现金底部: $3.3B 现金 / 5.43亿股 = $0.6/股（仅作下行保护）</li>
+</ul>
+
+<p><strong>选择</strong>: <strong>三情景 Forward P/S + EV/EBITDA 同行 + EV/GW 装机对比</strong></p>
+
+<h3>6.2 核心估值指标</h3>
+
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>当前股价</td>
+<td>$73.21</td>
+<td>2026-07-17</td>
+</tr>
+<tr>
+<td>市值</td>
+<td>$39.7B</td>
+<td>5.43亿股 × $73.21</td>
+</tr>
+<tr>
+<td>净债务</td>
+<td>$14.5B</td>
+<td>长期债务 $17.5B - 现金 $3.0B</td>
+</tr>
+<tr>
+<td>EV</td>
+<td>$54.2B</td>
+<td>市值 + 净债务</td>
+</tr>
+<tr>
+<td>Forward P/S (2026)</td>
+<td>3.05x</td>
+<td>$39.7B / $13B (指引中值)</td>
+</tr>
+<tr>
+<td>Forward EV/EBITDA (2026)</td>
+<td>~13x</td>
+<td>$54.2B / ~$4.2B (隐含 EBITDA 32% 利润率)</td>
+</tr>
+<tr>
+<td>2026Q1 调整后 EBITDA</td>
+<td>$1.16B</td>
+<td>56% 利润率</td>
+</tr>
+<tr>
+<td>P/B</td>
+<td>8.35x</td>
+<td>较高</td>
+</tr>
+<tr>
+<td>52周范围</td>
+<td>$33.51 - $153.20</td>
+<td>距高点 -52%</td>
+</tr>
+<tr>
+<td>收入积压</td>
+<td>$99.4B</td>
+<td>2026 Q1</td>
+</tr>
+<tr>
+<td>2026 退出 ARR 指引</td>
+<td>$18-19B</td>
+<td>上调</td>
+</tr>
+<tr>
+<td>2027 ARR 指引</td>
+<td>$30B+</td>
+<td>75% 已签</td>
+</tr>
+</tbody>
+</table>
+
+<h3>6.3 Growth Reality Check（成长现实检验）</h3>
+
+<table>
+<thead>
+<tr>
+<th>检验项</th>
+<th>状态</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TAM 支持</td>
+<td>✅</td>
+<td>$1.43万亿全球 AI 基础设施 TAM</td>
+</tr>
+<tr>
+<td>行业增速支持</td>
+<td>✅</td>
+<td>24-28% CAGR；Hyperscaler CapEx +77%</td>
+</tr>
+<tr>
+<td>市场份额还能提升</td>
+<td>✅</td>
+<td>独立 Neocloud 龙头，Nebius 追赶但仍有差距</td>
+</tr>
+<tr>
+<td>管理层公开指引</td>
+<td>✅</td>
+<td>2026 营收 $12-13B；2026 退出 ARR $18-19B；2027 ARR $30B+</td>
+</tr>
+<tr>
+<td>CapEx 是否支持</td>
+<td>✅</td>
+<td>$31-35B 2026 指引</td>
+</tr>
+<tr>
+<td>人才储备支持</td>
+<td>⚠️</td>
+<td>快速扩张稀释（员工翻倍）</td>
+</tr>
+<tr>
+<td>历史执行能力</td>
+<td>✅</td>
+<td>三年从 $0.16亿 → $51.3亿，签约电力从 0 → 3.5 GW</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote><p><strong>结论</strong>: Growth Reality Check 大部分通过。管理层公开指引具体且量化。</p></blockquote>
+
+<h3>6.4 DCF</h3>
+
+<p><strong>本次不进行标准 DCF 估值。</strong></p>
+
+<p>依据框架 7.4 条："由于缺乏可靠参数，本次不进行 DCF 估值。"</p>
+
+<p>DCF 需要的参数（GPU 价格走势、电力价格、利率轨迹、客户违约率、CapEx 学习曲线）在 Neocloud 这个 18 个月内出现的新行业中没有任何可靠来源——管理层仅给出 1 年营收/ARR 指引，无 5 年详细财务模型；行业可比公司均处于亏损或微利状态。</p>
+
+<p><strong>替代方法</strong>: 三情景远期 EV/EBITDA + Forward P/S</p>
+
+<h3>6.5 三情景估值（Bull / Base / Bear）</h3>
+
+<table>
+<thead>
+<tr>
+<th>情景</th>
+<th>2027 收入</th>
+<th>2027 EBITDA 率</th>
+<th>2027 EV/EBITDA</th>
+<th>隐含 EV</th>
+<th>隐含股价</th>
+<th>概率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bull</strong></td>
+<td>$25B (>$30B ARR)</td>
+<td>35%</td>
+<td>18x</td>
+<td>$157.5B</td>
+<td>~$160</td>
+<td>30%</td>
+</tr>
+<tr>
+<td><strong>Base</strong></td>
+<td>$20B</td>
+<td>30%</td>
+<td>14x</td>
+<td>$84.0B</td>
+<td>~$80</td>
+<td>45%</td>
+</tr>
+<tr>
+<td><strong>Bear</strong></td>
+<td>$13B</td>
+<td>22%</td>
+<td>10x</td>
+<td>$28.6B</td>
+<td>~$10</td>
+<td>25%</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>情景加权 EV</strong>: $157.5B × 0.30 + $84.0B × 0.45 + $28.6B × 0.25 = <strong>$93.9B</strong></p>
+
+<p><strong>隐含股价</strong> (扣净债务 $14.5B): $93.9B / 5.43亿股 ≈ <strong>$146/股</strong></p>
+
+<blockquote><p>⚠️ <strong>重要警告</strong>: 上述所有远期数据均为【推断】。2027 收入假设基于 2026 ARR $18-19B + 30-50% 增长；EBITDA 率基于规模效应 + 折旧前利润稳定。不可作为精确投资依据。</p></blockquote>
+
+<h3>6.6 同行估值对比</h3>
+
+<table>
+<thead>
+<tr>
+<th>公司</th>
+<th>市值</th>
+<th>TTM 收入</th>
+<th>2026 收入</th>
+<th>Forward P/S</th>
+<th>Forward EV/EBITDA</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CoreWeave (CRWV)</td>
+<td>$40B</td>
+<td>$5.1B</td>
+<td>$12-13B</td>
+<td>3.05x</td>
+<td>13x</td>
+<td>当前</td>
+</tr>
+<tr>
+<td>Nebius (NBIS)</td>
+<td>$55-60B</td>
+<td>$0.4B</td>
+<td>$0.7-0.9B</td>
+<td>70x+</td>
+<td>n/a (亏损)</td>
+<td>Q1 +684% 增长</td>
+</tr>
+<tr>
+<td>Applied Digital (APLD)</td>
+<td>~$3B</td>
+<td>$0.4B</td>
+<td>n/a</td>
+<td>7-8x</td>
+<td>n/a</td>
+<td>数据中心</td>
+</tr>
+<tr>
+<td>Iris Energy (IREN)</td>
+<td>~$3B</td>
+<td>$0.5B</td>
+<td>n/a</td>
+<td>6x</td>
+<td>n/a</td>
+<td>BTC+AI</td>
+</tr>
+<tr>
+<td>Lambda (私人)</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>估值 >$1.5B 融资</td>
+</tr>
+<tr>
+<td>Together AI (私人)</td>
+<td>$7.5B</td>
+<td>~$1B</td>
+<td>n/a</td>
+<td>7.5x</td>
+<td>n/a</td>
+<td>推理为主</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>判断</strong>: CoreWeave 估值倍数显著低于 Nebius（高增长溢价），但也远高于传统数据中心运营商（APLD、IREN）。市场给予"AI 龙头溢价"但因 GAAP 亏损而压制。</p>
+
+<h3>6.7 历史估值</h3>
+
+<p>CoreWeave 2025年3月上市，历史不足 17 个月，估值百分位分析意义有限。</p>
+
+<p><strong>关键价格事件</strong>:</p>
+<ul>
+<li>IPO: $40 (2025/3/28)</li>
+<li>高点: $187+ (2025/6)</li>
+<li>Q2 2025 财报后暴跌（首次指引失望）</li>
+<li>8月锁定期到期 + Magnetar 减持：跌至 ~$93</li>
+<li>9-10月回升至 $120+</li>
+<li>11月 财报后回吐</li>
+<li>12月底：约 $90</li>
+<li>2026/5 Q1 财报后：跌至 $90 → $72</li>
+<li>当前 $73.21</li>
+</ul>
+
+<h3>6.8 安全边际（Margin of Safety）</h3>
+
+<table>
+<thead>
+<tr>
+<th>估值方法</th>
+<th>公允价值</th>
+<th>权重</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>三情景 EV/EBITDA</td>
+<td>$146</td>
+<td>50%</td>
+<td>概率加权，可信度低</td>
+</tr>
+<tr>
+<td>2026 Forward P/S (4x)</td>
+<td>$96</td>
+<td>20%</td>
+<td>基于 2026 营收 $13B × 4x / 5.43亿股</td>
+</tr>
+<tr>
+<td>同行 P/S (3-5x 范围)</td>
+<td>$80-130</td>
+<td>20%</td>
+<td>Nebius/Applied Digital 中位</td>
+</tr>
+<tr>
+<td>现金底部</td>
+<td>$0.6/股</td>
+<td>10%</td>
+<td>$3.3B 现金 / 5.43亿股</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>综合公允价值</strong>: $146 × 0.50 + $96 × 0.20 + $105 × 0.20 + $0.6 × 0.10 = <strong>$112/股</strong>（情景加权，可信度 ★★★☆☆）</p>
+
+<p><strong>当前安全边际</strong>: ($112 - $73.21) / $112 = <strong>+34.6%</strong></p>
+
+<blockquote><p>⚠️ 注意：此安全边际建立在【推断】远期数据上，框架要求"若 AI 推断占比超 10% 应主动提醒"。</p></blockquote>
+
+<h3>6.9 估值失效条件（Valuation Killers）</h3>
+
+<ol>
+<li><strong>Microsoft 削减订单</strong> 30%+</li>
+<li><strong>OpenAI 重新谈判</strong> $22.4B 合同（信用风险）</li>
+<li><strong>AI Hyperscaler CapEx 2027 同比零增长或负增长</strong></li>
+<li><strong>Core Scientific 收购失败</strong>（被监管否决或 Core Scientific 股东反对）</li>
+<li><strong>NVIDIA 减持或关系降温</strong></li>
+<li><strong>重大 GPU 替代技术突破</strong>（TPU/Maia 性能超 Blackwell）</li>
+<li><strong>重大 AI 安全事件</strong>（监管禁止 AI 训练算力扩张）</li>
+<li><strong>利率上升 200bps+</strong> （$17.5B 长期债务重新定价压力）</li>
+</ul>
+
+<h3>6.10 最终估值结论</h3>
+
+<table>
+<thead>
+<tr>
+<th>判断</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>企业质量</strong></td>
+<td>★★★★☆（赛道极好、龙头地位明确，但 GAAP 持续亏损+高杠杆）</td>
+</tr>
+<tr>
+<td><strong>投资价值</strong></td>
+<td>★★★☆☆（合理偏低估，但风险极高）</td>
+</tr>
+<tr>
+<td><strong>是否值得买</strong></td>
+<td><strong>观察</strong>（适合卫星仓位 1-3%，不推荐重仓）</td>
+</tr>
+<tr>
+<td><strong>一句话</strong></td>
+<td>这是"AI 时代的铁铲公司"，但铁铲本身已经被抢得头破血流——重仓下注的代价是 $200亿+的资本开支和持续亏损</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h3>6.11 投资决策价格框架（Investment Decision Price Framework）</h3>
+
+<p><strong>成长股价格体系</strong>（⚠️ 远期数据为【推断】，可信度 ★★★☆☆）:</p>
+
+<table>
+<thead>
+<tr>
+<th>价格位置</th>
+<th>价格</th>
+<th>安全边际</th>
+<th>建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>极度低估</td>
+<td><$50</td>
+<td>>55%</td>
+<td>可重仓（若相信 AI 持续高增长）</td>
+</tr>
+<tr>
+<td>安全买入价</td>
+<td>$50-70</td>
+<td>38-55%</td>
+<td>积极建仓</td>
+</tr>
+<tr>
+<td>合理价值</td>
+<td>$70-110</td>
+<td>2-38%</td>
+<td>正常持有</td>
+</tr>
+<tr>
+<td>谨慎区</td>
+<td>$110-150</td>
+<td>-34~2%</td>
+<td>不追高</td>
+</tr>
+<tr>
+<td>高估区</td>
+<td>>$150</td>
+<td><-34%</td>
+<td>减仓/回避</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>综合公允价值</strong>: ~$112/股（情景加权，可信度 ★★★☆☆）</p>
+
+<p><strong>价格计算说明</strong>:</p>
+
+<table>
+<thead>
+<tr>
+<th>估值方法</th>
+<th>公允价值</th>
+<th>权重</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>三情景 EV/EBITDA (2027)</td>
+<td>$146</td>
+<td>50%</td>
+<td>远期假设，可信度低</td>
+</tr>
+<tr>
+<td>Forward P/S (2026)</td>
+<td>$96</td>
+<td>20%</td>
+<td>$13B × 4x / 5.43亿股</td>
+</tr>
+<tr>
+<td>同行 P/S 对比</td>
+<td>$105</td>
+<td>20%</td>
+<td>处于 Nebius 与传统 DC 之间</td>
+</tr>
+<tr>
+<td>现金底部</td>
+<td>$0.6</td>
+<td>10%</td>
+<td>$3.3B 现金 / 5.43亿股</td>
+</tr>
+</tbody>
+</table>
+
+<h3>6.12 投资操作建议（Action Plan）</h3>
+
+<table>
+<thead>
+<tr>
+<th>当前价格位置 ($73.21)</th>
+<th>建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>处于"合理价值"区下沿</td>
+<td><strong>可分批建仓，但不超过组合 1-3%</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>成长股特殊规则</strong>: 当前 $73.21 处于合理区下沿。安全边际 34%（基于情景加权公允价值 $112）。但远期假设可信度低，且当前利率环境下 $17.5B 长期债务的再融资风险存在。按照成长股规则，不建议仅因"略低估"重仓。</p>
+
+<h3>6.13 目标价格可信度（Target Price Confidence）</h3>
+
+<p><strong>证据来源评级</strong>: ★★★☆☆（二级证据为主，存在大量合理推断）</p>
+
+<p><strong>影响最大的三个变量</strong>:</p>
+<ol>
+<li><strong>2027 ARR 实际值</strong> — 每变化 ±$5B，目标价格变化 ±$30</li>
+<li><strong>调整后 EBITDA 利润率</strong> — 每变化 ±5%，目标价格变化 ±$25</li>
+<li><strong>远期 EV/EBITDA 估值倍数</strong> — 每变化 ±2x，目标价格变化 ±$30</li>
+</ul>
+
+<p><strong>更新规则</strong>: 上述任一变量若超出预测范围 20% 以上，必须重新计算整个价格体系。</p>
+
+<h3>6.14 价格失效条件（Price Killers）</h3>
+
+<p>以下条件触发后，当前 $112 估值立即失效:</p>
+<ol>
+<li><strong>Microsoft 订单削减</strong> 或 OpenAI 合同重新谈判</li>
+<li><strong>AI Hyperscaler 2027 CapEx 同比零增长</strong></li>
+<li><strong>Core Scientific 收购失败</strong></li>
+<li><strong>NVIDIA 减持</strong></li>
+<li><strong>利率上升 200bps+</strong></li>
+<li><strong>CEO/CFO 更换</strong> 或重大治理事件</li>
+<li><strong>重大 AI 安全事件</strong></li>
+</ul>
+
+<h3>6.15 最终投资决策（Final Investment Decision）</h3>
+
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>当前价格</td>
+<td>$73.21</td>
+</tr>
+<tr>
+<td>综合公允价值</td>
+<td>$112（可信度 ★★★☆☆）</td>
+</tr>
+<tr>
+<td>安全买入价格</td>
+<td>$50-70</td>
+</tr>
+<tr>
+<td>极度低估价格</td>
+<td><$50</td>
+</tr>
+<tr>
+<td>当前安全边际</td>
+<td>+34.6%</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>当前状态</th>
+<th>判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>价格位置</td>
+<td>合理区下沿</td>
+</tr>
+<tr>
+<td>投资建议</td>
+<td><strong>观察（可分批小仓位介入）</strong></td>
+</tr>
+<tr>
+<td>企业质量</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td>投资价值</td>
+<td>★★★☆☆</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote><p><strong>核心回答</strong>: "现在是否值得投入新的资金？"</p></blockquote>
+<p>></p>
+<blockquote><p><strong>有限度的"是"</strong>。当前 $73.21 已低于情景加权公允价值 $112（+34.6% 安全边际）。可作为 AI 算力敞口的卫星仓位（组合 1-3%），分批建仓。但 $200亿+ 年 CapEx 持续烧钱和高杠杆决定了 <strong>不应重仓</strong>。观察窗口: 2026 Q2 财报（2026/8）→ Microsoft 续约信号 → 2027 ARR 兑现进度。</p></blockquote>
+
+<hr />
+
+
+<div class="chart-container">
+<div class="chart-title">🎯 三情景估值分析 (Bull / Base / Bear, 2027)</div>
+<div class="chart-canvas-wrap"><canvas id="chartValuation"></canvas></div>
+</div>
+<div class="chart-container">
+<div class="chart-title">📊 收入积压 (RPO) 增长 (十亿美元)</div>
+<div class="chart-canvas-wrap"><canvas id="chartRPO"></canvas></div>
+</div>
+
+<h2>第7章 | 风险分析</h2>
+
+<table>
+<thead>
+<tr>
+<th>风险类别</th>
+<th>严重程度</th>
+<th>市场定价状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>客户集中度</td>
+<td>🔴 极高</td>
+<td>部分定价（已从 $187 跌至 $73）</td>
+</tr>
+<tr>
+<td>杠杆与利息</td>
+<td>🔴 极高</td>
+<td>部分定价</td>
+</tr>
+<tr>
+<td>CapEx 失控</td>
+<td>🔴 极高</td>
+<td>被低估（市场假设 CapEx/收入会下降）</td>
+</tr>
+<tr>
+<td>AI CapEx 见顶</td>
+<td>🔴 极高</td>
+<td>被低估</td>
+</tr>
+<tr>
+<td>创始人/早期股东减持</td>
+<td>🟡 中高</td>
+<td>已定价但持续承压</td>
+</tr>
+<tr>
+<td>OpenAI 信用风险</td>
+<td>🟡 中高</td>
+<td>被低估</td>
+</tr>
+<tr>
+<td>Hyperscaler 自建芯片</td>
+<td>🟡 中高</td>
+<td>被低估</td>
+</tr>
+<tr>
+<td>GPU 价格上涨压缩毛利</td>
+<td>🟡 中高</td>
+<td>被低估</td>
+</tr>
+<tr>
+<td>监管（出口管制、电力）</td>
+<td>🟡 中</td>
+<td>被低估</td>
+</tr>
+<tr>
+<td>利率上升</td>
+<td>🟡 中</td>
+<td>取决于美联储</td>
+</tr>
+<tr>
+<td>黑天鹅（AI 安全事件）</td>
+<td>🔴 极高</td>
+<td>完全被忽视</td>
+</tr>
+<tr>
+<td>治理（持续减持）</td>
+<td>🟡 中高</td>
+<td>已定价</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>市场最低估的风险</strong>:</p>
+<ol>
+<li><strong>OpenAI 信用风险</strong> — OpenAI 2029 年前烧光 $1150亿，可能重新谈判 $22.4B 合同</li>
+<li><strong>CapEx 学习曲线假设</strong> — 市场假设单位 CapEx/收入会下降，但 GPU 价格 Q1 已环比上涨</li>
+<li><strong>AI 推理竞争</strong> — 推理对 GPU 规模要求低，Hyperscaler 自建+Together AI 等推理云更具成本优势</li>
+</ul>
+
+<hr />
+
+<h2>第8章 | 投资逻辑</h2>
+
+<p><strong>核心逻辑</strong>: CoreWeave 是 AI 时代"铁铲公司"——NVIDIA 芯片 → 数据中心 → 长期合同租赁给 AI 实验室。在 AI CapEx 超级周期下，CRWV 拿到最优 NVIDIA 资源、最强客户合同（OpenAI $22.4B + Meta $21B + Microsoft 长期），未来 5 年收入可见度 $99.4B 锁定。</p>
+
+<p><strong>为什么可能持续十年以上</strong>:</p>
+<ol>
+<li><strong>AI 算力需求结构性增长</strong> — 推理需求爆发刚刚开始</li>
+<li><strong>先发优势</strong> — SemiAnalysis ClusterMAX 唯一 Platinum</li>
+<li><strong>NVIDIA 11.5% 持股</strong> — 深度绑定最关键供应商</li>
+<li><strong>客户多元化已实现</strong> — Top 4 AI 模型公司全部覆盖</li>
+<li><strong>垂直整合（Core Scientific 收购）</strong> — 1.3 GW 自有电力，年省 $5亿</li>
+</ul>
+
+<p><strong>投资逻辑失效条件</strong>:</p>
+<ol>
+<li>AI 投资回报率持续低于资本成本（IBM 数据：5.9% ROI vs 10% 资本成本）</li>
+<li>Hyperscaler 2027 CapEx 同比下降</li>
+<li>Microsoft/Google/Amazon 大幅加速自研芯片</li>
+<li>重大 AI 安全事件导致监管收紧</li>
+<li>OpenAI 信用事件引发连锁重新谈判</li>
+<li>NVIDIA 与其他 Neocloud 关系深化（关系优势被稀释）</li>
+</ul>
+
+<hr />
+
+<h2>第9章 | Value Drivers（价值驱动因素）</h2>
+
+<h3>9.1 识别价值驱动因素</h3>
+
+<p>CoreWeave 的长期价值由以下 7 个核心驱动因素决定：</p>
+
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Driver</th>
+<th>为什么决定企业价值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>2026 退出 ARR 实际值</strong></td>
+<td>指引 $18-19B（上调）— 是 2026 收入兑现的关键指标</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>2027 ARR 实际值 + 签约率</strong></td>
+<td>指引 $30B+，75% 已签约 — 决定 2027-2028 增长</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Microsoft 续约/扩单进度</strong></td>
+<td>2025 占 62-67%，任何变动直接传导收入和估值</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>OpenAI $22.4B 合同执行率</strong></td>
+<td>最大单一客户合同，OpenAI 信用风险决定该笔收入兑现</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>NVIDIA 关系 + Blackwell/Rubin 部署节奏</strong></td>
+<td>首批部署优势是 CoreWeave 核心壁垒</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Hyperscaler CapEx 趋势（2026-2027）</strong></td>
+<td>$7,250亿 (2026) → $1万亿+ (2027) 决定目标市场大小</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>调整后 EBITDA 利润率</strong></td>
+<td>2026Q1 56%，组件价格上涨已压缩 6 个百分点</td>
+</tr>
+</tbody>
+</table>
+
+<h3>9.2 Driver 权重</h3>
+
+<table>
+<thead>
+<tr>
+<th>Driver</th>
+<th>重要程度</th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026 退出 ARR</td>
+<td>★★★★★</td>
+<td>决定 2026 收入兑现 + 2027 增长起点</td>
+</tr>
+<tr>
+<td>2027 ARR + 签约率</td>
+<td>★★★★★</td>
+<td>2027-2028 增长的关键指标</td>
+</tr>
+<tr>
+<td>Microsoft 续约</td>
+<td>★★★★★</td>
+<td>最大客户决定收入底盘</td>
+</tr>
+<tr>
+<td>OpenAI 合同执行</td>
+<td>★★★★☆</td>
+<td>最大单一合同但占比下降</td>
+</tr>
+<tr>
+<td>NVIDIA 关系</td>
+<td>★★★★☆</td>
+<td>护城河核心</td>
+</tr>
+<tr>
+<td>Hyperscaler CapEx</td>
+<td>★★★★☆</td>
+<td>行业大盘</td>
+</tr>
+<tr>
+<td>EBITDA 利润率</td>
+<td>★★★☆☆</td>
+<td>影响估值倍数</td>
+</tr>
+</tbody>
+</table>
+
+<h3>9.3 长期监控</h3>
+
+<table>
+<thead>
+<tr>
+<th>Driver</th>
+<th>数据来源</th>
+<th>更新频率</th>
+<th>获取方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026 ARR</td>
+<td>CoreWeave IR + 季报</td>
+<td>每季</td>
+<td>10-Q 营收 + Management Guidance</td>
+</tr>
+<tr>
+<td>2027 ARR</td>
+<td>CoreWeave IR + Earnings Call</td>
+<td>每季</td>
+<td>Earnings Call Transcript + 退出 ARR</td>
+</tr>
+<tr>
+<td>Microsoft 订单</td>
+<td>Microsoft 财报 + CoreWeave 公告</td>
+<td>每季</td>
+<td>MSFT 10-Q CapEx + 公告</td>
+</tr>
+<tr>
+<td>OpenAI 合同</td>
+<td>OpenAI 公告 + CoreWeave 10-Q</td>
+<td>每半年</td>
+<td>The Information / Reuters</td>
+</tr>
+<tr>
+<td>NVIDIA 关系</td>
+<td>NVIDIA 公告 + GTC 大会</td>
+<td>每季</td>
+<td>NVDA 10-Q + GTC</td>
+</tr>
+<tr>
+<td>Hyperscaler CapEx</td>
+<td>MSFT/GOOGL/AMZN/META 季报</td>
+<td>每季</td>
+<td>4 家 10-Q</td>
+</tr>
+<tr>
+<td>EBITDA 利润率</td>
+<td>CoreWeave 10-Q</td>
+<td>每季</td>
+<td>10-Q 调整后 EBITDA 披露</td>
+</tr>
+</tbody>
+</table>
+
+<h3>9.4 估值影响</h3>
+
+<table>
+<thead>
+<tr>
+<th>Driver</th>
+<th>改善→估值影响</th>
+<th>恶化→估值影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026 ARR</td>
+<td>收入兑现确认 → 估值倍数稳定</td>
+<td>收入指引下调 → 估值压缩</td>
+</tr>
+<tr>
+<td>2027 ARR + 签约率</td>
+<td>增长可见度增强 → 估值中枢上移</td>
+<td>签约率下降 → 远期假设动摇</td>
+</tr>
+<tr>
+<td>Microsoft 续约</td>
+<td>收入底盘稳定 → 估值溢价</td>
+<td>客户流失 → 估值腰斩</td>
+</tr>
+<tr>
+<td>OpenAI 合同</td>
+<td>收入兑现 → 客户多元化验证</td>
+<td>重新谈判 → 估值重定价</td>
+</tr>
+<tr>
+<td>NVIDIA 关系</td>
+<td>部署优势维持 → 护城河</td>
+<td>关系降温 → 估值压缩</td>
+</tr>
+<tr>
+<td>Hyperscaler CapEx</td>
+<td>目标市场扩容 → 估值上行</td>
+<td>CapEx 见顶 → 估值压制</td>
+</tr>
+<tr>
+<td>EBITDA 利润率</td>
+<td>利润率改善 → 估值倍数扩张</td>
+<td>利润率压缩 → 估值倍数压缩</td>
+</tr>
+</tbody>
+</table>
+
+<h3>9.5 投资决策影响</h3>
+
+<table>
+<thead>
+<tr>
+<th>Driver</th>
+<th>当前状态 (2026.7)</th>
+<th>影响投资逻辑？</th>
+<th>需重新估值？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026 ARR 指引</td>
+<td>→ $18-19B（已上调）</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>2027 ARR 指引</td>
+<td>→ $30B+（75% 已签）</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>Microsoft 续约</td>
+<td>→ 长期合同稳定</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>OpenAI 合同</td>
+<td>→ $22.4B 兑现中</td>
+<td>待观察</td>
+<td>待观察</td>
+</tr>
+<tr>
+<td>NVIDIA 关系</td>
+<td>↑ 11.5% 持股 + 5 GW 合作</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>Hyperscaler CapEx</td>
+<td>↑ 2026 同比 +77%</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>EBITDA 利润率</td>
+<td>↓ 60% → 56%（GPU 涨价）</td>
+<td><strong>是</strong></td>
+<td><strong>是</strong></td>
+</tr>
+</tbody>
+</table>
+
+<blockquote><p><strong>当前判断</strong>: EBITDA 利润率压缩是当前最需要跟踪的 Driver。其他 Driver 未触发重构。</p></blockquote>
+
+<h3>9.6 季度更新规则</h3>
+
+<p><strong>下次财报 (Q2 2026，预计 2026-08 发布) 更新清单</strong>:</p>
+<ol>
+<li>检查 2026 退出 ARR 进度</li>
+<li>检查 Q2 调整后 EBITDA 利润率（若再下降 5%+ → 触发重新估值）</li>
+<li>检查 Microsoft 续约/扩单公告</li>
+<li>检查 Core Scientific 收购进度</li>
+<li>检查新增/失去的重大客户合同</li>
+<li>更新 9.5 决策表</li>
+<li>若无 Driver 重大变化 → 仅更新 9.5 + 6.15</li>
+</ul>
+
+<h3>9.7 触发重新生成完整报告的阈值</h3>
+
+<table>
+<thead>
+<tr>
+<th>触发条件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026 退出 ARR 偏离指引 >20%</td>
+<td>收入兑现失控</td>
+</tr>
+<tr>
+<td>Microsoft 重大订单变化</td>
+<td>客户集中度风险</td>
+</tr>
+<tr>
+<td>OpenAI 合同重新谈判</td>
+<td>信用事件</td>
+</tr>
+<tr>
+<td>Hyperscaler 2027 CapEx 同比零增长或负</td>
+<td>行业见顶</td>
+</tr>
+<tr>
+<td>利率上升 200bps+</td>
+<td>财务成本危机</td>
+</tr>
+<tr>
+<td>Core Scientific 收购失败</td>
+<td>垂直整合战略失败</td>
+</tr>
+<tr>
+<td>EBITDA 利润率再压缩 5%+</td>
+<td>成本端危机</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+
+<div class="mermaid-container">
+<div class="mermaid-title">📊 Value Drivers 监控体系</div>
+<div class="mermaid">
+flowchart TD
+    A[第6章 估值<br/>6.1-6.10] -->|输入参数| B[第9章 Value Drivers<br/>核心监控]
+    B --> C{Driver<br/>变化?}
+    C -->|重大变化| D[重新生成<br/>完整报告]
+    C -->|无重大变化| E[仅更新<br/>9.5 + 6.15]
+    D --> F[6.11-6.15<br/>价格体系更新]
+    E --> F
+    B --> G[★ ARR 兑现<br/>2026 $18-19B]
+    B --> H[★ 2027 ARR<br/>$30B+ 75% 签约]
+    B --> I[★ Microsoft<br/>续约]
+    B --> J[★ OpenAI 合同<br/>$22.4B 执行]
+    B --> K[★ Hyperscaler<br/>CapEx]
+    B --> L[★ NVIDIA 关系]
+    B --> M[★ EBITDA<br/>利润率]
+    G --> N{EBITDA<br/>利润率?}
+    N -->|>50%| O[持有/加仓]
+    N -->|40-50%| P[观察]
+    N -->|<40%| Q[重新评估]
+    style B fill:#e74c3c,color:#fff
+    style D fill:#dc2626,color:#fff
+    style Q fill:#dc2626,color:#fff
+</div>
+</div>
+
+<div class="mermaid-container">
+<div class="mermaid-title">🏗️ 投资决策闭环 (V-2.2 框架)</div>
+<div class="mermaid">
+flowchart LR
+    A[第0章<br/>公司分类] --> B[第1-5章<br/>企业分析]
+    B --> C[第6章<br/>财务验证]
+    C --> D[第6章 估值<br/>6.1-6.10]
+    D --> E[6.11-6.15<br/>投资决策]
+    E --> F[第10章<br/>最终结论]
+    F --> G[第9章<br/>Value Drivers]
+    G -->|下次财报| H{Driver<br/>变化?}
+    H -->|是| B
+    H -->|否| I[仅更新 6.15]
+    I -->|持续监控| G
+    style A fill:#3b82f6,color:#fff
+    style D fill:#e74c3c,color:#fff
+    style E fill:#e74c3c,color:#fff
+    style F fill:#16a34a,color:#fff
+    style G fill:#16a34a,color:#fff
+</div>
+</div>
+
+<h2>第10章 | 最终结论</h2>
+
+<h3>综合评分</h3>
+
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>权重</th>
+<th>评分</th>
+<th>加权</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>商业模式</td>
+<td>10%</td>
+<td>7/10</td>
+<td>0.70</td>
+</tr>
+<tr>
+<td>行业空间 (TAM)</td>
+<td>15%</td>
+<td>10/10</td>
+<td>1.50</td>
+</tr>
+<tr>
+<td>管理层</td>
+<td>10%</td>
+<td>5/10</td>
+<td>0.50</td>
+</tr>
+<tr>
+<td>财务健康</td>
+<td>10%</td>
+<td>3/10</td>
+<td>0.30</td>
+</tr>
+<tr>
+<td>护城河</td>
+<td>10%</td>
+<td>5/10</td>
+<td>0.50</td>
+</tr>
+<tr>
+<td>成长性</td>
+<td>15%</td>
+<td>10/10</td>
+<td>1.50</td>
+</tr>
+<tr>
+<td>估值合理性</td>
+<td>10%</td>
+<td>7/10</td>
+<td>0.70</td>
+</tr>
+<tr>
+<td>风险水平</td>
+<td>10%</td>
+<td>4/10</td>
+<td>0.40</td>
+</tr>
+<tr>
+<td>Fisher 评分</td>
+<td>10%</td>
+<td>6/10</td>
+<td>0.60</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>100%</strong></td>
+<td></td>
+<td><strong>6.70/10 → 67/100</strong></td>
+</tr>
+</tbody>
+</table>
+
+<h3>估值判断</h3>
+
+<p><strong>当前估值: 合理偏低估</strong>（相对情景加权公允价值 $112）</p>
+
+<ul>
+<li><strong>相对成长性</strong>: AI 算力 $1.43万亿 TAM，CRWV 是龙头</li>
+<li><strong>相对风险</strong>: 客户集中 + 高杠杆 + 持续减持 + 创始人信心动摇</li>
+<li><strong>相对同业</strong>: P/S 3x 远低于 Nebius 70x+，但反映"已盈利 vs 高增长"</li>
+</ul>
+
+<h3>投资建议</h3>
+
+<h4>🟡 观察（67/100）— 可分批小仓位介入</h4>
+
+<p><strong>仓位建议</strong>:</p>
+<ul>
+<li><strong>核心仓位（0%）</strong>: 不建议作为组合核心</li>
+<li><strong>卫星仓位（1-3%）</strong>: 适合作为 AI 算力敞口</li>
+<li><strong>风险警示</strong>: 持仓周期 3-5 年，承受 -50% 波动可能</li>
+</ul>
+
+<p><strong>更安全的替代</strong>:</p>
+<ul>
+<li><strong>NVIDIA (NVDA)</strong>: 同样 AI 算力敞口但无杠杆、客户分散</li>
+<li><strong>Nebius (NBIS)</strong>: 更高增长但更小市值</li>
+<li><strong>Microsoft (MSFT)</strong>: 自身就是 Neocloud 大客户，AI 全栈敞口</li>
+</ul>
+
+<p><strong>观察窗口</strong>:</p>
+<ul>
+<li>2026 Q2 财报（2026/8 月）— 检查 EBITDA 利润率</li>
+<li>2026 Q4 财报 — 检查 2026 退出 ARR 实际</li>
+<li>Microsoft 续约公告（持续）</li>
+<li>Core Scientific 收购完成（2026 Q3-Q4 预期）</li>
+</ul>
+
+<p><strong>一句话总结</strong>: CoreWeave 是 AI 时代最强"铁铲公司"——NVIDIA 11.5% 持股 + $99.4B 收入积压 + 全球 9/10 顶级 AI 客户，但 $21.6B 长期债务 + 持续减持 + GPU 涨价侵蚀毛利意味着这是一场高 Beta 卫星仓位，不是重仓押注。$73 是合理偏低估区下沿，可分批建仓 1-3% 仓位，但必须为 -50% 波动做好准备。</p>
+
+<hr />
+
+<h2>Evidence Coverage（证据覆盖率）</h2>
+
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>占比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一级证据（SEC 10-K/10-Q、S-1、公司 IR）</td>
+<td>50%</td>
+</tr>
+<tr>
+<td>二级证据（Morningstar、Morgan Stanley、SemiAnalysis、Reuters）</td>
+<td>25%</td>
+</tr>
+<tr>
+<td>三级证据（财经媒体、行业研究）</td>
+<td>15%</td>
+</tr>
+<tr>
+<td>AI 推断</td>
+<td>10%</td>
+</tr>
+</tbody>
+</table>
+
+<h3>未验证数据</h3>
+
+<ul>
+<li>2027 ARR $30B+ 指引的细分（按客户、按地区）</li>
+<li>2026 退出 ARR $18-19B 的具体口径</li>
+<li>各客户 Take-or-Pay 合同的具体单价</li>
+<li>CapEx 拆解（GPU 采购 vs 数据中心建设 vs 网络）</li>
+<li>推理 vs 训练业务的具体收入分项</li>
+<li>长期债务 5.9% 利率的具体合同条款</li>
+<li>2026 调整后 EBITDA 利润率的全年路径</li>
+<li>综合公允价值 $112/股</li>
+<li>三情景 EV/EBITDA 的所有远期假设</li>
+</ul>
+
+<h3>无法获取的数据</h3>
+
+<ul>
+<li>客户实际 GPU 使用率（公司未披露）</li>
+<li>单一数据中心运营效率数据</li>
+<li>创始人内部财务预测</li>
+<li>OpenAI/Meta/Anthropic 内部算力需求预测</li>
+<li>2027+ 详细 CapEx 指引</li>
+<li>NVIDIA 11.5% 持股的具体协议条款（是否含董事会席位等）</li>
+</ul>
+
+<blockquote><p>⚠️ <strong>本报告 AI 推断占比约 10%，处于临界值</strong>。远期估值假设（2027 EBITDA 率、EV/EBITDA 倍数、综合公允价值 $112）建议在 2026 Q2 财报后根据实际 ARR 兑现情况重新计算。</p></blockquote>
+
+<hr />
+
+<h2>附录：核心数据卡片</h2>
+
+<h3>关键数字一览</h3>
+
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>当前股价</td>
+<td>$73.21</td>
+</tr>
+<tr>
+<td>52周区间</td>
+<td>$33.51 - $153.20</td>
+</tr>
+<tr>
+<td>市值</td>
+<td>$39.7B</td>
+</tr>
+<tr>
+<td>EV</td>
+<td>$54.2B</td>
+</tr>
+<tr>
+<td>长期债务</td>
+<td>$17.5B</td>
+</tr>
+<tr>
+<td>现金</td>
+<td>$3.3B</td>
+</tr>
+<tr>
+<td>2026 营收指引</td>
+<td>$12-13B</td>
+</tr>
+<tr>
+<td>2026 调整后经营利润指引</td>
+<td>$0.9-1.1B</td>
+</tr>
+<tr>
+<td>2026 CapEx 指引</td>
+<td>$31-35B</td>
+</tr>
+<tr>
+<td>2026 退出 ARR 指引</td>
+<td>$18-19B</td>
+</tr>
+<tr>
+<td>2027 ARR 指引</td>
+<td>$30B+（75% 已签）</td>
+</tr>
+<tr>
+<td>收入积压 (RPO)</td>
+<td>$99.4B</td>
+</tr>
+<tr>
+<td>1 GW 活跃电力 / 3.5 GW 签约</td>
+<td>2026 Q1</td>
+</tr>
+<tr>
+<td>2030 电力目标</td>
+<td>8 GW+</td>
+</tr>
+<tr>
+<td>NVIDIA 持股</td>
+<td>11.5%</td>
+</tr>
+<tr>
+<td>创始人合计持股</td>
+<td>~18%</td>
+</tr>
+<tr>
+<td>分析师目标价（平均）</td>
+<td>$140</td>
+</tr>
+<tr>
+<td>分析师目标价（区间）</td>
+<td>$36 - $303</td>
+</tr>
+<tr>
+<td>买入/持有/卖出</td>
+<td>19/11/2（36 位）</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p><em>报告生成时间: 2026-07-20 18:30 CST | 框架: Research Constitution V-2.2</em></p>
+<p><em>下次更新触发: 2026 Q2 财报发布后更新第 9 章 Value Drivers + 6.15 投资决策摘要</em></p>
+
+  <footer>
+    <p>基于 <a href="#">大灰皮证券研究统一框架 V-2.2</a> · Evidence First · 仅供研究参考，不构成投资建议</p>
+    <p style="margin-top:8px;font-size:0.8rem;">报告生成时间: 2026-07-20 18:30 CST · 下次更新: 2026 Q2 财报后</p>
+  </footer>
+</div>
+<script>
+mermaid.initialize({ startOnLoad: true, theme: 'default', flowchart: { curve: 'basis' } });
+
+// 营收与 EBITDA 趋势
+const revenueCtx = document.getElementById('chartRevenue');
+if (revenueCtx) {
+  new Chart(revenueCtx.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['FY2022', 'FY2023', 'FY2024', 'FY2025', 'Q1 2026'],
+      datasets: [
+        {
+          label: '营收 ($B)',
+          data: [0.016, 0.229, 1.915, 5.131, 2.078],
+          backgroundColor: 'rgba(231, 76, 60, 0.7)',
+          borderColor: '#e74c3c',
+          borderWidth: 2,
+          yAxisID: 'y'
+        },
+        {
+          label: '调整后 EBITDA ($B)',
+          data: [null, null, 1.335, 3.089, 1.157],
+          backgroundColor: 'rgba(39, 174, 96, 0.7)',
+          borderColor: '#27ae60',
+          borderWidth: 2,
+          yAxisID: 'y'
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: '营收/EBITDA (十亿美元)' } }
+      }
+    }
+  });
+}
+
+// CapEx vs EBITDA
+const capexCtx = document.getElementById('chartCapex');
+if (capexCtx) {
+  new Chart(capexCtx.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['FY2024', 'FY2025', 'Q1 2026', '2026E 指引'],
+      datasets: [
+        {
+          label: 'CapEx ($B)',
+          data: [1.0, 8.5, 6.8, 33.0],
+          backgroundColor: 'rgba(245, 158, 11, 0.7)',
+          borderColor: '#f59e0b',
+          borderWidth: 2
+        },
+        {
+          label: '调整后 EBITDA ($B)',
+          data: [1.335, 3.089, 1.157, 4.2],
+          backgroundColor: 'rgba(39, 174, 96, 0.7)',
+          borderColor: '#27ae60',
+          borderWidth: 2
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: '金额 (十亿美元)' } }
+      }
+    }
+  });
+}
+
+// 三情景估值
+const valCtx = document.getElementById('chartValuation');
+if (valCtx) {
+  new Chart(valCtx.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['Bear (25%)', 'Base (45%)', 'Bull (30%)', '概率加权'],
+      datasets: [
+        {
+          label: '隐含股价 ($)',
+          data: [10, 80, 160, 146],
+          backgroundColor: ['#dc2626', '#f59e0b', '#16a34a', '#3b82f6'],
+          borderColor: ['#991b1b', '#92400e', '#065f46', '#1e40af'],
+          borderWidth: 2
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: {
+        legend: { display: false },
+        annotation: {}
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          title: { display: true, text: '隐含股价 (美元)' },
+          ticks: { callback: (v) => '$' + v }
+        }
+      }
+    }
+  });
+}
+
+// 客户集中度
+const concCtx = document.getElementById('chartConcentration');
+if (concCtx) {
+  new Chart(concCtx.getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: ['FY2024', 'FY2025', 'Q1 2026', '2026E (目标)'],
+      datasets: [
+        {
+          label: 'Microsoft 占收入比例 (%)',
+          data: [62, 65, 60, 50],
+          borderColor: '#e74c3c',
+          backgroundColor: 'rgba(231, 76, 60, 0.2)',
+          fill: true,
+          tension: 0.3,
+          borderWidth: 3
+        },
+        {
+          label: '前两大客户占比 (%)',
+          data: [77, 70, 56, 45],
+          borderColor: '#3b82f6',
+          backgroundColor: 'rgba(59, 130, 246, 0.1)',
+          fill: true,
+          tension: 0.3,
+          borderWidth: 2
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        y: { beginAtZero: true, max: 100, title: { display: true, text: '占比 (%)' } }
+      }
+    }
+  });
+}
+
+// Neocloud 对比
+const neoCtx = document.getElementById('chartNeocloud');
+if (neoCtx) {
+  new Chart(neoCtx.getContext('2d'), {
+    type: 'bubble',
+    data: {
+      datasets: [
+        { label: 'CoreWeave', data: [{x: 99.4, y: 12, r: 30}], backgroundColor: 'rgba(231, 76, 60, 0.6)' },
+        { label: 'Nebius', data: [{x: 46, y: 7, r: 22}], backgroundColor: 'rgba(59, 130, 246, 0.6)' },
+        { label: 'Together AI', data: [{x: 0, y: 1, r: 12}], backgroundColor: 'rgba(245, 158, 11, 0.6)' },
+        { label: 'Crusoe', data: [{x: 0, y: 0, r: 18}], backgroundColor: 'rgba(39, 174, 96, 0.6)' },
+        { label: 'Nscale', data: [{x: 0, y: 0, r: 20}], backgroundColor: 'rgba(168, 85, 247, 0.6)' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        x: { title: { display: true, text: '收入积压 RPO ($B)' } },
+        y: { title: { display: true, text: '2026 营收指引中值 ($B)' } }
+      }
+    }
+  });
+}
+
+// 债务演进
+const debtCtx = document.getElementById('chartDebt');
+if (debtCtx) {
+  new Chart(debtCtx.getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: ['FY2023', 'FY2024', 'FY2025', 'Q1 2026', '2026E'],
+      datasets: [
+        {
+          label: '长期债务 ($B)',
+          data: [3, 5.5, 14.7, 17.5, 25.0],
+          borderColor: '#e74c3c',
+          backgroundColor: 'rgba(231, 76, 60, 0.2)',
+          fill: true,
+          tension: 0.3,
+          borderWidth: 3
+        },
+        {
+          label: '现金 ($B)',
+          data: [0.5, 1.4, 3.1, 3.0, 5.0],
+          borderColor: '#27ae60',
+          backgroundColor: 'rgba(39, 174, 96, 0.2)',
+          fill: true,
+          tension: 0.3,
+          borderWidth: 2
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: '金额 (十亿美元)' } }
+      }
+    }
+  });
+}
+
+// Hyperscaler CapEx
+const hypCtx = document.getElementById('chartHyperscaler');
+if (hypCtx) {
+  new Chart(hypCtx.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['Amazon', 'Microsoft', 'Google', 'Meta', 'Oracle', '四家合计'],
+      datasets: [
+        {
+          label: '2026 AI CapEx ($B)',
+          data: [200, 190, 180, 135, 65, 705],
+          backgroundColor: ['#ff9900', '#00a4ef', '#4285f4', '#0866ff', '#f80000', '#1a1a2e'],
+          borderWidth: 2
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { beginAtZero: true, title: { display: true, text: 'CapEx (十亿美元)' } }
+      }
+    }
+  });
+}
+
+// RPO 增长
+const rpoCtx = document.getElementById('chartRPO');
+if (rpoCtx) {
+  new Chart(rpoCtx.getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: ['FY2024', 'FY2025', 'Q1 2026', '2026E (隐含)', '2027E (指引)'],
+      datasets: [
+        {
+          label: '收入积压 RPO ($B)',
+          data: [15.1, 66.8, 99.4, 130, 30],
+          borderColor: '#3b82f6',
+          backgroundColor: 'rgba(59, 130, 246, 0.2)',
+          fill: true,
+          tension: 0.3,
+          borderWidth: 3,
+          pointRadius: 6,
+          pointBackgroundColor: '#3b82f6'
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: 'RPO (十亿美元)' } }
+      }
+    }
+  });
+}
+
+</script>
+</body>
+</html>
