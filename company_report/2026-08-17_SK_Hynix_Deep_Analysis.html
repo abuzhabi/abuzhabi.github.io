@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SK海力士(000660.KS) 深度分析报告 | 大灰皮证券研究 V-2.4</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ===== 大灰皮证券研究 HTML 报告模板 ===== */
+/* 模板版本: V-2.4 | 来源: 沃格光电 603773 报告样式 */
+/* 设计原则: 深色主题、信息密度高、中国股市颜色(涨红跌绿)、Chart.js图表 */
+
+:root {
+  --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+  --border: #30363d; --text: #c9d1d9; --text-dim: #8b949e;
+  --red: #f85149; --green: #3fb950; --yellow: #d29922; --blue: #58a6ff; --purple: #bc8cff;
+  --orange: #db6d28; --cyan: #39c5cf;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif; line-height:1.7; padding:20px; max-width:1200px; margin:0 auto; }
+
+/* 标题层级 */
+h1 { color:var(--blue); font-size:1.8em; margin-bottom:5px; border-bottom:2px solid var(--border); padding-bottom:10px; }
+h2 { color:var(--cyan); font-size:1.4em; margin:30px 0 15px; padding-left:12px; border-left:4px solid var(--blue); }
+h3 { color:var(--purple); font-size:1.15em; margin:20px 0 10px; }
+h4 { color:var(--orange); font-size:1em; margin:15px 0 8px; }
+p { margin:8px 0; }
+.subtitle { color:var(--text-dim); font-size:0.9em; margin-bottom:20px; }
+
+/* 表格 */
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:0.9em; }
+th { background:var(--bg3); color:var(--blue); padding:10px; text-align:left; border:1px solid var(--border); }
+td { padding:8px 10px; border:1px solid var(--border); }
+tr:nth-child(even) { background:var(--bg2); }
+tr:hover { background:var(--bg3); }
+
+/* 评分徽章 */
+.score-badge { display:inline-block; padding:6px 20px; border-radius:8px; font-size:1.3em; font-weight:bold; }
+.score-red { background:rgba(248,81,73,0.15); color:var(--red); border:2px solid var(--red); }
+.score-yellow { background:rgba(210,153,34,0.15); color:var(--yellow); border:2px solid var(--yellow); }
+.score-green { background:rgba(63,185,80,0.15); color:var(--green); border:2px solid var(--green); }
+
+/* 卡片 */
+.card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+.card-red { border-left:4px solid var(--red); }
+.card-yellow { border-left:4px solid var(--yellow); }
+.card-green { border-left:4px solid var(--green); }
+.card-blue { border-left:4px solid var(--blue); }
+
+/* 网格布局 */
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; }
+@media (max-width:768px) { .grid-2, .grid-3 { grid-template-columns:1fr; } }
+
+/* 指标卡片 */
+.metric { text-align:center; padding:15px; background:var(--bg3); border-radius:8px; }
+.metric-val { font-size:1.8em; font-weight:bold; }
+.metric-label { color:var(--text-dim); font-size:0.85em; margin-top:5px; }
+
+/* 图表容器 */
+.chart-container { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:20px; margin:15px 0; }
+
+/* 高亮色 */
+.highlight-red { color:var(--red); font-weight:bold; }
+.highlight-green { color:var(--green); font-weight:bold; }
+.highlight-yellow { color:var(--yellow); font-weight:bold; }
+.highlight-blue { color:var(--blue); font-weight:bold; }
+
+/* 引用块 */
+blockquote { border-left:3px solid var(--orange); padding:10px 15px; margin:15px 0; background:var(--bg2); color:var(--text-dim); border-radius:0 8px 8px 0; }
+
+/* 列表 */
+ul,ol { margin:8px 0 8px 25px; }
+li { margin:4px 0; }
+
+/* 标签 */
+.tag { display:inline-block; padding:2px 10px; border-radius:4px; font-size:0.8em; margin:2px; }
+.tag-red { background:rgba(248,81,73,0.2); color:var(--red); }
+.tag-green { background:rgba(63,185,80,0.2); color:var(--green); }
+.tag-yellow { background:rgba(210,153,34,0.2); color:var(--yellow); }
+.tag-blue { background:rgba(88,166,255,0.2); color:var(--blue); }
+
+/* 分割线 */
+hr { border:none; border-top:1px solid var(--border); margin:25px 0; }
+
+/* 章节编号 */
+.section-num { color:var(--blue); font-weight:bold; }
+
+/* 证据覆盖率条 */
+.evidence-bar { display:flex; height:25px; border-radius:5px; overflow:hidden; margin:10px 0; }
+.evidence-bar div { display:flex; align-items:center; justify-content:center; font-size:0.75em; color:#fff; }
+
+/* 页脚 */
+.footer { text-align:center; color:var(--text-dim); margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:0.85em; }
+
+/* 导航栏 */
+.report-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  margin-bottom: 24px;
+  background: #1a1e2a;
+  border: 1px solid var(--border, #30363d);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+.report-nav a {
+  color: var(--blue, #58a6ff);
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.report-nav a:hover {
+  background: rgba(88,166,255,0.15);
+  color: #58a6ff;
+}
+.report-nav .nav-left { display: flex; align-items: center; gap: 8px; }
+.report-nav .nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.report-nav .nav-sep { color: var(--border, #30363d); font-size: 0.75rem; }
+</style></head><body>
+<div class="report-nav">
+  <div class="nav-left"><a href="index.html">&larr; 返回公司列表</a></div>
+  <div class="nav-right"><a href="../../index.html">&#127968; 研究报告首页</a></div>
+</div>
+
+<h1>SK海力士（000660.KS）深度分析报告</h1>
+<p class="subtitle">框架: 大灰皮证券研究 V-2.4 | 日期: 2026-08-17 | 分析师: 小八(AI) | Evidence First + Hard Constraints + Market Data Integrity | 首次覆盖</p>
+
+<div class="card card-yellow">
+<h2 style="margin-top:0">最终结论</h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">69<span style="font-size:0.5em">/100</span></div><div class="metric-label">综合评分</div></div>
+<div class="metric"><div class="score-badge score-yellow">&#128992; 观察</div><div class="metric-label">评级</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">观望/等待回调</div><div class="metric-label">投资建议</div></div>
+</div>
+<blockquote>AI存储超级周期最优质资产（HBM全球第一、净现金69.4万亿KRW、2026年盈利创纪录），但PB 6.2x周期顶部定价、无安全边际，且面临2027-2028供给释放+三星反攻+AI capex削减三重风险。好公司不等于好价格，等待回调至买入区（&#8361;1,250,000以下）或2026Q3财报确认周期位置。</blockquote>
+</div>
+
+<h2><span class="section-num">核心指标</span></h2>
+<div class="grid-3">
+<div class="metric"><div class="metric-val" style="color:var(--blue)">&#8361;1,645,000</div><div class="metric-label">当前股价(2026-08-14)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--blue)">1,161万亿KRW</div><div class="metric-label">市值(&asymp;8,230亿美元)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--red)">76%</div><div class="metric-label">2026Q2营业利润率</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--green)">69.4万亿KRW</div><div class="metric-label">净现金</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--purple)">58%</div><div class="metric-label">HBM全球份额(2026Q1)</div></div>
+<div class="metric"><div class="metric-val" style="color:var(--yellow)">6.2x / 5.8x</div><div class="metric-label">PB / 动态PE</div></div>
+</div>
+<h1>SK海力士（000660.KS）深度分析报告</h1>
+<blockquote>
+<strong>框架</strong>: 大灰皮证券研究 Research Constitution V-2.4 | <strong>日期</strong>: 2026-08-17 | <strong>分析师</strong>: 小八(AI) | <strong>首次覆盖</strong>（无历史报告）
+<strong>原则</strong>: Evidence First + 8 Principles + Hard Constraints + Market Data Integrity | <strong>货币</strong>: 韩元KRW（财报货币），辅以USD/CNY换算
+</blockquote>
+<hr>
+<h2>报告导读</h2>
+<h3>三句话认识公司</h3>
+<p><strong>SK海力士是全球第二大存储芯片制造商</strong>（DRAM全球份额约26-29%、NAND约18%），也是<strong>HBM（高带宽内存）的绝对领导者</strong>（2026Q1全球份额58%），深度绑定英伟达等AI芯片客户。</p>
+<p><strong>它怎么赚钱</strong>：生产DRAM（含HBM）和NAND Flash，卖给AI服务器/数据中心厂商（英伟达等）、智能手机和PC厂商，靠"存储芯片售价×出货量"赚钱——本质是<strong>半导体周期股</strong>，利润随存储价格暴涨暴跌。</p>
+<p><strong>为什么值得研究</strong>：2025-2026年AI驱动的"存储超级周期"让海力士盈利创历史纪录（2026Q2营业利润率76%史无前例），股价一年涨525%。但市场正激烈争论：这是超级周期的延续，还是顶部？三星技术反攻+中国产能扩张+2027-2028年可能产能过剩，构成了三重下行风险。</p>
+<h3>公司基本画像</h3>
+<table>
+<thead><tr><th>项目</th><th>内容</th></tr></thead>
+<tbody><tr><td>项目</td><td>内容</td></tr><tr><td>公司全称</td><td>SK hynix Inc.（SK海力士）</td></tr><tr><td>股票代码</td><td>000660.KS（韩交所）；2026年7月赴美发行ADR</td></tr><tr><td>所属行业</td><td>半导体 — 存储芯片（DRAM / NAND Flash / HBM）</td></tr><tr><td>总部</td><td>韩国利川市</td></tr><tr><td>大股东</td><td>SK株式会社（SK集团），会长崔泰源</td></tr><tr><td>CEO</td><td>郭鲁正（2022年3月起任社长）</td></tr><tr><td>核心产品</td><td>HBM（占DRAM收入约58%）、DRAM（占比73%）、NAND（占比27%）</td></tr><tr><td>主要客户</td><td>英伟达（2025年占收入23.9%）、谷歌、微软、AMD等，10家LTA长协覆盖约50%营收</td></tr><tr><td>当前市值</td><td>约1,161万亿韩元 ≈ 8,230亿美元 ≈ ¥5.5万亿（2026-08-14）</td></tr><tr><td>2026Q2业绩</td><td>营收79.32万亿韩元(+257% YoY)、营业利润60.54万亿(利润率76%)</td></tr><tr><td>财务状态</td><td>净现金69.4万亿韩元，2026年capex约40万亿韩元</td></tr></tbody></table>
+<h3>商业模式简图</h3>
+<pre><code>上游（设备/材料）         SK海力士                下游客户              收入利润
+┌─────────────┐   ┌──────────────────┐   ┌──────────────┐   ┌──────────────┐
+│ 东京电子/ASML │──▶│ 无锡/大连/利川/清州  │──▶│ 英伟达(GPU)   │──▶│  HBM+DRAM    │
+│ 设备+材料    │   │ DRAM/HBM/NAND晶圆厂 │   │ 服务器厂商    │   │  73%营收     │
+└─────────────┘   │ HBM4(1b+台积电7nm)│   │ 手机/PC厂商   │   │  NAND        │
+                  │ 321层V9 NAND     │   │ (三星/苹果/小米)│   │  27%营收     │
+                  └──────────────────┘   └──────────────┘   └──────────────┘
+                   净利润率：2026Q2达118%(含一次性收益) ｜ 经营利润率76%</code></pre>
+<h3>投资者当前最需要理解的问题</h3>
+<p><strong>当前是"存储超级周期"的延续还是顶部？</strong> 2025Q4-2026H1存储价格暴涨（DRAM合约价单季最高+95%），2026H2涨幅已收敛至+3-20%。多空分歧巨大：高盛/瑞银看短缺延续至2027-2028年，但彭博分析师警告2027年可能提前过剩。海力士当前PB 6.2倍处于十年历史高位（周期顶部定价特征），动态PE仅5.8倍（周期股"盈利顶点=估值低点"陷阱）。<strong>核心矛盾：好公司（HBM王者+净现金）vs 高估值（周期顶部）vs 周期拐点（2027-2028）。</strong></p>
+<hr>
+<h2>第0章 | 公司分类（Valuation Classification）</h2>
+<h3>分类判定</h3>
+<table>
+<thead><tr><th>判定项</th><th>内容</th><th>依据</th></tr></thead>
+<tbody><tr><td>判定项</td><td>内容</td><td>依据</td></tr><tr><td><strong>公司类型</strong></td><td><strong>周期股</strong>（半导体存储，带AI结构性成长属性）</td><td>DRAM/NAND是高度商品化产品，价格随供需周期剧烈波动；2023年巨亏7.7万亿 vs 2026年单季盈利60万亿，振幅验证强周期性</td></tr><tr><td><strong>周期位置</strong></td><td>超级周期<strong>高位趋缓段</strong>（2025Q4-2026H1暴涨已兑现，2026H2涨幅收敛但未转跌）</td><td>TrendForce：2026Q3 PC DRAM合约价+15-20%（vs Q1 +95%）；渠道库存仅2-4周（正常15周+）</td></tr><tr><td><strong>首选估值方法</strong></td><td><strong>EV/EBITDA + PB + 周期位置判断</strong>（周期股标准组合）</td><td>框架6.2节：周期股★★★★★ EV/EBITDA、PB、周期位置</td></tr><tr><td><strong>估值限制</strong></td><td>禁止直接用DCF（框架6.4：周期股慎用DCF）；禁止脱离存储价格周期单独估值（框架6.11）</td><td>现金流随价格周期剧烈波动，DCF可预测性极低</td></tr></tbody></table>
+<h3>估值方法选择说明</h3>
+<p>海力士属于<strong>"周期+成长"混合体</strong>：传统DRAM/NAND业务是纯周期品，HBM业务（2026年占DRAM收入58%）带有结构性成长属性（AI需求是多年维度的增长逻辑，非纯周期）。但HBM本身也受价格周期影响（2026Q2 HBM均价已同比下跌）。因此仍归为<strong>周期股</strong>，估值以周期股传导链为主，同时考虑HBM的结构性溢价。</p>
+<blockquote>
+<strong>结论→证据→判断</strong>：公司类型=周期股（带成长属性）。首选EV/EBITDA+PB+周期位置。禁止DCF为主要估值手段。信心等级：★★★★☆（存储周期属性为行业共识，但HBM结构性成长使纯周期框架略有偏差）。
+</blockquote>
+<hr>
+<h2>第1章 | 公司基本面分析</h2>
+<h3>1.1 商业模式与核心产品</h3>
+<p><strong>结论</strong>: SK海力士是全球第二大DRAM厂商（2026Q2 Counterpoint口径份额26%，三星39%居首）和第二大NAND厂商（约18%），但在<strong>HBM细分市场是绝对第一</strong>（2026Q1份额58%，三星/美光各约21%）。</p>
+<p><strong>证据</strong>（证据等级：二级-机构数据）:</p>
+<ul>
+<li>2026Q2业务拆分：DRAM 73%、NAND 27%（公司财报口径）</li>
+<li>HBM占DRAM收入约58%（fazen.markets，2026Q2）</li>
+<li>2026Q1全球HBM收入份额：SK海力士58%（Counterpoint）、三星21%、美光21%</li>
+<li>2026Q2 DRAM份额：三星39%、SK海力士26%、美光25%（Counterpoint）——海力士Q1还以28.8%居首，Q2被三星反超</li>
+</ul>
+<p><strong>反方证据</strong>: 三星在HBM4世代实现技术反超（2026年2月全球首量产HBM4 12-Hi，1c制程+自研4nm逻辑基片），良率从2月约60%升至8月近80%；英伟达确认三家HBM4均通过认证、全线量产，海力士从"独家供应"退为"份额领先"。</p>
+<p><strong>最终判断</strong>: 海力士技术护城河<strong>稳固但非不可攻破</strong>——HBM4不再是独家，三星/美光正快速追赶。HBM独占溢价时代结束。信心等级：★★★★☆</p>
+<h3>1.2 收入结构</h3>
+<table>
+<thead><tr><th>维度</th><th>占比</th><th>说明</th></tr></thead>
+<tbody><tr><td>维度</td><td>占比</td><td>说明</td></tr><tr><td>DRAM（含HBM）</td><td>73%</td><td>HBM占DRAM收入约58%，其余为DDR5/LPDDR5X等常规DRAM</td></tr><tr><td>NAND</td><td>27%</td><td>321层V9为最大产出占比，全球首款321层QLC SSD已出货</td></tr><tr><td>中国大陆</td><td>24.6%（2026H1）</td><td>无锡DRAM厂、大连NAND厂产能占全球DRAM约30-35%、NAND约35-40%</td></tr><tr><td>美国</td><td>64.1%（2026H1）</td><td>AI/HBM需求主阵地</td></tr></tbody></table>
+<h3>1.3 客户结构</h3>
+<p><strong>结论</strong>: 客户高度集中——英伟达2025年占收入23.9%，2026H1前二大客户合计约26%；但与约10家大客户（英伟达、谷歌、微软、AMD等）签订5年期LTA长协，覆盖约50%营收，短期收入可见度高。</p>
+<p><strong>证据</strong>: 公司财报+BigGo财经数据。长协多为take-or-pay性质，渠道库存仅2-4周（正常15周+）。</p>
+<p><strong>反方证据</strong>: 单一客户依赖是双刃剑——英伟达自研芯片（TPU类）或转向三星/美光将直接冲击海力士；HBM3E降价已显现客户议价力。</p>
+<p><strong>最终判断</strong>: LTA锁定半壁江山，但依赖AI资本开支景气度。信心等级：★★★★☆</p>
+<h3>1.4 竞争格局</h3>
+<table>
+<thead><tr><th>领域</th><th>格局</th></tr></thead>
+<tbody><tr><td>领域</td><td>格局</td></tr><tr><td>HBM（2026Q1）</td><td>海力士58% &gt; 三星21% ≈ 美光21%；TrendForce预测全年海力士约50%、三星约28%、美光约22%；UBS预测2027年三星bit份额41%反超海力士39%</td></tr><tr><td>DRAM（2026Q2）</td><td>三星39% &gt; 海力士26% &gt; 美光25% &gt; 长鑫等约10%（长鑫同比+716%）</td></tr><tr><td>NAND</td><td>三星29-32% &gt; 海力士18% &gt; 铠侠/美光/闪迪各13-14% ≈ 长江存储13%</td></tr><tr><td>中国追赶</td><td>长鑫：月产28-30万片→2028年50万片，HBM3E计划2027年量产；长江存储：294层良率&gt;90%，2027年产能近翻倍</td></tr></tbody></table>
+<h3>1.5 核心竞争优势</h3>
+<ol>
+<li><strong>HBM技术领先</strong>：HBM4 12层已量产（1b DRAM + 台积电7nm逻辑片），良率接近HBM3E成熟期水平；为HBM5开发iHBM（热阻降30%+）</li>
+<li><strong>客户深度绑定</strong>：英伟达Vera Rubin平台HBM4份额估60-70%；与英伟达、台积电"AI三角同盟"</li>
+<li><strong>财务实力</strong>：净现金69.4万亿韩元，2026年capex 40万亿韩元可完全自筹</li>
+<li><strong>先进封装一体化</strong>：MR-MUF技术延续，清州19万亿韩元先进封装厂、美国印第安纳州封装厂（2028H2量产HBM4E/5）</li>
+</ol>
+<h3>1.6 未来5-10年增长驱动力</h3>
+<ul>
+<li><strong>HBM需求爆发</strong>：高盛预测HBM市场2026年546-580亿美元→2027年1,160亿→2028年1,680亿美元</li>
+<li><strong>AI服务器渗透</strong>：英伟达Rubin/Rubin Ultra世代HBM搭载量持续提升</li>
+<li><strong>常规DRAM供需紧平衡</strong>：2026年DRAM供需缺口-4.9%（高盛，近15年最严重）</li>
+<li><strong>NAND高端化</strong>：321层QLC SSD、企业级存储</li>
+</ul>
+<p><strong>风险驱动</strong>: 若2027-2028年供给集中释放+AI capex减速，增长叙事可能快速反转。</p>
+<blockquote>
+<strong>基本面综合判断</strong>: 商业模式优秀但强周期；HBM技术领先但领先幅度收窄；财务实力顶级。信心等级：★★★★☆
+</blockquote>
+<hr>
+<h2>第2章 | 行业研究（TAM）</h2>
+<h3>2.1 行业规模与增长</h3>
+<p><strong>结论</strong>: 全球存储芯片市场正在经历AI驱动的爆发式增长，2026年市场规模预计5,500-6,300亿美元，2027年可能达8,400亿美元。</p>
+<p><strong>证据</strong>（机构口径差异大，均标注来源）:</p>
+<ul>
+<li>TrendForce（2026-01）：2025年存储产值约2,354亿美元（DRAM 1,657亿+73%、NAND 697亿）→ 2026年5,516亿 → 2027年8,427亿（+53%）</li>
+<li>Gartner（2026-04）：2025年存储收入2,163亿美元 → 2026年6,333亿（+193%）；2026年DRAM均价+125%、NAND均价+234%</li>
+<li>高盛：HBM市场2026年546-580亿美元（+58%）→ 2027年1,160亿 → 2028年1,680亿</li>
+</ul>
+<p>⚠️ <strong>数据完整性提示</strong>: TrendForce与Gartner的TAM口径差异巨大（2026年5,516亿 vs 6,333亿美元），且与"2025年2,300亿→2026年5,500亿（+144%）"的增速相互印证难度大。本报告以TrendForce为基准（存储行业最权威第三方），Gartner数据作为对照。<strong>该TAM增速本身属于AI超级周期假设，需警惕回归常态。</strong></p>
+<h3>2.2 周期位置（核心判断）</h3><div class="chart-container"><canvas id="priceChart"></canvas></div>
+<p><strong>结论</strong>: 当前处于<strong>超级周期高位趋缓段</strong>——暴涨已兑现，涨幅收敛，拐点未现，但多空分歧已达历史最大。</p>
+<p><strong>证据</strong>（TrendForce合约价数据）:</p>
+<table>
+<thead><tr><th>期间</th><th>DRAM合约价变动</th><th>备注</th></tr></thead>
+<tbody><tr><td>期间</td><td>DRAM合约价变动</td><td>备注</td></tr><tr><td>2025Q4</td><td>+53-58%</td><td>暴涨起点（历史性）</td></tr><tr><td>2026Q1</td><td>+95%</td><td>近翻倍（历史性）</td></tr><tr><td>2026Q2</td><td>+58-63%</td><td>NAND +70-75%</td></tr><tr><td>2026Q3（预告）</td><td>PC +15-20%、Server +13-18%</td><td><strong>涨幅显著收敛</strong></td></tr><tr><td>2026Q4（预告）</td><td>PC +3-8%</td><td>接近正常化</td></tr></tbody></table>
+<ul>
+<li>DDR5 16Gb现货价：2025年11月约20美元 → 2026年6月约117.5美元（+4.9倍）</li>
+<li>渠道库存仅2-4周（正常&gt;15周）——极度缺货状态</li>
+<li>零售32GB DDR5从490美元回落至379.99美元（-22%），业内称"技术性回调"</li>
+</ul>
+<h3>2.3 供需平衡（决定周期方向的关键）</h3>
+<p><strong>多头证据</strong>:</p>
+<ul>
+<li>JPMorgan：2026/2027/2028年HBM供需缺口 -15%/-14%/-22%，<strong>未转过剩</strong></li>
+<li>高盛：2026年DRAM供需缺口-4.9%（近15年最严重），2027年更紧</li>
+<li>三厂2026年HBM产能全部售罄；2027年客户配额仅为请求量的60-70%</li>
+<li>SK海力士会长：2027年或为史上最严重短缺，紧张或延续至2030年</li>
+<li>三大厂与客户签3-5年take-or-pay长协，锁量锁价</li>
+</ul>
+<p><strong>空头证据</strong>:</p>
+<ul>
+<li>彭博30年周期分析师Shuli Ren：短缺2026Q2已见顶、2027Q1回稳、最快2028年过剩；若云厂商砍capex可能提前至2027</li>
+<li>TrendForce警告：NAND 2027H2或转向过剩</li>
+<li>三星HBM4 1c产能2026年计划+170%，平泽P4 2027Q1达10-12万片/月；SK海力士M15X年底5.5-6万片/月、龙仁厂2028H2投产</li>
+<li>长鑫存储2028年产能目标50万片/月（全球12%+），HBM月产能2028年目标10万片</li>
+</ul>
+<p><strong>最终判断</strong>: 2026-2027年供需紧张格局大概率延续（LTA锁量+库存极低+三厂售罄），但<strong>2028年回归平衡甚至过剩的概率显著上升</strong>（供给集中释放+中国产能）。周期拐点窗口在2027H2-2028年。信心等级：★★★☆☆（供需是变量最大的环节）</p>
+<h3>2.4 行业壁垒</h3>
+<ol>
+<li><strong>资本壁垒</strong>：单座先进DRAM厂投资百亿美元级；海力士2026年capex 40万亿韩元（约283-350亿美元）</li>
+<li><strong>技术壁垒</strong>：HBM需DRAM制程+先进封装+TSV/键合技术协同，1c/1d nm制程难度极高</li>
+<li><strong>客户认证壁垒</strong>：英伟达HBM认证周期长（三星HBM3E曾被拒18个月）</li>
+<li><strong>规模经济</strong>：产能规模决定成本曲线位置</li>
+</ol>
+<h3>2.5 三情景（行业层面）</h3>
+<table>
+<thead><tr><th>情景</th><th>假设</th><th>2027年存储市场</th></tr></thead>
+<tbody><tr><td>情景</td><td>假设</td><td>2027年存储市场</td></tr><tr><td><strong>乐观</strong></td><td>AI capex持续超预期，HBM需求超供给至2029</td><td>TAM超1万亿美元，短缺持续</td></tr><tr><td><strong>基准</strong></td><td>短缺延续至2027-2028，2028H2回归平衡</td><td>TAM约8,000-9,000亿美元，价格2027年后趋稳</td></tr><tr><td><strong>悲观</strong></td><td>2027年云厂商capex削减+产能集中释放</td><td>2027H2价格转跌，2028年进入过剩，TAM回落至5,000亿美元以下</td></tr></tbody></table>
+<hr>
+<h2>第3章 | Fisher成长股评价</h2><div class="chart-container"><canvas id="fisherChart"></canvas></div>
+<h3>3.1 十维度评分</h3>
+<table>
+<thead><tr><th>维度</th><th>得分(10分制)</th><th>依据</th></tr></thead>
+<tbody><tr><td>维度</td><td>得分(10分制)</td><td>依据</td></tr><tr><td>1. 市场潜力</td><td>9</td><td>HBM TAM从546亿→1,680亿美元（2026-2028），AI服务器需求多年维度增长</td></tr><tr><td>2. 管理层</td><td>7</td><td>郭鲁正"良率优先、保守务实"，32年行业经验；但集团层面治理受崔泰源股权质押影响</td></tr><tr><td>3. 研发</td><td>9</td><td>HBM4/5领先、iHBM、321层NAND、MR-MUF先进封装，研发强度高</td></tr><tr><td>4. 销售/客户</td><td>8</td><td>英伟达Vera Rubin HBM4份额60-70%，10家LTA长协覆盖50%营收</td></tr><tr><td>5. 利润率空间</td><td>6</td><td>当前76%营业利润率史无前例，但属周期顶部水平，均值回归风险大</td></tr><tr><td>6. 护城河</td><td>6</td><td>HBM技术+客户绑定强；但三星良率修复至80%、HBM4三家齐供，独占性消失</td></tr><tr><td>7. 长期成长</td><td>8</td><td>HBM结构性成长+常规DRAM紧平衡至2028；但2028年后周期风险</td></tr><tr><td>8. 文化/治理</td><td>5</td><td>SK集团现金牛压力、崔泰源59.2%持股质押、股东回报诉求受压制</td></tr><tr><td>9. 资本配置</td><td>7</td><td>净现金69.4万亿、capex自筹；但股息率仅0.2%，股东回报待改善</td></tr><tr><td>10. 长期竞争力</td><td>6</td><td>1b+台积电外包模式 vs 三星垂直整合（DRAM+代工+封装），长期成本/技术协同承压</td></tr><tr><td><strong>综合</strong></td><td><strong>7.1/10</strong></td><td></td></tr></tbody></table>
+<h3>3.2 Fisher评价要点</h3>
+<ul>
+<li><strong>最符合Fisher思想</strong>：技术研发领先（HBM4良率接近HBM3E成熟期、iHBM前瞻布局）+ 超级成长市场（AI存储）</li>
+<li><strong>最不符合Fisher思想</strong>：产品本质是商品化存储，价格周期性极强，2023年刚巨亏7.7万亿——Fisher偏好"利润可预测的成长"，海力士盈利波动性与Fisher理念天然冲突；且治理层面（大股东质押、低股东回报）不达标</li>
+</ul>
+<blockquote>
+<strong>Fisher判断</strong>: 7.1/10。技术驱动成长符合Fisher标准，但强周期性+治理瑕疵是硬伤。信心等级：★★★★☆
+</blockquote>
+<hr>
+<h2>第4章 | 财务审计（Bear Audit）</h2><div class="chart-container"><canvas id="finChart"></canvas></div>
+<h3>4.1 历史财务序列（周期验证）</h3>
+<table>
+<thead><tr><th>年份</th><th>营收(万亿KRW)</th><th>营业利润(万亿KRW)</th><th>备注</th></tr></thead>
+<tbody><tr><td>年份</td><td>营收(万亿KRW)</td><td>营业利润(万亿KRW)</td><td>备注</td></tr><tr><td>2022</td><td>44.6</td><td>~7.0</td><td>周期下行起点</td></tr><tr><td>2023</td><td>32.8</td><td><strong>-7.73</strong></td><td>巨亏（净亏9.13），周期底部</td></tr><tr><td>2024</td><td>66.2</td><td>23.5</td><td>复苏</td></tr><tr><td>2025</td><td>97.1</td><td>47.2</td><td>创纪录（利润率49%，首次超过三星营业利润）</td></tr><tr><td>2026Q1</td><td>~50.7*</td><td>~38*</td><td>暴涨延续（AI推断，Q2发布时确认）</td></tr><tr><td>2026Q2</td><td>79.3</td><td>60.5</td><td><strong>历史最高单季</strong>（利润率76%）</td></tr></tbody></table>
+<p>*2026Q1数据为AI基于"上半年营收破100万亿"与Q2的推算，标注为推断。</p>
+<h3>4.2 利润质量审计（做空机构视角）</h3>
+<table>
+<thead><tr><th>审计项</th><th>发现</th><th>红旗等级</th></tr></thead>
+<tbody><tr><td>审计项</td><td>发现</td><td>红旗等级</td></tr><tr><td><strong>利润可持续性</strong></td><td>2026Q2净利率118%&gt;营收，因含大额一次性收益（出售铠侠股份等）；营业利润率76%属周期顶部水平</td><td>🔴 高</td></tr><tr><td><strong>盈利波动性</strong></td><td>营业利润从-7.73万亿（2023）到60.54万亿（2026Q2单季），振幅极端</td><td>🔴 高</td></tr><tr><td><strong>毛利率</strong></td><td>Q1约78.9%（美股口径）；Q2未单独披露，但营业利润率76%意味着毛利极高——HBM时代毛利率结构质变</td><td>🟡 中</td></tr><tr><td><strong>应收/存货</strong></td><td>渠道库存仅2-4周（极度缺货），存货周转极快，无堆积迹象</td><td>🟢 低</td></tr><tr><td><strong>现金流</strong></td><td>净现金69.4万亿韩元（2026Q2末），总借款18.6万亿，负债权益比极低</td><td>🟢 低</td></tr><tr><td><strong>资本开支</strong></td><td>2026年capex约40万亿韩元（2025年29万亿），占营收约35%——激进而必要</td><td>🟡 中</td></tr><tr><td><strong>股权稀释</strong></td><td>注销库存股1,530万股（约12.2万亿韩元，占2.1%），无稀释</td><td>🟢 低</td></tr><tr><td><strong>客户集中</strong></td><td>英伟达占2025年收入23.9%；前二客户约26%（2026H1）</td><td>🟡 中</td></tr><tr><td><strong>会计政策</strong></td><td>HBM产品采用收入确认正常；一次性收益（出售铠侠股份）需剔除看待</td><td>🟡 中</td></tr></tbody></table>
+<h3>4.3 审计评级</h3>
+<p><strong>🟡 黄色（关注）</strong></p>
+<p><strong>核心逻辑</strong>: 资产负债表极度健康（净现金69.4万亿、无造假红旗、现金流质量高），<strong>但利润质量是最大问题</strong>——76%营业利润率处于周期顶部，历史均值回归必然发生（2023年刚亏损过）。做空者不会攻击财务造假，而会攻击"盈利可持续性"。2026Q2净利超营收含一次性收益，需剔除后评估真实经营盈利。</p>
+<blockquote>
+<strong>Bear Audit结论</strong>: 无财务造假红旗，但盈利周期性风险突出。若2027年价格见顶回落，利润可能以同样斜率崩塌。信心等级：★★★★☆
+</blockquote>
+<hr>
+<h2>第5章 | Bear Case（完整做空逻辑）</h2>
+<h3>5.1 最脆弱环节</h3>
+<p><strong>周期见顶 + 估值周期顶部定价 + 竞争恶化三重叠加</strong>。当前PB 6.2倍（十年历史高位，2026年6月峰值约10.6倍），市场已按"短缺延续3年"定价；一旦2027年供需预期逆转，戴维斯双杀（盈利下修+估值下修）将极其猛烈。</p>
+<h3>5.2 做空逻辑链条</h3>
+<p><strong>做空逻辑</strong>:</p>
+<ol>
+<li><strong>供给集中释放</strong>：三星HBM4 1c产能2026年+170%、平泽P4 2027Q1达10-12万片/月；海力士M15X+龙仁厂2028H2投产；长鑫2028年50万片/月——2027H2-2028年供给曲线陡峭</li>
+<li><strong>需求脆弱性</strong>：AI capex高度集中（美国四大云厂商2026年合计capex约8,000亿美元），一旦AI货币化不及预期，砍单将引发价格崩塌；彭博分析师已警告2027年可能提前过剩</li>
+<li><strong>竞争恶化</strong>：三星HBM4良率修复至80%、美光HBM4 12层爬坡速度为HBM3E两倍——海力士从"独家"到"三强"，HBM3E已开始降价</li>
+<li><strong>估值陷阱</strong>：动态PE 5.8倍看似便宜，实为"盈利顶点=估值低点"的典型陷阱；PB 6.2倍才是周期顶部的真实定价</li>
+<li><strong>价格信号</strong>：2026Q2 HBM均价已同比下跌；DDR5现货价6月后回落22%</li>
+</ol>
+<h3>5.3 股价腰斩的最大原因推演</h3>
+<p><strong>情景</strong>: 2027年某季度云厂商capex指引下调 → 市场恐慌性抛售存储 → 合约价预期反转 → 海力士2027年盈利预测从120万亿砍至60万亿 → PE/PB双杀 → 股价向₩700,000-900,000区间（对应PB 2.5-3.5x）回归。<strong>参考</strong>：2026年6月高点298.7万韩元到8月初142.5万韩元，已经发生过一次-52%的预演回调。</p>
+<h3>5.4 做空成功概率</h3>
+<p><strong>35-45%</strong>（未来12-18个月维度）</p>
+<p><strong>理由</strong>: 基本面强劲（LTA锁量、库存极低、三厂售罄至2027）限制了短期做空空间；但估值已price-in完美情形，任何周期拐点信号都会触发剧烈下修。做空赔率：下行至₩700,000（-57%）vs 上行至₩2,200,000（+34%），不对称性对空头有利。</p>
+<hr>
+<h2>Market Data Integrity Gate（市场数据完整性检查）</h2>
+<h3>G.1 市场数据身份表</h3>
+<table>
+<thead><tr><th>数据</th><th>身份</th><th>值</th><th>来源</th><th>验证来源</th></tr></thead>
+<tbody><tr><td>数据</td><td>身份</td><td>值</td><td>来源</td><td>验证来源</td></tr><tr><td>股价</td><td>SK海力士 000660.KS（韩交所）</td><td>₩1,645,000（2026-08-14收盘）</td><td>stockanalysis.com</td><td>Morningstar（52周区间₩245,000-2,987,000）</td></tr><tr><td>市值</td><td>总市值（KRW）</td><td>~1,161万亿韩元（2026-08-13）</td><td>stockanalysis.com</td><td>按汇率1411折算≈8,230亿美元</td></tr><tr><td>汇率</td><td>USD/KRW</td><td>1411（2026-08-17）</td><td>Forbes/pexx</td><td>交叉验证一致</td></tr><tr><td>汇率</td><td>CNY/KRW</td><td>209.68（2026-08-17中间价）</td><td>中国外汇交易中心</td><td>新浪财经/新华社</td></tr><tr><td>商品</td><td>DRAM合约价变动</td><td>2026Q2 +58-63%（TrendForce）</td><td>TrendForce</td><td>Gartner（+125%均价口径，2026）</td></tr><tr><td>商品</td><td>DDR5现货价</td><td>2025-11约20美元→2026-06约117.5美元</td><td>招商证券汇总</td><td>ima.qq.com转载</td></tr><tr><td>财务</td><td>2026Q2营收/营业利润</td><td>79.32/60.54万亿KRW</td><td>SK hynix官方新闻稿</td><td>Yonhap</td></tr><tr><td>财务</td><td>2025全年营收/营业利润</td><td>97.15/47.21万亿KRW</td><td>SK hynix官方新闻稿</td><td>Yonhap</td></tr><tr><td>份额</td><td>HBM份额2026Q1</td><td>58%</td><td>Counterpoint</td><td>IDC（56.4%）</td></tr></tbody></table>
+<h3>G.2 历史时点锁定</h3>
+<p>本报告所有估值基于 <strong>2026-08-17</strong> 决策时点的可得数据。历史数据（2023年亏损、2025年业绩）仅用于周期分析，不参与当前估值。当前股价采用2026-08-14收盘价（最新可得）。</p>
+<h3>G.5 双来源验证</h3>
+<ul>
+<li>股价/市值：stockanalysis.com vs Morningstar，一致 ✓</li>
+<li>汇率：Forbes(1414.5) vs pexx(1411.8)，差异&lt;0.3% ✓</li>
+<li>HBM份额：Counterpoint(58%) vs IDC(56.4%)，差异2.8%——可解释（统计口径差异），标注即可，未停止 ✓</li>
+<li><strong>TAM口径：TrendForce(2026年5,516亿) vs Gartner(6,333亿)，差异14.8%&gt;2%——无法完全解释，已在第2章明确标注双口径并采用TrendForce为基准</strong> ✓（处理方式：不用于精确估值输入，仅作趋势参考）</li>
+</ul>
+<h3>G.6 单位与币种换算</h3>
+<ul>
+<li>市值：1,161万亿KRW ÷ 1,411 KRW/USD ≈ 8,230亿美元（原始值→汇率→结果均展示）</li>
+<li>折人民币：8,230亿美元 × 6.73 CNY/USD ≈ ¥5.54万亿（CNY/USD由1411/209.68反推）</li>
+<li>2026Q2营业利润：60.54万亿KRW ≈ 429亿美元 ≈ ¥2,887亿</li>
+</ul>
+<h3>G.8/G.9 异常检测与核验表</h3>
+<table>
+<thead><tr><th>检查项</th><th>值</th><th>状态</th></tr></thead>
+<tbody><tr><td>检查项</td><td>值</td><td>状态</td></tr><tr><td>股价</td><td>₩1,645,000，位于52周区间(24.5万-298.7万)中部</td><td>已验证</td></tr><tr><td>动态PE</td><td>5.8倍（2026-07-29），低于十年中位11.54倍</td><td>已验证（周期股特征）</td></tr><tr><td>PB</td><td>6.2倍，高于十年均值，接近峰值10.6倍后回落</td><td>已验证（周期顶部特征）</td></tr><tr><td>营业利润率</td><td>76%，历史极值</td><td>已验证（超级周期）</td></tr><tr><td>净利率&gt;100%</td><td>含一次性收益（出售铠侠股份）</td><td>可解释差异</td></tr><tr><td>汇率</td><td>KRW走弱（2026年6月曾破1550）</td><td>已验证</td></tr></tbody></table>
+<h3>G.10 失败即停止</h3>
+<p><strong>通过</strong>：所有关键估值输入数据均通过身份确认、双来源验证、单位换算审计。TAM口径差异已标注处理，不影响估值主体。</p>
+<hr>
+<h2>第6章 | 估值分析（6.1~6.15 完整投资决策）</h2>
+<h3>Valuation Data Admission Check（估值数据准入检查）</h3>
+<table>
+<thead><tr><th>数据</th><th>状态</th><th>说明</th></tr></thead>
+<tbody><tr><td>数据</td><td>状态</td><td>说明</td></tr><tr><td>当前股价/市值</td><td>✅ 通过</td><td>₩1,645,000 / 1,161万亿KRW（2026-08-14，双源验证）</td></tr><tr><td>2025-2026财务</td><td>✅ 通过</td><td>官方新闻稿+Yonhap双源</td></tr><tr><td>汇率</td><td>✅ 通过</td><td>USD/KRW 1411（双源差异&lt;0.3%）</td></tr><tr><td>DRAM/NAND价格周期数据</td><td>✅ 通过</td><td>TrendForce合约价系列数据</td></tr><tr><td>HBM市场/份额</td><td>✅ 通过</td><td>Counterpoint/IDC/高盛多源</td></tr><tr><td>TAM总量</td><td>⚠️ 有差异但已处理</td><td>TrendForce vs Gartner差异14.8%，不用于精确估值输入</td></tr><tr><td>2027年供需预测</td><td>⚠️ 分歧极大</td><td>多空机构分歧为最大不确定性，估值中体现为情景差异</td></tr></tbody></table>
+<p><strong>准入结论</strong>: 通过（含一次性收益已剔除说明）。</p>
+<h3>6.1 为什么采用当前估值模型</h3>
+<p>海力士为<strong>周期股（带成长属性）</strong>，采用<strong>周期股传导链估值</strong>：存储价格假设 → 企业利润预测 → 合理估值倍数（PE/PB）→ 对应价格。同时以PB作为周期位置锚（防止"盈利顶点=PE低点"陷阱），并做三情景压力测试。<strong>不采用DCF</strong>（框架6.4：周期股现金流不可预测，DCF仅作辅助说明）。</p>
+<h3>6.2 核心估值指标</h3>
+<table>
+<thead><tr><th>指标</th><th>当前值</th><th>十年历史参考</th><th>说明</th></tr></thead>
+<tbody><tr><td>指标</td><td>当前值</td><td>十年历史参考</td><td>说明</td></tr><tr><td>动态PE</td><td>~5.8倍（2026-07-29）</td><td>最高58.6/最低2.7/中位11.5</td><td>盈利顶部=PE低点，<strong>不可单独使用</strong></td></tr><tr><td>PB</td><td>~6.2倍（2026-08）</td><td>2025-03为1.62→2026-06峰值约10.6</td><td><strong>处于周期顶部定价区</strong>（本报告主要估值锚）</td></tr><tr><td>EV/EBITDA</td><td>未获可靠数据（AI推断：约6-8倍）</td><td>—</td><td>因净现金规模大（69.4万亿），EV显著低于市值</td></tr></tbody></table>
+<h3>6.3 Growth Reality Check（成长现实检验）</h3>
+<ul>
+<li>□ TAM是否支持？ <strong>是</strong>（HBM 2028年1,680亿美元，高盛）</li>
+<li>□ 行业增速是否支持？ <strong>是</strong>（2026-2027存储市场+50-100%，但机构口径差异大）</li>
+<li>□ 市场份额还能提升吗？ <strong>存疑</strong>——HBM份额从58%可能降至2027年约40-50%（UBS预测三星反超），DRAM份额Q2已被三星反超（26% vs 39%）</li>
+<li>□ 管理层是否公开指引？ <strong>是</strong>（2027年或为史上最严重短缺，会长公开表态）</li>
+<li>□ CapEx是否支持？ <strong>是</strong>（2026年40万亿韩元，M15X/龙仁厂/印第安纳封装厂）</li>
+<li>□ 历史执行能力？ <strong>是</strong>（HBM3E→HBM4连续领先）</li>
+<li>□ 长期竞争优势？ <strong>部分</strong>——外包逻辑片模式 vs 三星垂直整合，长期承压</li>
+</ul>
+<p><strong>结论</strong>: 成长假设短期（2026-2027）成立，长期（2028+）存疑。<strong>增长可信度：中等偏高（短期）</strong>。</p>
+<h3>6.4 DCF</h3>
+<p><strong>本次不进行DCF估值</strong>。理由（框架6.4）：周期股现金流随价格波动极大，DCF参数（终值增长率、WACC）在周期顶部的设定无意义。辅助参考：若假设2027-2031年平均净利80万亿KRW、永续增长3%、WACC 10%，隐含价值约1,000万亿KRW（≈₩1,420,000/股）——<strong>该数字仅为量级参考（AI推断），不作为估值结论</strong>。</p>
+<h3>6.5 Bull / Base / Bear 三情景</h3><div class="chart-container"><canvas id="scenarioChart"></canvas></div>
+<p><strong>利润预测基础</strong>（AI基于调研数据的推断，非公司指引）:</p>
+<table>
+<thead><tr><th>情景</th><th>核心假设</th><th>2026E净利</th><th>2027E净利</th><th>合理倍数</th><th>合理市值</th><th>对应股价</th></tr></thead>
+<tbody><tr><td>情景</td><td>核心假设</td><td>2026E净利</td><td>2027E净利</td><td>合理倍数</td><td>合理市值</td><td>对应股价</td></tr><tr><td><strong>Bull</strong></td><td>短缺延续至2028+，HBM量价齐升，三星未能反超</td><td>~100万亿KRW</td><td>130万亿</td><td>12x PE</td><td>1,560万亿</td><td><strong>₩2,210,000</strong>（+34%）</td></tr><tr><td><strong>Base</strong></td><td>短缺延续至2027，2028H2回归平衡，份额降至50%</td><td>~90万亿</td><td>110万亿</td><td>9-11x PE</td><td>990-1,210万亿</td><td><strong>₩1,400,000-1,720,000</strong></td></tr><tr><td><strong>Bear</strong></td><td>2027年云厂商砍capex+供给集中释放，价格崩塌</td><td>~90万亿</td><td>55万亿</td><td>8x PE</td><td>440万亿</td><td><strong>₩624,000</strong>（-62%）</td></tr></tbody></table>
+<p><strong>关键假设说明</strong>:</p>
+<ul>
+<li>2026E净利90-100万亿KRW：剔除一次性收益后（2026Q2净利93.9万亿含出售铠侠股份等非经常项），基于全年营收150-180万亿、营业利润率60-75%的推断</li>
+<li>2027E净利：Base=110万亿（量增+价格趋稳）、Bull=130万亿（价格维持）、Bear=55万亿（价格下跌50%+量增有限）</li>
+<li>合理倍数：周期股盈利顶部给9-12x PE（低于历史中位11.5x上方），下行期给8x——所有倍数均为<strong>AI推断情景值</strong></li>
+</ul>
+<h3>6.6 历史估值（历史百分位）</h3><div class="chart-container"><canvas id="pbChart"></canvas></div>
+<table>
+<thead><tr><th>指标</th><th>当前</th><th>历史位置</th></tr></thead>
+<tbody><tr><td>指标</td><td>当前</td><td>历史位置</td></tr><tr><td>PB 6.2x</td><td>高于十年均值（约1.4-3.5x区间）</td><td><strong>&gt;90分位</strong>（周期顶部定价）</td></tr><tr><td>PE 5.8x（动态）</td><td>低于中位11.5x</td><td>&lt;20分位（盈利顶部特征）</td></tr><tr><td>股价位置</td><td>₩1,645,000，距6月高点298.7万回撤45%</td><td>52周区间中部</td></tr></tbody></table>
+<p><strong>解读</strong>: PB与PE给出截然相反的信号——这正是周期股的经典特征。<strong>PB是周期位置的更可靠指标</strong>：6.2x表明市场已按"超高盈利持续多年"定价。</p>
+<h3>6.7 同行估值</h3>
+<table>
+<thead><tr><th>公司</th><th>代码</th><th>当前PB</th><th>动态PE</th><th>备注</th></tr></thead>
+<tbody><tr><td>公司</td><td>代码</td><td>当前PB</td><td>动态PE</td><td>备注</td></tr><tr><td>SK海力士</td><td>000660.KS</td><td>~6.2x</td><td>~5.8x</td><td>本报告标的</td></tr><tr><td>三星电子</td><td>005930.KS</td><td>~1.5-2.0x（AI推断）</td><td>~8-10x（AI推断）</td><td>综合半导体集团，存储+代工+手机</td></tr><tr><td>美光</td><td>MU (NASDAQ)</td><td>~3-4x（AI推断）</td><td>~7-9x（AI推断）</td><td>纯存储，HBM追赶者</td></tr><tr><td>铠侠</td><td>285A.T</td><td>—</td><td>—</td><td>NAND为主，2025年上市</td></tr></tbody></table>
+<p>*同行估值为AI推断量级（未获可靠当日数据），仅作方向参考：海力士PB显著高于三星/美光，反映HBM溢价+盈利领先，但也隐含更高周期顶部定价风险。</p>
+<h3>6.8 安全边际（Margin of Safety）</h3>
+<ul>
+<li>Base合理区间中枢：₩1,560,000（9-11x PE中值10x × 110万亿）</li>
+<li>当前价：₩1,645,000 → <strong>安全边际约-5%（几乎为零）</strong></li>
+<li>要求20-25%安全边际 → 买入区应低于₩1,250,000</li>
+<li>结论：<strong>当前价格无安全边际，处于合理区上沿</strong></li>
+</ul>
+<h3>6.9 估值失效条件（Valuation Killers）</h3>
+<ol>
+<li>2027年DRAM/NAND合约价转跌（周期提前见顶）</li>
+<li>云厂商AI capex显著削减（微软/谷歌/Meta/亚马逊资本开支指引下修）</li>
+<li>三星HBM4在英伟达平台份额超过海力士（技术反超兑现）</li>
+<li>HBM价格战加剧（HBM3E持续降价蔓延至HBM4）</li>
+<li>长鑫HBM3E提前量产并进入海外市场</li>
+</ol>
+<h3>6.10 最终估值结论</h3>
+<p><strong>Base情景合理市值区间：990-1,210万亿KRW（对应₩1,400,000-1,720,000）</strong>。当前市值1,161万亿KRW位于合理区间中上部，<strong>估值总体合理偏上，无安全边际</strong>。市场已price-in"短缺延续至2027-2028"的基准情形，超额收益需依赖Bull情景（短缺超预期延续）兑现。</p>
+<h3>6.11 投资决策价格框架（周期股传导链）</h3>
+<pre><code>存储价格假设（2026H2涨幅收敛+3-20%，2027年趋稳/转跌）
+    ↓
+企业利润预测（2026E净利90-100万亿，2027E Base 110万亿）
+    ↓
+合理估值倍数（Base 9-11x PE / PB 4-6x）
+    ↓
+对应目标价格区间 ₩1,400,000 - 1,720,000</code></pre>
+<table>
+<thead><tr><th>价格位置</th><th>价格（KRW）</th><th>对应估值</th><th>建议</th></tr></thead>
+<tbody><tr><td>价格位置</td><td>价格（KRW）</td><td>对应估值</td><td>建议</td></tr><tr><td>深度低估区</td><td>&lt; ₩900,000</td><td>PB &lt;3.5x / 2027E PE &lt;7x</td><td>重仓（极罕见，需周期恐慌）</td></tr><tr><td>买入区</td><td>₩1,100,000 - 1,250,000</td><td>PB ~4.2-4.7x / 2027E PE 8-9x</td><td>建仓（20-25%安全边际）</td></tr><tr><td>合理区</td><td>₩1,400,000 - 1,720,000</td><td>PB 5.3-6.5x / 2027E PE 9-11x</td><td>持有（当前价在此区上沿）</td></tr><tr><td>谨慎区</td><td>₩1,800,000 - 2,100,000</td><td>PB 6.8-7.9x</td><td>暂停加仓</td></tr><tr><td>高估区</td><td>&gt; ₩2,200,000</td><td>PB &gt;8x</td><td>减仓/回避（周期顶部信号）</td></tr></tbody></table>
+<h3>6.12 投资操作建议（Action Plan）</h3>
+<table>
+<thead><tr><th>当前价格位置</th><th>建议</th></tr></thead>
+<tbody><tr><td>当前价格位置</td><td>建议</td></tr><tr><td>当前价 ₩1,645,000（合理区上沿）</td><td><strong>持有/观望，不新增仓位</strong>。已持有者继续持有但设置周期拐点观察清单；未持有者等待回调至买入区（₩1,250,000以下）或等待2026Q3财报确认周期位置</td></tr></tbody></table>
+<h3>6.13 目标价格可信度</h3>
+<p><strong>证据评级：★★★☆☆（中等）</strong>——三情景估值基于机构供需预测与AI利润推断，其中：</p>
+<ul>
+<li>影响最大的三个变量：①2027年存储供需平衡时点（多空机构分歧极大）②英伟达HBM4订单分配（海力士60-70%份额能否维持）③云厂商AI capex持续性</li>
+<li>合理区间₩1,400,000-1,720,000的可信度中等：区间下限较可信（PB 5.3x锚），上限依赖短缺延续假设</li>
+</ul>
+<h3>6.14 价格失效条件（Price Killers）</h3>
+<ol>
+<li>合约价单季环比转跌（先行信号）</li>
+<li>海力士/三星/美光任何一家宣布超预期扩产（供给拐点）</li>
+<li>英伟达下一代平台削减HBM搭载量（需求破坏）</li>
+<li>中国HBM量产进度超预期（2026Q4试产→2027量产路径提前）</li>
+<li>韩元剧烈升值（侵蚀韩元计价的出口盈利）</li>
+</ol>
+<h3>6.15 最终投资决策</h3>
+<table>
+<thead><tr><th>项目</th><th>结论</th></tr></thead>
+<tbody><tr><td>项目</td><td>结论</td></tr><tr><td>当前股价</td><td>₩1,645,000（2026-08-14，韩元）</td></tr><tr><td>合理价值区间</td><td>₩1,400,000 - 1,720,000（Base情景）</td></tr><tr><td>买入区间</td><td>₩1,100,000 - 1,250,000</td></tr><tr><td>安全边际</td><td>~0%（当前价无安全边际）</td></tr><tr><td>操作建议</td><td><strong>观察（黄色）</strong>——好公司、高景气，但当前价格无安全边际+周期顶部PB定价，不宜追高</td></tr><tr><td>触发买入的条件</td><td>①回调至₩1,250,000以下 ②或2026Q3/Q4财报确认供需紧张延续且份额企稳 ③或股价回调但周期数据（合约价、库存、capex指引）未恶化</td></tr></tbody></table>
+<hr>
+<h2>第7章 | 风险分析</h2>
+<h3>7.1 风险清单（按严重程度排序）</h3>
+<table>
+<thead><tr><th>风险</th><th>严重度</th><th>概率</th><th>市场状态</th><th>说明</th></tr></thead>
+<tbody><tr><td>风险</td><td>严重度</td><td>概率</td><td>市场状态</td><td>说明</td></tr><tr><td><strong>周期见顶/产能过剩</strong>（2027-2028）</td><td>★★★★★</td><td>中高</td><td>部分反映</td><td>供给集中释放（三星+170% HBM4产能、长鑫50万片/月）+AI capex不确定性；彭博已警告2028过剩</td></tr><tr><td><strong>AI capex削减</strong></td><td>★★★★★</td><td>中</td><td>未反映</td><td>美国四大云厂商2026年capex约8,000亿美元，微软/Alphabet/Meta自由现金流转负；若货币化不及预期将砍单</td></tr><tr><td><strong>HBM竞争恶化</strong></td><td>★★★★</td><td>中高</td><td>部分反映</td><td>三星良率80%+美光爬坡加速；HBM3E已降价；UBS预测2027年三星bit份额反超</td></tr><tr><td><strong>估值高位回落</strong></td><td>★★★★</td><td>中高</td><td>—</td><td>PB 6.2x十年&gt;90分位，2026年6月已发生过-52%回调预演</td></tr><tr><td><strong>客户集中</strong></td><td>★★★</td><td>中</td><td>未反映</td><td>英伟达占2025年收入23.9%，前二客户约26%</td></tr><tr><td><strong>地缘/出口管制</strong></td><td>★★★</td><td>中</td><td>部分反映</td><td>对华HBM出口限制（2026年3月升级），中国产能占全球DRAM 30-35%；大陆营收占24.6%</td></tr><tr><td><strong>中国竞争</strong></td><td>★★★</td><td>中低</td><td>未反映</td><td>长鑫2028年50万片/月+HBM3E 2027量产；长江存储294层良率&gt;90%</td></tr><tr><td><strong>治理/股东回报</strong></td><td>★★</td><td>中</td><td>部分反映</td><td>崔泰源59.2%持股质押、离婚案9,440亿KRW；股息率仅0.2%，机构施压提高回报</td></tr><tr><td><strong>韩国宏观</strong></td><td>★★</td><td>中</td><td>部分反映</td><td>韩元17年新低（2026年6月破1550）、KOSPI月内回撤25%、外资流出700亿美元</td></tr></tbody></table>
+<h3>7.2 风险-机会对称性</h3>
+<p>海力士风险特征呈<strong>极端不对称</strong>：上行空间约+34%（Bull情景），下行空间约-62%（Bear情景）。周期股在周期顶部时，下行风险被系统性低估——<strong>历史经验：存储周期反转后，龙头公司股价从顶部回撤50-70%是常态</strong>（参考2018、2022年周期）。</p>
+<hr>
+<h2>第8章 | 投资逻辑</h2>
+<h3>8.1 多头逻辑</h3>
+<ol>
+<li><strong>HBM超级周期确定性</strong>：2026-2028年HBM市场546亿→1,680亿美元，海力士以58%份额+60-70%英伟达份额为最大受益者</li>
+<li><strong>供需紧张延续</strong>：LTA锁量（覆盖50%营收）+渠道库存2-4周+三厂2026年售罄、2027年配额仅60-70%</li>
+<li><strong>财务实力</strong>：净现金69.4万亿，capex完全自筹，无融资稀释</li>
+<li><strong>技术领先</strong>：HBM4良率接近成熟、iHBM前瞻布局、321层NAND</li>
+</ol>
+<h3>8.2 空头逻辑</h3>
+<ol>
+<li><strong>周期顶部</strong>：PB 6.2x（十年&gt;90分位），市场已按完美情形定价</li>
+<li><strong>2027-2028供给释放</strong>：三星+170%产能、海力士M15X/龙仁、长鑫50万片/月</li>
+<li><strong>竞争格局恶化</strong>：从独家到三强，HBM3E降价开始</li>
+<li><strong>AI capex脆弱性</strong>：云厂商FCF转负，砍单风险</li>
+<li><strong>股东回报差</strong>：股息率0.2%，大股东质押</li>
+</ol>
+<h3>8.3 护城河评估</h3>
+<p><strong>宽但非永久</strong>。HBM技术（2-3年领先）已被三星/美光追赶至1-2个世代内；真正的长期护城河是客户绑定（英伟达生态）与规模成本优势，而非技术独占。<strong>护城河深度：中等偏上</strong>。</p>
+<h3>8.4 为什么能持续十年（或不持续）</h3>
+<ul>
+<li><strong>能持续的</strong>：AI对存储需求的长期增长（HBM渗透率提升、AI终端普及）</li>
+<li><strong>不能持续的</strong>：当前76%的营业利润率、60%+的HBM份额独占、以及"短缺持续3年"的定价——这些都会均值回归</li>
+</ul>
+<h3>8.5 投资逻辑失效条件</h3>
+<ol>
+<li>2027年合约价环比转跌（周期确认见顶）</li>
+<li>三星在英伟达HBM4份额反超海力士</li>
+<li>云厂商capex显著下修</li>
+<li>长鑫HBM进入量产且良率达标</li>
+</ol>
+<hr>
+<h2>第9章 | Value Drivers（价值驱动因素）★ 长期维护章节</h2>
+<h3>9.1 核心Driver识别（6个，体现存储行业特征）</h3>
+<table>
+<thead><tr><th>#</th><th>Driver</th><th>说明</th><th>重要度</th></tr></thead>
+<tbody><tr><td>#</td><td>Driver</td><td>说明</td><td>重要度</td></tr><tr><td>D1</td><td><strong>DRAM/NAND合约价趋势</strong></td><td>存储行业利润的决定性变量；TrendForce月度合约价数据</td><td>★★★★★</td></tr><tr><td>D2</td><td><strong>HBM份额与订单分配</strong></td><td>海力士在英伟达各世代平台的份额（HBM4 60-70%能否维持）</td><td>★★★★★</td></tr><tr><td>D3</td><td><strong>AI资本开支（云厂商capex）</strong></td><td>微软/谷歌/Meta/亚马逊季度capex指引，AI需求源头</td><td>★★★★★</td></tr><tr><td>D4</td><td><strong>供给端扩产节奏</strong></td><td>三星HBM4产能爬坡、海力士M15X/龙仁、长鑫产能进度</td><td>★★★★</td></tr><tr><td>D5</td><td><strong>HBM价格（均价）</strong></td><td>2026Q2 HBM均价已同比下跌，价格战信号</td><td>★★★★</td></tr><tr><td>D6</td><td><strong>股东回报政策</strong></td><td>股息/回购方案（2026Q3预期公布），集团治理指标</td><td>★★★</td></tr></tbody></table>
+<h3>9.2 Driver权重理由</h3>
+<p>D1/D2/D3是利润的"价格×量×份额"三角，任何一项恶化都直接改变估值结论；D4决定周期拐点时点；D5是竞争烈度的先行指标；D6影响估值下限（低股东回报的周期股在熊市缺乏支撑）。</p>
+<h3>9.3 长期监控计划</h3>
+<table>
+<thead><tr><th>Driver</th><th>数据来源</th><th>频率</th></tr></thead>
+<tbody><tr><td>Driver</td><td>数据来源</td><td>频率</td></tr><tr><td>D1 合约价</td><td>TrendForce/集邦咨询</td><td>月度</td></tr><tr><td>D2 HBM份额</td><td>Counterpoint/IDC季度报告</td><td>季度</td></tr><tr><td>D3 云capex</td><td>微软/谷歌/Meta/亚马逊财报电话会</td><td>季度</td></tr><tr><td>D4 扩产</td><td>公司法说会、TrendForce产能追踪</td><td>季度</td></tr><tr><td>D5 HBM均价</td><td>公司财报HBM收入/出货量拆分</td><td>季度</td></tr><tr><td>D6 股东回报</td><td>公司公告、SK集团公告</td><td>事件驱动</td></tr></tbody></table>
+<h3>9.4 估值影响方向</h3>
+<ul>
+<li>D1恶化（价格转跌）→ 触发6.14 Price Killer 1，估值下修至Bear情景</li>
+<li>D2恶化（份额被三星反超）→ 利润预测下修，估值中枢下移</li>
+<li>D3恶化（capex削减）→ 触发6.9 Valuation Killer 2，逻辑失效</li>
+<li>D4超预期（供给提前释放）→ 周期拐点提前，PB锚下移</li>
+<li>D6改善（大额回购）→ 提升估值下限，部分对冲周期风险</li>
+</ul>
+<h3>9.5 投资决策影响</h3>
+<p><strong>当前状态</strong>：D1（涨幅收敛但未转跌）、D2（份额领先但Q2被三星反超DRAM总份额）、D3（capex未削减但FCF转负）、D4（供给在2027H2释放）、D5（HBM3E降价）、D6（待公布）。</p>
+<p><strong>结论</strong>：多数Driver处于"高位趋缓"状态，未触发投资逻辑失效，但D2/D5已出现边际恶化迹象。<strong>当前维持观察评级，D1（合约价环比转跌）或D3（capex下修）为降级触发信号。</strong></p>
+<h3>9.6 季度更新规则</h3>
+<p>2026Q3财报（预计2026年10月下旬发布）后优先更新本节：重点核查D1合约价、D2份额、D5 HBM均价。Driver重大变化（D1转跌/D3削减）才重写全文；一般变化仅更新本节+第6.11价格框架。</p>
+<h3>9.7 与框架其他章节联动</h3>
+<p>Driver恶化 → 6.14 Price Killers → 6.15投资决策调整；D2恶化 → 第8章投资逻辑失效条件；D6改善 → 第4章审计评级可能上调。</p>
+<hr>
+<h2>第10章 | 最终结论</h2>
+<h3>10.1 综合评分（100分制）</h3>
+<table>
+<thead><tr><th>维度</th><th>得分(10分制)</th><th>权重</th><th>加权</th></tr></thead>
+<tbody><tr><td>维度</td><td>得分(10分制)</td><td>权重</td><td>加权</td></tr><tr><td>商业模式</td><td>7</td><td>15%</td><td>1.05</td></tr><tr><td>行业/赛道</td><td>9</td><td>15%</td><td>1.35</td></tr><tr><td>管理层</td><td>7</td><td>10%</td><td>0.70</td></tr><tr><td>财务质量</td><td>8</td><td>15%</td><td>1.20</td></tr><tr><td>护城河</td><td>6</td><td>15%</td><td>0.90</td></tr><tr><td>成长性</td><td>9</td><td>10%</td><td>0.90</td></tr><tr><td>估值</td><td>4</td><td>10%</td><td>0.40</td></tr><tr><td>风险</td><td>4</td><td>10%</td><td>0.40</td></tr><tr><td><strong>综合</strong></td><td>—</td><td>—</td><td><strong>6.90 → 69/100</strong></td></tr></tbody></table>
+<p>*注：股东回报与Fisher已通过其他维度体现，此处按框架10维度简化合并。评分说明：估值（PB 6.2x周期顶部）与风险（周期见顶概率中高）显著拉低总分，行业与成长性拉高。</p>
+<h3>10.2 当前估值判断</h3>
+<p><strong>合理偏上（无安全边际）</strong>：Base情景合理区间₩1,400,000-1,720,000，当前价₩1,645,000位于区间上沿；PB 6.2x处于十年&gt;90分位。</p>
+<h3>10.3 投资建议</h3>
+<blockquote>
+## 🟡 <strong>观察（黄色）</strong>
+
+<strong>核心逻辑</strong>：SK海力士是AI存储超级周期的最优质资产（HBM全球第一、净现金69.4万亿、2026年盈利创历史纪录），但当前价格已price-in完美情形——PB 6.2x周期顶部定价、无安全边际、且面临三重风险（2027-2028供给释放、三星技术反超、AI capex削减）。<strong>好公司≠好价格</strong>。建议等待回调至₩1,250,000以下（对应PB~4.7x、20%+安全边际）分批建仓，或等待2026Q3财报确认周期位置后决策。
+
+<strong>触发升级为推荐的条件</strong>：股价回调至买入区 且 周期数据（合约价、库存、capex指引）未恶化；或2027年供需紧张超预期延续且份额企稳。
+<strong>触发回避的条件</strong>：合约价环比转跌 或 云厂商capex显著削减 或 三星英伟达HBM4份额反超。
+</blockquote>
+<hr>
+<h2>Evidence Coverage（证据覆盖率）</h2>
+<h3>数据来源统计</h3>
+<table>
+<thead><tr><th>证据等级</th><th>占比</th><th>说明</th></tr></thead>
+<tbody><tr><td>证据等级</td><td>占比</td><td>说明</td></tr><tr><td>一级（公司财报/官方新闻稿）</td><td>~35%</td><td>SK hynix官网新闻稿（2026Q2/2025年报）、法说会</td></tr><tr><td>二级（机构权威数据）</td><td>~35%</td><td>TrendForce、Counterpoint、IDC、高盛、JPMorgan、Gartner</td></tr><tr><td>三级（财经媒体）</td><td>~20%</td><td>Yonhap、新浪财经、东方财富、证券时报等</td></tr><tr><td><strong>AI推断</strong></td><td><strong>~10%</strong></td><td>2026全年利润预测、合理倍数选择、价格区间测算、部分同行估值</td></tr></tbody></table>
+<p>⚠️ <strong>本报告AI推断占比约10%</strong>（刚好在10%阈值附近）——主要集中于第6章估值情景构建（2026E/2027E利润为推断、合理倍数为主观设定）与6.7同行估值。推断部分均已在文中标注。<strong>未达"较高推断比例"红线（&gt;10%较多），但估值部分请以证据链自行复核。</strong></p>
+<h3>未验证数据列表</h3>
+<ul>
+<li>2026Q1单季营收/营业利润（AI推断，官方未直接引用）</li>
+<li>同行（三星/美光）当日PB/PE精确值（AI量级推断）</li>
+<li>2026E/2027E净利润预测（AI基于机构供需预测构建）</li>
+<li>EV/EBITDA精确值（AI推断约6-8倍）</li>
+<li>瑞银"2026年营业利润32.7万亿"数据与官方业绩明显矛盾（Q2单季已达60.5万亿），判定为过时或口径错误，<strong>未采用</strong></li>
+</ul>
+<h3>无法获取的数据列表</h3>
+<ul>
+<li>2026Q2毛利率单列数据（公司未单独披露）</li>
+<li>海力士官方2027年产能/出货指引细节</li>
+<li>英伟达HBM订单的官方合同金额（"5,000亿美元LTA"仅媒体单源说法，未采用）</li>
+</ul>
+<h3>Market Data Coverage（市场数据覆盖率）</h3>
+<table>
+<thead><tr><th>检查项</th><th>状态</th></tr></thead>
+<tbody><tr><td>检查项</td><td>状态</td></tr><tr><td>数据身份确认</td><td>✅ 全部确认</td></tr><tr><td>双来源交叉验证</td><td>✅ 通过（TAM口径差异已标注处理）</td></tr><tr><td>历史时点锁定</td><td>✅ 决策日2026-08-17</td></tr><tr><td>单位/币种换算</td><td>✅ KRW/USD/CNY完整展示</td></tr></tbody></table>
+<hr>
+<h2>Market Data Final Audit（市场数据最终复检）</h2>
+<h3>19项复检清单</h3>
+<table>
+<thead><tr><th>#</th><th>检查项</th><th>状态</th></tr></thead>
+<tbody><tr><td>#</td><td>检查项</td><td>状态</td></tr><tr><td>1</td><td>股价代码/市场</td><td>✅ 000660.KS韩交所</td></tr><tr><td>2</td><td>股价日期</td><td>✅ 2026-08-14收盘</td></tr><tr><td>3</td><td>股价双源验证</td><td>✅ stockanalysis vs Morningstar</td></tr><tr><td>4</td><td>市值计算</td><td>✅ 1,161万亿KRW ÷ 1411 = 8,230亿美元</td></tr><tr><td>5</td><td>汇率双源</td><td>✅ Forbes vs pexx（差异&lt;0.3%）</td></tr><tr><td>6</td><td>CNY/KRW</td><td>✅ 中国外汇交易中心中间价</td></tr><tr><td>7</td><td>DRAM合约价来源</td><td>✅ TrendForce系列</td></tr><tr><td>8</td><td>HBM份额双源</td><td>✅ Counterpoint 58% vs IDC 56.4%</td></tr><tr><td>9</td><td>2026Q2财务</td><td>✅ 官方新闻稿</td></tr><tr><td>10</td><td>2025全年财务</td><td>✅ 官方新闻稿</td></tr><tr><td>11</td><td>2023亏损数据</td><td>✅ Yonhap</td></tr><tr><td>12</td><td>净现金</td><td>✅ 69.4万亿KRW（官方）</td></tr><tr><td>13</td><td>capex</td><td>✅ 约40万亿KRW（公司电话会，媒体转载）</td></tr><tr><td>14</td><td>客户占比</td><td>✅ 英伟达23.9%（2025），前二26%（2026H1）</td></tr><tr><td>15</td><td>周期位置判断</td><td>✅ 基于TrendForce合约价序列</td></tr><tr><td>16</td><td>TAM口径差异</td><td>✅ 已标注TrendForce/Gartner双口径</td></tr><tr><td>17</td><td>估值传导链</td><td>✅ 价格→利润→倍数→价格（6.11）</td></tr><tr><td>18</td><td>一次性收益处理</td><td>✅ 已剔除说明（出售铠侠股份）</td></tr><tr><td>19</td><td>跨文件一致性</td><td>✅ 与MD/HTML一致</td></tr></tbody></table>
+<h3>6项最终检查</h3>
+<table>
+<thead><tr><th>#</th><th>检查项</th><th>状态</th></tr></thead>
+<tbody><tr><td>#</td><td>检查项</td><td>状态</td></tr><tr><td>1</td><td>数据身份无误</td><td>✅</td></tr><tr><td>2</td><td>历史时点锁定（未用未来数据）</td><td>✅</td></tr><tr><td>3</td><td>双源验证通过（差异处理透明）</td><td>✅</td></tr><tr><td>4</td><td>币种/单位换算完整</td><td>✅</td></tr><tr><td>5</td><td>估值传导链完整（6.11周期股价格体系）</td><td>✅</td></tr><tr><td>6</td><td>跨文件一致性（MD/HTML/PDF）</td><td>✅</td></tr></tbody></table>
+<p><strong>复检结论：通过。</strong> 本报告未发现市场数据身份、日期锁定、双源验证或单位换算方面的错误。估值情景构建中的推断项均已明确标注。</p>
+<hr>
+<p>*报告完 | 生成时间：2026-08-17 | 数据截止：2026-08-14（股价）/ 2026-08-17（检索）*</p>
+<p>*免责声明：本报告为个人研究记录，不构成投资建议。周期股投资风险极高，请独立决策。*</p>
+<script>
+// Fisher雷达图
+new Chart(document.getElementById('fisherChart'), {
+  type: 'radar',
+  data: { labels: ['市场潜力','管理层','研发','销售客户','利润率空间','护城河','长期成长','治理文化','资本配置','长期竞争'],
+    datasets: [{ label: 'SK海力士 Fisher评分', data: [9,7,9,8,6,6,8,5,7,6],
+      borderColor: '#58a6ff', backgroundColor: 'rgba(88,166,255,0.2)', pointBackgroundColor: '#58a6ff' }]},
+  options: { scales: { r: { min: 0, max: 10, ticks: { stepSize: 2, color: '#8b949e' },
+      grid: { color: '#30363d' }, angleLines: { color: '#30363d' }, pointLabels: { color: '#c9d1d9', font: { size: 11 } } } },
+    plugins: { legend: { labels: { color: '#c9d1d9' } } } }
+});
+// 财务柱状图
+new Chart(document.getElementById('finChart'), {
+  type: 'bar',
+  data: { labels: ['2022','2023','2024','2025','2026Q1*','2026Q2'],
+    datasets: [
+      { label: '营收(万亿KRW)', data: [44.6,32.8,66.2,97.1,50.7,79.3], backgroundColor: '#58a6ff' },
+      { label: '营业利润(万亿KRW)', data: [7.0,-7.73,23.5,47.2,38,60.5], backgroundColor: '#f85149' } ]},
+  options: { plugins: { legend: { labels: { color: '#c9d1d9' } } },
+    scales: { x: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } },
+      y: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } } } }
+});
+// 三情景估值
+new Chart(document.getElementById('scenarioChart'), {
+  type: 'bar',
+  data: { labels: ['Bear(2027价格崩塌)','Base(短缺至2028)','Bull(短缺超预期)'],
+    datasets: [{ label: '合理市值(万亿KRW)', data: [440, 1100, 1560], backgroundColor: ['#f85149','#d29922','#3fb950'] }]},
+  options: { indexAxis: 'y',
+    plugins: { legend: { display: false } },
+    scales: { x: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } },
+      y: { ticks: { color: '#c9d1d9' }, grid: { display: false } } } }
+});
+// PB历史走势
+new Chart(document.getElementById('pbChart'), {
+  type: 'line',
+  data: { labels: ['2025-03','2025-09','2026-03','2026-06峰','2026-08'],
+    datasets: [{ label: 'PB(倍)', data: [1.62, 2.40, 3.48, 10.6, 6.2],
+      borderColor: '#bc8cff', backgroundColor: 'rgba(188,140,255,0.15)', fill: true, tension: 0.3 }]},
+  options: { plugins: { legend: { labels: { color: '#c9d1d9' } } },
+    scales: { x: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } },
+      y: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } } } }
+});
+// DRAM合约价涨幅
+new Chart(document.getElementById('priceChart'), {
+  type: 'bar',
+  data: { labels: ['2025Q4','2026Q1','2026Q2','2026Q3E','2026Q4E'],
+    datasets: [{ label: 'DRAM合约价环比变动(%)', data: [55, 95, 60, 17, 5], backgroundColor: ['#3fb950','#3fb950','#d29922','#d29922','#f85149'] }]},
+  options: { plugins: { legend: { display: false } },
+    scales: { x: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } },
+      y: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } } } }
+});
+</script>
+
+<div class="footer">
+SK海力士深度分析报告 | 生成时间 2026-08-17 | 数据截止 2026-08-14(股价)/2026-08-17(检索)<br>
+本报告为个人研究记录，不构成投资建议。周期股投资风险极高，请独立决策。
+</div>
+</body></html>
